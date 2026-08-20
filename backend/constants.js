@@ -8,7 +8,7 @@
 // const BRAND_NAME = "VanaRoots";
 
 // Line 4
-const BRAND_NAME = process.env.BRAND_NAME || "PlantBase";
+const BRAND_NAME = process.env.BRAND_NAME || "Anjaney Nexus";
 
 // ── Derived constants (all auto-generated from BRAND_NAME) ──
 const BRAND_SLUG = BRAND_NAME.toLowerCase().replace(/\s+/g, '-');

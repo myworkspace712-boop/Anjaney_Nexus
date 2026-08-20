@@ -1,5 +1,5 @@
 /**
- * Email Service — PlantBase
+ * Email Service — Anjaney Nexus
  * Handles sending verification and password-reset emails.
  * Uses Nodemailer with configurable transport (console fallback for dev).
  */
@@ -38,7 +38,7 @@ if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
   console.log('⚠️  EMAIL_USER / EMAIL_PASS not set — emails will print to console');
 }
 
-const FROM = process.env.EMAIL_USER || 'noreply@plantbase.com';
+const FROM = process.env.EMAIL_USER || 'noreply@anjaneynexus.com';
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
 
 // ---------------------------------------------------------------------------
@@ -50,7 +50,7 @@ const sendVerificationEmail = async (to, token) => {
   const html = `
     <div style="font-family:'Inter',Arial,sans-serif;max-width:560px;margin:0 auto;background:#FDFAF4;border-radius:12px;overflow:hidden;border:1px solid #D4C5A9;">
       <div style="background:linear-gradient(135deg,#8DB600,#6B9A00);padding:32px 24px;text-align:center;">
-        <h1 style="color:#fff;margin:0;font-size:28px;">🌿 PlantBase</h1>
+        <h1 style="color:#fff;margin:0;font-size:28px;">🌿 Anjaney Nexus</h1>
         <p style="color:rgba(255,255,255,0.9);margin:8px 0 0;font-size:14px;">Plant-Based Marketplace</p>
       </div>
       <div style="padding:32px 24px;">
@@ -71,15 +71,15 @@ const sendVerificationEmail = async (to, token) => {
         </p>
       </div>
       <div style="background:#F5F0E8;padding:16px 24px;text-align:center;">
-        <p style="color:#999;font-size:11px;margin:0;">© ${new Date().getFullYear()} PlantBase. All rights reserved.</p>
+        <p style="color:#999;font-size:11px;margin:0;">© ${new Date().getFullYear()} Anjaney Nexus. All rights reserved.</p>
       </div>
     </div>
   `;
 
   await transporter.sendMail({
-    from: `"PlantBase" <${FROM}>`,
+    from: `"Anjaney Nexus" <${FROM}>`,
     to,
-    subject: '🌿 Verify your PlantBase account',
+    subject: '🌿 Verify your Anjaney Nexus account',
     html,
   });
 };
@@ -93,7 +93,7 @@ const sendPasswordResetEmail = async (to, token) => {
   const html = `
     <div style="font-family:'Inter',Arial,sans-serif;max-width:560px;margin:0 auto;background:#FDFAF4;border-radius:12px;overflow:hidden;border:1px solid #D4C5A9;">
       <div style="background:linear-gradient(135deg,#A0522D,#7A3E1E);padding:32px 24px;text-align:center;">
-        <h1 style="color:#fff;margin:0;font-size:28px;">🌿 PlantBase</h1>
+        <h1 style="color:#fff;margin:0;font-size:28px;">🌿 Anjaney Nexus</h1>
         <p style="color:rgba(255,255,255,0.9);margin:8px 0 0;font-size:14px;">Password Reset Request</p>
       </div>
       <div style="padding:32px 24px;">
@@ -114,15 +114,15 @@ const sendPasswordResetEmail = async (to, token) => {
         </p>
       </div>
       <div style="background:#F5F0E8;padding:16px 24px;text-align:center;">
-        <p style="color:#999;font-size:11px;margin:0;">© ${new Date().getFullYear()} PlantBase. All rights reserved.</p>
+        <p style="color:#999;font-size:11px;margin:0;">© ${new Date().getFullYear()} Anjaney Nexus. All rights reserved.</p>
       </div>
     </div>
   `;
 
   await transporter.sendMail({
-    from: `"PlantBase" <${FROM}>`,
+    from: `"Anjaney Nexus" <${FROM}>`,
     to,
-    subject: '🔐 Reset your PlantBase password',
+    subject: '🔐 Reset your Anjaney Nexus password',
     html,
   });
 };

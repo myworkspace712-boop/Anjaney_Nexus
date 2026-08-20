@@ -1,33 +1,39 @@
 const mongoose = require('mongoose');
 
-// const connectDB = async () => {
-//   try {
-//     const conn = await mongoose.connect(process.env.MONGO_URI);
 
-//     console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
+// Attach listeners once outside the function to avoid duplicate loggers
+mongoose.connection.on('connected', () => {
+  console.log(`✅ MongoDB Connected to: ${mongoose.connection.host} | DB: ${mongoose.connection.name}`);
+});
 
-//   } catch (error) {
-//     console.error(`❌ DB Error: ${error.message}`);
-//     process.exit(1);
-//   }
-// };
+mongoose.connection.on('error', (err) => {
+  console.error(`❌ MongoDB Runtime Error: ${err.message}`);
+});
 
-const connectDB = async (retries = 5, delay = 3000) => {
-  for (let i = 1; i <= retries; i++) {
-    try {
-      const conn = await mongoose.connect(process.env.MONGO_URI);
-      console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
-      return;
-    } catch (error) {
-      console.error(`❌ DB Error (attempt ${i}/${retries}): ${error.message}`);
-      if (i === retries) {
-        console.error('❌ Max retries reached. Exiting...');
-        process.exit(1);
-      }
-      console.log(`⏳ Retrying in ${delay / 1000}s...`);
-      await new Promise((res) => setTimeout(res, delay));
-    }
+mongoose.connection.on('disconnected', () => {
+  console.warn('⚠️ MongoDB Disconnected');
+});
+
+const connectDB = async () => {
+  if (!process.env.MONGO_URI) {
+    console.error('❌ MONGO_URI is not defined in environment variables');
+    return;
+  }
+
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URI, {
+      serverSelectionTimeoutMS: 10000,
+      maxPoolSize: 10,
+      family: 4,
+      authSource: 'admin',
+      bufferCommands: false,
+    });
+    console.log(`✅ MongoDB Connection Established: ${conn.connection.host}`);
+  } catch (error) {
+    console.error(`❌ Initial DB Connection Error: ${error.message}`);
+    console.error('If you see "bad auth", your Atlas username/password is incorrect.');
   }
 };
+
 
 module.exports = connectDB;

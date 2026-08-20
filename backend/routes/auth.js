@@ -5,6 +5,7 @@ const generateToken = require('../utils/token');
 const { protect } = require('../middleware/auth');
 const { sendVerificationEmail, sendPasswordResetEmail } = require('../utils/emailService');
 
+
 // ─── Helper: generate random hex token ───
 const generateCryptoToken = () => crypto.randomBytes(32).toString('hex');
 
@@ -13,6 +14,7 @@ const generateCryptoToken = () => crypto.randomBytes(32).toString('hex');
 // ─────────────────────────────────────────────────────────────
 router.post('/register', async (req, res) => {
   try {
+    console.log("1. Received payload:", req.body);
     const { name, email, password, role, sellerInfo } = req.body;
 
     // Required fields
@@ -35,19 +37,26 @@ router.post('/register', async (req, res) => {
     const exists = await User.findOne({ email });
     if (exists) return res.status(400).json({ success: false, message: 'User already exists' });
 
+    if (role === 'admin' || role === 'superadmin') {
+      return res.status(403).json({ success: false, message: 'Admins must be registered through the dedicated admin endpoint.' });
+    }
+
     // Generate verification token
     const verificationToken = generateCryptoToken();
 
+    console.log("2. Password hashing and DB save started");
     const user = await User.create({
       name,
       email,
       password,
-      role: role || 'customer',
+      role: role && ['customer', 'seller'].includes(role) ? role : 'customer',
       sellerInfo: role === 'seller' ? sellerInfo : undefined,
       isEmailVerified: false,           // New users must verify
       emailVerificationToken: verificationToken,
       emailVerificationExpiry: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
     });
+    
+    console.log("3. User saved to DB successfully");
 
     // Send verification email
     try {

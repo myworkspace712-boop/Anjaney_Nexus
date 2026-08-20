@@ -50,6 +50,20 @@ router.get('/users', protect, admin, async (req, res) => {
   }
 });
 
+// @GET /api/admin/orders
+router.get('/orders', protect, admin, async (req, res) => {
+  try {
+    const orders = await Order.find({})
+      .populate('user', 'id name email')
+      .sort('-createdAt')
+      .lean();
+    res.json(orders);
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+
 // @PUT /api/admin/users/:id/toggle
 router.put('/users/:id/toggle', protect, admin, async (req, res) => {
   try {

@@ -1,5 +1,5 @@
 /**
- * Database Seed Script — PlantBase
+ * Database Seed Script — Anjaney Nexus
  * Resets the database and populates it with realistic marketplace data.
  */
 require('dotenv').config({ path: require('path').resolve(__dirname, '.env') });
@@ -20,7 +20,7 @@ mongoose.connect(MONGO_URI).then(() => console.log('MongoDB Connected'))
 
 const seedDB = async () => {
   try {
-    console.log('🌱 Starting database seed for PlantBase...');
+    console.log('🌱 Starting database seed for Anjaney Nexus...');
 
     // 1. Clear existing data
     await User.deleteMany();
@@ -30,7 +30,7 @@ const seedDB = async () => {
 
     // 2. Create Admin
     const admin = await User.create({
-      name: 'PlantBase Admin',
+      name: 'Anjaney Nexus Admin',
       email: 'admin@plantbase.com',
       password: 'admin123',
       role: 'admin',

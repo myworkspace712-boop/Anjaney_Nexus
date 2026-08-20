@@ -6,23 +6,34 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
-const setupSocket = require('./socket');
-const notificationService = require('./services/notificationService');
-const { BRAND_NAME } = require('./constants');
+
+
+// Safe import for constants
+let BRAND_NAME = 'Anjaney Nexus';
+try {
+  const constants = require('./constants');
+  if (constants.BRAND_NAME) BRAND_NAME = constants.BRAND_NAME;
+} catch (e) {
+  console.warn('⚠️ constants.js not found, using default BRAND_NAME.');
+}
 
 const app = express();
 const server = http.createServer(app);
 
-// console.log('MONGO URI:', process.env.MONGO_URI);
-
 // Connect DB
 connectDB();
 
-// Setup Socket.io
-const io = setupSocket(server);
-notificationService.setIO(io);
+// Setup Socket.io safely
+try {
+  const setupSocket = require('./socket');
+  const notificationService = require('./services/notificationService');
+  const io = setupSocket(server);
+  notificationService.setIO(io);
+} catch (e) {
+  console.warn('⚠️ Socket.io or Notification service failed to load:', e.message);
+}
 
-// Security
+// Security & Cookies
 app.use(helmet());
 app.use(cookieParser());
 
@@ -43,67 +54,39 @@ const generalLimiter = rateLimit({
 });
 app.use('/api', generalLimiter);
 
-const authLimiter = rateLimit({
-  windowMs: 60 * 1000,
-  max: 20,
-  message: { success: false, message: 'Too many auth attempts, try again in 1 minute' }
-});
-app.use('/api/auth/login', authLimiter);
-app.use('/api/auth/register', authLimiter);
-
 // Body parsing
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
-// NoSQL injection sanitization
-const sanitizeMongo = (obj) => {
-  if (obj instanceof Object) {
-    for (const key in obj) {
-      if (/^\$/.test(key)) delete obj[key];
-      else sanitizeMongo(obj[key]);
-    }
+// ─── Safe Route Loader ───
+// Helper function to mount routes without crashing the entire server if one file is missing
+const mountRoute = (path, modulePath) => {
+  try {
+    app.use(path, require(modulePath));
+  } catch (err) {
+    console.error(`❌ Failed to load route ${path} (${modulePath}):`, err.message);
   }
 };
-app.use((req, res, next) => {
-  ['body', 'query', 'params'].forEach(k => { if (req[k]) sanitizeMongo(req[k]); });
-  next();
-});
 
-// XSS sanitization
-app.use((req, res, next) => {
-  if (req.body) {
-    const sanitizeXss = (obj) => {
-      for (const key in obj) {
-        if (typeof obj[key] === 'string') obj[key] = obj[key].replace(/[<>]/g, '');
-        else if (typeof obj[key] === 'object' && obj[key] !== null) sanitizeXss(obj[key]);
-      }
-    };
-    sanitizeXss(req.body);
-  }
-  next();
-});
-
-// ─── Routes ───
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/products', require('./routes/products'));
-app.use('/api/orders', require('./routes/orders'));
-app.use('/api/admin', require('./routes/admin'));
-app.use('/api/categories', require('./routes/categories'));
-app.use('/api/reviews', require('./routes/reviews'));
-app.use('/api/wishlist', require('./routes/wishlist'));
-app.use('/api/wallet', require('./routes/wallet'));
-app.use('/api/coupons', require('./routes/coupons'));
-app.use('/api/payments', require('./routes/payments'));
-app.use('/api/ai', require('./routes/ai'));
-app.use('/api/analytics', require('./routes/analytics'));
-app.use('/api/blog', require('./routes/blog'));
-app.use('/api/seller-profile', require('./routes/sellerProfile'));
-app.use('/api/referral', require('./routes/referral'));
-app.use('/api/logistics', require('./routes/logistics'));
-app.use('/api/notifications', require('./routes/notifications'));
-
-const adminRoutes = require('./routes/adminRoutes');
-app.use('/api/admin', adminRoutes);
+mountRoute('/api/auth', './routes/auth');
+mountRoute('/api/users', './routes/userRoutes');
+mountRoute('/api/admin_auth', './routes/adminRoutes');
+mountRoute('/api/products', './routes/products');
+mountRoute('/api/orders', './routes/orders');
+mountRoute('/api/admin', './routes/admin');
+mountRoute('/api/categories', './routes/categories');
+mountRoute('/api/reviews', './routes/reviews');
+mountRoute('/api/wishlist', './routes/wishlist');
+mountRoute('/api/wallet', './routes/wallet');
+mountRoute('/api/coupons', './routes/coupons');
+mountRoute('/api/payments', './routes/payments');
+mountRoute('/api/ai', './routes/ai');
+mountRoute('/api/analytics', './routes/analytics');
+mountRoute('/api/blog', './routes/blog');
+mountRoute('/api/seller-profile', './routes/sellerProfile');
+mountRoute('/api/referral', './routes/referral');
+mountRoute('/api/logistics', './routes/logistics');
+mountRoute('/api/notifications', './routes/notifications');
 
 // Health check
 app.get('/api/health', (req, res) =>
@@ -112,7 +95,7 @@ app.get('/api/health', (req, res) =>
 
 // Global error handler
 app.use((err, req, res, next) => {
-  console.error(err.message);
+  console.error('[Global Error]:', err.message);
   res.status(err.status || 500).json({
     success: false,
     message: process.env.NODE_ENV === 'production' ? 'Something went wrong' : err.message
@@ -120,6 +103,6 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () =>
-  console.log(`🚀 ${process.env.BRAND_NAME || 'PlantBase'} Server running on port ${PORT}`)
+server.listen(PORT, '0.0.0.0', () =>
+  console.log(`🚀 ${BRAND_NAME} Server running on port ${PORT} (0.0.0.0)`)
 );

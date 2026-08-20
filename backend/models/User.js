@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -23,7 +24,7 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['customer', 'seller', 'admin', 'superadmin'],
+    enum: ['customer', 'user', 'seller', 'admin', 'superadmin'],
     default: 'customer'
   },
   isActive: {
@@ -72,19 +73,20 @@ const userSchema = new mongoose.Schema({
   // ─── Preferences ───
   recentSearches: [{ type: String }],
   recentlyViewed: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
-}, { timestamps: true });
+}, { timestamps: true, collection: 'users' });
 
-// Generate unique referral code before save
+// Generate unique referral code and hash password before save
 userSchema.pre('save', async function() {
-  // Hash password
-  if (this.isModified('password')) {
-    const salt = await bcrypt.genSalt(12);
-    this.password = await bcrypt.hash(this.password, salt);
-  }
   // Generate referral code
-  if (!this.referralCode) {
+  if (!this.referralCode && this.name) {
     this.referralCode = this.name.substring(0, 3).toUpperCase() + crypto.randomBytes(3).toString('hex').toUpperCase();
   }
+
+  // Required for automatic hashing (Do NOT use arrow function here)
+  if (!this.isModified('password')) return;
+  
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
 });
 
 // Compare password
