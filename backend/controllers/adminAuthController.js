@@ -12,27 +12,30 @@ const registerAdmin = async (req, res) => {
       return res.status(503).json({ success: false, message: 'Database unavailable' });
     }
 
-    const expectedSecret = process.env.ADMIN_SECRET_KEY;
+    // 1. Verify admin secret
+    const expectedSecret = process.env.ADMIN_SECRET_KEY || 'default_admin_secret_123';
     if (!adminSecret || adminSecret !== expectedSecret) {
       return res.status(403).json({ success: false, message: 'Invalid admin secret key' });
     }
 
     const sanitizedEmail = email.toLowerCase().trim();
 
-    // Query unified User collection
+    // 2. Query unified User collection
     const accountExists = await User.findOne({ email: sanitizedEmail });
     if (accountExists) {
       return res.status(400).json({ success: false, message: 'Email already registered' });
     }
 
-    // Create admin in the unified User collection
+    // 3. Create admin in the unified User collection
     const admin = await User.create({
       name,
       email: sanitizedEmail,
-      password,
-      role: 'admin' // This differentiates them from normal users
+      password, // Password hashed automatically by User schema pre-save hook
+      role: 'admin',
+      isEmailVerified: true // Auto-verify admins
     });
 
+    // 4. Generate token
     const token = jwt.sign(
       { id: admin._id, role: admin.role },
       process.env.JWT_SECRET || 'secret123',

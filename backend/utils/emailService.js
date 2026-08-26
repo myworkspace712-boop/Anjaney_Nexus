@@ -10,12 +10,14 @@ const nodemailer = require('nodemailer');
 // ---------------------------------------------------------------------------
 let transporter;
 
-if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+if (process.env.SMTP_USER && process.env.SMTP_PASS) {
   transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: process.env.SMTP_HOST || 'smtp.gmail.com',
+    port: process.env.SMTP_PORT || 587,
+    secure: process.env.SMTP_PORT == 465, // true for 465, false for other ports
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
     },
   });
 } else {
@@ -35,10 +37,10 @@ if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
       return { messageId: 'dev-console' };
     },
   };
-  console.log('⚠️  EMAIL_USER / EMAIL_PASS not set — emails will print to console');
+  console.log('⚠️  SMTP_USER / SMTP_PASS not set — emails will print to console');
 }
 
-const FROM = process.env.EMAIL_USER || 'noreply@anjaneynexus.com';
+const FROM = process.env.SMTP_USER || 'noreply@anjaneynexus.com';
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
 
 // ---------------------------------------------------------------------------

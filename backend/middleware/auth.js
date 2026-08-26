@@ -39,17 +39,17 @@ const protect = async (req, res, next) => {
 };
 
 const admin = (req, res, next) => {
-  if (req.user && ['admin', 'superadmin'].includes(req.user.role)) {
+  if (req.user && req.user.role === 'admin') {
     return next();
   }
   return res.status(403).json({ success: false, message: 'Access denied: Admin only' });
 };
 
 const seller = (req, res, next) => {
-  if (req.user && ['seller', 'admin', 'superadmin'].includes(req.user.role)) {
+  if (req.user && (req.user.role === 'admin' || (req.user.role === 'seller' && req.user.sellerStatus === 'approved'))) {
     return next();
   }
-  return res.status(403).json({ success: false, message: 'Access denied: Seller only' });
+  return res.status(403).json({ success: false, message: 'Access denied: Approved Seller or Admin only' });
 };
 
 module.exports = { protect, admin, seller };

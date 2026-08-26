@@ -39,9 +39,24 @@ app.use(cookieParser());
 
 // CORS
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production'
-    ? [process.env.FRONTEND_URL || 'https://yourdomain.com']
-    : ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:3000'],
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      'http://localhost:3000', 
+      'http://localhost:5173',
+      'http://localhost:5174',
+      process.env.FRONTEND_URL,
+      'https://anjaney-nexus.onrender.com'
+    ];
+    
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
@@ -64,13 +79,35 @@ const mountRoute = (path, modulePath) => {
   try {
     app.use(path, require(modulePath));
   } catch (err) {
-    console.error(`❌ Failed to load route ${path} (${modulePath}):`, err.message);
+    console.error(`❌ Failed to load route ${path} (${modulePath}):`);
+    console.error(err.stack); // Changed to err.stack to expose hidden errors
   }
 };
+
+const User = require('./models/User');
+app.post('/api/auth/verify', async (req, res) => {
+  try {
+    const { token } = req.body;
+    if (!token) {
+      return res.status(400).json({ success: false, message: 'Token is required' });
+    }
+
+    const user = await User.findOne({ emailVerificationToken: token }).select('+emailVerificationToken +emailVerificationExpiry');
+    
+    if (!user) {
+      return res.status(400).json({ success: false, message: 'Invalid token (Direct Route)' });
+    }
+
+    res.json({ success: true, message: 'Direct Route works! Token found in DB.' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Direct Route Error: ' + error.message });
+  }
+});
 
 mountRoute('/api/auth', './routes/auth');
 mountRoute('/api/users', './routes/userRoutes');
 mountRoute('/api/admin_auth', './routes/adminRoutes');
+mountRoute('/api/seller_auth', './routes/sellerRoutes');
 mountRoute('/api/products', './routes/products');
 mountRoute('/api/orders', './routes/orders');
 mountRoute('/api/admin', './routes/admin');
@@ -93,6 +130,15 @@ app.get('/api/health', (req, res) =>
   res.json({ success: true, message: `${BRAND_NAME} API running`, version: '2.0.0' })
 );
 
+// Global 404 Not Found Handler
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "Route not found",
+    path: req.originalUrl
+  });
+});
+
 // Global error handler
 app.use((err, req, res, next) => {
   console.error('[Global Error]:', err.message);
@@ -103,6 +149,6 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, '0.0.0.0', () =>
-  console.log(`🚀 ${BRAND_NAME} Server running on port ${PORT} (0.0.0.0)`)
-);
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 ${BRAND_NAME} Server running on port ${PORT} (0.0.0.0)`);
+});

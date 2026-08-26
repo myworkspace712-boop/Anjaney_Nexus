@@ -4,7 +4,7 @@ const User = require('../models/User');
 const generateToken = require('../utils/token');
 const { protect } = require('../middleware/auth');
 const { sendVerificationEmail, sendPasswordResetEmail } = require('../utils/emailService');
-
+const { registerCustomer, verifyEmail } = require('../controllers/authController');
 
 // ─── Helper: generate random hex token ───
 const generateCryptoToken = () => crypto.randomBytes(32).toString('hex');
@@ -12,96 +12,12 @@ const generateCryptoToken = () => crypto.randomBytes(32).toString('hex');
 // ─────────────────────────────────────────────────────────────
 // @POST /api/auth/register — with email verification
 // ─────────────────────────────────────────────────────────────
-router.post('/register', async (req, res) => {
-  try {
-    console.log("1. Received payload:", req.body);
-    const { name, email, password, role, sellerInfo } = req.body;
-
-    // Required fields
-    if (!name || !email || !password) {
-      return res.status(400).json({ success: false, message: 'All fields are required' });
-    }
-
-    // Input validation
-    if (name.length < 2 || name.length > 50) {
-      return res.status(400).json({ success: false, message: 'Name must be 2-50 characters' });
-    }
-    if (password.length < 6 || password.length > 100) {
-      return res.status(400).json({ success: false, message: 'Password must be 6-100 characters' });
-    }
-    if (!/^\S+@\S+\.\S+$/.test(email)) {
-      return res.status(400).json({ success: false, message: 'Invalid email format' });
-    }
-
-    // Duplicate check
-    const exists = await User.findOne({ email });
-    if (exists) return res.status(400).json({ success: false, message: 'User already exists' });
-
-    if (role === 'admin' || role === 'superadmin') {
-      return res.status(403).json({ success: false, message: 'Admins must be registered through the dedicated admin endpoint.' });
-    }
-
-    // Generate verification token
-    const verificationToken = generateCryptoToken();
-
-    console.log("2. Password hashing and DB save started");
-    const user = await User.create({
-      name,
-      email,
-      password,
-      role: role && ['customer', 'seller'].includes(role) ? role : 'customer',
-      sellerInfo: role === 'seller' ? sellerInfo : undefined,
-      isEmailVerified: false,           // New users must verify
-      emailVerificationToken: verificationToken,
-      emailVerificationExpiry: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
-    });
-    
-    console.log("3. User saved to DB successfully");
-
-    // Send verification email
-    try {
-      await sendVerificationEmail(user.email, verificationToken);
-    } catch (emailErr) {
-      console.error('Email send failed:', emailErr.message);
-      // Don't fail registration if email fails — user can resend
-    }
-
-    res.status(201).json({
-      success: true,
-      message: 'Registration successful! Please check your email to verify your account.',
-      requiresVerification: true,
-    });
-
-  } catch (err) {
-    console.error('Register error:', err.message);
-    res.status(500).json({ success: false, message: 'Server error' });
-  }
-});
+router.post('/register', registerCustomer);
 
 // ─────────────────────────────────────────────────────────────
-// @GET /api/auth/verify-email/:token
+// @POST /api/auth/verify
 // ─────────────────────────────────────────────────────────────
-router.get('/verify-email/:token', async (req, res) => {
-  try {
-    const user = await User.findOne({
-      emailVerificationToken: req.params.token,
-      emailVerificationExpiry: { $gt: new Date() },
-    }).select('+emailVerificationToken +emailVerificationExpiry');
-
-    if (!user) {
-      return res.status(400).json({ success: false, message: 'Invalid or expired verification link' });
-    }
-
-    user.isEmailVerified = true;
-    user.emailVerificationToken = undefined;
-    user.emailVerificationExpiry = undefined;
-    await user.save();
-
-    res.json({ success: true, message: 'Email verified successfully! You can now log in.' });
-  } catch (err) {
-    res.status(500).json({ success: false, message: 'Server error' });
-  }
-});
+router.post('/verify', verifyEmail);
 
 // ─────────────────────────────────────────────────────────────
 // @POST /api/auth/resend-verification
@@ -121,7 +37,7 @@ router.post('/resend-verification', async (req, res) => {
     // Generate new token
     const verificationToken = generateCryptoToken();
     user.emailVerificationToken = verificationToken;
-    user.emailVerificationExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000);
+    user.emailVerificationExpiry = new Date(Date.now() + 30 * 60 * 1000); // 30 minutes
     await user.save();
 
     await sendVerificationEmail(user.email, verificationToken);
