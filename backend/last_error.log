@@ -1,0 +1,7 @@
+TypeError: next is not a function
+    at model.<anonymous> (C:\Y J\Businesses Websites\Anjaney_Nexus\backend\models\User.js:97:5)
+    at async Kareem.execPre (C:\Y J\Businesses Websites\Anjaney_Nexus\backend\node_modules\kareem\index.js:70:24)
+    at async model.$__save (C:\Y J\Businesses Websites\Anjaney_Nexus\backend\node_modules\mongoose\lib\model.js:394:5)
+    at async model.save (C:\Y J\Businesses Websites\Anjaney_Nexus\backend\node_modules\mongoose\lib\model.js:664:5)
+    at async model.create (C:\Y J\Businesses Websites\Anjaney_Nexus\backend\node_modules\mongoose\lib\model.js:2751:5)
+    at async registerCustomer (C:\Y J\Businesses Websites\Anjaney_Nexus\backend\controllers\authController.js:56:18)

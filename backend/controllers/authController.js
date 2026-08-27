@@ -78,7 +78,23 @@ const registerCustomer = async (req, res) => {
     });
 
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.log('--- ERROR IN registerCustomer ---');
+    console.error("Original Error:", error);
+    require('fs').writeFileSync('last_error.log', error.stack || error.message);
+    console.log(error); // Logs the full original error stack
+
+    // Catch MongoDB Duplicate Key Error (e.g., email already exists)
+    if (error.code === 11000) {
+      const field = Object.keys(error.keyValue)[0];
+      return res.status(400).json({ success: false, message: `An account with that ${field} already exists.` });
+    }
+    // Catch Mongoose Validation Errors (missing required fields)
+    if (error.name === 'ValidationError') {
+      const messages = Object.values(error.errors).map(val => val.message);
+      return res.status(400).json({ success: false, message: "Validation Failed", errors: messages });
+    }
+    // Catch all other generic errors
+    return res.status(500).json({ success: false, message: error.message, errorName: error.name });
   }
 };
 
