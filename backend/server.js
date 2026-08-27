@@ -102,6 +102,8 @@ app.post('/api/auth/verify', async (req, res) => {
   } catch (error) {
     res.status(500).json({ success: false, message: 'Direct Route Error: ' + error.message });
   }
+});
+
 mountRoute('/api/auth', './routes/auth');
 mountRoute('/api/users', './routes/userRoutes');
 mountRoute('/api/admin_auth', './routes/adminRoutes');
