@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
 import './CustomerRegistration.css';
 
 
@@ -7,6 +8,7 @@ const CustomerRegistration = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   
   // UI State
   const [loading, setLoading] = useState(false);
@@ -22,7 +24,7 @@ const CustomerRegistration = () => {
     setError(null);
     setSuccess(null);
 
-    const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    const baseUrl = import.meta.env.VITE_API_URL || '';
 
     try {
       const response = await fetch(`${baseUrl}/api/auth/register`, {
@@ -108,15 +110,29 @@ const CustomerRegistration = () => {
 
           <div className="cr-input-group">
             <label className="cr-label">Password</label>
-            <input
-              type="password"
-              className="cr-input"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              minLength={6}
-            />
+            <div style={{ position: 'relative' }}>
+              <input
+                type={showPassword ? "text" : "password"}
+                className="cr-input"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                minLength={6}
+                style={{ paddingRight: '40px', width: '100%', boxSizing: 'border-box' }}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                style={{
+                  position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)',
+                  background: 'transparent', border: 'none', cursor: 'pointer', color: '#6b7280',
+                  display: 'flex', alignItems: 'center'
+                }}
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
           </div>
 
           <button type="submit" className="cr-submit-btn" disabled={loading}>

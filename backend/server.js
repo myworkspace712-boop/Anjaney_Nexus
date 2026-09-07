@@ -1,11 +1,29 @@
 require('dotenv').config();
+const os = require('os');
 const express = require('express');
 const http = require('http');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
+const nodemailer = require('nodemailer');
 const connectDB = require('./config/db');
+
+process.on('uncaughtException', (err) => {
+  console.error('\n=================================');
+  console.error('[FATAL CRASH] Uncaught Exception:');
+  console.error(err);
+  console.error('=================================\n');
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('\n=================================');
+  console.error('[FATAL CRASH] Unhandled Promise Rejection:');
+  console.error(reason);
+  console.error('=================================\n');
+});
+
+const localIpAddress = process.env.LOCAL_IP || '192.168.1.15';
 
 
 // Safe import for constants
@@ -18,10 +36,40 @@ try {
 }
 
 const app = express();
+
+// MUST BE AT THE VERY TOP
+app.use(cors({
+  origin: '*', // Allow all local network IPs to connect
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: '*'
+}));
+app.options(/.*/, cors()); // Explicitly answer all OPTIONS preflight requests
 const server = http.createServer(app);
 
 // Connect DB
 connectDB();
+
+// ─── SMTP Startup Verification ───
+/*
+const smtpTransporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST || 'smtp.gmail.com',
+  port: process.env.SMTP_PORT || 465,
+  secure: true,
+  auth: {
+    user: process.env.SMTP_EMAIL,
+    pass: process.env.SMTP_PASSWORD,
+  },
+});
+
+smtpTransporter.verify((error, success) => {
+  if (error) {
+    // console.error("🚨 FATAL SMTP ERROR:", error);
+    // process.exit(1); // Demoted to warning so server doesn't crash on boot
+  } else {
+    console.log("✅ SMTP Email Server Connected & Ready");
+  }
+});
+*/
 
 // Setup Socket.io safely
 try {
@@ -37,29 +85,7 @@ try {
 app.use(helmet());
 app.use(cookieParser());
 
-// CORS
-app.use(cors({
-  origin: function (origin, callback) {
-    const allowedOrigins = [
-      'http://localhost:3000', 
-      'http://localhost:5173',
-      'http://localhost:5174',
-      process.env.FRONTEND_URL,
-      'https://anjaney-nexus.onrender.com'
-    ];
-    
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+
 
 // Rate limiting
 const generalLimiter = rateLimit({
@@ -73,6 +99,12 @@ app.use('/api', generalLimiter);
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
+// NEW: Global Request Logger
+app.use((req, res, next) => {
+  console.log(`[INCOMING REQUEST] Method: ${req.method} | URL: ${req.url} | Original URL: ${req.originalUrl}`);
+  next();
+});
+
 // ─── Safe Route Loader ───
 // Helper function to mount routes without crashing the entire server if one file is missing
 const mountRoute = (path, modulePath) => {
@@ -85,23 +117,11 @@ const mountRoute = (path, modulePath) => {
 };
 
 const User = require('./models/User');
-app.post('/api/auth/verify', async (req, res) => {
-  try {
-    const { token } = req.body;
-    if (!token) {
-      return res.status(400).json({ success: false, message: 'Token is required' });
-    }
 
-    const user = await User.findOne({ emailVerificationToken: token }).select('+emailVerificationToken +emailVerificationExpiry');
-    
-    if (!user) {
-      return res.status(400).json({ success: false, message: 'Invalid token (Direct Route)' });
-    }
 
-    res.json({ success: true, message: 'Direct Route works! Token found in DB.' });
-  } catch (error) {
-    res.status(500).json({ success: false, message: 'Direct Route Error: ' + error.message });
-  }
+// 1. Diagnostic test route
+app.post('/api/auth/ping', (req, res) => {
+  res.status(200).json({ message: "Server is alive and receiving POST requests!" });
 });
 
 mountRoute('/api/auth', './routes/auth');
@@ -126,17 +146,23 @@ mountRoute('/api/logistics', './routes/logistics');
 mountRoute('/api/notifications', './routes/notifications');
 
 // Health check
-app.get('/api/health', (req, res) =>
-  res.json({ success: true, message: `${BRAND_NAME} API running`, version: '2.0.0' })
-);
+app.get('/api/health', (req, res) => {
+  res.status(200).send("✅ Backend is reachable over the network!");
+});
 
-// Global 404 Not Found Handler
-app.use((req, res) => {
-  res.status(404).json({
-    success: false,
-    message: "Route not found",
-    path: req.originalUrl
-  });
+// 1. Import the controller directly
+const { registerCustomer } = require('./controllers/authController');
+
+// 2. Add a startup health-check to ensure it's not undefined
+console.log("[STARTUP CHECK] Is registerCustomer defined?", typeof registerCustomer !== 'undefined');
+
+// 3. Mount the route directly on the app instance (Bypassing authRoutes.js)
+app.post('/api/auth/register', registerCustomer);
+
+// 4. THIS MUST BE LAST: Update the 404 handler to log the exact method
+app.use((req, res, next) => {
+  console.log(`[404 HIT] Method: ${req.method} | URL: ${req.originalUrl}`);
+  res.status(404).json({ message: `Backend route not found: [${req.method}] ${req.originalUrl}` });
 });
 
 // Global error handler
@@ -149,6 +175,9 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 ${BRAND_NAME} Server running on port ${PORT} (0.0.0.0)`);
+
+// STRICT IPv4 BINDING
+server.listen(PORT, '127.0.0.1', () => {
+  console.clear();
+  console.log(`🚀 BACKEND ONLINE: http://127.0.0.1:${PORT}`);
 });

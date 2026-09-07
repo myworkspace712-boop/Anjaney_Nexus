@@ -10,38 +10,25 @@ const nodemailer = require('nodemailer');
 // ---------------------------------------------------------------------------
 let transporter;
 
-if (process.env.SMTP_USER && process.env.SMTP_PASS) {
-  transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST || 'smtp.gmail.com',
-    port: process.env.SMTP_PORT || 587,
-    secure: process.env.SMTP_PORT == 465, // true for 465, false for other ports
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  });
-} else {
-  // Development fallback — prints emails to the terminal
-  transporter = {
-    sendMail: async (mailOptions) => {
-      console.log('\n╔══════════════════════════════════════════╗');
-      console.log('║       📧  DEV EMAIL (console mode)       ║');
-      console.log('╠══════════════════════════════════════════╣');
-      console.log(`║ To:      ${mailOptions.to}`);
-      console.log(`║ Subject: ${mailOptions.subject}`);
-      console.log('╠══════════════════════════════════════════╣');
-      // Extract the link from the HTML
-      const linkMatch = mailOptions.html?.match(/href="([^"]+)"/);
-      if (linkMatch) console.log(`║ 🔗 Link: ${linkMatch[1]}`);
-      console.log('╚══════════════════════════════════════════╝\n');
-      return { messageId: 'dev-console' };
-    },
-  };
-  console.log('⚠️  SMTP_USER / SMTP_PASS not set — emails will print to console');
+if (!process.env.SMTP_EMAIL || !process.env.SMTP_PASSWORD) {
+  console.warn('⚠️ SMTP credentials missing - emails will fail in production.');
 }
 
-const FROM = process.env.SMTP_USER || 'noreply@anjaneynexus.com';
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST || 'smtp.gmail.com',
+  port: process.env.SMTP_PORT || 587,
+  secure: process.env.SMTP_PORT == 465,
+  auth: {
+    user: process.env.SMTP_EMAIL,
+    pass: process.env.SMTP_PASSWORD,
+  },
+});
+
+const FROM = process.env.SMTP_EMAIL || 'noreply@anjaneynexus.com';
+let FRONTEND_URL = process.env.CLIENT_URL;
+if (!FRONTEND_URL || FRONTEND_URL === 'undefined' || FRONTEND_URL === 'null' || FRONTEND_URL.trim() === '') {
+  FRONTEND_URL = 'http://192.168.1.15:5173';
+}
 
 // ---------------------------------------------------------------------------
 // Send Verification Email

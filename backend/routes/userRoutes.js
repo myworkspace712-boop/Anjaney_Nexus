@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { registerCustomer, verifyUser } = require('../controllers/authController');
+const { getUserProfile, updateUserProfile } = require('../controllers/userController');
 const { protect } = require('../middleware/auth'); // adjusted from authMiddleware
 
 
@@ -9,5 +10,11 @@ router.post('/register', registerCustomer);
 
 // GET /api/users/verify
 router.get('/verify', protect, verifyUser);
+
+// GET /api/users/profile
+router.get('/profile', protect, getUserProfile);
+
+// PUT /api/users/profile
+router.put('/profile', protect, updateUserProfile);
 
 module.exports = router;

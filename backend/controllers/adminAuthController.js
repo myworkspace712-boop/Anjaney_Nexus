@@ -6,19 +6,19 @@ const jwt = require('jsonwebtoken');
 
 const registerAdmin = async (req, res) => {
   try {
-    const { name, email, password, adminSecret } = req.body || {};
+    const { name, email, password } = req.body || {};
 
     if (mongoose.connection.readyState !== 1) {
       return res.status(503).json({ success: false, message: 'Database unavailable' });
     }
 
-    // 1. Verify admin secret
-    const expectedSecret = process.env.ADMIN_SECRET_KEY || 'default_admin_secret_123';
-    if (!adminSecret || adminSecret !== expectedSecret) {
-      return res.status(403).json({ success: false, message: 'Invalid admin secret key' });
-    }
-
     const sanitizedEmail = email.toLowerCase().trim();
+    
+    // 1. Verify company domain instead of secret key
+    const COMPANY_DOMAIN = "@anjaneynexus.com";
+    if (!sanitizedEmail.endsWith(COMPANY_DOMAIN)) {
+      return res.status(403).json({ success: false, message: 'Admin registration requires a company email address.' });
+    }
 
     // 2. Query unified User collection
     const accountExists = await User.findOne({ email: sanitizedEmail });

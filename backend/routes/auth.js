@@ -2,9 +2,13 @@ const router = require('express').Router();
 const crypto = require('crypto');
 const User = require('../models/User');
 const generateToken = require('../utils/token');
-const { protect } = require('../middleware/auth');
+const { protect, admin } = require('../middleware/auth');
 const { sendVerificationEmail, sendPasswordResetEmail } = require('../utils/emailService');
-const { registerCustomer, verifyEmail } = require('../controllers/authController');
+const { sendEmail } = require('../utils/sendEmail');
+const { registerCustomer, bulkRegisterCustomers, loginUser, verifyEmail, deleteUser, deleteUserByEmail, getAllUsers, getUserProfile, checkStatus, deleteAllUsers, resendVerification, bulkResendVerification } = require('../controllers/authController');
+
+// Diagnostic log
+console.log("[ROUTER INIT] authRoutes.js is mounting endpoints.");
 
 // ─── Helper: generate random hex token ───
 const generateCryptoToken = () => crypto.randomBytes(32).toString('hex');
@@ -15,38 +19,49 @@ const generateCryptoToken = () => crypto.randomBytes(32).toString('hex');
 router.post('/register', registerCustomer);
 
 // ─────────────────────────────────────────────────────────────
-// @POST /api/auth/verify
+// @POST /api/auth/bulk-register-customers — Bulk add users
 // ─────────────────────────────────────────────────────────────
-router.post('/verify', verifyEmail);
+router.post('/bulk-register-customers', bulkRegisterCustomers);
+
+// ─────────────────────────────────────────────────────────────
+// @DELETE /api/auth/user/:id — delete user
+// ─────────────────────────────────────────────────────────────
+router.delete('/user/:id', protect, admin, deleteUser);
+
+// ─────────────────────────────────────────────────────────────
+// @DELETE /api/auth/delete-by-email — delete user by email
+// ─────────────────────────────────────────────────────────────
+router.delete('/delete-by-email', deleteUserByEmail);
+
+// ─────────────────────────────────────────────────────────────
+// @DELETE /api/auth/delete-all — delete all users (testing)
+// ─────────────────────────────────────────────────────────────
+router.delete('/delete-all', deleteAllUsers);
+
+// ─────────────────────────────────────────────────────────────
+// @GET /api/auth/users — get all users
+// ─────────────────────────────────────────────────────────────
+router.get('/users', protect, admin, getAllUsers);
+
+// ─────────────────────────────────────────────────────────────
+// @POST /api/auth/verify-email/:token
+// ─────────────────────────────────────────────────────────────
+router.post('/verify-email/:token', verifyEmail);
+
+// ─────────────────────────────────────────────────────────────
+// @GET /api/auth/check-status/:email
+// ─────────────────────────────────────────────────────────────
+router.get('/check-status/:email', checkStatus);
 
 // ─────────────────────────────────────────────────────────────
 // @POST /api/auth/resend-verification
 // ─────────────────────────────────────────────────────────────
-router.post('/resend-verification', async (req, res) => {
-  try {
-    const { email } = req.body;
-    if (!email) return res.status(400).json({ success: false, message: 'Email required' });
+router.post('/resend-verification', resendVerification);
 
-    const user = await User.findOne({ email }).select('+emailVerificationToken +emailVerificationExpiry');
-    if (!user) return res.status(404).json({ success: false, message: 'User not found' });
-
-    if (user.isEmailVerified) {
-      return res.status(400).json({ success: false, message: 'Email already verified' });
-    }
-
-    // Generate new token
-    const verificationToken = generateCryptoToken();
-    user.emailVerificationToken = verificationToken;
-    user.emailVerificationExpiry = new Date(Date.now() + 30 * 60 * 1000); // 30 minutes
-    await user.save();
-
-    await sendVerificationEmail(user.email, verificationToken);
-
-    res.json({ success: true, message: 'Verification email resent. Please check your inbox.' });
-  } catch (err) {
-    res.status(500).json({ success: false, message: 'Server error' });
-  }
-});
+// ─────────────────────────────────────────────────────────────
+// @POST /api/auth/bulk-resend-verification
+// ─────────────────────────────────────────────────────────────
+router.post('/bulk-resend-verification', bulkResendVerification);
 
 // ─────────────────────────────────────────────────────────────
 // @POST /api/auth/forgot-password
@@ -109,74 +124,12 @@ router.post('/reset-password/:token', async (req, res) => {
 // ─────────────────────────────────────────────────────────────
 // @POST /api/auth/login
 // ─────────────────────────────────────────────────────────────
-router.post('/login', async (req, res) => {
-  try {
-    const { email, password } = req.body;
-
-    if (!email || !password)
-      return res.status(400).json({ success: false, message: 'Email and password required' });
-
-    const user = await User.findOne({ email }).select('+password');
-
-    if (!user || !(await user.matchPassword(password))) {
-      return res.status(401).json({ success: false, message: 'Invalid credentials' });
-    }
-
-    if (!user.isActive) {
-      return res.status(403).json({ success: false, message: 'Account is deactivated' });
-    }
-
-    // Check email verification
-    if (!user.isEmailVerified) {
-      return res.status(403).json({
-        success: false,
-        message: 'Please verify your email before logging in.',
-        requiresVerification: true,
-        email: user.email,
-      });
-    }
-
-    const token = generateToken(user._id);
-
-    res.json({
-      success: true,
-      user: {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        phone: user.phone,
-        address: user.address,
-        sellerInfo: user.sellerInfo,
-      },
-      token,
-    });
-
-  } catch (err) {
-    res.status(500).json({ success: false, message: 'Server error' });
-  }
-});
+router.post('/login', loginUser);
 
 // ─────────────────────────────────────────────────────────────
 // @GET /api/auth/me
 // ─────────────────────────────────────────────────────────────
-router.get('/me', protect, async (req, res) => {
-  try {
-    res.json({
-      _id: req.user._id,
-      name: req.user.name,
-      email: req.user.email,
-      role: req.user.role,
-      phone: req.user.phone,
-      address: req.user.address,
-      sellerInfo: req.user.sellerInfo,
-      isActive: req.user.isActive,
-      isEmailVerified: req.user.isEmailVerified,
-    });
-  } catch (err) {
-    res.status(500).json({ success: false, message: 'Server error' });
-  }
-});
+router.get('/me', protect, getUserProfile);
 
 // ─────────────────────────────────────────────────────────────
 // @PUT /api/auth/profile — update user profile

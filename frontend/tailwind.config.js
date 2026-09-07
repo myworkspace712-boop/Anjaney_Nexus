@@ -17,6 +17,13 @@ export default {
           text: 'var(--pb-text)',
           'text-secondary': 'var(--pb-text-secondary)',
           border: 'var(--pb-border)',
+        },
+        spice: {
+          red: '#9B2C2C', // Deep terracotta red
+          gold: '#D69E2E', // Turmeric gold
+          green: '#2F855A', // Earthy leaf green
+          dark: '#1A202C', // Deep text
+          light: '#F7FAFC' // Off-white bg
         }
       },
       fontFamily: {

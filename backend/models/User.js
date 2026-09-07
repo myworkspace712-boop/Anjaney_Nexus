@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
     lowercase: true,
+    trim: true,
     match: [/^\S+@\S+\.\S+$/, 'Please use a valid email']
   },
   password: {
@@ -42,7 +43,7 @@ const userSchema = new mongoose.Schema({
     default: true  // true by default so existing/seeded users work
   },
   emailVerificationToken: { type: String, select: false },
-  emailVerificationExpiry: { type: Date, select: false },
+  emailVerificationExpires: { type: Date, select: false },
 
   // ─── Password Reset ───
   resetPasswordToken: { type: String, select: false },
@@ -56,6 +57,12 @@ const userSchema = new mongoose.Schema({
     city: { type: String, default: '' },
     state: { type: String, default: '' },
     pincode: { type: String, default: '' }
+  },
+  shippingAddress: {
+    streetAddress: { type: String, default: '' },
+    city: { type: String, default: '' },
+    state: { type: String, default: '' },
+    zipCode: { type: String, default: '' }
   },
 
   // ─── Seller Info ───
@@ -77,7 +84,7 @@ const userSchema = new mongoose.Schema({
   // ─── Preferences ───
   recentSearches: [{ type: String }],
   recentlyViewed: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
-}, { timestamps: true, collection: 'users', strict: false });
+}, { timestamps: true, collection: 'users' });
 
 // Generate unique referral code and hash password before save
 userSchema.pre('save', async function() {

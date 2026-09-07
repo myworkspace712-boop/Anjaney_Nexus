@@ -1,7 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { X } from 'lucide-react';
 
-
 const Sidebar = ({ isOpen, onClose }) => {
   return (
     <>
@@ -15,78 +14,86 @@ const Sidebar = ({ isOpen, onClose }) => {
 
       {/* Slide-over panel */}
       <div 
-        className={`fixed inset-y-0 left-0 w-64 bg-white z-50 shadow-2xl transform transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-y-0 left-0 w-72 bg-white z-50 shadow-2xl transform transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="flex items-center justify-between p-4 border-b">
-          <span className="text-xl font-bold text-green-600">Menu</span>
+        <div className="flex items-center justify-between p-6 border-b">
+          <img 
+            src="https://anjaneynexus.com/wp-content/uploads/2026/06/Anjaney_logo.webp" 
+            alt="Anjaney Nexus" 
+            className="h-8 w-auto"
+          />
           <button 
             onClick={onClose} 
-            className="p-2 text-gray-600 hover:text-gray-900 focus:outline-none rounded-md hover:bg-gray-100"
+            className="p-2 text-gray-400 hover:text-spice-dark focus:outline-none"
             aria-label="Close sidebar"
           >
             <X size={24} />
           </button>
         </div>
         
-        <nav className="flex flex-col p-4 space-y-2">
+        <nav className="flex flex-col p-6 space-y-4">
           <NavLink 
             to="/" 
             onClick={onClose}
             className={({ isActive }) => 
-              `px-4 py-3 rounded-lg text-lg font-medium transition ${
-                isActive ? 'bg-green-50 text-green-700' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+              `text-lg font-semibold transition-colors ${
+                isActive ? 'text-spice-gold' : 'text-spice-dark hover:text-spice-gold'
               }`
             }
-          >
-            Home
-          </NavLink>
-          <NavLink 
-            to="/about" 
-            onClick={onClose}
-            className={({ isActive }) => 
-              `px-4 py-3 rounded-lg text-lg font-medium transition ${
-                isActive ? 'bg-green-50 text-green-700' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
-              }`
-            }
-          >
-            About Us
-          </NavLink>
+          >Home</NavLink>
           <NavLink 
             to="/products" 
             onClick={onClose}
             className={({ isActive }) => 
-              `px-4 py-3 rounded-lg text-lg font-medium transition ${
-                isActive ? 'bg-green-50 text-green-700' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+              `text-lg font-semibold transition-colors ${
+                isActive ? 'text-spice-gold' : 'text-spice-dark hover:text-spice-gold'
               }`
             }
-          >
-            Products
-          </NavLink>
+          >Products</NavLink>
           <NavLink 
-            to="/inquire" 
+            to="/about-us" 
             onClick={onClose}
             className={({ isActive }) => 
-              `px-4 py-3 rounded-lg text-lg font-medium transition ${
-                isActive ? 'bg-green-50 text-green-700' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+              `text-lg font-semibold transition-colors ${
+                isActive ? 'text-spice-gold' : 'text-spice-dark hover:text-spice-gold'
               }`
             }
-          >
-            Inquire Us
-          </NavLink>
+          >About Us</NavLink>
+          <NavLink 
+            to="/contact" 
+            onClick={onClose}
+            className={({ isActive }) => 
+              `text-lg font-semibold transition-colors ${
+                isActive ? 'text-spice-gold' : 'text-spice-dark hover:text-spice-gold'
+              }`
+            }
+          >Contact</NavLink>
+          <NavLink 
+            to="/seller-application" 
+            onClick={onClose}
+            className={({ isActive }) => 
+              `text-lg font-semibold transition-colors ${
+                isActive ? 'text-spice-gold' : 'text-spice-dark hover:text-spice-gold'
+              }`
+            }
+          >Seller Application</NavLink>
 
-          <div className="pt-4 mt-4 border-t border-gray-100">
+          <div className="pt-6 mt-6 border-t border-gray-100 space-y-4 flex flex-col">
+            <NavLink 
+              to="/contact" 
+              onClick={onClose}
+              className="px-4 py-3 border-2 border-spice-dark text-center text-spice-dark font-bold hover:bg-spice-dark hover:text-white transition-colors"
+            >
+              Inquiry Now
+            </NavLink>
             <NavLink 
               to="/signup" 
               onClick={onClose}
-              className={({ isActive }) => 
-                `block px-4 py-3 rounded-lg text-lg font-medium text-center transition ${
-                  isActive ? 'bg-green-700 text-white' : 'bg-green-600 text-white hover:bg-green-700'
-                }`
-              }
+              className="px-4 py-3 bg-spice-gold text-white text-center font-bold hover:bg-yellow-600 transition-colors"
             >
-              Sign Up
+              Sign Up / Login
             </NavLink>
           </div>
         </nav>
@@ -94,6 +101,5 @@ const Sidebar = ({ isOpen, onClose }) => {
     </>
   );
 };
-
 
 export default Sidebar;

@@ -7,7 +7,12 @@ import SignUp from './pages/SignUp';
 import About from './pages/About';
 import Products from './pages/Products';
 import Inquire from './pages/Inquire';
+import UserProfile from './pages/UserProfile';
+import UserDashboard from './pages/UserDashboard';
 import Navbar from './components/Navbar';
+import VerifyEmail from './pages/VerifyEmail';
+import Footer from './components/Footer';
+import SellerApplication from './pages/SellerApplication';
 
 
 function App() {
@@ -16,12 +21,16 @@ function App() {
       <Navbar />
       <Routes>
         {/* Render SignUp as the first page */}
-        <Route path="/" element={<SignUp />} />
+        <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/products" element={<Products />} />
         <Route path="/inquire" element={<Inquire />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/register" element={<SignUp />} />
+        <Route path="/verify-email/:token" element={<VerifyEmail />} />
+        <Route path="/profile" element={<UserProfile />} />
+        <Route path="/dashboard" element={<UserDashboard />} />
+        <Route path="/seller-application" element={<SellerApplication />} />
 
         {/* Admin Dashboard Route */}
         <Route 
@@ -33,6 +42,7 @@ function App() {
           } 
         />
       </Routes>
+      <Footer />
     </Router>
   );
 }
