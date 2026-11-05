@@ -124,7 +124,7 @@ const Navbar = ({ activePage, setActivePage, navCount = 0, currentUser: propCurr
             {/* 2. The Styled Company Name */}
             <div className="text-lg sm:text-xl font-black">
               <span className="text-orange-500">Anjaney</span>{' '}
-              <span className="text-indigo-600 dark:text-indigo-400">
+              <span className="text-blue-900 dark:text-blue-400">
                 Nexus India
               </span>
             </div>
