@@ -1,174 +1,124 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Eye, EyeOff } from 'lucide-react';
-import AuthHistoryDropdown from '../components/AuthHistoryDropdown';
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
-  const [savedEmails, setSavedEmails] = useState([]);
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const history = JSON.parse(localStorage.getItem('nexus_login_emails') || '[]');
-    setSavedEmails(history);
-  }, []);
-
-  useEffect(() => {
+    // If a user just verified on another tab, catch it and redirect
     const authChannel = new BroadcastChannel('nexus_auth_channel');
-
     authChannel.onmessage = (event) => {
       if (event.data === 'verified_success') {
-        navigate('/'); 
+        navigate('/dashboard'); 
       }
     };
-
     return () => authChannel.close(); 
   }, [navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    // Save attempt to local storage
-    try {
-      const history = JSON.parse(localStorage.getItem('auth_attempts') || '[]');
-      history.push({ name: 'N/A (Login)', email, type: 'login' });
-      localStorage.setItem('auth_attempts', JSON.stringify(history));
-      window.dispatchEvent(new Event('auth_history_updated'));
-    } catch(err) { console.error('Failed to save auth history', err); }
-
+    setLoading(true);
     setError('');
-    
+
     try {
-      console.log('Sending login payload:', { email, password });
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
+      const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
       });
       
       const data = await response.json();
-      if (data.success) {
-        const currentHistory = JSON.parse(localStorage.getItem('nexus_login_emails') || '[]');
-        if (email && !currentHistory.includes(email)) {
-          const newHistory = [email, ...currentHistory].slice(0, 5); // Keep the last 5 emails
-          localStorage.setItem('nexus_login_emails', JSON.stringify(newHistory));
-          setSavedEmails(newHistory);
-        }
+      if (response.ok && data.success !== false) {
+        // Save auth data
+        if (data.token) localStorage.setItem('token', data.token);
+        if (data.user) localStorage.setItem('user', JSON.stringify(data.user));
+        
+        // Notify other components if needed
+        window.dispatchEvent(new Event('auth_history_updated'));
 
-        localStorage.setItem('token', data.token);
-        if (data.user) {
-          localStorage.setItem('user', JSON.stringify(data.user));
-        }
         navigate('/dashboard');
       } else {
-        setError(data.message || 'Login failed');
+        setError(data.message || 'Login failed. Please check your credentials.');
       }
     } catch (err) {
-      setError('Network error');
+      console.error(err);
+      setError('Network error. Unable to reach the server.');
+    } finally {
+      setLoading(false);
     }
   };
 
+  const inputStyle = { width: '100%', padding: '14px', borderRadius: '8px', border: '1px solid #d4d4d8', fontSize: '16px', marginBottom: '20px', outline: 'none' };
+
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
-      <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-6">Welcome Back</h2>
-        
-        <AuthHistoryDropdown />
-        
+    <div style={{ minHeight: 'calc(100vh - 85px)', backgroundColor: '#fafaf9', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px' }}>
+      <div style={{ backgroundColor: '#ffffff', padding: '50px 40px', borderRadius: '16px', boxShadow: '0 10px 25px rgba(0,0,0,0.05)', width: '100%', maxWidth: '450px', borderTop: '4px solid #1e3a8a' }}>
+
+        <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+          <h2 style={{ fontFamily: 'Georgia, serif', color: '#1e3a8a', fontSize: '32px', margin: '0 0 10px 0' }}>Welcome Back</h2>
+          <p style={{ color: '#666', margin: 0, fontSize: '15px' }}>Sign in to access your export dashboard.</p>
+        </div>
+
         {error && (
-          <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-md text-sm text-center">
+          <div style={{ marginBottom: '16px', padding: '12px', backgroundColor: '#fee2e2', border: '1px solid #fca5a5', color: '#b91c1c', borderRadius: '8px', fontSize: '14px', textAlign: 'center' }}>
             {error}
           </div>
         )}
 
-        <form onSubmit={handleLogin} className="space-y-4" autoComplete="off">
-          <div className="relative w-full">
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input 
-              type="email" 
-              required
-              autoComplete="off"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              onFocus={() => setShowDropdown(true)}
-              onBlur={() => setTimeout(() => setShowDropdown(false), 150)}
-              placeholder="e.g. you@example.com"
-            />
-            {showDropdown && savedEmails.length > 0 && (
-              <div className="absolute top-full left-0 right-0 mt-1 bg-[#1c1917] border border-stone-700 rounded-md shadow-xl z-50 overflow-hidden text-sm">
-                {savedEmails.map((savedEmail, i) => (
-                  <div 
-                    key={i} 
-                    onMouseDown={(e) => { 
-                      e.preventDefault(); 
-                      setEmail(savedEmail); // Update to match your email state setter
-                      setShowDropdown(false); 
-                    }}
-                    className="px-4 py-2 text-stone-200 hover:bg-stone-800 cursor-pointer flex items-center gap-2"
-                  >
-                    <svg className="w-4 h-4 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                    {savedEmail}
-                  </div>
-                ))}
-                <div 
-                  onMouseDown={(e) => { 
-                    e.preventDefault(); 
-                    localStorage.removeItem('nexus_login_emails'); 
-                    setSavedEmails([]); 
-                    setShowDropdown(false); 
-                  }}
-                  className="px-4 py-2 text-red-400 hover:bg-stone-800 cursor-pointer border-t border-stone-700 font-medium text-xs text-center transition-colors"
-                >
-                  Clear history
-                </div>
-              </div>
-            )}
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-            <div className="relative">
-              <input 
-                type={showPassword ? "text" : "password"} 
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 pr-10"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="e.g. ••••••••"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700 bg-transparent border-none cursor-pointer"
-              >
-                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-              </button>
-            </div>
-          </div>
+        <form onSubmit={handleLogin}>
+          <label style={{ display: 'block', color: '#1c1917', fontWeight: '600', marginBottom: '8px', fontSize: '14px' }}>Email Address</label>
+          <input 
+            type="email" 
+            style={inputStyle} 
+            placeholder="admin@anjaneynexus.com" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required 
+            disabled={loading}
+          />
+
+          <label style={{ display: 'block', color: '#1c1917', fontWeight: '600', marginBottom: '8px', fontSize: '14px' }}>Password</label>
+          <input 
+            type="password" 
+            style={inputStyle} 
+            placeholder="••••••••" 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required 
+            disabled={loading}
+          />
+
           <button 
             type="submit" 
-            className="w-full bg-green-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-green-700 transition"
+            disabled={loading}
+            style={{ 
+              width: '100%', 
+              backgroundColor: loading ? '#9ca3af' : '#ea580c', 
+              color: '#fff', 
+              border: 'none', 
+              padding: '14px', 
+              borderRadius: '8px', 
+              fontWeight: 'bold', 
+              fontSize: '16px', 
+              cursor: loading ? 'not-allowed' : 'pointer', 
+              transition: 'opacity 0.2s', 
+              marginTop: '10px' 
+            }}
+            onMouseOver={(e) => { if(!loading) e.target.style.opacity = '0.9'; }}
+            onMouseOut={(e) => { if(!loading) e.target.style.opacity = '1'; }}
           >
-            Sign In
+            {loading ? 'Signing In...' : 'Sign In'}
           </button>
         </form>
 
-        <div className="mt-4 text-center text-sm text-gray-600">
-          <Link to="/forgot-password" className="text-green-600 font-semibold hover:underline">
-            Forgot Password?
-          </Link>
-        </div>
-
-        <div className="mt-6 text-center text-sm text-gray-600">
-          Don't have an account?{' '}
-          <Link to="/signup" className="text-green-600 font-semibold hover:underline">
-            Sign Up
-          </Link>
-        </div>
+        <p style={{ textAlign: 'center', marginTop: '24px', color: '#666', fontSize: '14px' }}>
+          Don't have an account? <Link to="/register" style={{ color: '#ea580c', fontWeight: 'bold', textDecoration: 'none' }}>Register here</Link>
+        </p>
       </div>
     </div>
   );

@@ -6,8 +6,14 @@ const crypto = require('crypto');
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
-    trim: true
+    required: false,
+    trim: true,
+    default: ''
+  },
+  companyName: {
+    type: String,
+    trim: true,
+    default: ''
   },
   email: {
     type: String,
@@ -25,8 +31,8 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['customer', 'seller', 'admin'],
-    default: 'customer'
+    enum: ['customer', 'user', 'seller', 'admin'],
+    default: 'user'
   },
   sellerStatus: {
     type: String,
@@ -40,9 +46,12 @@ const userSchema = new mongoose.Schema({
   // ─── Email Verification ───
   isEmailVerified: {
     type: Boolean,
-    default: true  // true by default so existing/seeded users work
+    default: false
   },
+  verificationToken: { type: String, select: false },
+  verificationTokenExpiry: { type: Date, select: false },
   emailVerificationToken: { type: String, select: false },
+  emailVerificationOtp: { type: String, select: false },
   emailVerificationExpires: { type: Date, select: false },
 
   // ─── Password Reset ───
@@ -84,7 +93,7 @@ const userSchema = new mongoose.Schema({
   // ─── Preferences ───
   recentSearches: [{ type: String }],
   recentlyViewed: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
-}, { timestamps: true, collection: 'users' });
+}, { timestamps: true, collection: 'users', bufferCommands: false });
 
 // Generate unique referral code and hash password before save
 userSchema.pre('save', async function() {

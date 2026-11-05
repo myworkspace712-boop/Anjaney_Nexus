@@ -1,119 +1,104 @@
-/**
- * Email Service — Anjaney Nexus
- * Handles sending verification and password-reset emails.
- * Uses Nodemailer with configurable transport (console fallback for dev).
- */
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 const nodemailer = require('nodemailer');
 
-// ---------------------------------------------------------------------------
-// Transporter — uses Gmail SMTP if credentials exist, otherwise logs to console
-// ---------------------------------------------------------------------------
-let transporter;
+const getTransporter = () => {
+  const emailUser = process.env.EMAIL_USER || process.env.SMTP_EMAIL;
+  const emailPass = (process.env.EMAIL_PASS || process.env.SMTP_PASS || process.env.SMTP_PASSWORD || '').replace(/\s+/g, '');
 
-if (!process.env.SMTP_EMAIL || !process.env.SMTP_PASSWORD) {
-  console.warn('⚠️ SMTP credentials missing - emails will fail in production.');
-}
+  if (!emailUser || !emailPass) {
+    throw new Error('Email credentials are missing from environment variables (EMAIL_USER / EMAIL_PASS).');
+  }
 
-transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || 'smtp.gmail.com',
-  port: process.env.SMTP_PORT || 587,
-  secure: process.env.SMTP_PORT == 465,
-  auth: {
-    user: process.env.SMTP_EMAIL,
-    pass: process.env.SMTP_PASSWORD,
-  },
-});
-
-const FROM = process.env.SMTP_EMAIL || 'noreply@anjaneynexus.com';
-let FRONTEND_URL = process.env.CLIENT_URL;
-if (!FRONTEND_URL || FRONTEND_URL === 'undefined' || FRONTEND_URL === 'null' || FRONTEND_URL.trim() === '') {
-  FRONTEND_URL = 'http://192.168.1.15:5173';
-}
-
-// ---------------------------------------------------------------------------
-// Send Verification Email
-// ---------------------------------------------------------------------------
-const sendVerificationEmail = async (to, token) => {
-  const verifyUrl = `${FRONTEND_URL}/verify-email/${token}`;
-
-  const html = `
-    <div style="font-family:'Inter',Arial,sans-serif;max-width:560px;margin:0 auto;background:#FDFAF4;border-radius:12px;overflow:hidden;border:1px solid #D4C5A9;">
-      <div style="background:linear-gradient(135deg,#8DB600,#6B9A00);padding:32px 24px;text-align:center;">
-        <h1 style="color:#fff;margin:0;font-size:28px;">🌿 Anjaney Nexus</h1>
-        <p style="color:rgba(255,255,255,0.9);margin:8px 0 0;font-size:14px;">Plant-Based Marketplace</p>
-      </div>
-      <div style="padding:32px 24px;">
-        <h2 style="color:#2C1A0E;margin:0 0 12px;font-size:22px;">Verify Your Email</h2>
-        <p style="color:#6B4C2A;line-height:1.6;margin:0 0 24px;">
-          Thanks for signing up! Please verify your email address by clicking the button below.
-          This link will expire in <strong>24 hours</strong>.
-        </p>
-        <div style="text-align:center;margin:24px 0;">
-          <a href="${verifyUrl}"
-             style="display:inline-block;background:#8DB600;color:#fff;text-decoration:none;padding:14px 36px;border-radius:8px;font-weight:600;font-size:16px;">
-            ✅ Verify Email
-          </a>
-        </div>
-        <p style="color:#999;font-size:12px;margin:24px 0 0;line-height:1.5;">
-          If the button doesn't work, copy and paste this link:<br>
-          <a href="${verifyUrl}" style="color:#8DB600;word-break:break-all;">${verifyUrl}</a>
-        </p>
-      </div>
-      <div style="background:#F5F0E8;padding:16px 24px;text-align:center;">
-        <p style="color:#999;font-size:11px;margin:0;">© ${new Date().getFullYear()} Anjaney Nexus. All rights reserved.</p>
-      </div>
-    </div>
-  `;
-
-  await transporter.sendMail({
-    from: `"Anjaney Nexus" <${FROM}>`,
-    to,
-    subject: '🌿 Verify your Anjaney Nexus account',
-    html,
+  // 1. USE THE 'gmail' SERVICE PRESET
+  return nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: emailUser,
+      pass: emailPass,
+    },
+    tls: {
+      rejectUnauthorized: false
+    }
   });
 };
 
-// ---------------------------------------------------------------------------
-// Send Password Reset Email
-// ---------------------------------------------------------------------------
-const sendPasswordResetEmail = async (to, token) => {
-  const resetUrl = `${FRONTEND_URL}/reset-password/${token}`;
+const sendVerificationEmail = async (toEmail, token = '') => {
+  const currentUser = process.env.SMTP_EMAIL || process.env.EMAIL_USER;
+  const currentPass = (process.env.SMTP_PASS || process.env.EMAIL_PASS || process.env.SMTP_PASSWORD || '').replace(/\s+/g, '');
 
-  const html = `
-    <div style="font-family:'Inter',Arial,sans-serif;max-width:560px;margin:0 auto;background:#FDFAF4;border-radius:12px;overflow:hidden;border:1px solid #D4C5A9;">
-      <div style="background:linear-gradient(135deg,#A0522D,#7A3E1E);padding:32px 24px;text-align:center;">
-        <h1 style="color:#fff;margin:0;font-size:28px;">🌿 Anjaney Nexus</h1>
-        <p style="color:rgba(255,255,255,0.9);margin:8px 0 0;font-size:14px;">Password Reset Request</p>
-      </div>
-      <div style="padding:32px 24px;">
-        <h2 style="color:#2C1A0E;margin:0 0 12px;font-size:22px;">Reset Your Password</h2>
-        <p style="color:#6B4C2A;line-height:1.6;margin:0 0 24px;">
-          We received a request to reset your password. Click the button below to set a new password.
-          This link will expire in <strong>1 hour</strong>.
-        </p>
-        <div style="text-align:center;margin:24px 0;">
-          <a href="${resetUrl}"
-             style="display:inline-block;background:#A0522D;color:#fff;text-decoration:none;padding:14px 36px;border-radius:8px;font-weight:600;font-size:16px;">
-            🔐 Reset Password
-          </a>
+  if (!currentUser || !currentPass) {
+    throw new Error('SMTP credentials are missing from environment variables (SMTP_EMAIL / SMTP_PASS).');
+  }
+
+  const transporter = getTransporter();
+
+  const frontendUrl = process.env.FRONTEND_URL || process.env.CLIENT_URL || 'http://localhost:5173';
+  const tokenQuery = token ? `&token=${encodeURIComponent(token)}` : '';
+  const verificationUrl = `${frontendUrl}/verify-email?email=${encodeURIComponent(toEmail)}${tokenQuery}`;
+
+  const mailOptions = {
+    from: `"Anjaney Nexus" <${currentUser}>`,
+    to: toEmail,
+    subject: 'Action Required: Verify your Anjaney Nexus Account',
+    html: `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.06);">
+        <div style="background: #0f172a; padding: 28px 24px; text-align: center; border-bottom: 3px solid #ea580c;">
+          <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 800; letter-spacing: 0.5px;">
+            Anjaney Nexus <span style="color: #f97316;">India</span>
+          </h1>
+          <p style="color: #94a3b8; font-size: 13px; margin: 6px 0 0; text-transform: uppercase; letter-spacing: 1px;">Account Verification</p>
         </div>
-        <p style="color:#999;font-size:12px;margin:24px 0 0;line-height:1.5;">
-          If you didn't request this, you can safely ignore this email.<br>
-          <a href="${resetUrl}" style="color:#A0522D;word-break:break-all;">${resetUrl}</a>
-        </p>
+        <div style="padding: 36px 32px;">
+          <h2 style="color: #0f172a; margin-top: 0; font-size: 20px; font-weight: 700;">Verify Your Email Address</h2>
+          <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 24px;">
+            Thank you for registering with <strong>Anjaney Nexus</strong>. To activate your account for <span style="color: #ea580c; font-weight: 600;">${toEmail}</span> and complete your registration, please click the button below:
+          </p>
+          <div style="text-align: center; margin: 32px 0;">
+            <a href="${verificationUrl}" target="_blank" rel="noopener noreferrer" style="background-color: #ea580c; color: #ffffff; padding: 14px 36px; text-decoration: none; border-radius: 10px; font-weight: 700; font-size: 15px; display: inline-block; box-shadow: 0 4px 14px rgba(234,88,12,0.35);">
+              Verify My Email
+            </a>
+          </div>
+          <p style="color: #64748b; font-size: 13px; line-height: 1.5; margin-top: 24px;">
+            Or copy and paste this link directly into your browser:
+          </p>
+          <p style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; font-size: 12px; font-family: monospace; word-break: break-all; color: #334155;">
+            ${verificationUrl}
+          </p>
+          <p style="color: #94a3b8; font-size: 12px; margin-top: 20px;">
+            This verification link will remain active for 24 hours.
+          </p>
+        </div>
+        <div style="background: #f8fafc; padding: 20px 24px; text-align: center; border-top: 1px solid #e2e8f0;">
+          <p style="color: #94a3b8; font-size: 12px; margin: 0;">
+            If you didn't create an account on Anjaney Nexus, you can safely ignore this email.
+          </p>
+        </div>
       </div>
-      <div style="background:#F5F0E8;padding:16px 24px;text-align:center;">
-        <p style="color:#999;font-size:11px;margin:0;">© ${new Date().getFullYear()} Anjaney Nexus. All rights reserved.</p>
-      </div>
-    </div>
-  `;
+    `,
+  };
 
-  await transporter.sendMail({
-    from: `"Anjaney Nexus" <${FROM}>`,
-    to,
+  const info = await transporter.sendMail(mailOptions);
+  return info;
+};
+
+// Also export reset password email for backwards compatibility
+const sendPasswordResetEmail = async (toEmail, token) => {
+  const currentUser = process.env.SMTP_EMAIL || process.env.EMAIL_USER;
+  const frontendUrl = process.env.FRONTEND_URL || process.env.CLIENT_URL || 'http://localhost:5173';
+  const resetUrl = `${frontendUrl}/reset-password/${token}`;
+  const transporter = getTransporter();
+
+  return transporter.sendMail({
+    from: `"Anjaney Nexus" <${currentUser}>`,
+    to: toEmail,
     subject: '🔐 Reset your Anjaney Nexus password',
-    html,
+    html: `
+      <h2>Password Reset Request</h2>
+      <p>Click the link below to reset your password:</p>
+      <a href="${resetUrl}" style="display:inline-block; padding:10px 20px; background-color:#ea580c; color:white; text-decoration:none; border-radius:5px;">Reset Password</a>
+    `,
   });
 };
 
-module.exports = { sendVerificationEmail, sendPasswordResetEmail };
+module.exports = { getTransporter, sendVerificationEmail, sendPasswordResetEmail };

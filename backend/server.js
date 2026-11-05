@@ -1,6 +1,44 @@
-require('dotenv').config();
-const os = require('os');
+process.on('uncaughtException', (err) => {
+  console.log("\n================ [ REAL FATAL CRASH ] ================");
+  console.error("The server genuinely crashed due to this exact error:");
+  console.error(err.stack || err.message);
+  console.log("======================================================\n");
+  process.exit(1);
+});
+
+const path = require('path');
+const fs = require('fs');
+
+const envPath = path.resolve(__dirname, '.env');
+
+console.log("\n================ [ SYSTEM BOOT CHECK ] ================");
+
+if (!fs.existsSync(envPath)) {
+  console.log("⚠️ .env file MISSING. Auto-generating a template now...");
+  const defaultEnvContent = `SMTP_EMAIL=your_email@gmail.com\nSMTP_PASS=your_16_letter_app_password\nPORT=5000\n`;
+  fs.writeFileSync(envPath, defaultEnvContent);
+  console.log("⚠️ ACTION REQUIRED: I created a .env file. Please fill in your passwords.");
+} else {
+  console.log("✅ .env file physically found on hard drive.");
+}
+
+require('dotenv').config({ path: envPath });
+
+const dns = require('dns');
+if (dns.setDefaultResultOrder) {
+  dns.setDefaultResultOrder('ipv4first');
+}
+
+if (!process.env.SMTP_EMAIL || !process.env.SMTP_PASS || process.env.SMTP_EMAIL === 'your_email@gmail.com') {
+  console.error("⚠️ SAFE MODE ACTIVE: SMTP_EMAIL or SMTP_PASS missing or invalid in .env.");
+  console.error("⚠️ The server is running, but email verification will fail.");
+} else {
+  console.log("✅ Environment variables loaded into memory successfully.");
+}
+console.log("=======================================================\n");
+
 const express = require('express');
+const os = require('os');
 const http = require('http');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -9,12 +47,7 @@ const cookieParser = require('cookie-parser');
 const nodemailer = require('nodemailer');
 const connectDB = require('./config/db');
 
-process.on('uncaughtException', (err) => {
-  console.error('\n=================================');
-  console.error('[FATAL CRASH] Uncaught Exception:');
-  console.error(err);
-  console.error('=================================\n');
-});
+
 
 process.on('unhandledRejection', (reason, promise) => {
   console.error('\n=================================');

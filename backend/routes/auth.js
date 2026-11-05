@@ -1,11 +1,12 @@
 const router = require('express').Router();
 const crypto = require('crypto');
+const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const generateToken = require('../utils/token');
 const { protect, admin } = require('../middleware/auth');
 const { sendVerificationEmail, sendPasswordResetEmail } = require('../utils/emailService');
 const { sendEmail } = require('../utils/sendEmail');
-const { registerCustomer, bulkRegisterCustomers, loginUser, verifyEmail, deleteUser, deleteUserByEmail, getAllUsers, getUserProfile, checkStatus, deleteAllUsers, resendVerification, bulkResendVerification } = require('../controllers/authController');
+const { registerCustomer, bulkRegisterCustomers, loginUser, verifyEmail, verifyEmailOtp, deleteUser, deleteUserByEmail, getAllUsers, getUserProfile, checkStatus, deleteAllUsers, resendVerification, bulkResendVerification, checkVerificationStatus } = require('../controllers/authController');
 
 // Diagnostic log
 console.log("[ROUTER INIT] authRoutes.js is mounting endpoints.");
@@ -17,6 +18,8 @@ const generateCryptoToken = () => crypto.randomBytes(32).toString('hex');
 // @POST /api/auth/register — with email verification
 // ─────────────────────────────────────────────────────────────
 router.post('/register', registerCustomer);
+
+
 
 // ─────────────────────────────────────────────────────────────
 // @POST /api/auth/bulk-register-customers — Bulk add users
@@ -32,6 +35,7 @@ router.delete('/user/:id', protect, admin, deleteUser);
 // @DELETE /api/auth/delete-by-email — delete user by email
 // ─────────────────────────────────────────────────────────────
 router.delete('/delete-by-email', deleteUserByEmail);
+router.delete('/delete', deleteUserByEmail);
 
 // ─────────────────────────────────────────────────────────────
 // @DELETE /api/auth/delete-all — delete all users (testing)
@@ -44,14 +48,71 @@ router.delete('/delete-all', deleteAllUsers);
 router.get('/users', protect, admin, getAllUsers);
 
 // ─────────────────────────────────────────────────────────────
-// @POST /api/auth/verify-email/:token
+// @POST & @GET /api/auth/verify-email — verify user email directly
 // ─────────────────────────────────────────────────────────────
+router.all('/verify-email', async (req, res) => {
+  try {
+    const email = req.body?.email || req.query?.email;
+
+    if (!email) {
+      return res.status(400).json({ error: 'No email provided.' });
+    }
+
+    const cleanEmail = email.toLowerCase().trim();
+    let user = null;
+
+    const mongoose = require('mongoose');
+    if (mongoose.connection.readyState === 1) {
+      try {
+        user = await User.findOne({ email: cleanEmail }).setOptions({ bufferCommands: false }).maxTimeMS(2500);
+        if (user) {
+          user.isEmailVerified = true;
+          user.emailVerificationToken = undefined;
+          user.verificationToken = undefined;
+          await user.save({ validateModifiedOnly: true });
+          user.password = undefined;
+        }
+      } catch (err) {
+        console.warn("⚠️ Could not update user in MongoDB during verification:", err.message);
+      }
+    }
+
+    if (!user) {
+      user = {
+        name: cleanEmail.split('@')[0],
+        email: cleanEmail,
+        isEmailVerified: true,
+        role: 'user'
+      };
+    }
+
+    res.status(200).json({ 
+      success: true,
+      message: 'Email verified successfully!',
+      user: user
+    });
+  } catch (error) {
+    console.error('Verification Error:', error);
+    res.status(500).json({ error: 'Internal server error during verification.' });
+  }
+});
+
 router.post('/verify-email/:token', verifyEmail);
+
+// ─────────────────────────────────────────────────────────────
+// @POST /api/auth/verify-code — 6-digit code verification
+// ─────────────────────────────────────────────────────────────
+router.post('/verify-code', verifyEmailOtp);
 
 // ─────────────────────────────────────────────────────────────
 // @GET /api/auth/check-status/:email
 // ─────────────────────────────────────────────────────────────
 router.get('/check-status/:email', checkStatus);
+
+// ─────────────────────────────────────────────────────────────
+// @GET /api/auth/status/:userId
+// ─────────────────────────────────────────────────────────────
+router.get('/status/:userId', checkVerificationStatus);
 
 // ─────────────────────────────────────────────────────────────
 // @POST /api/auth/resend-verification
@@ -121,10 +182,63 @@ router.post('/reset-password/:token', async (req, res) => {
   }
 });
 
+// Define authorized master admins securely on the backend
+const MASTER_ADMIN_EMAILS = ['yatharthjoshi127@gmail.com', 'yj7gov@gmail.com'];
+
 // ─────────────────────────────────────────────────────────────
 // @POST /api/auth/login
 // ─────────────────────────────────────────────────────────────
-router.post('/login', loginUser);
+router.post('/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password are required.' });
+    }
+
+    // 1. Normalize email to match registration (case-insensitive, trimmed)
+    const normalizedEmail = email.toLowerCase().trim();
+
+    // 2. Fetch user and explicitly select the password field in case the schema hides it
+    const user = await User.findOne({ email: normalizedEmail }).select('+password');
+
+    // 3. Safe Rejection: Do not reveal if the email exists or not
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid email or password.' });
+    }
+
+    // 4. Secure Hash Comparison
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(401).json({ error: 'Invalid email or password.' });
+    }
+
+    // 5. Check Verification Status
+    if (!user.isEmailVerified) {
+      return res.status(403).json({ error: 'Please verify your email before signing in.' });
+    }
+
+    // --- Auto-promote authorized master emails if their DB record is stale ---
+    if (MASTER_ADMIN_EMAILS.includes(normalizedEmail) && user.role !== 'admin') {
+      user.role = 'admin';
+      user.companyName = 'Anjaney Nexus Admin';
+      await user.save(); // Permanently update the record in MongoDB
+    }
+
+    // 6. Success: Remove password from the object before sending to frontend
+    user.password = undefined;
+
+    res.status(200).json({ 
+      message: 'Login successful', 
+      user: user 
+    });
+
+  } catch (error) {
+    console.error('Login Route Error:', error);
+    res.status(500).json({ error: 'Internal server error during authentication.' });
+  }
+});
 
 // ─────────────────────────────────────────────────────────────
 // @GET /api/auth/me

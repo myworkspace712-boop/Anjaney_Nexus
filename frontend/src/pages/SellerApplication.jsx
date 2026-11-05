@@ -7,7 +7,7 @@ const SellerApplication = () => {
     name: '',
     email: '',
     password: '',
-    businessName: '',
+    shopName: '',
     phone: ''
   });
   const [loading, setLoading] = useState(false);
@@ -39,7 +39,7 @@ const SellerApplication = () => {
       const data = await response.json();
       if (response.ok || data.success) {
         setSuccessMessage("Your seller application has been submitted and is pending admin approval.");
-        setSellerData({ name: '', email: '', password: '', businessName: '', phone: '' });
+        setSellerData({ name: '', email: '', password: '', shopName: '', phone: '' });
       } else {
         setError(data.message || 'Application failed to submit.');
       }
@@ -98,12 +98,12 @@ const SellerApplication = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Business Name</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Company Name</label>
               <input 
                 type="text" 
-                name="businessName" 
+                name="shopName" 
                 placeholder="e.g. Acme Corp" 
-                value={sellerData.businessName} 
+                value={sellerData.shopName} 
                 onChange={handleChange} 
                 required 
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none"

@@ -1,3 +1,57 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    /* Logo-Inspired Light Mode: Pure White Background, Contrast Deep Navy Blue, Saffron/Orange Accent */
+    --bg-primary: #ffffff;
+    --bg-surface: #ffffff;
+    --bg-elevated: #f8fafc;
+    --text-primary: #0b1d3a;     /* Logo Deep Navy */
+    --text-secondary: #475569;   /* Muted Corporate Slate */
+    --brand-navy: #0b1d3a;       /* Anjaney Corporate Deep Navy */
+    --brand-orange: #f97316;     /* Saffron / Energy Orange */
+    --brand-orange-hover: #ea580c;
+    --border-color: #e2e8f0;
+  }
+
+  .dark {
+    /* Dark Mode: Deep Midnight / Slate */
+    --bg-primary: #020617;
+    --bg-surface: #0b1d3a;
+    --bg-elevated: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --brand-navy: #1e3a8a;
+    --brand-orange: #f97316;
+    --brand-orange-hover: #fb923c;
+    --border-color: #1e293b;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Remove number input spin arrows */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+

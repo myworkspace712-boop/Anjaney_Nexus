@@ -2,6 +2,16 @@ import { NavLink } from 'react-router-dom';
 import { X } from 'lucide-react';
 
 const Sidebar = ({ isOpen, onClose }) => {
+  const token = localStorage.getItem('token') || localStorage.getItem('anjaney-nexus-token');
+  const isAuthenticated = token && token !== 'undefined' && token !== 'null';
+
+  const handleLogout = () => {
+    localStorage.removeItem('userInfo');
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    localStorage.removeItem('anjaney-nexus-token');
+    window.location.href = '/';
+  };
   return (
     <>
       {/* Backdrop overlay */}
@@ -88,13 +98,22 @@ const Sidebar = ({ isOpen, onClose }) => {
             >
               Inquiry Now
             </NavLink>
-            <NavLink 
-              to="/signup" 
-              onClick={onClose}
-              className="px-4 py-3 bg-spice-gold text-white text-center font-bold hover:bg-yellow-600 transition-colors"
-            >
-              Sign Up / Login
-            </NavLink>
+            {isAuthenticated ? (
+              <button 
+                onClick={handleLogout}
+                className="px-4 py-3 bg-red-600 text-white text-center font-bold hover:bg-red-700 transition-colors w-full"
+              >
+                Logout
+              </button>
+            ) : (
+              <NavLink 
+                to="/signup" 
+                onClick={onClose}
+                className="px-4 py-3 bg-spice-gold text-white text-center font-bold hover:bg-yellow-600 transition-colors"
+              >
+                Sign Up / Login
+              </NavLink>
+            )}
           </div>
         </nav>
       </div>

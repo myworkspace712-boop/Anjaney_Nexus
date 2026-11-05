@@ -9,7 +9,14 @@ const SignUp = () => {
   const [resendTimer, setResendTimer] = useState(0);
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [registeredUserId, setRegisteredUserId] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      window.location.href = '/';
+    }
+  }, []);
 
   const handleChange = (e) => {
     setCustomerData({ ...customerData, [e.target.name]: e.target.value });
@@ -26,6 +33,46 @@ const SignUp = () => {
   }, [resendTimer]);
 
   useEffect(() => {
+    let interval;
+
+    if (isWaiting && registeredUserId) {
+      // Ping the backend every 3 seconds
+      interval = setInterval(async () => {
+        try {
+          const response = await fetch(`/api/auth/status/${registeredUserId}`);
+          const data = await response.json();
+
+          if (data.isVerified) {
+            clearInterval(interval);
+            setIsWaiting(false);
+
+            // 🛑 STRICT GUARD: Only set storage if the backend actually sent the token
+            if (data.token && data.token !== 'undefined' && data.token !== 'null') {
+              localStorage.setItem('token', data.token);
+              localStorage.setItem('user', JSON.stringify(data.user));
+              localStorage.setItem('an_active_session_user', JSON.stringify(data.user));
+              window.dispatchEvent(new Event('authChange'));
+              window.dispatchEvent(new Event('auth-change'));
+
+              const isAdmin = data.user?.role === 'admin' || data.user?.email?.toLowerCase().includes('admin');
+              alert(`✅ Email verified successfully! You are now logged in and will be redirected to ${isAdmin ? 'the Admin Dashboard' : 'the homepage'}.`);
+              window.location.href = isAdmin ? '/admin' : '/'; 
+            } else {
+              console.error("Backend confirmed verification but failed to send the auth token!");
+              window.location.href = '/login'; 
+            }
+          }
+        } catch (error) {
+          console.error("Status check failed:", error);
+        }
+      }, 3000); 
+    }
+
+    // Cleanup function to prevent memory leaks if the user leaves the page
+    return () => clearInterval(interval);
+  }, [isWaiting, registeredUserId, navigate]);
+
+  useEffect(() => {
     const authChannel = new BroadcastChannel('auth_channel');
 
     authChannel.onmessage = (event) => {
@@ -34,11 +81,13 @@ const SignUp = () => {
         // Log the original tab in silently
         localStorage.setItem('token', event.data.token);
         localStorage.setItem('user', JSON.stringify(event.data.user));
+        localStorage.setItem('an_active_session_user', JSON.stringify(event.data.user));
+        window.dispatchEvent(new Event('authChange'));
+        window.dispatchEvent(new Event('auth-change'));
 
+        const isAdmin = event.data.user?.role === 'admin' || event.data.user?.email?.toLowerCase().includes('admin');
         setIsWaiting(false); 
-        // Force a full page reload to the homepage
-        // This guarantees the Navbar updates to show the "Logout" button
-        window.location.href = '/'; 
+        window.location.href = isAdmin ? '/admin' : '/'; 
       } else if (event.data === 'verified_failure') {
         setSuccessMessage("Your previous verification link expired or was invalid.");
         setError("Verification Failed. Please resend the email.");
@@ -90,8 +139,16 @@ const SignUp = () => {
         throw new Error(data.message || "Failed to connect to server");
       }
 
-      setSuccessMessage("Account created successfully! Please check your email to verify.");
+      // Extract the receipt from the backend data
+      const proofMessage = data.receiptId 
+        ? `Email formally accepted by Google!\nReceipt ID: ${data.receiptId}\n\nIf it is not in your inbox, check your SPAM/JUNK folder immediately.`
+        : `Account created successfully! Please check your email.`;
+
+      alert(proofMessage);
+
+      setSuccessMessage(proofMessage);
       setIsWaiting(true);
+      setRegisteredUserId(data.userId);
       setResendTimer(60);
     } catch (error) {
       console.error("Submission Error:", error);
@@ -104,6 +161,7 @@ const SignUp = () => {
   };
 
   const handleResendEmail = async () => {
+    setLoading(true); // Triggers loading UI during resend
     try {
       console.log("Sending email payload:", customerData.email);
       const response = await fetch('/api/auth/resend-verification', {
@@ -123,6 +181,9 @@ const SignUp = () => {
     } catch (error) {
       console.error("Error resending email:", error);
       alert(`Network error: ${error.message}`);
+    } finally {
+      // 🎯 GUARANTEED RESET: Removes the stuck loading UI no matter what happens
+      setLoading(false);
     }
   };
 

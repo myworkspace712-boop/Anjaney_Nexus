@@ -1,129 +1,150 @@
-import { useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-
-const VerifyEmail = () => {
-  const { token } = useParams();
+const VerifyEmail = ({ token: propToken, setActivePage }) => {
+  const params = useParams();
   const navigate = useNavigate();
-  const [status, setStatus] = useState('loading'); // 'loading', 'success', 'error'
-  const [message, setMessage] = useState('');
-  const [countdown, setCountdown] = useState(5);
-  const [isVerified, setIsVerified] = useState(false);
-
-
-
-
+  const [status, setStatus] = useState('Verifying your email...');
 
   useEffect(() => {
-    let timer;
-    if (status === 'error') {
-      timer = setInterval(() => {
-        setCountdown((prev) => {
-          if (prev <= 1) {
-            clearInterval(timer);
-            window.close();
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-    }
-    return () => clearInterval(timer);
-  }, [status]);
+    // Extract token/email whether provided via router params, props, or query string
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = propToken || params.token || urlParams.get('token');
+    const email = urlParams.get('verify_email') || urlParams.get('email');
 
-  useEffect(() => {
-    const authChannel = new BroadcastChannel('auth_channel');
-    
-    const verifyToken = async () => {
+    const verifyUserEmail = async () => {
+      if (!token && !email) {
+        setStatus('No verification token or email provided in the link. Please check your email.');
+        return;
+      }
+
       try {
-        const response = await fetch(`/api/auth/verify-email/${token}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          }
+        const backendUrl = import.meta.env.VITE_BACKEND_URL || '';
+        // 1. Send verification payload to backend
+        const response = await axios.post(`${backendUrl}/api/auth/verify-email`, {
+          token,
+          email
         });
-        const data = await response.json();
-        
-        if (response.ok && data.success) {
-          // Log this tab in
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('user', JSON.stringify(data.user));
 
-          // 1. Notify any other open tabs that verification is complete
-          const authChannel = new BroadcastChannel('auth_channel');
-          authChannel.postMessage({ 
-            type: 'verification_complete', 
-            token: data.token, 
-            user: data.user 
-          });
-          authChannel.close(); // Clean up
+        if (response.data?.success || response.data?.user) {
+          const user = response.data.user;
+          const authToken = response.data.token;
 
-          // 2. Update local state
-          setStatus('success');
-          setIsVerified(true);
-          setMessage('Verified! You can close this tab now.');
+          setStatus('Verification successful! Redirecting you to the dashboard...');
 
-          // 3. Attempt to automatically close this tab after 1.5 seconds
+          // 2. Save authentication token and user across app session keys
+          if (authToken) localStorage.setItem('token', authToken);
+          if (user) {
+            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('ACTIVE_USER_KEY', JSON.stringify(user));
+            localStorage.setItem('an_active_session_user', JSON.stringify(user));
+            localStorage.setItem('an_user', JSON.stringify(user));
+          }
+
+          // 3. Fire cross-tab notification in case registration tab is open
+          localStorage.setItem('emailVerifiedEvent', JSON.stringify({
+            timestamp: Date.now(),
+            user,
+            token: authToken || ''
+          }));
+          window.dispatchEvent(new Event('auth-change'));
+
+          try {
+            const authChannel = new BroadcastChannel('auth_channel');
+            authChannel.postMessage({
+              type: 'verification_complete',
+              token: authToken,
+              user,
+              email
+            });
+            authChannel.close();
+          } catch {}
+
+          // 4. Directly send them to the correct page based on their role
           setTimeout(() => {
-            window.close();
+            const isAdmin = user?.role === 'admin' || user?.isAdmin;
+            const targetPage = isAdmin ? 'admin' : 'home';
+            const targetPath = isAdmin ? '/admin-dashboard' : '/dashboard';
+
+            if (typeof setActivePage === 'function') {
+              setActivePage(targetPage);
+            } else if (navigate) {
+              navigate(targetPath, { replace: true });
+            } else {
+              window.location.href = targetPath;
+            }
           }, 1500);
         } else {
-          authChannel.postMessage('verified_failure');
-          setStatus('error');
-          setMessage(data.message || 'Invalid or Expired Link');
+          setStatus(response.data?.message || 'Verification failed. Link may be expired.');
         }
       } catch (error) {
-        authChannel.postMessage('verified_failure');
-        const errorMessage = error.response?.data?.message || error.message;
-        console.error("Verification Rejected Because:", errorMessage);
-        
-        setStatus('error');
-        setMessage(`Verification failed: ${errorMessage}`);
+        setStatus(
+          error.response?.data?.message ||
+          error.response?.data?.error ||
+          'Verification failed or link expired. Please try registering again.'
+        );
       }
     };
-    
-    if (token) {
-      verifyToken();
+
+    verifyUserEmail();
+  }, [params.token, propToken, navigate, setActivePage]);
+
+  const handleManualRedirect = () => {
+    const user = JSON.parse(localStorage.getItem('user') || localStorage.getItem('an_active_session_user') || '{}');
+    const isAdmin = user.role === 'admin' || user.isAdmin;
+    if (typeof setActivePage === 'function') {
+      setActivePage(isAdmin ? 'admin' : 'home');
+    } else if (navigate) {
+      navigate(isAdmin ? '/admin-dashboard' : '/dashboard', { replace: true });
     } else {
-      setStatus('error');
-      setMessage('No token provided.');
+      window.location.href = isAdmin ? '/admin-dashboard' : '/';
     }
-    
-    return () => authChannel.close();
-  }, [token]);
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 flex items-center justify-center p-6">
-      <div className="max-w-md w-full bg-white/80 backdrop-blur-md rounded-2xl shadow-2xl p-8 border border-white/40 text-center">
-        {isVerified && (
-          <div style={{ textAlign: 'center', padding: '50px' }}>
-            <h2>✅ Email Verified!</h2>
-            <p>{message}</p>
-          </div>
-        )}
-        {status === 'loading' && (
-          <div className="animate-in fade-in duration-300">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6 tracking-tight">Verifying your email...</h2>
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600 mx-auto"></div>
-          </div>
+    <div className="min-h-screen flex items-center justify-center bg-[#f8f9fc] font-sans px-4">
+      <div className="bg-white p-10 rounded-3xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] text-center max-w-md w-full border border-gray-100">
+        <div className="w-16 h-16 bg-[#172033] text-white rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-md">
+          ✉️
+        </div>
+        <h2 className="text-2xl font-extrabold text-[#172033] mb-4 tracking-tight">
+          Email Verification
+        </h2>
+        <p className="text-gray-500 font-medium leading-relaxed">
+          {status}
+        </p>
+
+        {/* Fallback button just in case the automatic redirect takes too long */}
+        {status.includes('successful') && (
+          <button
+            onClick={handleManualRedirect}
+            className="mt-8 w-full bg-[#172033] text-white font-bold py-3.5 rounded-xl hover:bg-gray-800 transition-colors uppercase tracking-widest text-xs cursor-pointer shadow-lg shadow-slate-900/10"
+          >
+            Enter Site Now
+          </button>
         )}
 
-        {status === 'error' && (
-          <div className="animate-in zoom-in duration-500">
-            <div className="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-              </svg>
-            </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Verification Failed</h2>
-            <p className="text-red-500 font-medium mb-4">Error: {message}</p>
-            <p className="text-stone-500 font-medium mb-8">Redirecting you to the app in <span className="font-bold text-red-600 text-lg">{countdown}</span> seconds...</p>
-            <Link 
-              to="/signup"
-              className="inline-block w-full bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-bold py-3 px-4 rounded-xl shadow-md transition-all duration-300 transform hover:-translate-y-0.5"
+        {status.includes('failed') && (
+          <div className="mt-8 flex flex-col gap-2.5">
+            <button
+              onClick={() => {
+                if (typeof setActivePage === 'function') setActivePage('auth');
+                else navigate('/auth');
+              }}
+              className="w-full bg-[#172033] text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider hover:bg-gray-800 transition-all cursor-pointer"
             >
-              Back to Sign Up
-            </Link>
+              Go to Sign In
+            </button>
+            <button
+              onClick={() => {
+                if (typeof setActivePage === 'function') setActivePage('home');
+                else navigate('/');
+              }}
+              className="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl text-xs uppercase tracking-wider transition-all cursor-pointer"
+            >
+              Back to Homepage
+            </button>
           </div>
         )}
       </div>

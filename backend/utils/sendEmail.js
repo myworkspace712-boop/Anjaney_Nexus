@@ -1,37 +1,37 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 const nodemailer = require('nodemailer');
 
-/*
-const transporter = nodemailer.createTransport({
-  service: 'gmail', // This automatically configures the correct host/port for Google
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS, // This will be the Google App Password
-  },
-});
+const getTransporter = () => {
+  const emailUser = process.env.EMAIL_USER || process.env.SMTP_EMAIL;
+  const emailPass = (process.env.EMAIL_PASS || process.env.SMTP_PASS || process.env.SMTP_PASSWORD || '').replace(/\s+/g, '');
 
-// Add a startup check to verify the credentials immediately
-transporter.verify((error, success) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log("✅ [SMTP SUCCESS] Gmail is connected. You can now send verification emails to ANY address.");
+  if (!emailUser || !emailPass) {
+    throw new Error("Missing email credentials (EMAIL_USER / EMAIL_PASS) in backend/.env file.");
   }
-});
-*/
-// Provide a dummy transporter so exports don't crash
-const transporter = null;
+
+  // 1. USE THE 'gmail' SERVICE PRESET
+  return nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: emailUser,
+      pass: emailPass
+    },
+    tls: {
+      rejectUnauthorized: false
+    }
+  });
+};
 
 const sendEmail = async (to, subject, text, html) => {
-  console.log("📨 Email utility triggered for:", to, "using SMTP User:", process.env.SMTP_EMAIL);
-  if (!process.env.SMTP_EMAIL || !process.env.SMTP_PASSWORD) {
-    throw new Error("🚨 FATAL: Missing SMTP credentials in .env file. Cannot send real emails.");
-  }
+  const emailUser = process.env.SMTP_EMAIL || process.env.EMAIL_USER;
+  console.log("📨 Email utility triggered for:", to, "using SMTP User:", emailUser);
+
+  const transporter = getTransporter();
 
   try {
-
     const mailOptions = {
-      from: `"Anjaney Nexus" <${process.env.SMTP_EMAIL}>`,
+      from: `"Anjaney Nexus" <${emailUser}>`,
       to,
       subject,
       text,
@@ -55,4 +55,4 @@ const sendEmail = async (to, subject, text, html) => {
   }
 };
 
-module.exports = { sendEmail, transporter };
+module.exports = { sendEmail, getTransporter };

@@ -18,6 +18,15 @@ export default {
           'text-secondary': 'var(--pb-text-secondary)',
           border: 'var(--pb-border)',
         },
+        brand: {
+          navy: '#0b1d3a',
+          'navy-dark': '#061021',
+          'navy-light': '#1e3a8a',
+          orange: '#f97316',
+          'orange-hover': '#ea580c',
+          'orange-light': '#fff7ed',
+          border: '#e2e8f0',
+        },
         spice: {
           red: '#9B2C2C', // Deep terracotta red
           gold: '#D69E2E', // Turmeric gold
@@ -27,8 +36,11 @@ export default {
         }
       },
       fontFamily: {
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
         display: ['"Playfair Display"', 'serif'],
-        body: ['Inter', '"DM Sans"', 'Syne', 'sans-serif']
+        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+        body: ['"Plus Jakarta Sans"', 'Inter', '"DM Sans"', 'sans-serif'],
+        outfit: ['Outfit', 'sans-serif']
       }
     }
   },
