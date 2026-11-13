@@ -129,19 +129,10 @@ const VerifyEmail = ({ token: propToken, setActivePage }) => {
           <div className="mt-8 flex flex-col gap-2.5">
             <button
               onClick={() => {
-                if (typeof setActivePage === 'function') setActivePage('auth');
-                else navigate('/auth');
-              }}
-              className="w-full bg-[#172033] text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider hover:bg-gray-800 transition-all cursor-pointer"
-            >
-              Go to Sign In
-            </button>
-            <button
-              onClick={() => {
                 if (typeof setActivePage === 'function') setActivePage('home');
                 else navigate('/');
               }}
-              className="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl text-xs uppercase tracking-wider transition-all cursor-pointer"
+              className="w-full bg-[#172033] text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider hover:bg-gray-800 transition-all cursor-pointer"
             >
               Back to Homepage
             </button>

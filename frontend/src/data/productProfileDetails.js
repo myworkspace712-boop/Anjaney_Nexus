@@ -81,7 +81,7 @@ export const PRODUCT_PROFILE_DETAILS = {
   'P-04': {
     categoryHeader: 'SPICES',
     subHeader: 'Active & Bioactive Compounds',
-    overview: 'Chilli are packed with the active compound that provides their signature spicy heat (SHU) and are rich in water, vitamin C, vitamin A, vitamin B6, and potassium.',
+    overview: 'Chillies are packed with the active compound that provides their signature spicy heat (SHU) and are rich in water, vitamin C, vitamin A, vitamin B6, and potassium.',
     highlights: [
       {
         title: 'Active & Bioactive Compounds',

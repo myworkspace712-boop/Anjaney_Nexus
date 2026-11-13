@@ -427,11 +427,14 @@ const loginUser = async (req, res) => {
       return res.status(403).json({ success: false, message: "Your email is not verified. A fresh verification link has just been sent to your inbox. Please check your email." });
     }
 
-    // Auto-promote master admins if record is stale
-    const MASTER_ADMIN_EMAILS = ['yatharthjoshi127@gmail.com', 'yj7gov@gmail.com'];
-    if (MASTER_ADMIN_EMAILS.includes(normalizedEmail) && user.role !== 'admin') {
+    // Auto-promote master admins if record is configured in environment
+    const configuredAdminEmails = (process.env.ADMIN_EMAILS || '')
+      .split(',')
+      .map((e) => e.trim().toLowerCase())
+      .filter(Boolean);
+    if (configuredAdminEmails.includes(normalizedEmail) && user.role !== 'admin') {
       user.role = 'admin';
-      user.companyName = 'Anjaney Nexus Admin';
+      user.companyName = user.companyName || 'Anjaney Nexus Admin';
       await user.save();
     }
     

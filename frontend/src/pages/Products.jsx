@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useCart } from '../App';
 import { useTheme } from '../context/ThemeContext';
 import { PRODUCT_PROFILE_DETAILS } from '../data/productProfileDetails';
 
@@ -32,6 +31,15 @@ export const EXPORT_CATALOG = [
     "bullets": [
       "Premium grades feature extra-long grains (8.2 mm or longer).",
       "Grow up to twice their size when cooked, remain non-sticky, and are naturally aged."
+    ],
+    "varieties": [
+      "1121 Steamy Sella",
+      "1121 Creamy Sella",
+      "1121 Golden Sella",
+      "XXXL Steamy Sella",
+      "XXXL Creamy Sella",
+      "XXXL Golden Sella",
+      "1509 Basmati"
     ],
     "description": "• Premium grades feature extra-long grains (8.2 mm or longer).\n• Grow up to twice their size when cooked, remain non-sticky, and are naturally aged.",
     "specs": [
@@ -108,6 +116,11 @@ export const EXPORT_CATALOG = [
       "Graded primarily by grain length, percentage of broken kernels, and overall purity.",
       "Popular varieties include sona masoori (light and aromatic) and IR64 (high yield)."
     ],
+    "varieties": [
+      "Sona Masuri",
+      "IR64",
+      "All Broken Grades(5% - 100%)"
+    ],
     "description": "• Graded primarily by grain length, percentage of broken kernels, and overall purity.\n• Popular varieties include sona masoori (light and aromatic) and IR64 (high yield).",
     "specs": [
       {
@@ -160,9 +173,16 @@ export const EXPORT_CATALOG = [
     "id": "P-03",
     "numId": 3,
     "name": "Turmeric",
-    "title": "Turmeric",
+    "title": "Turmeric (2.5% - 9% curcumin)",
+    "subtitle": "(2.5% - 9% curcumin)",
     "category": "Spices",
     "badgeCategory": "SPICES",
+    "dropdownPlaceholder": "Select Variety",
+    "varieties": [
+      "Fingers",
+      "Bulb",
+      "Powder"
+    ],
     "bullets": [
       "Composition: Carbohydrates (60-70%), dietary fiber (20-22%), moisture (10-13%), and essential minerals.",
       "Active Curcumin: Accounts for an average of 2% to 9% by weight, alongside essential oils."
@@ -214,10 +234,16 @@ export const EXPORT_CATALOG = [
   {
     "id": "P-04",
     "numId": 4,
-    "name": "Chilly",
-    "title": "Chilly",
+    "name": "Chillies",
+    "title": "Chillies",
     "category": "Spices",
     "badgeCategory": "SPICES",
+    "varieties": [
+      "S17 Teja",
+      "Kashmiri",
+      "Sannam 334",
+      "Byadgi"
+    ],
     "bullets": [
       "Packed with the active compound capsaicin that provides signature spicy heat (SHU).",
       "Rich in water, vitamin C, vitamin A, vitamin B6, potassium, and antioxidants."
@@ -273,6 +299,11 @@ export const EXPORT_CATALOG = [
     "title": "Cumin Seeds",
     "category": "Spices",
     "badgeCategory": "SPICES",
+    "dropdownPlaceholder": "Select Variety",
+    "varieties": [
+      "Singaporean",
+      "European"
+    ],
     "bullets": [
       "A dried, boat-shaped seed from the Cuminum cyminum plant with a warm, earthy flavor.",
       "Composed of 44% carbohydrates, 22% fat, 18% protein, and 8% water."
@@ -328,6 +359,24 @@ export const EXPORT_CATALOG = [
     "title": "Cardamom",
     "category": "Spices",
     "badgeCategory": "SPICES",
+    "varieties": [
+      {
+        "name": "6 mm to 8.5 mm",
+        "image": "/images/Products/cardamom_s.jpg"
+      },
+      {
+        "name": "Green (All Sizes & All Grades)",
+        "image": "/images/Products/Cardamom.png"
+      },
+      {
+        "name": "Black (All Sizes & All Grades)",
+        "image": "/images/Products/cardamom_b.jpg"
+      },
+      {
+        "name": "Husk",
+        "image": "/images/Products/cardamom_h.jpeg"
+      }
+    ],
     "bullets": [
       "Highly aromatic spice containing essential oils (3-8%) rich in 1, 8-cineole and a-terpinyl acetate.",
       "Provides 18 calories and 1.6 grams of fiber per tablespoon."
@@ -379,10 +428,24 @@ export const EXPORT_CATALOG = [
   {
     "id": "P-07",
     "numId": 7,
-    "name": "Black Pepper",
-    "title": "Black Pepper",
+    "name": "Pepper",
+    "title": "Pepper",
     "category": "Spices",
     "badgeCategory": "SPICES",
+    "varieties": [
+      {
+        "name": "400 G/L to 800 G/L",
+        "image": "/images/Products/BlackPepper.png"
+      },
+      {
+        "name": "White(Vietnamese) All Grades & Sizes",
+        "image": "/images/Products/white_p.jpg"
+      },
+      {
+        "name": "Black(Indian, Sri Lankan, and Vietnamese) All Grades & SIzes",
+        "image": "/images/Products/black_pv.jpg"
+      }
+    ],
     "bullets": [
       "Single-ingredient spice made from the dried, unripe berries of the Piper nigrum vine.",
       "Signature heat comes from the active alkaloid compound piperine."
@@ -434,6 +497,16 @@ export const EXPORT_CATALOG = [
     "title": "Cloves",
     "category": "Spices",
     "badgeCategory": "SPICES",
+    "varieties": [
+      {
+        "name": "Indonesian(Lal Pari)",
+        "image": "/images/Products/indonesian_c.jpg"
+      },
+      {
+        "name": "Madagascan",
+        "image": "/images/Products/madagascan_c.jpg"
+      }
+    ],
     "bullets": [
       "Aromatic, dried unopened flower buds of the Syzygium aromaticum evergreen tree.",
       "Pungent flavor driven by eugenol, accounting for 70% to 90% of the essential oil."
@@ -485,6 +558,16 @@ export const EXPORT_CATALOG = [
     "title": "Coriander",
     "category": "Spices",
     "badgeCategory": "SPICES",
+    "varieties": [
+      {
+        "name": "Eagle(Machine Cleaned or Sortex)",
+        "image": "/images/Products/coriander_em.jpeg"
+      },
+      {
+        "name": "Parrot(Machine Cleaned or Sortex)",
+        "image": "/images/Products/coriander_ps.jpg"
+      }
+    ],
     "bullets": [
       "Dual-purpose herb where both the fresh leaves (cilantro) and dried seeds (dhaniya) are consumed.",
       "Earthy, slightly sweet flavor driven by naturally occurring terpenes like linalool and pinene."
@@ -540,6 +623,17 @@ export const EXPORT_CATALOG = [
     "title": "Cinnamon",
     "category": "Spices",
     "badgeCategory": "SPICES",
+    "dropdownPlaceholder": "Select Variety",
+    "varieties": [
+      {
+        "name": "Vietnamese",
+        "image": "/images/Products/cinnamon_v.jpg"
+      },
+      {
+        "name": "Indian",
+        "image": "/images/Products/cinnamon_i.jpg"
+      }
+    ],
     "bullets": [
       "Versatile inner bark known for its signature active compound, cinnamaldehyde.",
       "True Ceylon Cinnamon is milder and sweeter, while Cassia is stronger and spicier."
@@ -595,6 +689,17 @@ export const EXPORT_CATALOG = [
     "title": "Mustard Seeds",
     "category": "Spices",
     "badgeCategory": "SPICES",
+    "dropdownPlaceholder": "Select Variety",
+    "varieties": [
+      {
+        "name": "Yellow",
+        "image": "/images/Products/mustardSeeds_y.jpg"
+      },
+      {
+        "name": "Black",
+        "image": "/images/Products/mustardSeeds_b.jpg"
+      }
+    ],
     "bullets": [
       "Mustard seeds (rai) are a staple in Indian kitchens.",
       "Highly valued for their bold flavor and inherent health benefits."
@@ -650,6 +755,17 @@ export const EXPORT_CATALOG = [
     "title": "Sesame Seeds",
     "category": "Oil Seeds",
     "badgeCategory": "OIL SEEDS",
+    "dropdownPlaceholder": "Select Variety",
+    "varieties": [
+      {
+        "name": "White Sesame Seeds",
+        "image": "/images/Products/SesameSeeds.png"
+      },
+      {
+        "name": "Black Sesame Seeds",
+        "image": "/images/Products/sesameSeeds_b.jpeg"
+      }
+    ],
     "bullets": [
       "Entirely plant-based, composed of 45%-65% natural oils, 19%-35% protein.",
       "Contain unique phytochemicals called lignans (sesamin and sesamolin) to help lower cholesterol."
@@ -701,10 +817,11 @@ export const EXPORT_CATALOG = [
   {
     "id": "P-13",
     "numId": 13,
-    "name": "Soyabean",
-    "title": "Soyabean",
+    "name": "Soyabeans",
+    "title": "Soyabeans",
     "category": "Oil Seeds",
     "badgeCategory": "OIL SEEDS",
+    "varieties": [],
     "bullets": [
       "Nutrient-dense legume commonly used for plant-based proteins, dairy alternatives, and oils.",
       "Rich in isoflavones, protein, and essential micronutrients like folate and Vitamin K."
@@ -756,6 +873,36 @@ export const EXPORT_CATALOG = [
     "title": "Ground Nut",
     "category": "Oil Seeds",
     "badgeCategory": "OIL SEEDS",
+    "varieties": [
+      {
+        "name": "Bold",
+        "image": "/images/Products/groundnut_b.jpg"
+      },
+      {
+        "name": "Java",
+        "image": "/images/Products/groundnut_j.jpg"
+      },
+      {
+        "name": "Tj",
+        "image": "/images/Products/groundnut_t.jpg"
+      },
+      {
+        "name": "30/40",
+        "image": "/images/Products/GroundNuts.jpg"
+      },
+      {
+        "name": "40/50",
+        "image": "/images/Products/GroundNuts.jpg"
+      },
+      {
+        "name": "50/50",
+        "image": "/images/Products/GroundNuts.jpg"
+      },
+      {
+        "name": "60/70",
+        "image": "/images/Products/GroundNuts.jpg"
+      }
+    ],
     "bullets": [
       "Highly nutritious, boasting ~25g of plant-based protein and 49g of healthy fats per 100g.",
       "Rich in B-Vitamins (Niacin, Folate, Biotin) and Vitamin E."
@@ -811,6 +958,11 @@ export const EXPORT_CATALOG = [
     "title": "Sunflower Oil",
     "category": "Edible Oils",
     "badgeCategory": "EDIBLE OILS",
+    "varieties": [
+      "Refined Sunflower Oil (RSFO)",
+      "Crude Degummed Bulk",
+      "High Oleic Sunflower Oil"
+    ],
     "bullets": [
       "100% fat, providing about 120 calories and 14 grams of fat per tablespoon.",
       "Rich in polyunsaturated omega-6 fatty acids (linoleic acid) and vitamin E."
@@ -862,6 +1014,10 @@ export const EXPORT_CATALOG = [
     "title": "Soyabean Oil",
     "category": "Edible Oils",
     "badgeCategory": "EDIBLE OILS",
+    "varieties": [
+      "Refined Soyabean Oil",
+      "Crude Degummed Bulk"
+    ],
     "bullets": [
       "Extracted from seeds containing 18%-24% oil, yielding a high concentration of unsaturated fats.",
       "Rich in Linoleic Acid (51%-58%) and Oleic Acid (17%-30%)."
@@ -913,6 +1069,10 @@ export const EXPORT_CATALOG = [
     "title": "Ground Nut Oil",
     "category": "Edible Oils",
     "badgeCategory": "EDIBLE OILS",
+    "varieties": [
+      "Cold Pressed Kachi Ghani",
+      "Refined Groundnut Oil"
+    ],
     "bullets": [
       "Extracted from kernels that consist of 46% to 51% oil and roughly 26% proteins.",
       "1 kg of raw groundnut kernels typically produces 0.4 to 0.45 liters of oil."
@@ -964,6 +1124,12 @@ export const EXPORT_CATALOG = [
     "title": "Cashew Nuts",
     "category": "Dry Fruits",
     "badgeCategory": "DRY FRUITS",
+    "varieties": [
+      "W180 King Size",
+      "W240 Large Whole",
+      "W320 White Whole",
+      "JH / LWP Splits & Pieces"
+    ],
     "bullets": [
       "Nutrient-dense nuts packed with heart-healthy unsaturated fats and plant-based protein.",
       "Rich in essential minerals like copper, magnesium, zinc, and iron."
@@ -1015,6 +1181,11 @@ export const EXPORT_CATALOG = [
     "title": "Saffron",
     "category": "Dry Fruits",
     "badgeCategory": "DRY FRUITS",
+    "varieties": [
+      "California Type Bold",
+      "Mamra Almonds",
+      "Gurbandi Almonds"
+    ],
     "bullets": [
       "Composed of over 150 compounds, with vital phytochemicals: crocin, picrocrocin, and safranal.",
       "Dried threads contain roughly 65% carbohydrates, 11% protein, and 6% fat."
@@ -1066,6 +1237,11 @@ export const EXPORT_CATALOG = [
     "title": "Almonds",
     "category": "Dry Fruits",
     "badgeCategory": "DRY FRUITS",
+    "varieties": [
+      "Pure Kashmir Mongra",
+      "Lacha Saffron",
+      "ISO Category 1 Saffron"
+    ],
     "bullets": [
       "Nutrient-dense edible seeds packed with plant-based protein, dietary fiber, and healthy fats.",
       "Exceptionally rich in vitamin E (7.3mg/oz) and magnesium (76.7mg/oz)."
@@ -1117,6 +1293,12 @@ export const EXPORT_CATALOG = [
     "title": "Tea",
     "category": "Beverages",
     "badgeCategory": "TEA & COFFEE",
+    "varieties": [
+      "Assam CTC BOP / BP",
+      "Darjeeling FTGFOP1",
+      "Indian Masala Chai Blend",
+      "Green Tea Leaf & Fannings"
+    ],
     "bullets": [
       "True teas (Black, Green) from Camellia sinensis contain caffeine, amino acids, and flavonoids.",
       "Herbal teas are caffeine-free infusions made from botanicals, dried fruits, or herbs."
@@ -1168,6 +1350,11 @@ export const EXPORT_CATALOG = [
     "title": "Coffee",
     "category": "Beverages",
     "badgeCategory": "TEA & COFFEE",
+    "varieties": [
+      "Arabica Plantation A",
+      "Robusta Cherry AB",
+      "Monsooned Malabar AA"
+    ],
     "bullets": [
       "Brewed beverage from roasted beans, containing caffeine, tannins, carbohydrates, and proteins.",
       "A standard 8-oz brewed cup contains about 95 - 100 mg of caffeine."
@@ -1219,6 +1406,11 @@ export const EXPORT_CATALOG = [
     "title": "Coco",
     "category": "Beverages",
     "badgeCategory": "TEA & COFFEE",
+    "varieties": [
+      "Natural Cacao Powder (10-12%)",
+      "Alkalized Dutch Cocoa",
+      "Raw Cocoa Beans"
+    ],
     "bullets": [
       "Unsweetened cocoa powder is a nutrient-dense ingredient, rich in antioxidants, iron, and magnesium.",
       "1-tablespoon (5g) provides ~10 calories and 3g of carbohydrates (2g fiber)."
@@ -1270,6 +1462,12 @@ export const EXPORT_CATALOG = [
     "title": "Dehydrated Onion Powder",
     "category": "Dehydrated",
     "badgeCategory": "FOOD INGREDIENTS",
+    "varieties": [
+      "White Onion Flakes / Chopped",
+      "White Onion Minced (40-60 Mesh)",
+      "White Onion Powder (100 Mesh)",
+      "Red Onion Flakes & Powder"
+    ],
     "bullets": [
       "Highly concentrated flavor without fresh water weight, providing 342 kcal and 10g protein per 100g.",
       "Retains essential minerals and maintains a low moisture content of 4% to 6%."
@@ -1321,6 +1519,11 @@ export const EXPORT_CATALOG = [
     "title": "Dehydrated Garlic Powder",
     "category": "Dehydrated",
     "badgeCategory": "FOOD INGREDIENTS",
+    "varieties": [
+      "Garlic Clove Flakes",
+      "Garlic Granules (40-60 Mesh)",
+      "Pure Garlic Powder (100 Mesh)"
+    ],
     "bullets": [
       "Made by drying and grinding fresh garlic cloves, containing zero fat and <5% moisture.",
       "Delivers essential nutrients like calcium, iron, and potassium while remaining shelf-stable."
@@ -1372,6 +1575,11 @@ export const EXPORT_CATALOG = [
     "title": "Dehydrated Ginger Powder",
     "category": "Dehydrated",
     "badgeCategory": "FOOD INGREDIENTS",
+    "varieties": [
+      "Sun-Dried Whole Ginger",
+      "Dried Split Ginger",
+      "Pure Ginger Root Powder"
+    ],
     "bullets": [
       "Concentrated spice with 6% to 10% moisture, yielding 1.5% to 7% pungent gingerol.",
       "Breakdown per 100g includes ~70-72% carbs, ~12-14% dietary fiber, and ~6-9% protein."
@@ -1432,18 +1640,28 @@ const CATEGORIES = [
   'Food Ingredients'
 ];
 
-const ProductsPage = ({ addToCart: propAddToCart, setActivePage }) => {
-  const cartContext = useCart ? useCart() : null;
-  const addToCart = propAddToCart || cartContext?.addToCart;
+const ProductsPage = ({ setActivePage }) => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
 
   const [activeCategory, setActiveCategory] = useState('All Commodities');
   const [searchQuery, setSearchQuery] = useState('');
-  const [addedItems, setAddedItems] = useState({});
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [openDropdownId, setOpenDropdownId] = useState(null);
+  const [selectedVarieties, setSelectedVarieties] = useState({});
   const [pdfDrawerOpen, setPdfDrawerOpen] = useState(false);
   const [activePdfPage, setActivePdfPage] = useState(1);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!e.target.closest('.product-dropdown-container')) {
+        setOpenDropdownId(null);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
 
   // Sync search query from URL parameter if navigated from another page
   useEffect(() => {
@@ -1467,6 +1685,7 @@ const ProductsPage = ({ addToCart: propAddToCart, setActivePage }) => {
     const matchesSearch =
       (item.title && item.title.toLowerCase().includes(searchQuery.toLowerCase())) ||
       (item.name && item.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (item.subtitle && item.subtitle.toLowerCase().includes(searchQuery.toLowerCase())) ||
       (item.category && item.category.toLowerCase().includes(searchQuery.toLowerCase())) ||
       (item.hsCode && item.hsCode.includes(searchQuery)) ||
       (item.importers && item.importers.toLowerCase().includes(searchQuery.toLowerCase())) ||
@@ -1476,11 +1695,13 @@ const ProductsPage = ({ addToCart: propAddToCart, setActivePage }) => {
   });
 
   const handleGetQuote = (product) => {
+    const chosenVariety = selectedVarieties[product.id] || (product.varieties && (typeof product.varieties[0] === 'string' ? product.varieties[0] : product.varieties[0]?.name)) || '';
     try {
       localStorage.setItem('an_quote_product', JSON.stringify({
         id: product.id,
         name: product.title || product.name,
-        spec: product.spec,
+        variety: chosenVariety,
+        spec: chosenVariety ? `${product.title || product.name} (${chosenVariety})` : product.spec,
         moq: product.moq,
         category: product.category,
         hsCode: product.hsCode
@@ -1497,16 +1718,6 @@ const ProductsPage = ({ addToCart: propAddToCart, setActivePage }) => {
     }
   };
 
-  const handleAddToRFQ = (product) => {
-    if (addToCart) {
-      addToCart(product);
-    }
-    setAddedItems((prev) => ({ ...prev, [product.id]: true }));
-    setTimeout(() => {
-      setAddedItems((prev) => ({ ...prev, [product.id]: false }));
-    }, 2000);
-  };
-
   const openPdfViewer = (pageNumber = 1) => {
     setActivePdfPage(pageNumber);
     setPdfDrawerOpen(true);
@@ -1515,32 +1726,37 @@ const ProductsPage = ({ addToCart: propAddToCart, setActivePage }) => {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-black font-sans transition-colors duration-300">
       
-      {/* 1. HERO SECTION (Single Image - No Carousel) */}
+      {/* 1. HERO SECTION (Pantry Background Image Underlapping Text) */}
       <div className="relative w-full min-h-[500px] lg:min-h-[560px] flex items-center font-sans overflow-hidden bg-slate-950">
-        {/* The Single Hero Image */}
+        {/* The Pantry Background Image */}
         <div className="absolute inset-0">
           <img 
-            src="https://images.unsplash.com/photo-1586528116311-ad8ed7c83a7f?q=80&w=2000" 
-            alt="Anjaney Nexus Agro Commodity Export" 
+            src="/images/pantry.jpg" 
+            onError={(e) => {
+              if (e.currentTarget.src !== '/images/images/pantry.jpg') {
+                e.currentTarget.src = '/images/images/pantry.jpg';
+              }
+            }}
+            alt="India's Global Pantry - Anjaney Nexus Agro Commodity Export" 
             className="w-full h-full object-cover object-center"
           />
         </div>
 
-        {/* Brand Dark Navy Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-950/95 via-blue-950/85 to-slate-950/75"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-black/30 pointer-events-none"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(#f97316_1px,transparent_1px)] [background-size:32px_32px] opacity-10 pointer-events-none"></div>
+        {/* Lighter Gradient Fade Overlays - Ensuring the pantry image is clearly visible underlapping text */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/70 via-slate-950/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-black/25 pointer-events-none"></div>
 
         {/* Hero Content */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 sm:py-20">
           <div className="max-w-3xl">
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-normal font-serif text-amber-300 leading-[1.15] mb-4 tracking-tight drop-shadow-[0_2px_12px_rgba(252,211,77,0.25)]">
-              India's Global Pantry
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-normal font-serif leading-[1.15] mb-4 tracking-tight drop-shadow-md">
+              <span className="text-blue-900 drop-shadow-[0_1px_2px_rgba(255,255,255,0.4)]">India's</span>{' '}
+              <span className="text-white">Global Pantry</span>
             </h1>
 
             {/* Subheading / Tagline */}
-            <p className="text-base sm:text-lg lg:text-xl text-slate-200 font-sans font-normal not-italic max-w-2xl leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl text-white/90 font-sans font-normal not-italic max-w-2xl leading-relaxed drop-shadow-sm">
               Submit your product, quantity, specification and destination inquiry, our export team will review your complete trade enquiry during published business hours.
             </p>
           </div>
@@ -1550,57 +1766,40 @@ const ProductsPage = ({ addToCart: propAddToCart, setActivePage }) => {
       {/* 2. PRODUCT GRID SECTION */}
       <div id="catalog-products-section" className="max-w-7xl mx-auto px-6 sm:px-8 pt-16 sm:pt-20 pb-24">
         
-        {/* Section Header & Search / Filters */}
-        <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div>
-            <span className="text-[10px] font-black text-orange-500 dark:text-orange-400 uppercase tracking-[0.2em] mb-3 block">
-              Our Products
-            </span>
-            <h2 className="text-3xl md:text-5xl font-black text-blue-950 dark:text-white tracking-tight leading-[1.1]">
-              Comprehensive Trade Solutions <br className="hidden md:block" />
-              <span className="text-slate-400 dark:text-slate-600">for Global Business</span>
-            </h2>
-          </div>
+        {/* Centered "OUR PRODUCTS" Header with Blue Pill Background */}
+        <div className="flex justify-center mb-6">
+          <h2 className="inline-flex items-center justify-center px-5 py-1.5 sm:px-6 sm:py-2 rounded-full bg-blue-900 dark:bg-blue-600 text-white font-black text-xs uppercase tracking-[0.2em] shadow-sm shadow-blue-950/20">
+            OUR PRODUCTS
+          </h2>
+        </div>
 
-          {/* Quick Search & Burger Button */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            <div className="relative min-w-[260px]">
-              <input
-                type="text"
-                placeholder="Search products, HS code, specs..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full py-3 pl-4 pr-10 text-xs font-bold rounded-xl border bg-white dark:bg-[#0a0a0a] border-slate-200 dark:border-slate-800 text-blue-950 dark:text-white placeholder:text-slate-400 outline-none focus:border-orange-500 shadow-sm"
-              />
-              {searchQuery ? (
-                <button 
-                  onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-3 text-xs font-bold text-slate-400 hover:text-slate-600"
-                >
-                  ×
-                </button>
-              ) : (
-                <svg className="w-4 h-4 text-slate-400 absolute right-3.5 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              )}
-            </div>
-
-            <button
-              onClick={() => openPdfViewer(1)}
-              className="px-4 py-3 bg-white dark:bg-[#0a0a0a] border border-slate-200 dark:border-slate-800 hover:border-orange-500 text-blue-950 dark:text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer shrink-0"
-              title="Open entire 12-page company profile description"
-            >
-              <svg className="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 6h16M4 12h16M4 18h16" />
+        {/* Quick Search */}
+        <div className="mb-10 max-w-md mx-auto w-full">
+          <div className="relative w-full">
+            <input
+              type="text"
+              placeholder="Search products, HS code, specs..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full py-3 pl-4 pr-10 text-xs font-bold rounded-xl border bg-white dark:bg-[#0a0a0a] border-slate-200 dark:border-slate-800 text-blue-950 dark:text-white placeholder:text-slate-400 outline-none focus:border-blue-500 shadow-sm"
+            />
+            {searchQuery ? (
+              <button 
+                onClick={() => setSearchQuery('')}
+                className="absolute right-3 top-3 text-xs font-bold text-slate-400 hover:text-slate-600"
+              >
+                ×
+              </button>
+            ) : (
+              <svg className="w-4 h-4 text-slate-400 absolute right-3.5 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
-              <span>Brochure Menu</span>
-            </button>
+            )}
           </div>
         </div>
 
         {/* Category Filter Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none">
+        <div className="flex items-center md:justify-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none">
           {CATEGORIES.map((cat) => {
             const isSelected = activeCategory === cat;
             return (
@@ -1632,7 +1831,15 @@ const ProductsPage = ({ addToCart: propAddToCart, setActivePage }) => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {filteredProducts.map((product) => (
+            {filteredProducts.map((product) => {
+              const selectedVarObj = product.varieties?.find(
+                (v) => (typeof v === 'string' ? v : v.name) === selectedVarieties[product.id]
+              );
+              const cardImage = (selectedVarObj && typeof selectedVarObj === 'object' && selectedVarObj.image)
+                ? selectedVarObj.image
+                : product.image;
+
+              return (
               <div 
                 key={product.id} 
                 className="bg-white dark:bg-[#0a0a0a] border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:border-orange-500 dark:hover:border-orange-400 transition-all duration-300 flex flex-col group"
@@ -1641,7 +1848,7 @@ const ProductsPage = ({ addToCart: propAddToCart, setActivePage }) => {
                 {/* Product Image with Category Pill & Menu Burger for Entire Description */}
                 <div className="h-56 w-full overflow-hidden bg-slate-100 dark:bg-slate-900 relative">
                   <img 
-                    src={product.image} 
+                    src={cardImage} 
                     alt={product.title || product.name} 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
                     onError={(e) => {
@@ -1681,94 +1888,109 @@ const ProductsPage = ({ addToCart: propAddToCart, setActivePage }) => {
                   </div>
                 </div>
 
-                {/* Card Body */}
-                <div className="p-6 sm:p-8 flex flex-col flex-grow">
-                  
-                  {/* Title */}
-                  <h3 className="text-2xl font-black text-blue-950 dark:text-white leading-tight mb-4">
-                    {product.title || product.name}
-                  </h3>
-                  
-                  {/* Bulleted Description */}
-                  <div className="text-[13px] sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-6 space-y-2">
-                    {product.bullets && product.bullets.map((bullet, idx) => (
-                      <div key={idx} className="flex items-start">
-                        <span className="mr-2 font-bold text-slate-400">•</span>
-                        <span>{bullet}</span>
-                      </div>
-                    ))}
-                  </div>
+                {/* Card Body (Cleaned of all information clutter, dropdown placed properly) */}
+                <div className="p-6 flex flex-col flex-grow justify-between space-y-5">
+                  <div className="space-y-4">
+                    {/* Title */}
+                    <h3 className="text-xl sm:text-2xl font-black text-blue-950 dark:text-white leading-tight flex flex-wrap items-baseline gap-2">
+                      <span>{product.name}</span>
+                      {product.subtitle && (
+                        <span className="text-sm sm:text-base font-bold text-orange-600 dark:text-orange-400">
+                          {product.subtitle}
+                        </span>
+                      )}
+                    </h3>
 
-                  {/* EXACT SPECIFICATIONS TABLE LAYOUT FROM IMAGE */}
-                  <div className="flex flex-col border border-slate-200 dark:border-slate-700 mb-6 rounded-md bg-white dark:bg-[#0a0a0a]">
-                    {product.specs && product.specs.map((spec, idx) => (
-                      <div key={idx} className="flex text-[13px] sm:text-sm border-b last:border-b-0 border-slate-200 dark:border-slate-700">
-                        {/* Left Label Column: White bg, dark teal/blue text */}
-                        <div className="w-1/2 p-2.5 sm:p-3 border-r border-slate-200 dark:border-slate-700 text-blue-950 dark:text-slate-300 font-bold flex items-center">
-                          {spec.label}
+                    {/* Prominent Varieties & Grades Dropdown Menu (only if product has varieties) */}
+                    {product.varieties && product.varieties.length > 0 && (
+                      <div className="relative product-dropdown-container">
+                        <button 
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setOpenDropdownId(openDropdownId === product.id ? null : product.id);
+                          }}
+                          className={`w-full flex items-center justify-between px-4 py-3.5 rounded-xl border text-xs font-black transition-all cursor-pointer shadow-xs ${
+                            openDropdownId === product.id
+                              ? 'bg-orange-50 dark:bg-orange-950/40 border-orange-500 text-orange-600 dark:text-orange-400 ring-2 ring-orange-500/20'
+                              : 'bg-slate-50 dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 text-blue-950 dark:text-white hover:border-orange-500'
+                          }`}
+                        >
+                          <span className="flex items-center gap-2">
+                            <span className={`w-2 h-2 rounded-full ${openDropdownId === product.id ? 'bg-orange-500 animate-ping' : 'bg-orange-500'}`}></span>
+                            <span className="truncate">
+                              {selectedVarieties[product.id] || product.dropdownPlaceholder || 'Select Variety / Grade'}
+                            </span>
+                          </span>
+                          <svg 
+                            className={`w-4 h-4 shrink-0 transition-transform duration-300 ${
+                              openDropdownId === product.id ? 'rotate-180 text-orange-500' : 'text-slate-400'
+                            }`}
+                            fill="none" 
+                            stroke="currentColor" 
+                            viewBox="0 0 24 24"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </button>
+
+                        {/* Dropdown Menu Effect */}
+                        <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          openDropdownId === product.id ? 'max-h-[500px] mt-2 opacity-100' : 'max-h-0 opacity-0'
+                        }`}>
+                          <div className="p-2.5 bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl space-y-1.5 shadow-lg max-h-72 overflow-y-auto">
+                            {product.varieties.map((v, vIdx) => {
+                              const varName = typeof v === 'string' ? v : v.name;
+                              const varImg = typeof v === 'object' && v.image ? v.image : null;
+                              const isSelected = selectedVarieties[product.id] === varName;
+                              return (
+                                <button 
+                                  key={vIdx}
+                                  type="button"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setSelectedVarieties((prev) => ({ ...prev, [product.id]: varName }));
+                                    setOpenDropdownId(null);
+                                  }}
+                                  className={`w-full flex items-center justify-between p-2.5 rounded-lg border text-xs font-bold transition-all text-left cursor-pointer ${
+                                    isSelected 
+                                      ? 'bg-orange-500 text-white border-orange-500 shadow-sm' 
+                                      : 'bg-white dark:bg-zinc-950 border-slate-200/70 dark:border-zinc-800 text-slate-800 dark:text-slate-200 hover:border-orange-500/60 hover:bg-orange-50/50 dark:hover:bg-zinc-900'
+                                  }`}
+                                >
+                                  <div className="flex items-center gap-2.5 min-w-0 pr-1">
+                                    {varImg && (
+                                      <img 
+                                        src={varImg} 
+                                        alt={varName} 
+                                        className="w-8 h-8 rounded-lg object-cover border border-slate-200 dark:border-zinc-700 shrink-0 shadow-xs" 
+                                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                                      />
+                                    )}
+                                    <span className="leading-snug break-words">{varName}</span>
+                                  </div>
+                                </button>
+                              );
+                            })}
+                          </div>
                         </div>
-                        {/* Right Value Column: White bg, dark grey text, leaves blank via nbsp if no value provided */}
-                        <div className="w-1/2 p-2.5 sm:p-3 text-right text-slate-800 dark:text-white font-bold flex items-center justify-end">
-                          {spec.value || "\u00A0"}
-                        </div>
                       </div>
-                    ))}
+                    )}
                   </div>
 
-                  {/* Expand Indicator */}
-                  <div className="flex justify-center mb-6 mt-auto pt-2">
-                    <button 
-                      onClick={() => setSelectedProduct(product)}
-                      className="w-6 h-6 rounded-full bg-slate-50 dark:bg-slate-900 hover:bg-orange-500 hover:text-white flex items-center justify-center text-slate-300 dark:text-slate-700 transition-colors cursor-pointer"
-                      title="Expand full technical specifications"
-                    >
-                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </button>
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
-                    <button 
-                      onClick={() => setSelectedProduct(product)}
-                      className="flex-grow bg-blue-950 hover:bg-orange-500 dark:bg-blue-500/20 dark:text-blue-400 dark:border dark:border-blue-500/30 dark:hover:bg-orange-400 dark:hover:text-black dark:hover:border-orange-400 text-white text-[10px] sm:text-xs font-black uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-sm cursor-pointer"
-                    >
-                      View Details
-                    </button>
-                    
+                  {/* Clean Action Button */}
+                  <div className="pt-2">
                     <button 
                       onClick={() => handleGetQuote(product)}
-                      className="flex-grow bg-slate-100 hover:bg-slate-200 dark:bg-slate-900 dark:hover:bg-slate-800 text-blue-950 dark:text-slate-300 text-[10px] sm:text-xs font-black uppercase tracking-widest py-3.5 rounded-xl transition-colors border border-transparent dark:border-slate-800 cursor-pointer"
+                      className="w-full bg-blue-950 hover:bg-orange-500 dark:bg-orange-500 dark:hover:bg-orange-600 text-white text-xs font-black uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-sm cursor-pointer text-center"
                     >
-                      Get Quote
-                    </button>
-                    
-                    {/* RFQ / Cart Box Button */}
-                    <button 
-                      onClick={() => handleAddToRFQ(product)}
-                      className={`w-12 sm:w-14 flex items-center justify-center border rounded-xl transition-colors shrink-0 shadow-sm cursor-pointer ${
-                        addedItems[product.id]
-                          ? 'bg-emerald-500 border-emerald-500 text-white'
-                          : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0a0a0a] hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-400 hover:text-orange-500 dark:hover:text-orange-400'
-                      }`}
-                      title={addedItems[product.id] ? "Added to RFQ Inquiry List" : "Add to RFQ Inquiry List"}
-                    >
-                      {addedItems[product.id] ? (
-                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
-                        </svg>
-                      ) : (
-                        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                        </svg>
-                      )}
+                      Get Official Quote
                     </button>
                   </div>
-
                 </div>
               </div>
-            ))}
+            );
+          })}
           </div>
         )}
 

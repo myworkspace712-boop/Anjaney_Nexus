@@ -224,22 +224,6 @@ const UserProfile = () => {
         Log Out
       </button>
 
-      {/* 3. My Cart Section */}
-      <div className="cart-section" style={{ padding: '20px', border: '1px solid #eee', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
-        <h3 style={{ marginTop: 0 }}>My Cart</h3>
-        <p style={{ color: '#666' }}>Your cart items will appear here.</p>
-
-        <div className="cart-summary" style={{ marginTop: '20px', borderTop: '1px solid #eee', paddingTop: '15px' }}>
-          <h4 style={{ margin: '0 0 15px 0' }}>Total: $0.00</h4>
-          <button 
-            onClick={handleCheckout}
-            style={{ width: '100%', padding: '10px', backgroundColor: '#28a745', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
-          >
-            Proceed to Checkout
-          </button>
-        </div>
-      </div>
-
     </div>
   );
 };

@@ -122,6 +122,23 @@ const AuthWithSidebar = () => {
     setUsers(updatedUsers);
   };
 
+  // Delete account helper
+  const handleDeleteAccount = () => {
+    let target = (loginEmail || regEmail || '').toLowerCase().trim();
+    if (!target) {
+      const entered = window.prompt('Enter the email address of the account to delete:');
+      if (!entered) return;
+      target = entered.toLowerCase().trim();
+    }
+    if (window.confirm(`Are you sure you want to permanently delete the account for ${target}?`)) {
+      const updated = users.filter((u) => u.email !== target);
+      setUsers(updated);
+      setLoginEmail('');
+      setRegEmail('');
+      alert(`Account ${target} deleted successfully.`);
+    }
+  };
+
   return (
     <div className="max-w-7xl mx-auto py-10 px-4 text-white">
       {/* Main Grid: Forms on Left/Center, History Sidebar on Right */}
@@ -216,6 +233,18 @@ const AuthWithSidebar = () => {
                 Verify Credentials
               </button>
             </form>
+          </div>
+
+          {/* BUTTON DIRECTLY BELOW REGISTRATION & SIGN IN CARDS */}
+          <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 shadow-xl space-y-2">
+            <button
+              type="button"
+              onClick={handleDeleteAccount}
+              className="w-full py-2.5 px-4 bg-red-600/10 hover:bg-red-600 text-red-400 hover:text-white border border-red-500/30 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2"
+            >
+              <span>🗑️</span>
+              <span>Delete Entered Account</span>
+            </button>
           </div>
         </div>
 

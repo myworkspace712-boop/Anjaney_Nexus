@@ -54,10 +54,6 @@ const CustomerDashboard = () => {
             />
             <span style={{ position: 'absolute', left: '12px', top: '10px' }}>🔍</span>
           </div>
-          <button className="flex items-center gap-2 px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700 transition font-medium cursor-pointer border-none">
-            <span role="img" aria-label="cart" className="text-xl">🛒</span>
-            <span>My Cart</span>
-          </button>
         </div>
       </div>
 

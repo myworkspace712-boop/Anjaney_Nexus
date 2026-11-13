@@ -12,7 +12,7 @@ const SLIDES = [
     primaryCta: 'Explore Catalog',
     primaryAction: 'products',
     secondaryCta: 'Request Bulk Quote',
-    secondaryAction: 'cart',
+    secondaryAction: 'contact',
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ const SLIDES = [
     primaryCta: 'View Spices',
     primaryAction: 'products',
     secondaryCta: 'Start RFQ',
-    secondaryAction: 'cart',
+    secondaryAction: 'contact',
   },
   {
     id: 3,
@@ -36,7 +36,7 @@ const SLIDES = [
     primaryCta: 'View Agriculture',
     primaryAction: 'products',
     secondaryCta: 'Contact Sales',
-    secondaryAction: 'cart',
+    secondaryAction: 'contact',
   },
   {
     id: 4,
@@ -45,8 +45,8 @@ const SLIDES = [
     title: 'Seamless Container',
     highlight: 'Logistics',
     desc: 'End-to-end export management offering FOB, CIF, and CFR Incoterms. We handle the phytosanitary certifications, customs clearance, and port loading.',
-    primaryCta: 'Create RFQ',
-    primaryAction: 'cart',
+    primaryCta: 'Inquire Now',
+    primaryAction: 'contact',
     secondaryCta: 'View Products',
     secondaryAction: 'products',
   },
@@ -60,7 +60,7 @@ const SLIDES = [
     primaryCta: 'Browse Catalog',
     primaryAction: 'products',
     secondaryCta: 'Bulk Inquiries',
-    secondaryAction: 'cart',
+    secondaryAction: 'contact',
   },
 ];
 

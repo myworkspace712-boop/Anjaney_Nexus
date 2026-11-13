@@ -49,6 +49,73 @@ const Inquire = ({ setActivePage }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const rfqId = `RFQ-${Math.floor(100000 + Math.random() * 900000)}`;
+    const newQuoteRequirement = {
+      rfqId,
+      id: rfqId,
+      submittedAt: new Date().toLocaleString(),
+      date: new Date().toISOString().split('T')[0],
+      status: 'Pending Review',
+      type: 'Commercial Quote Requirement',
+      buyer: {
+        fullName: formData.fullName || 'Commercial Buyer',
+        companyName: formData.companyName || formData.fullName || 'Private Commercial Entity',
+        email: formData.email,
+        phone: formData.phone || 'Not provided',
+        country: formData.destinationCountry || 'Global'
+      },
+      commodities: [
+        {
+          id: 1,
+          name: formData.product || 'Agro Commodity',
+          volume: formData.quantity || '1',
+          unit: 'MT',
+          packaging: formData.requiredPacking || 'Standard Export Packing',
+          requirements: formData.requirements || '',
+          quotedUnitPrice: '1250'
+        }
+      ],
+      shipping: {
+        port: formData.portOfDischarge || 'To be nominated',
+        country: formData.destinationCountry || 'International Destination',
+        incoterm: formData.incoterm || 'CIF',
+        paymentTerm: formData.shipmentMonth ? `Target Month: ${formData.shipmentMonth}` : 'Standard LC / TT',
+      },
+      requirements: formData.requirements || '',
+      shipmentMonth: formData.shipmentMonth || '',
+      product: formData.product,
+      quantity: formData.quantity
+    };
+
+    // 1. Immediately store into local RFQ database for Admin Dashboard
+    try {
+      const RFQ_STORAGE_KEY = 'an_bulk_rfq_database';
+      const existingRfqs = JSON.parse(localStorage.getItem(RFQ_STORAGE_KEY)) || [];
+      const updatedRfqs = [newQuoteRequirement, ...existingRfqs];
+      localStorage.setItem(RFQ_STORAGE_KEY, JSON.stringify(updatedRfqs));
+
+      // 2. Dispatch cross-component and storage events for real-time dashboard update
+      window.dispatchEvent(new Event('rfq-change'));
+      window.dispatchEvent(new Event('storage'));
+    } catch (err) {
+      console.error('Failed to save RFQ to local database:', err);
+    }
+
+    // 3. Optional background server persistence
+    try {
+      const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+      fetch(`${backendUrl}/api/rfqs`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newQuoteRequirement)
+      }).catch(() => {
+        // Safe fail-silent if backend is offline; localStorage guarantees delivery
+      });
+    } catch {
+      // ignore network errors
+    }
+
     setSubmitted(true);
   };
 
@@ -73,21 +140,20 @@ const Inquire = ({ setActivePage }) => {
           />
         </div>
 
-        {/* Brand Dark Navy Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-950/95 via-blue-950/85 to-slate-950/75"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-black/30 pointer-events-none"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(#f97316_1px,transparent_1px)] [background-size:32px_32px] opacity-10 pointer-events-none"></div>
+        {/* Gradient Fade Overlays with increased top-to-bottom fade */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/65 via-slate-950/35 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-transparent to-slate-950/85 pointer-events-none"></div>
 
         {/* Hero Content */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 sm:py-20">
           <div className="max-w-3xl">
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-4 tracking-tight">
-              Have a chat with our <span className="text-orange-500">Export Team</span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-4 tracking-tight drop-shadow-md">
+              Have a chat with us for your <span className="text-orange-500">Export Inquiry</span>
             </h1>
 
             {/* Description */}
-            <p className="text-slate-300 max-w-2xl text-sm sm:text-base leading-relaxed font-medium">
+            <p className="text-slate-100 max-w-2xl text-sm sm:text-base leading-relaxed font-medium drop-shadow-sm">
               Submit your product, quantity, specification and destination inquiry, our export team will review your complete trade enquiry during published business hours.
             </p>
           </div>
@@ -102,22 +168,14 @@ const Inquire = ({ setActivePage }) => {
           isDark ? 'border-slate-800 bg-slate-900 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)]' : 'border-slate-200 bg-white shadow-xl'
         }`}>
           
-          {/* Card Top Title Bar */}
-          <div className="p-6 sm:p-8 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div>
-              <span className="text-[10px] font-black uppercase tracking-widest text-orange-500 block mb-1">
-                Official Commercial RFQ Form
-              </span>
-              <h2 className="text-xl sm:text-2xl font-black text-blue-950 dark:text-white">
-                Request Your Export Quote
-              </h2>
-            </div>
-            <div className="flex items-center gap-2 opacity-80">
-              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Regulated By</span>
-              <div className="font-serif italic text-lg text-slate-300 font-bold tracking-tight select-none px-2 py-0.5 bg-slate-800 rounded">
-                fssai
-              </div>
-            </div>
+          {/* Card Top Title Bar (Centered) */}
+          <div className="p-6 sm:p-8 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 text-center">
+            <span className="text-[10px] font-black uppercase tracking-widest text-orange-500 block mb-1">
+              Official Commercial RFQ Form
+            </span>
+            <h2 className="text-xl sm:text-2xl font-black text-blue-950 dark:text-white">
+              Request Your Export Quote
+            </h2>
           </div>
 
           {/* LOWER FORM SECTION */}
@@ -279,30 +337,40 @@ const Inquire = ({ setActivePage }) => {
                   >
                     <option value="Other / Multiple Products">Other / Multiple Products</option>
                     
-                    {/* 1. Agriculture */}
-                    <optgroup label="── AGRICULTURE ──" className="font-bold text-orange-500">
-                      <option value="Basmati Rice">Basmati Rice (Premium / Grade A / Standard)</option>
-                      <option value="Non-Basmati Rice">Non-Basmati Rice (Raw / Parboiled Sella)</option>
+                    {/* 1. Agriculture / Rice */}
+                    <optgroup label="── BASMATI RICE ──" className="font-bold text-orange-500">
+                      <option value="1121 Steamy Sella Basmati">1121 Steamy Sella Basmati</option>
+                      <option value="1121 Creamy Sella Basmati">1121 Creamy Sella Basmati</option>
+                      <option value="1121 Golden Sella Basmati">1121 Golden Sella Basmati</option>
+                      <option value="XXXL Steamy Sella Basmati">XXXL Steamy Sella Basmati</option>
+                      <option value="XXXL Creamy Sella Basmati">XXXL Creamy Sella Basmati</option>
+                      <option value="XXXL Golden Sella Basmati">XXXL Golden Sella Basmati</option>
+                      <option value="1509 Basmati Rice">1509 Basmati Rice</option>
+                    </optgroup>
+                    <optgroup label="── NON-BASMATI RICE ──" className="font-bold text-orange-500">
+                      <option value="Non-Basmati - Sona Masuri">Non-Basmati - Sona Masuri</option>
+                      <option value="Non-Basmati - IR64">Non-Basmati - IR64</option>
+                      <option value="Non-Basmati - All Broken Grades(5% - 100%)">Non-Basmati - All Broken Grades(5% - 100%)</option>
                     </optgroup>
 
                     {/* 2. Spices */}
                     <optgroup label="── SPICES ──" className="font-bold text-orange-500">
-                      <option value="Turmeric">Turmeric (Raw Root / Powder)</option>
-                      <option value="Chilly">Chilly (Whole / High SHU Ground)</option>
-                      <option value="Cumin Seeds (Jeera)">Cumin Seeds / Jeera (Dried Whole)</option>
-                      <option value="Cardamom">Green Cardamom (Whole Pods / Ground)</option>
-                      <option value="Black Pepper">Black Pepper (Whole Tellicherry / Powder)</option>
-                      <option value="Cloves">Cloves (Dried Unopened Flower Buds)</option>
-                      <option value="Coriander">Coriander Seeds / Dhania (Whole)</option>
-                      <option value="Cinnamon">Cinnamon (Ceylon / Cassia Bark)</option>
-                      <option value="Mustard Seeds">Mustard Seeds / Rai (Whole Machine Cleaned)</option>
+                      <option value="Turmeric (2.5% - 9% curcumin)">Turmeric (2.5% - 9% curcumin) - Fingers / Bulb / Powder</option>
+                      <option value="Chillies">Chillies (S17 Teja / Kashmiri / Sannam 334 / Byadgi)</option>
+                      <option value="Cumin Seeds">Cumin Seeds (Singaporean / European)</option>
+                      <option value="Cardamom">Cardamom (6mm to 8.5mm / Green / Black / Husk)</option>
+                      <option value="Pepper">Pepper (400-800 G/L / White Vietnamese / Black Indian-Sri Lankan-Vietnamese)</option>
+                      <option value="Cloves">Cloves (Indonesian Lal Pari / Madagascan)</option>
+                      <option value="Coriander">Coriander (Eagle / Parrot Machine Cleaned or Sortex)</option>
+                      <option value="Cinnamon">Cinnamon (Vietnamese / Indian)</option>
+                      <option value="Mustard Seeds">Mustard Seeds (Yellow / Black)</option>
                     </optgroup>
 
                     {/* 3. Oil Seeds */}
                     <optgroup label="── OIL SEEDS ──" className="font-bold text-orange-500">
-                      <option value="Sesame Seeds">Sesame Seeds (Natural / Hulled Auto-Sortex)</option>
-                      <option value="Soyabean">Soyabean (Whole High Protein Seeds)</option>
-                      <option value="Ground Nut">Ground Nut / Peanuts (Bold / Java Kernels)</option>
+                      <option value="Sesame Seeds">Sesame Seeds (White / Black)</option>
+                      <option value="Soyabeans">Soyabeans (Whole High Protein Seeds)</option>
+                      <option value="Ground Nut">Ground Nut / Peanuts (Bold / Java / Tj / 30/40 / 40/50 / 50/50 / 60/70)</option>
                     </optgroup>
 
                     {/* 4. Edible Oils */}
@@ -485,16 +553,13 @@ const Inquire = ({ setActivePage }) => {
                   ></textarea>
                 </div>
 
-                {/* SUBMISSION FOOTER */}
-                <div className="md:col-span-2 mt-4 flex flex-col sm:flex-row items-center justify-between border-t border-slate-200 dark:border-slate-800 pt-6 gap-4">
-                  <p className="text-xs text-slate-500 dark:text-slate-400 font-medium max-w-sm text-center sm:text-left">
-                    By submitting this quote request, your commercial details remain strictly confidential under Anjaney Nexus international trade agreements.
-                  </p>
+                {/* SUBMISSION FOOTER (Full Width Elongated Button) */}
+                <div className="md:col-span-2 mt-6 border-t border-slate-200 dark:border-slate-800 pt-8">
                   <button 
                     type="submit"
-                    className="w-full sm:w-auto px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white font-black text-xs sm:text-sm uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 cursor-pointer shrink-0"
+                    className="w-full py-3.5 sm:py-4 px-6 bg-orange-500 hover:bg-orange-600 text-white font-black text-xs sm:text-sm uppercase tracking-[0.2em] rounded-2xl transition-all shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center block"
                   >
-                    Submit Export Quote Request
+                    SUBMIT YOUR RFQ
                   </button>
                 </div>
 

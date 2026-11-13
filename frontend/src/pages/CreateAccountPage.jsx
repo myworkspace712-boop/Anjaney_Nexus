@@ -466,10 +466,10 @@ const CreateAccountPage = ({ setActivePage, setCurrentUser }) => {
           </button>
           <button
             type="button"
-            onClick={() => setActivePage('auth')}
+            onClick={() => setActivePage('home')}
             className="text-orange-600 dark:text-orange-400 font-bold hover:underline cursor-pointer"
           >
-            Sign In →
+            Home →
           </button>
         </div>
 

@@ -182,8 +182,12 @@ router.post('/reset-password/:token', async (req, res) => {
   }
 });
 
-// Define authorized master admins securely on the backend
-const MASTER_ADMIN_EMAILS = ['yatharthjoshi127@gmail.com', 'yj7gov@gmail.com'];
+// Configurable admin emails from environment variables (No hardcoded personal emails)
+const getConfiguredAdminEmails = () =>
+  (process.env.ADMIN_EMAILS || '')
+    .split(',')
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
 
 // ─────────────────────────────────────────────────────────────
 // @POST /api/auth/login
@@ -219,10 +223,11 @@ router.post('/login', async (req, res) => {
       return res.status(403).json({ error: 'Please verify your email before signing in.' });
     }
 
-    // --- Auto-promote authorized master emails if their DB record is stale ---
-    if (MASTER_ADMIN_EMAILS.includes(normalizedEmail) && user.role !== 'admin') {
+    // --- Auto-promote authorized admin emails if configured in environment ---
+    const adminEmails = getConfiguredAdminEmails();
+    if (adminEmails.includes(normalizedEmail) && user.role !== 'admin') {
       user.role = 'admin';
-      user.companyName = 'Anjaney Nexus Admin';
+      user.companyName = user.companyName || 'Anjaney Nexus Admin';
       await user.save(); // Permanently update the record in MongoDB
     }
 

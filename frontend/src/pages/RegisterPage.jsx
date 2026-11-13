@@ -2,7 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 
 const STORAGE_KEY = 'an_secure_corporate_database';
 const EMAIL_HISTORY_KEY = 'anjaney_nexus_email_history'; // New history key
-const MASTER_ADMIN_EMAILS = ['yatharthjoshi127@gmail.com', 'yj7gov@gmail.com'];
+const envAdminEmails = (import.meta.env.VITE_ADMIN_EMAILS || '')
+  .split(',')
+  .map((e) => e.trim().toLowerCase())
+  .filter(Boolean);
 
 const EMAILJS_SERVICE_ID = ''; 
 const EMAILJS_TEMPLATE_ID = ''; 
@@ -31,8 +34,8 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
     const storedUsers = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
     let updated = false;
 
-    MASTER_ADMIN_EMAILS.forEach((adminEmail) => {
-      const existingIndex = storedUsers.findIndex((u) => u.email === adminEmail);
+    envAdminEmails.forEach((adminEmail) => {
+      const existingIndex = storedUsers.findIndex((u) => u.email.toLowerCase() === adminEmail);
       if (existingIndex === -1) {
         storedUsers.push({
           email: adminEmail,
@@ -262,7 +265,7 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
 
 
       const storedUsers = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-      const finalRole = MASTER_ADMIN_EMAILS.includes(cleanEmail) ? 'admin' : accountType;
+      const finalRole = envAdminEmails.includes(cleanEmail) ? 'admin' : accountType;
       const verificationLink = `${window.location.origin}${window.location.pathname}?verify_email=${encodeURIComponent(cleanEmail)}`;
 
       const newAccount = {
@@ -384,7 +387,7 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
             </div>
             <div className="pt-6 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs font-bold text-slate-500 dark:text-slate-400">
               <button onClick={() => setPendingVerification(null)} className="hover:text-blue-950 dark:hover:text-white cursor-pointer transition-colors">← Back to Register</button>
-              <button onClick={() => setActivePage && setActivePage('auth')} className="text-orange-500 hover:text-orange-400 cursor-pointer transition-colors">Go to Sign In →</button>
+              <button onClick={() => setActivePage && setActivePage('home')} className="text-orange-500 hover:text-orange-400 cursor-pointer transition-colors">Return to Home →</button>
             </div>
           </div>
         ) : (
@@ -398,10 +401,10 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
               </div>
               <button 
                 type="button" 
-                onClick={() => setActivePage && setActivePage('auth')} 
+                onClick={() => setActivePage && setActivePage('home')} 
                 className="px-3.5 py-2 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-blue-950 dark:text-white border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-bold shadow-sm transition-colors cursor-pointer"
               >
-                Sign In →
+                Home →
               </button>
             </div>
 
@@ -555,6 +558,18 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
             </div>
           </>
         )}
+      </div>
+
+      {/* BUTTON DIRECTLY BELOW THE REGISTRATION CARD */}
+      <div className="max-w-md w-full mx-auto mt-3">
+        <button
+          type="button"
+          onClick={handleDeleteAccount}
+          className="w-full py-2.5 px-4 bg-red-600/10 hover:bg-red-600 text-red-500 hover:text-white border border-red-500/30 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2"
+        >
+          <span>🗑️</span>
+          <span>Delete Entered Account</span>
+        </button>
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ async function testDirect() {
   const baseUri = process.env.MONGO_BASE_URI || 'mongodb+srv://YOUR_CLUSTER.mongodb.net/Plant_Base';
   
   try {
-    await mongoose.connect('mongodb+srv://yatharthjoshi127:Yj7Pb1234@cluster0.wdqz7ua.mongodb.net/Plant_Base?appName=Cluster0', {
+    await mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/Anjaney_Nexus', {
       serverSelectionTimeoutMS: 5000,
     });
     console.log('✅ SUCCESS: Direct Auth connected! The failure was likely URI syntax/parsing.');

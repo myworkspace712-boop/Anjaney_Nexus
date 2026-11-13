@@ -177,6 +177,7 @@ mountRoute('/api/seller-profile', './routes/sellerProfile');
 mountRoute('/api/referral', './routes/referral');
 mountRoute('/api/logistics', './routes/logistics');
 mountRoute('/api/notifications', './routes/notifications');
+mountRoute('/api/rfqs', './routes/rfqRoutes');
 
 // Health check
 app.get('/api/health', (req, res) => {

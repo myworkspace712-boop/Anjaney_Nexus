@@ -60,7 +60,7 @@ const ProductGrid = ({ setActivePage }) => {
   };
 
   return (
-    <section className="w-full py-20 md:py-32 font-sans bg-slate-50 dark:bg-[#0a0a0a] transition-colors duration-300 border-t border-slate-200 dark:border-slate-800">
+    <section className="w-full py-20 md:py-32 font-sans bg-slate-50 dark:bg-zinc-950 transition-colors duration-300 border-t border-slate-200 dark:border-zinc-800">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         
         {/* SECTION HEADER */}
@@ -68,9 +68,18 @@ const ProductGrid = ({ setActivePage }) => {
           <span className="text-xs font-black text-orange-500 dark:text-orange-400 uppercase tracking-[0.2em] mb-4 block">
             Featured Exports
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-blue-950 dark:text-white tracking-tight leading-[1.1]">
-            Global <span className="text-slate-400 dark:text-slate-600">Commodities</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] mb-6">
+            <span className="text-blue-900 dark:text-zinc-400">Global </span>
+            <span className="text-orange-300 dark:text-orange-300">Commodities</span>
           </h2>
+          <div className="flex justify-center">
+            <button 
+              onClick={handleNavigateToProducts}
+              className="px-8 py-3.5 bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 hover:bg-orange-500 hover:text-white hover:border-orange-500 text-blue-950 dark:text-zinc-200 text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-sm cursor-pointer"
+            >
+              Explore Catalogue
+            </button>
+          </div>
         </div>
 
         {/* HOVER-EFFECT PRODUCT GRID */}

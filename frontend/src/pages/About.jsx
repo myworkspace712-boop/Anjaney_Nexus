@@ -4,43 +4,39 @@ const AboutPage = () => {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans transition-colors duration-300">
       
-      {/* 1. HERO SECTION (Single Image - Direct Origin Farm Procurement) */}
+      {/* 1. HERO SECTION (Single Image - Direct Farm Procurement) */}
       <div className="relative w-full min-h-[500px] lg:min-h-[560px] flex items-center font-sans overflow-hidden bg-slate-950">
-        {/* The Direct Origin Farm Procurement Image */}
+        {/* The Direct Farm Procurement Image */}
         <div className="absolute inset-0">
           <img 
             src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=2000&auto=format&fit=crop" 
-            alt="Direct Origin Farm Procurement - Agricultural Harvesting" 
+            alt="Direct Farm Procurement - Agricultural Harvesting" 
             className="w-full h-full object-cover object-center"
           />
         </div>
 
-        {/* Brand Dark Navy Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-950/95 via-blue-950/85 to-slate-950/75"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-black/30 pointer-events-none"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(#f97316_1px,transparent_1px)] [background-size:32px_32px] opacity-10 pointer-events-none"></div>
+        {/* Lighter Gradient Fade Overlays - Ensuring the image is clearly visible */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/65 via-slate-950/35 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-black/20 pointer-events-none"></div>
 
         {/* Hero Content */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 sm:py-20">
           <div className="max-w-3xl">
-            {/* Trust Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500 text-blue-950 font-black text-xs sm:text-sm uppercase tracking-widest rounded-sm mb-6 shadow-sm">
-              <span>★</span> DIRECT ORIGIN PROCUREMENT · SUSTAINABLE AGRICULTURE
+            {/* Main Headline */}
+            <div className="mb-6">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.1] mb-3 tracking-tight drop-shadow-md">
+                <span className="text-blue-900 drop-shadow-[0_1px_2px_rgba(255,255,255,0.4)]">Direct Farm Procurement.</span><br />
+                <span className="text-white">Connecting India's Harvest to the World.</span>
+              </h1>
+
+              {/* Subheading / Tagline */}
+              <p className="text-lg sm:text-xl text-white font-medium max-w-2xl drop-shadow-sm">
+                Ensuring global standards in every shipment.
+              </p>
             </div>
 
-            {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-3 tracking-tight">
-              Direct Origin Farm Procurement.<br />
-              <span className="text-orange-500">Connecting India's Harvest to the World.</span>
-            </h1>
-
-            {/* Subheading / Tagline */}
-            <p className="text-lg sm:text-xl text-orange-400 font-serif italic mb-4 max-w-2xl">
-              Direct partnerships with certified growers across India's premier fertile agricultural belts.
-            </p>
-
             {/* Description */}
-            <p className="text-slate-300 max-w-2xl text-sm sm:text-base leading-relaxed font-medium">
+            <p className="text-white/90 max-w-2xl text-sm sm:text-base leading-relaxed font-medium drop-shadow-sm">
               Backed by over 15 years of trade integrity, strict laboratory testing standards, and transparent supply chain execution from farm to containerized sea freight.
             </p>
           </div>
@@ -59,9 +55,13 @@ const AboutPage = () => {
               A Trusted Partner in Global Trade
             </h2>
             
-            {/* About Us Paragraph */}
+            {/* About Us Paragraphs */}
             <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
-              With over 15 years of experience in the import and export industry, we have established ourselves as a trusted partner in the global fertilizer trade. Our expertise lies in sourcing and supplying high-quality agricultural fertilizers, including Sulphur, DAP (Di-Ammonium Phosphate), and Urea, to customers across domestic and international markets. Our commitment to quality, reliability, and timely delivery has enabled us to build long-term relationships with suppliers, distributors, and customers worldwide. Backed by industry knowledge, a strong global network, and a customer-focused approach, we continue to expand our reach and deliver value to the agricultural sector.
+              With over 15 years of experience in the import and export industry, we have established ourselves as a trusted partner in the global fertilizer trade. Our expertise lies in sourcing and supplying high-quality agricultural fertilizers, including Sulphur, DAP (Di-Ammonium Phosphate), and Urea, to customers across domestic and international markets.
+            </p>
+
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
+              Our commitment to quality, reliability, and timely delivery has enabled us to build long-term relationships with suppliers, distributors, and customers worldwide. Backed by industry knowledge, a strong global network, and a customer-focused approach, we continue to expand our reach and deliver value to the agricultural sector.
             </p>
 
             {/* Our Mission Paragraph */}
@@ -80,27 +80,38 @@ const AboutPage = () => {
               </p>
             </div>
 
-            {/* Core Competencies Bullet Points */}
-            <ul className="space-y-4 mt-2">
-              <li className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-orange-50 dark:bg-orange-950/40 flex items-center justify-center border border-orange-100 dark:border-orange-900/50 shrink-0">
-                  <span className="text-orange-500 text-sm font-bold">✓</span>
+            {/* Core Competencies Cards (Hover Lift Effect) */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 pt-4">
+              {/* Card 1 */}
+              <div className="group p-5 sm:p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:border-orange-500/80 dark:hover:border-orange-500/80 transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between cursor-pointer">
+                <div className="w-10 h-10 rounded-xl bg-orange-50 dark:bg-orange-950/40 border border-orange-200/60 dark:border-orange-900/60 flex items-center justify-center text-orange-500 group-hover:bg-orange-500 group-hover:text-white group-hover:scale-110 transition-all duration-300 shrink-0 mb-4 shadow-xs">
+                  <span className="text-base font-black">✓</span>
                 </div>
-                <span className="text-sm font-bold text-blue-950 dark:text-slate-200">15+ Years Industry Experience</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-orange-50 dark:bg-orange-950/40 flex items-center justify-center border border-orange-100 dark:border-orange-900/50 shrink-0">
-                  <span className="text-orange-500 text-sm font-bold">✓</span>
+                <h4 className="text-base font-black text-blue-950 dark:text-white tracking-tight leading-snug group-hover:text-orange-500 dark:group-hover:text-orange-400 transition-colors">
+                  15+ Years Industry Experience
+                </h4>
+              </div>
+
+              {/* Card 2 */}
+              <div className="group p-5 sm:p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:border-orange-500/80 dark:hover:border-orange-500/80 transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between cursor-pointer">
+                <div className="w-10 h-10 rounded-xl bg-orange-50 dark:bg-orange-950/40 border border-orange-200/60 dark:border-orange-900/60 flex items-center justify-center text-orange-500 group-hover:bg-orange-500 group-hover:text-white group-hover:scale-110 transition-all duration-300 shrink-0 mb-4 shadow-xs">
+                  <span className="text-base font-black">✓</span>
                 </div>
-                <span className="text-sm font-bold text-blue-950 dark:text-slate-200">Commitment to Sustainable Practices</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-orange-50 dark:bg-orange-950/40 flex items-center justify-center border border-orange-100 dark:border-orange-900/50 shrink-0">
-                  <span className="text-orange-500 text-sm font-bold">✓</span>
+                <h4 className="text-base font-black text-blue-950 dark:text-white tracking-tight leading-snug group-hover:text-orange-500 dark:group-hover:text-orange-400 transition-colors">
+                  Commitment to Sustainable Practices
+                </h4>
+              </div>
+
+              {/* Card 3 */}
+              <div className="group p-5 sm:p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:border-orange-500/80 dark:hover:border-orange-500/80 transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between cursor-pointer">
+                <div className="w-10 h-10 rounded-xl bg-orange-50 dark:bg-orange-950/40 border border-orange-200/60 dark:border-orange-900/60 flex items-center justify-center text-orange-500 group-hover:bg-orange-500 group-hover:text-white group-hover:scale-110 transition-all duration-300 shrink-0 mb-4 shadow-xs">
+                  <span className="text-base font-black">✓</span>
                 </div>
-                <span className="text-sm font-bold text-blue-950 dark:text-slate-200">Global Network & Reliable Logistics</span>
-              </li>
-            </ul>
+                <h4 className="text-base font-black text-blue-950 dark:text-white tracking-tight leading-snug group-hover:text-orange-500 dark:group-hover:text-orange-400 transition-colors">
+                  Global Network & Reliable Logistics
+                </h4>
+              </div>
+            </div>
 
           </div>
         </div>

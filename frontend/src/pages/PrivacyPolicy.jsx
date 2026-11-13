@@ -151,7 +151,7 @@ const PrivacyPolicy = () => {
               5. Data Security
             </h2>
             <p>
-              We value the trust you place in providing your corporate information. Our platform uses standard encryption protocols for data transmission. Access to the Admin Dashboard and client directories is strictly restricted and monitored. However, no method of transmission over the internet or electronic storage is 100% secure.
+              We value the trust you place in providing your corporate information. Our platform uses standard encryption protocols for data transmission. Access to trade information and client records is strictly restricted and monitored. However, no method of transmission over the internet or electronic storage is 100% secure.
             </p>
           </section>
 
@@ -175,9 +175,9 @@ const PrivacyPolicy = () => {
               <p className="font-bold text-blue-950 dark:text-white">Anjaney Nexus India LLP</p>
               <p>Ahmedabad, Gujarat, India</p>
               <p className="pt-2">
-                <span className="text-slate-400 dark:text-slate-500 mr-2">Email:</span> 
-                <a href="mailto:privacy@anjaneynexus.com" className="text-orange-500 hover:text-orange-600 dark:text-orange-400 dark:hover:text-orange-300 font-bold transition-colors">
-                  privacy@anjaneynexus.com
+                <span className="text-slate-400 dark:text-slate-500 mr-2">Phone:</span> 
+                <a href="tel:+919824056061" className="text-orange-500 hover:text-orange-600 dark:text-orange-400 dark:hover:text-orange-300 font-bold transition-colors">
+                  +91 98240 56061
                 </a>
               </p>
             </address>
