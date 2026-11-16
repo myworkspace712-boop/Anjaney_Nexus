@@ -1887,16 +1887,16 @@ const ProductsPage = ({ setActivePage }) => {
 
   return (
     <div className={`min-h-screen font-sans transition-colors duration-500 relative overflow-hidden ${
-      isDark ? 'bg-[#0c192c] text-slate-100' : 'bg-[#f8fafc] text-[#0b1d3a]'
+      isDark ? 'bg-[#020611] text-slate-100' : 'bg-[#f8fafc] text-[#0b1d3a]'
     }`}>
       
       {/* AMBIENT DYNAMIC GLOWS (Strictly non-black in dark mode, branded in light mode) */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full pointer-events-none blur-3xl opacity-20 -z-0 transition-opacity duration-700 bg-orange-500/20"></div>
+      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full pointer-events-none blur-3xl opacity-20 -z-0 transition-opacity duration-700 bg-orange-400/20"></div>
       <div className={`absolute top-[450px] right-10 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 ${
-        isDark ? 'bg-[#1e3a8a]/25' : 'bg-blue-600/10'
+        isDark ? 'bg-[#132649]/35' : 'bg-blue-600/10'
       }`}></div>
       <div className={`absolute top-[1200px] left-10 w-[450px] h-[450px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 ${
-        isDark ? 'bg-[#152e54]/30' : 'bg-orange-500/10'
+        isDark ? 'bg-[#0d203e]/30' : 'bg-orange-500/10'
       }`}></div>
 
       {/* =========================================================================
@@ -1919,28 +1919,28 @@ const ProductsPage = ({ setActivePage }) => {
 
         {/* Dynamic Theme Gradient Overlays:
             - Light mode: Deep Anjaney Logo Navy (#0b1d3a) gradient for maximum contrast and prestige
-            - Dark mode: Deep Maritime Ocean Blue (#0c192c to #122744), strictly non-black */}
+            - Dark mode: Deep Maritime Ocean Blue (#020611 to #071326), strictly non-black */}
         <div className={`absolute inset-0 transition-colors duration-500 ${
           isDark 
-            ? 'bg-gradient-to-r from-[#0c192c]/95 via-[#0c192c]/85 to-[#122744]/65'
+            ? 'bg-gradient-to-r from-[#020611]/95 via-[#020611]/85 to-[#071326]/65'
             : 'bg-gradient-to-r from-[#0b1d3a]/95 via-[#0b1d3a]/80 to-[#0b1d3a]/45'
         }`}></div>
         
         <div className={`absolute inset-0 pointer-events-none transition-colors duration-500 ${
           isDark
-            ? 'bg-gradient-to-b from-[#0c192c]/75 via-transparent to-[#0c192c]'
+            ? 'bg-gradient-to-b from-[#020611]/75 via-transparent to-[#020611]'
             : 'bg-gradient-to-b from-[#0b1d3a]/75 via-transparent to-[#f8fafc]'
         }`}></div>
 
         {/* Subtle dynamic grid pattern for high-tech maritime feel */}
-        <div className="absolute inset-0 bg-[radial-gradient(#f97316_1px,transparent_1px)] [background-size:36px_36px] opacity-15 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(#fb923c_1px,transparent_1px)] [background-size:36px_36px] opacity-15 pointer-events-none"></div>
 
         {/* Hero Content */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-20 sm:py-24">
           <div className="max-w-3xl">
             {/* Main Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.1] mb-5 tracking-tight drop-shadow-lg text-white">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-500 to-amber-400">India's</span>{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-orange-400 to-amber-300">India's</span>{' '}
               <span className="text-white">Global Pantry</span>
             </h1>
 
@@ -1962,18 +1962,18 @@ const ProductsPage = ({ setActivePage }) => {
               key={idx}
               className={`p-6 rounded-2xl border transition-all duration-300 transform hover:-translate-y-1 ${
                 isDark 
-                  ? 'bg-[#12243d] border-[#1f3c64] hover:border-orange-500/50 shadow-[0_12px_30px_rgba(4,12,24,0.4)]' 
+                  ? 'bg-[#071326] border-[#132649] hover:border-orange-400/60 shadow-[0_12px_30px_rgba(4,12,24,0.4)]' 
                   : 'bg-white border-slate-200/90 hover:border-orange-500/40 shadow-[0_12px_30px_rgba(11,29,58,0.06)]'
               }`}
             >
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-500/10 text-orange-500">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={stat.icon} />
                   </svg>
                 </div>
               </div>
-              <div className="text-2xl sm:text-3xl font-black text-orange-500 tracking-tight mb-1">
+              <div className="text-2xl sm:text-3xl font-black text-orange-500 dark:text-orange-400 tracking-tight mb-1">
                 {stat.value}
               </div>
               <div className={`text-sm font-bold mb-1 ${isDark ? 'text-white' : 'text-[#0b1d3a]'}`}>
@@ -1993,12 +1993,12 @@ const ProductsPage = ({ setActivePage }) => {
       <div id="catalog-products-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-24 relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-slate-200 dark:border-[#1f3c64]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-slate-200 dark:border-[#132649]">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-orange-500 bg-orange-500/10 border border-orange-500/20 mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-orange-500 dark:text-orange-400 bg-orange-500/10 dark:bg-orange-400/15 border border-orange-500/20 dark:border-orange-400/30 mb-3">
               <span>B2B Commercial Export Catalog</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-blue-800 dark:text-blue-400">
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-blue-800 dark:text-sky-400">
               OUR PRODUCTS
             </h2>
             <p className={`text-sm font-medium mt-1 ${
@@ -2019,17 +2019,17 @@ const ProductsPage = ({ setActivePage }) => {
               onChange={(e) => setSearchQuery(e.target.value)}
               className={`w-full py-3.5 pl-11 pr-10 text-sm font-medium rounded-xl border transition-all outline-none ${
                 isDark
-                  ? 'bg-[#10243e] border-[#23426e] text-white placeholder-slate-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/30'
+                  ? 'bg-[#071326] border-[#132649] text-white placeholder-slate-400 focus:border-orange-400 focus:ring-2 focus:ring-orange-400/30'
                   : 'bg-white border-slate-300 text-[#0b1d3a] placeholder-slate-400 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 shadow-xs'
               }`}
             />
-            <svg className="w-5 h-5 text-orange-500 absolute left-3.5 top-3.5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-orange-500 dark:text-orange-400 absolute left-3.5 top-3.5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             {searchQuery && (
               <button 
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3.5 top-3.5 text-slate-400 hover:text-orange-500 text-sm font-bold cursor-pointer"
+                className="absolute right-3.5 top-3.5 text-slate-400 hover:text-orange-500 dark:hover:text-orange-400 text-sm font-bold cursor-pointer"
                 title="Clear search"
               >
                 ×
@@ -2038,7 +2038,7 @@ const ProductsPage = ({ setActivePage }) => {
           </div>
 
           <div className={`text-xs font-semibold ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-            Showing <span className="font-bold text-orange-500">{filteredProducts.length}</span> of {EXPORT_CATALOG.length} commodities
+            Showing <span className="font-bold text-orange-500 dark:text-orange-400">{filteredProducts.length}</span> of {EXPORT_CATALOG.length} commodities
           </div>
         </div>
 
@@ -2053,10 +2053,10 @@ const ProductsPage = ({ setActivePage }) => {
                 className={`whitespace-nowrap px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-200 cursor-pointer ${
                   isSelected
                     ? isDark 
-                      ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/30 scale-105 border-transparent'
+                      ? 'bg-gradient-to-r from-orange-400 to-amber-500 text-white shadow-lg shadow-orange-500/30 scale-105 border-transparent'
                       : 'bg-[#0b1d3a] text-white shadow-lg shadow-blue-950/20 scale-105 border-transparent'
                     : isDark
-                      ? 'bg-[#12243d] text-slate-300 hover:text-white border border-[#1f3c64] hover:border-orange-500/50'
+                      ? 'bg-[#071326] text-slate-300 hover:text-white border border-[#132649] hover:border-orange-400/60'
                       : 'bg-white text-slate-600 hover:text-[#0b1d3a] border border-slate-200/90 hover:border-orange-400 shadow-xs'
                 }`}
               >
@@ -2069,9 +2069,9 @@ const ProductsPage = ({ setActivePage }) => {
         {/* Product Cards Grid */}
         {filteredProducts.length === 0 ? (
           <div className={`text-center py-20 rounded-3xl border border-dashed p-8 ${
-            isDark ? 'bg-[#10243e] border-[#1f3c64]' : 'bg-white border-slate-300'
+            isDark ? 'bg-[#071326] border-[#132649]' : 'bg-white border-slate-300'
           }`}>
-            <div className="w-16 h-16 rounded-2xl bg-orange-500/10 text-orange-500 flex items-center justify-center mx-auto mb-4 text-2xl font-black">
+            <div className="w-16 h-16 rounded-2xl bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400 flex items-center justify-center mx-auto mb-4 text-2xl font-black">
               🔍
             </div>
             <p className={`text-base font-bold ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
@@ -2079,7 +2079,7 @@ const ProductsPage = ({ setActivePage }) => {
             </p>
             <button
               onClick={() => { setSearchQuery(''); setActiveCategory('All Commodities'); }}
-              className="mt-4 px-6 py-2.5 bg-orange-500 hover:bg-orange-600 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md shadow-orange-500/25 cursor-pointer"
+              className="mt-4 px-6 py-2.5 bg-orange-500 hover:bg-orange-600 dark:bg-orange-400 dark:hover:bg-orange-500 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md shadow-orange-500/25 cursor-pointer"
             >
               Reset Filters
             </button>
@@ -2099,14 +2099,14 @@ const ProductsPage = ({ setActivePage }) => {
                 key={product.id} 
                 className={`border rounded-3xl overflow-hidden transition-all duration-300 flex flex-col group hover:-translate-y-1.5 ${
                   isDark 
-                    ? 'bg-[#12243d] border-[#1f3c64] shadow-[0_12px_30px_rgba(4,12,24,0.4)] hover:shadow-[0_20px_45px_rgba(4,12,24,0.7)] hover:border-orange-500/70' 
+                    ? 'bg-[#071326] border-[#132649] shadow-[0_12px_30px_rgba(4,12,24,0.4)] hover:shadow-[0_20px_45px_rgba(4,12,24,0.7)] hover:border-orange-400/80' 
                     : 'bg-white border-slate-200/90 shadow-[0_10px_30px_rgba(11,29,58,0.05)] hover:shadow-[0_20px_45px_rgba(11,29,58,0.12)] hover:border-orange-500/60'
                 }`}
               >
                 
                 {/* Product Image Container */}
                 <div className={`h-60 w-full overflow-hidden relative ${
-                  isDark ? 'bg-[#0c192c]' : 'bg-slate-100'
+                  isDark ? 'bg-[#020611]' : 'bg-slate-100'
                 }`}>
                   <img 
                     src={cardImage} 
@@ -2133,7 +2133,7 @@ const ProductsPage = ({ setActivePage }) => {
                       }`}>
                         <span>{product.name}</span>
                         {product.subtitle && (
-                          <span className="text-sm sm:text-base font-bold text-orange-500">
+                          <span className="text-sm sm:text-base font-bold text-orange-500 dark:text-orange-400">
                             {product.subtitle}
                           </span>
                         )}
@@ -2158,9 +2158,9 @@ const ProductsPage = ({ setActivePage }) => {
                           }}
                           className={`w-full flex items-center justify-between px-4 py-3.5 rounded-xl border text-xs font-black transition-all cursor-pointer shadow-xs ${
                             openDropdownId === product.id
-                              ? 'bg-orange-50 dark:bg-orange-950/40 border-orange-500 text-orange-600 dark:text-orange-400 ring-2 ring-orange-500/20'
+                              ? 'bg-orange-50 dark:bg-orange-400/15 border-orange-500 dark:border-orange-400 text-orange-600 dark:text-orange-400 ring-2 ring-orange-500/20 dark:ring-orange-400/30'
                               : isDark
-                                ? 'bg-[#0c192c] border-[#23426e] text-white hover:border-orange-500/70'
+                                ? 'bg-[#020611] border-[#132649] text-white hover:border-orange-400/80'
                                 : 'bg-[#fafafa] border-slate-300 text-[#0b1d3a] hover:border-orange-500'
                           }`}
                         >
@@ -2169,10 +2169,10 @@ const ProductsPage = ({ setActivePage }) => {
                               <img 
                                 src={selectedVarObj.image} 
                                 alt={selectedVarObj.name} 
-                                className="w-5 h-5 rounded-md object-cover border border-slate-200 dark:border-slate-700 shrink-0 shadow-2xs" 
+                                className="w-5 h-5 rounded-md object-cover border border-slate-200 dark:border-[#132649] shrink-0 shadow-2xs" 
                               />
                             ) : (
-                              <span className={`w-2 h-2 rounded-full shrink-0 ${openDropdownId === product.id ? 'bg-orange-500 animate-ping' : 'bg-orange-500'}`}></span>
+                              <span className={`w-2 h-2 rounded-full shrink-0 ${openDropdownId === product.id ? 'bg-orange-500 dark:bg-orange-400 animate-ping' : 'bg-orange-500 dark:bg-orange-400'}`}></span>
                             )}
                             <span className="truncate">
                               {selectedVarieties[product.id] || product.dropdownPlaceholder || 'Select Variety / Grade'}
@@ -2180,7 +2180,7 @@ const ProductsPage = ({ setActivePage }) => {
                           </span>
                           <svg 
                             className={`w-4 h-4 shrink-0 transition-transform duration-300 ${
-                              openDropdownId === product.id ? 'rotate-180 text-orange-500' : 'text-slate-400'
+                              openDropdownId === product.id ? 'rotate-180 text-orange-500 dark:text-orange-400' : 'text-slate-400'
                             }`}
                             fill="none" 
                             stroke="currentColor" 
@@ -2196,7 +2196,7 @@ const ProductsPage = ({ setActivePage }) => {
                         }`}>
                           <div className={`p-2.5 border rounded-xl space-y-1.5 shadow-xl max-h-72 overflow-y-auto ${
                             isDark 
-                              ? 'bg-[#0c192c] border-[#1f3c64]' 
+                              ? 'bg-[#020611] border-[#132649]' 
                               : 'bg-white border-slate-200'
                           }`}>
                             {product.varieties.map((v, vIdx) => {
@@ -2214,9 +2214,11 @@ const ProductsPage = ({ setActivePage }) => {
                                   }}
                                   className={`w-full flex items-center justify-between p-2.5 rounded-lg border text-xs font-bold transition-all text-left cursor-pointer ${
                                     isSelected 
-                                      ? 'bg-orange-500 text-white border-orange-500 shadow-sm' 
+                                      ? isDark
+                                        ? 'bg-gradient-to-r from-orange-400 to-amber-500 text-white border-transparent shadow-sm'
+                                        : 'bg-orange-500 text-white border-orange-500 shadow-sm' 
                                       : isDark
-                                        ? 'bg-[#12243d] border-[#1f3c64] text-slate-200 hover:border-orange-500/60 hover:bg-[#162c4b]'
+                                        ? 'bg-[#071326] border-[#132649] text-slate-200 hover:border-orange-400/60 hover:bg-[#0d203e]'
                                         : 'bg-slate-50 border-slate-200/80 text-slate-800 hover:border-orange-500/60 hover:bg-orange-50/50'
                                   }`}
                                 >
@@ -2225,7 +2227,7 @@ const ProductsPage = ({ setActivePage }) => {
                                       <img 
                                         src={varImg} 
                                         alt={varName} 
-                                        className="w-8 h-8 rounded-lg object-cover border border-slate-200 dark:border-slate-700 shrink-0 shadow-xs" 
+                                        className="w-8 h-8 rounded-lg object-cover border border-slate-200 dark:border-[#132649] shrink-0 shadow-xs" 
                                         onError={(e) => { e.currentTarget.style.display = 'none'; }}
                                       />
                                     )}
@@ -2243,11 +2245,11 @@ const ProductsPage = ({ setActivePage }) => {
                     {product.varieties && product.varieties.length === 1 && (
                       <div className={`w-full flex items-center justify-between px-4 py-3.5 rounded-xl border text-xs font-black shadow-xs ${
                         isDark 
-                          ? 'border-[#23426e] bg-[#0c192c] text-white' 
+                          ? 'border-[#132649] bg-[#020611] text-white' 
                           : 'border-slate-300 bg-[#fafafa] text-[#0b1d3a]'
                       }`}>
                         <span className="flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-orange-500"></span>
+                          <span className="w-2 h-2 rounded-full bg-orange-500 dark:bg-orange-400"></span>
                           <span className="truncate">
                             {typeof product.varieties[0] === 'string' ? product.varieties[0] : product.varieties[0]?.name}
                           </span>
@@ -2260,7 +2262,7 @@ const ProductsPage = ({ setActivePage }) => {
                   <div className="pt-2">
                     <button 
                       onClick={() => handleGetQuote(product)}
-                      className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-xs font-black uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-md shadow-orange-500/25 hover:shadow-orange-500/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center block"
+                      className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 dark:from-orange-400 dark:to-amber-500 dark:hover:from-orange-400 dark:hover:to-amber-400 text-white text-xs font-black uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-md shadow-orange-500/25 hover:shadow-orange-500/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center block"
                     >
                       Get Official Quote
                     </button>
@@ -2280,34 +2282,34 @@ const ProductsPage = ({ setActivePage }) => {
         const profile = PRODUCT_PROFILE_DETAILS[selectedProduct.id] || PRODUCT_PROFILE_DETAILS[baseKey] || {};
         return (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 md:p-6 bg-[#0c192c]/85 backdrop-blur-md animate-fadeIn overflow-y-auto"
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 md:p-6 bg-[#020611]/90 backdrop-blur-md animate-fadeIn overflow-y-auto"
             onClick={() => setSelectedProduct(null)}
           >
             <div
               className={`relative w-full max-w-4xl my-auto rounded-3xl border shadow-2xl overflow-hidden transition-all duration-300 max-h-[92vh] flex flex-col ${
                 isDark
-                  ? 'bg-[#10243e] border-[#1f3c64] text-slate-100 shadow-[0_25px_70px_rgba(4,12,24,0.8)]'
+                  ? 'bg-[#071326] border-[#132649] text-slate-100 shadow-[0_25px_70px_rgba(4,12,24,0.8)]'
                   : 'bg-white border-slate-200 text-[#0b1d3a] shadow-2xl'
               }`}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal Header */}
               <div className={`p-5 sm:p-6 border-b flex items-start justify-between gap-4 sticky top-0 z-20 backdrop-blur-md ${
-                isDark ? 'bg-[#152e4f]/95 border-[#1f3c64]' : 'bg-white/95 border-slate-200'
+                isDark ? 'bg-[#071326]/95 border-[#132649]' : 'bg-white/95 border-slate-200'
               }`}>
                 <div className="space-y-1">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-orange-500 text-white">
+                    <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-orange-500 dark:bg-orange-400 text-white">
                       {profile.categoryHeader || selectedProduct.badgeCategory || selectedProduct.category}
                     </span>
                     <span className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-md border ${
-                      isDark ? 'bg-[#0c192c] text-slate-300 border-[#1f3c64]' : 'bg-slate-100 text-slate-700 border-slate-200'
+                      isDark ? 'bg-[#020611] text-slate-300 border-[#132649]' : 'bg-slate-100 text-slate-700 border-slate-200'
                     }`}>
                       Official Export Documentation
                     </span>
                     {selectedProduct.hsCode && (
                       <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-md ${
-                        isDark ? 'bg-[#0c192c] text-orange-400' : 'bg-slate-100 text-orange-600'
+                        isDark ? 'bg-[#020611] text-orange-400' : 'bg-slate-100 text-orange-600'
                       }`}>
                         HS: {selectedProduct.hsCode}
                       </span>
@@ -2324,7 +2326,7 @@ const ProductsPage = ({ setActivePage }) => {
                     {selectedProduct.title || selectedProduct.name}
                   </h2>
                   {profile.subHeader && (
-                    <p className="text-xs sm:text-sm font-semibold text-orange-500">
+                    <p className="text-xs sm:text-sm font-semibold text-orange-500 dark:text-orange-400">
                       {profile.subHeader}
                     </p>
                   )}
@@ -2334,7 +2336,7 @@ const ProductsPage = ({ setActivePage }) => {
                   <button
                     onClick={() => setSelectedProduct(null)}
                     className={`p-2 rounded-xl transition-colors cursor-pointer shrink-0 ${
-                      isDark ? 'bg-[#0c192c] hover:bg-[#1a355f] text-slate-300' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                      isDark ? 'bg-[#020611] hover:bg-[#0d203e] text-slate-300' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
                     }`}
                     aria-label="Close details"
                   >
@@ -2350,10 +2352,10 @@ const ProductsPage = ({ setActivePage }) => {
                 
                 {/* Product Overview Top Box */}
                 <div className={`p-4 sm:p-6 rounded-2xl border flex flex-col sm:flex-row items-center gap-6 ${
-                  isDark ? 'bg-[#0c192c] border-[#1f3c64]' : 'bg-orange-50/30 border-orange-100'
+                  isDark ? 'bg-[#020611] border-[#132649]' : 'bg-orange-50/30 border-orange-100'
                 }`}>
                   <div className={`w-36 h-36 sm:w-44 sm:h-44 rounded-2xl p-2 flex items-center justify-center shrink-0 border overflow-hidden ${
-                    isDark ? 'bg-[#10243e] border-[#1f3c64]' : 'bg-white border-slate-200 shadow-sm'
+                    isDark ? 'bg-[#071326] border-[#132649]' : 'bg-white border-slate-200 shadow-sm'
                   }`}>
                     <img
                       src={selectedProduct.image}
@@ -2367,7 +2369,7 @@ const ProductsPage = ({ setActivePage }) => {
                     />
                   </div>
                   <div className="space-y-3 flex-1 text-center sm:text-left">
-                    <div className="text-xs font-bold uppercase tracking-wider text-orange-500">
+                    <div className="text-xs font-bold uppercase tracking-wider text-orange-500 dark:text-orange-400">
                       Product Overview &amp; Specifications (Official Profile)
                     </div>
                     <p className={`text-sm sm:text-base leading-relaxed font-medium whitespace-pre-line ${
@@ -2389,7 +2391,7 @@ const ProductsPage = ({ setActivePage }) => {
                     <h4 className={`text-xs sm:text-sm font-black uppercase tracking-wider flex items-center gap-2 ${
                       isDark ? 'text-white' : 'text-[#0b1d3a]'
                     }`}>
-                      <span className="w-2 h-2 rounded-full bg-orange-500" />
+                      <span className="w-2 h-2 rounded-full bg-orange-500 dark:bg-orange-400" />
                       Grading &amp; Classifications
                     </h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -2397,11 +2399,11 @@ const ProductsPage = ({ setActivePage }) => {
                         <div
                           key={idx}
                           className={`p-4 rounded-xl border flex flex-col justify-between ${
-                            isDark ? 'bg-[#0c192c] border-[#1f3c64]' : 'bg-slate-50 border-slate-200'
+                            isDark ? 'bg-[#020611] border-[#132649]' : 'bg-slate-50 border-slate-200'
                           }`}
                         >
                           <div>
-                            <span className="text-xs font-bold text-orange-500 block mb-1">
+                            <span className="text-xs font-bold text-orange-500 dark:text-orange-400 block mb-1">
                               {g.grade}
                             </span>
                             <p className={`text-xs leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
@@ -2420,7 +2422,7 @@ const ProductsPage = ({ setActivePage }) => {
                     <h4 className={`text-xs sm:text-sm font-black uppercase tracking-wider flex items-center gap-2 ${
                       isDark ? 'text-white' : 'text-[#0b1d3a]'
                     }`}>
-                      <span className="w-2 h-2 rounded-full bg-orange-500" />
+                      <span className="w-2 h-2 rounded-full bg-orange-500 dark:bg-orange-400" />
                       {profile.breakdownTitle || 'Chemical Composition & Bioactives'}
                     </h4>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5">
@@ -2428,7 +2430,7 @@ const ProductsPage = ({ setActivePage }) => {
                         <div
                           key={idx}
                           className={`p-3 rounded-xl border text-center ${
-                            isDark ? 'bg-[#0c192c] border-[#1f3c64]' : 'bg-slate-50 border-slate-200'
+                            isDark ? 'bg-[#020611] border-[#132649]' : 'bg-slate-50 border-slate-200'
                           }`}
                         >
                           <div className="text-[11px] font-semibold text-slate-400 mb-0.5">
@@ -2449,7 +2451,7 @@ const ProductsPage = ({ setActivePage }) => {
                     <h4 className={`text-xs sm:text-sm font-black uppercase tracking-wider flex items-center gap-2 ${
                       isDark ? 'text-white' : 'text-[#0b1d3a]'
                     }`}>
-                      <span className="w-2 h-2 rounded-full bg-orange-500" />
+                      <span className="w-2 h-2 rounded-full bg-orange-500 dark:bg-orange-400" />
                       Key Highlights &amp; Compounds
                     </h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -2457,10 +2459,10 @@ const ProductsPage = ({ setActivePage }) => {
                         <div
                           key={idx}
                           className={`p-4 rounded-xl border ${
-                            isDark ? 'bg-[#0c192c] border-[#1f3c64]' : 'bg-slate-50 border-slate-200'
+                            isDark ? 'bg-[#020611] border-[#132649]' : 'bg-slate-50 border-slate-200'
                           }`}
                         >
-                          <h5 className="text-xs font-bold text-orange-500 mb-1">{h.title}</h5>
+                          <h5 className="text-xs font-bold text-orange-500 dark:text-orange-400 mb-1">{h.title}</h5>
                           <p className={`text-xs leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
                             {h.desc}
                           </p>
@@ -2476,11 +2478,11 @@ const ProductsPage = ({ setActivePage }) => {
                     <h4 className={`text-xs sm:text-sm font-black uppercase tracking-wider flex items-center gap-2 ${
                       isDark ? 'text-white' : 'text-[#0b1d3a]'
                     }`}>
-                      <span className="w-2 h-2 rounded-full bg-orange-500" />
+                      <span className="w-2 h-2 rounded-full bg-orange-500 dark:bg-orange-400" />
                       Technical &amp; Quality Parameters
                     </h4>
                     <div className={`rounded-2xl border overflow-hidden ${
-                      isDark ? 'border-[#1f3c64] bg-[#0c192c]' : 'border-slate-200 bg-white'
+                      isDark ? 'border-[#132649] bg-[#020611]' : 'border-slate-200 bg-white'
                     }`}>
                       <table className="w-full text-left text-xs border-collapse">
                         <tbody>
@@ -2489,10 +2491,10 @@ const ProductsPage = ({ setActivePage }) => {
                               <tr
                                 key={idx}
                                 className={`border-b last:border-0 ${
-                                  isDark ? 'border-[#1f3c64]/60 hover:bg-[#12243d]' : 'border-slate-100 hover:bg-slate-50/80'
+                                  isDark ? 'border-[#132649]/60 hover:bg-[#071326]' : 'border-slate-100 hover:bg-slate-50/80'
                                 }`}
                               >
-                                <td className="p-3 sm:p-3.5 font-bold text-orange-500 w-1/3">
+                                <td className="p-3 sm:p-3.5 font-bold text-orange-500 dark:text-orange-400 w-1/3">
                                   {spec.key}
                                 </td>
                                 <td className={`p-3 sm:p-3.5 font-medium ${isDark ? 'text-slate-200' : 'text-slate-800'}`}>
@@ -2505,10 +2507,10 @@ const ProductsPage = ({ setActivePage }) => {
                               <tr
                                 key={idx}
                                 className={`border-b last:border-0 ${
-                                  isDark ? 'border-[#1f3c64]/60 hover:bg-[#12243d]' : 'border-slate-100 hover:bg-slate-50/80'
+                                  isDark ? 'border-[#132649]/60 hover:bg-[#071326]' : 'border-slate-100 hover:bg-slate-50/80'
                                 }`}
                               >
-                                <td className="p-3 sm:p-3.5 font-bold text-orange-500 w-1/3">
+                                <td className="p-3 sm:p-3.5 font-bold text-orange-500 dark:text-orange-400 w-1/3">
                                   {spec.label}
                                 </td>
                                 <td className={`p-3 sm:p-3.5 font-medium ${isDark ? 'text-slate-200' : 'text-slate-800'}`}>
@@ -2525,10 +2527,10 @@ const ProductsPage = ({ setActivePage }) => {
 
                 {/* Company Footer Note */}
                 <div className={`p-4 rounded-xl border text-xs flex flex-col sm:flex-row items-center justify-between gap-3 ${
-                  isDark ? 'bg-[#0c192c] border-[#1f3c64] text-slate-400' : 'bg-slate-100 border-slate-200 text-slate-600'
+                  isDark ? 'bg-[#020611] border-[#132649] text-slate-400' : 'bg-slate-100 border-slate-200 text-slate-600'
                 }`}>
                   <div className="flex items-center gap-2">
-                    <span className="font-bold text-orange-500">Anjaney Nexus India LLP</span>
+                    <span className="font-bold text-orange-500 dark:text-orange-400">Anjaney Nexus India LLP</span>
                     <span>• Certified Export Documentation (APEDA, Spices Board, FSSAI)</span>
                   </div>
                   <div className="text-[11px] font-mono">
@@ -2540,7 +2542,7 @@ const ProductsPage = ({ setActivePage }) => {
 
               {/* Modal Action Footer */}
               <div className={`p-4 sm:p-5 border-t flex flex-col sm:flex-row items-center justify-between gap-3 sticky bottom-0 z-20 backdrop-blur-md ${
-                isDark ? 'bg-[#152e4f]/95 border-[#1f3c64]' : 'bg-white/95 border-slate-200'
+                isDark ? 'bg-[#071326]/95 border-[#132649]' : 'bg-white/95 border-slate-200'
               }`}>
                 <div className="text-xs text-slate-400 hidden sm:block">
                   Need private labelling, custom packaging, or SGS inspection?
@@ -2549,7 +2551,7 @@ const ProductsPage = ({ setActivePage }) => {
                   <button
                     onClick={() => setSelectedProduct(null)}
                     className={`flex-1 sm:flex-none px-5 py-2.5 rounded-xl text-xs font-bold transition-colors cursor-pointer border ${
-                      isDark ? 'border-[#1f3c64] bg-[#0c192c] text-slate-200 hover:bg-[#1a355f]' : 'border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200'
+                      isDark ? 'border-[#132649] bg-[#020611] text-slate-200 hover:bg-[#0d203e]' : 'border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200'
                     }`}
                   >
                     Close
@@ -2560,7 +2562,7 @@ const ProductsPage = ({ setActivePage }) => {
                       setSelectedProduct(null);
                       handleGetQuote(prod);
                     }}
-                    className="flex-1 sm:flex-none px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer shadow-md bg-orange-500 hover:bg-orange-600 text-white shadow-orange-500/25"
+                    className="flex-1 sm:flex-none px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer shadow-md bg-orange-500 hover:bg-orange-600 dark:bg-orange-400 dark:hover:bg-orange-500 text-white shadow-orange-500/25"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />

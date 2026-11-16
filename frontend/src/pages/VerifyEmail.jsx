@@ -103,15 +103,15 @@ const VerifyEmail = ({ token: propToken, setActivePage }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f8f9fc] font-sans px-4">
-      <div className="bg-white p-10 rounded-3xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] text-center max-w-md w-full border border-gray-100">
-        <div className="w-16 h-16 bg-[#172033] text-white rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-md">
+    <div className="min-h-screen flex items-center justify-center bg-[#f8f9fc] dark:bg-[#020611] font-sans px-4 transition-colors">
+      <div className="bg-white dark:bg-[#071326] p-10 rounded-3xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] text-center max-w-md w-full border border-gray-100 dark:border-[#132649]">
+        <div className="w-16 h-16 bg-[#172033] dark:bg-[#020611] border border-transparent dark:border-[#132649] text-white rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-md">
           ✉️
         </div>
-        <h2 className="text-2xl font-extrabold text-[#172033] mb-4 tracking-tight">
+        <h2 className="text-2xl font-extrabold text-[#172033] dark:text-white mb-4 tracking-tight">
           Email Verification
         </h2>
-        <p className="text-gray-500 font-medium leading-relaxed">
+        <p className="text-gray-500 dark:text-slate-400 font-medium leading-relaxed">
           {status}
         </p>
 
@@ -119,7 +119,7 @@ const VerifyEmail = ({ token: propToken, setActivePage }) => {
         {status.includes('successful') && (
           <button
             onClick={handleManualRedirect}
-            className="mt-8 w-full bg-[#172033] text-white font-bold py-3.5 rounded-xl hover:bg-gray-800 transition-colors uppercase tracking-widest text-xs cursor-pointer shadow-lg shadow-slate-900/10"
+            className="mt-8 w-full bg-[#172033] hover:bg-gray-800 dark:bg-orange-400 dark:hover:bg-orange-500 text-white font-bold py-3.5 rounded-xl transition-colors uppercase tracking-widest text-xs cursor-pointer shadow-lg shadow-slate-900/10"
           >
             Enter Site Now
           </button>
@@ -132,7 +132,7 @@ const VerifyEmail = ({ token: propToken, setActivePage }) => {
                 if (typeof setActivePage === 'function') setActivePage('home');
                 else navigate('/');
               }}
-              className="w-full bg-[#172033] text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider hover:bg-gray-800 transition-all cursor-pointer"
+              className="w-full bg-[#172033] hover:bg-gray-800 dark:bg-[#020611] dark:hover:bg-[#0d203e] border border-transparent dark:border-[#132649] text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition-all cursor-pointer"
             >
               Back to Homepage
             </button>

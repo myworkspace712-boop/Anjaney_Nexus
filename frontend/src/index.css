@@ -17,16 +17,16 @@
   }
 
   .dark {
-    /* Dark Mode: Deep Midnight / Slate */
-    --bg-primary: #020617;
-    --bg-surface: #0b1d3a;
-    --bg-elevated: #1e293b;
+    /* Dark Mode: Deep Midnight Sapphire Navy & Lighter Radiant Saffron Orange */
+    --bg-primary: #020611;
+    --bg-surface: #071326;
+    --bg-elevated: #0d203e;
     --text-primary: #f8fafc;
     --text-secondary: #94a3b8;
-    --brand-navy: #1e3a8a;
-    --brand-orange: #f97316;
-    --brand-orange-hover: #fb923c;
-    --border-color: #1e293b;
+    --brand-navy: #38bdf8;
+    --brand-orange: #fb923c;
+    --brand-orange-hover: #fdba74;
+    --border-color: #132649;
   }
 
   body {
@@ -43,6 +43,22 @@
   100% {
     transform: translateX(-50%);
   }
+}
+
+@keyframes nav-underline-in {
+  0% {
+    transform: scaleX(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+.animate-nav-underline {
+  transform-origin: left;
+  animation: nav-underline-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Remove number input spin arrows */

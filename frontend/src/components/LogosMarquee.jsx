@@ -39,7 +39,7 @@ const LogosMarquee = () => {
   const loopedLogos = [...logos, ...logos, ...logos, ...logos, ...logos, ...logos];
 
   return (
-    <section className="w-full bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800 py-8 overflow-hidden relative transition-colors duration-300">
+    <section className="w-full bg-white dark:bg-[#020611] border-y border-slate-200 dark:border-[#132649] py-8 overflow-hidden relative transition-colors duration-300">
       {/* Marquee Animation Keyframes */}
       <style dangerouslySetInnerHTML={{
         __html: `
@@ -75,8 +75,8 @@ const LogosMarquee = () => {
 
       {/* Edge Gradient Mask for Smooth Fade In/Out */}
       <div className="relative w-full overflow-hidden py-1">
-        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-white dark:from-slate-900 to-transparent z-10 pointer-events-none"></div>
-        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-white dark:from-slate-900 to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-white dark:from-[#020611] to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-white dark:from-[#020611] to-transparent z-10 pointer-events-none"></div>
 
         {/* The Moving Slider track (slides towards the left side) */}
         <div className="logos-slider-track gap-10 sm:gap-14 items-center px-4 py-2">
@@ -84,15 +84,30 @@ const LogosMarquee = () => {
             <div
               key={index}
               title={`${item.name} - ${item.fullName}`}
-              className="relative flex-shrink-0 flex items-center justify-center h-20 sm:h-24 w-auto min-w-[140px] px-5 py-2.5 bg-white dark:bg-slate-800/90 rounded-xl border border-slate-200/90 dark:border-slate-700/80 shadow-xs hover:shadow-md transition-all group"
+              className="relative flex-shrink-0 flex items-center justify-center h-20 sm:h-24 w-auto min-w-[140px] px-5 py-2.5 bg-white dark:bg-[#071326] rounded-xl border border-slate-200/90 dark:border-[#132649] shadow-xs hover:shadow-md transition-all group"
             >
-              {/* Smaller Tick Mark fitted cleanly inside the certificate box */}
+              {/* Flower-like Circle Badge */}
               <div 
-                className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 w-4 h-4 rounded-full bg-green-50 dark:bg-emerald-950 border border-green-200 dark:border-emerald-600 flex items-center justify-center shadow-xs z-10"
+                className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 w-5.5 h-5.5 flex items-center justify-center z-10 transition-transform duration-300 group-hover:scale-110"
                 title="Verified Regulatory Body"
               >
-                <svg className="w-2.5 h-2.5 text-green-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                <svg 
+                  className="w-full h-full drop-shadow-xs" 
+                  viewBox="0 0 24 24" 
+                  fill="none"
+                >
+                  <path 
+                    d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" 
+                    className="fill-green-500/15 dark:fill-green-400/20 stroke-green-500 dark:stroke-green-400" 
+                    strokeWidth="1.25"
+                  />
+                  <path 
+                    d="m9 12 2 2 4-4" 
+                    className="stroke-green-600 dark:stroke-green-400" 
+                    strokeWidth="2.5" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                  />
                 </svg>
               </div>
 

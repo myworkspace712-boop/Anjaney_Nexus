@@ -5,7 +5,7 @@ const ProfileIcon = ({ isLoggedIn = false, isDarkMode = true }) => {
     <div
       className={`relative flex items-center justify-center w-9 h-9 rounded-full border transition-colors ${
         isDarkMode
-          ? 'bg-blue-900/90 border-blue-700 text-orange-400 group-hover:border-orange-500'
+          ? 'bg-[#071326] border-[#132649] text-orange-400 group-hover:border-orange-400'
           : 'bg-blue-50 border-blue-200 text-blue-950 group-hover:border-orange-500'
       }`}
     >
@@ -27,7 +27,7 @@ const ProfileIcon = ({ isLoggedIn = false, isDarkMode = true }) => {
       {/* Online / Signed-In Status Dot */}
       <span
         className={`absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full border-2 ${
-          isDarkMode ? 'border-blue-950' : 'border-white'
+          isDarkMode ? 'border-[#020611]' : 'border-white'
         } ${isLoggedIn ? 'bg-green-500' : 'bg-slate-400'}`}
       />
     </div>

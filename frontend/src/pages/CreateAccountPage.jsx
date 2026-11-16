@@ -268,11 +268,11 @@ const CreateAccountPage = ({ setActivePage, setCurrentUser }) => {
   };
 
   return (
-    <div className="min-h-[80vh] bg-white dark:bg-slate-900 flex items-center justify-center px-4 py-12 font-sans text-slate-800 dark:text-white transition-colors duration-300">
-      <div className="max-w-md w-full bg-white dark:bg-slate-950 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl dark:shadow-2xl space-y-6">
+    <div className="min-h-[80vh] bg-white dark:bg-[#020611] flex items-center justify-center px-4 py-12 font-sans text-slate-800 dark:text-white transition-colors duration-300">
+      <div className="max-w-md w-full bg-white dark:bg-[#071326] p-8 rounded-2xl border border-slate-200 dark:border-[#132649] shadow-xl dark:shadow-2xl space-y-6">
         {/* Header */}
-        <div className="text-center space-y-1.5 border-b border-slate-200 dark:border-slate-800 pb-4">
-          <span className="text-[11px] font-bold text-orange-600 dark:text-orange-500 uppercase tracking-widest bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/20">
+        <div className="text-center space-y-1.5 border-b border-slate-200 dark:border-[#132649] pb-4">
+          <span className="text-[11px] font-bold text-orange-600 dark:text-orange-400 uppercase tracking-widest bg-orange-500/10 dark:bg-orange-400/15 px-3 py-1 rounded-full border border-orange-500/20 dark:border-orange-400/30">
             {accountType === 'admin' ? 'Admin Registration' : accountType === 'seller' ? 'Seller Registration' : 'User Registration'}
           </span>
           <h2 className="text-2xl font-black text-blue-950 dark:text-white pt-1">
@@ -284,12 +284,12 @@ const CreateAccountPage = ({ setActivePage, setCurrentUser }) => {
         </div>
 
         {/* Role Selector */}
-        <div className="grid grid-cols-3 gap-1.5 p-1 bg-slate-100 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
+        <div className="grid grid-cols-3 gap-1.5 p-1 bg-slate-100 dark:bg-[#020611] rounded-xl border border-slate-200 dark:border-[#132649]">
           <button
             type="button"
             onClick={() => setAccountType('user')}
             className={`py-2 text-xs font-bold rounded-lg transition-all cursor-pointer ${
-              accountType === 'user' ? 'bg-orange-500 text-white shadow-md' : 'text-slate-600 dark:text-slate-400 hover:text-blue-950 dark:hover:text-white'
+              accountType === 'user' ? 'bg-orange-500 dark:bg-orange-400 text-white shadow-md' : 'text-slate-600 dark:text-slate-400 hover:text-blue-950 dark:hover:text-white'
             }`}
           >
             User
@@ -298,7 +298,7 @@ const CreateAccountPage = ({ setActivePage, setCurrentUser }) => {
             type="button"
             onClick={() => setAccountType('seller')}
             className={`py-2 text-xs font-bold rounded-lg transition-all cursor-pointer ${
-              accountType === 'seller' ? 'bg-orange-500 text-white shadow-md' : 'text-slate-600 dark:text-slate-400 hover:text-blue-950 dark:hover:text-white'
+              accountType === 'seller' ? 'bg-orange-500 dark:bg-orange-400 text-white shadow-md' : 'text-slate-600 dark:text-slate-400 hover:text-blue-950 dark:hover:text-white'
             }`}
           >
             Seller
@@ -307,7 +307,7 @@ const CreateAccountPage = ({ setActivePage, setCurrentUser }) => {
             type="button"
             onClick={() => setAccountType('admin')}
             className={`py-2 text-xs font-bold rounded-lg transition-all cursor-pointer ${
-              accountType === 'admin' ? 'bg-orange-500 text-white shadow-md' : 'text-slate-600 dark:text-slate-400 hover:text-blue-950 dark:hover:text-white'
+              accountType === 'admin' ? 'bg-orange-500 dark:bg-orange-400 text-white shadow-md' : 'text-slate-600 dark:text-slate-400 hover:text-blue-950 dark:hover:text-white'
             }`}
           >
             Admin
@@ -409,7 +409,7 @@ const CreateAccountPage = ({ setActivePage, setCurrentUser }) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-blue-950 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none focus:border-orange-500 text-sm"
+              className="w-full p-3.5 rounded-xl bg-slate-50 dark:bg-[#020611] border border-slate-200 dark:border-[#132649] text-blue-950 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none focus:border-orange-500 dark:focus:border-orange-400 text-sm"
             />
           </div>
 
@@ -433,7 +433,7 @@ const CreateAccountPage = ({ setActivePage, setCurrentUser }) => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-blue-950 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none focus:border-orange-500 text-sm"
+              className="w-full p-3.5 rounded-xl bg-slate-50 dark:bg-[#020611] border border-slate-200 dark:border-[#132649] text-blue-950 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none focus:border-orange-500 dark:focus:border-orange-400 text-sm"
             />
             {confirmPassword && confirmPassword !== password && (
               <p className="text-[11px] text-red-500 mt-1 font-semibold">
@@ -449,14 +449,14 @@ const CreateAccountPage = ({ setActivePage, setCurrentUser }) => {
 
           <button
             type="submit"
-            className="w-full py-3.5 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl text-sm uppercase tracking-wider transition-colors shadow-lg cursor-pointer mt-2"
+            className="w-full py-3.5 bg-orange-500 hover:bg-orange-600 dark:bg-orange-400 dark:hover:bg-orange-500 text-white font-bold rounded-xl text-sm uppercase tracking-wider transition-colors shadow-lg cursor-pointer mt-2"
           >
             Register & Send Verification
           </button>
         </form>
 
         {/* Navigation Links */}
-        <div className="flex justify-between items-center pt-4 border-t border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400">
+        <div className="flex justify-between items-center pt-4 border-t border-slate-200 dark:border-[#132649] text-xs text-slate-600 dark:text-slate-400">
           <button
             type="button"
             onClick={() => setActivePage('register')}
@@ -522,7 +522,7 @@ const CreateAccountPage = ({ setActivePage, setCurrentUser }) => {
                 });
               }
             }}
-            className="w-full py-2 px-4 bg-slate-100 hover:bg-slate-200 dark:bg-slate-900 dark:hover:bg-slate-800 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 border border-slate-200 dark:border-slate-800 rounded-xl text-[11px] font-semibold transition-all cursor-pointer flex items-center justify-center gap-2"
+            className="w-full py-2 px-4 bg-slate-100 hover:bg-slate-200 dark:bg-[#020611] dark:hover:bg-[#0d203e] text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 border border-slate-200 dark:border-[#132649] rounded-xl text-[11px] font-semibold transition-all cursor-pointer flex items-center justify-center gap-2"
           >
             <span>⚠️</span>
             <span>Wipe All Registered Users (Reset)</span>

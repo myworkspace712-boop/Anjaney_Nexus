@@ -14,7 +14,7 @@ const PrivacyPolicy = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#0a0a0a] font-sans py-20 md:py-32 transition-colors duration-300">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#020611] font-sans py-20 md:py-32 transition-colors duration-300">
       <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
         
         {/* HEADER */}
@@ -25,7 +25,7 @@ const PrivacyPolicy = () => {
           <h1 className="text-4xl md:text-5xl font-black text-blue-950 dark:text-white tracking-tight leading-[1.1] mb-6">
             Privacy & Cookie Policy
           </h1>
-          <p className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest border-b border-slate-200 dark:border-slate-800 pb-8">
+          <p className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest border-b border-slate-200 dark:border-[#132649] pb-8">
             Anjaney Nexus India LLP
           </p>
         </div>
@@ -51,19 +51,19 @@ const PrivacyPolicy = () => {
             <p className="mb-4">We collect various types of information to provide and improve our B2B export services:</p>
             <ul className="space-y-2 pl-2">
               <li className="flex items-start">
-                <span className="text-orange-500 mr-3 font-black">•</span>
+                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black">•</span>
                 <span><strong>Corporate Identity Data:</strong> Company name, registered addresses, and buyer credentials.</span>
               </li>
               <li className="flex items-start">
-                <span className="text-orange-500 mr-3 font-black">•</span>
+                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black">•</span>
                 <span><strong>Contact Information:</strong> Primary and billing email addresses, phone numbers, and representative names.</span>
               </li>
               <li className="flex items-start">
-                <span className="text-orange-500 mr-3 font-black">•</span>
+                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black">•</span>
                 <span><strong>Trade Data:</strong> Details of your RFQs, commodity requirements (e.g., spices, rice, oilseeds), port of destination, and preferred shipping terms (FOB, CIF).</span>
               </li>
               <li className="flex items-start">
-                <span className="text-orange-500 mr-3 font-black">•</span>
+                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black">•</span>
                 <span><strong>Usage Data & Cookies:</strong> We use cookies to track portal usage, manage user authentication securely, and optimize the buyer journey.</span>
               </li>
             </ul>
@@ -82,7 +82,7 @@ const PrivacyPolicy = () => {
             </p>
 
             {/* Interactive Cookie Preference Settings */}
-            <div className="bg-white dark:bg-black border border-slate-200 dark:border-slate-800 rounded-xl p-5 sm:p-6 mt-4 shadow-sm">
+            <div className="bg-white dark:bg-[#071326] border border-slate-200 dark:border-[#132649] rounded-xl p-5 sm:p-6 mt-4 shadow-sm">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                   <h4 className="text-sm font-bold text-blue-950 dark:text-white">Your Saved Cookie Preference</h4>
@@ -98,8 +98,8 @@ const PrivacyPolicy = () => {
                     onClick={() => handleUpdateConsent('essential')}
                     className={`px-5 py-2.5 text-xs font-bold uppercase tracking-wider rounded-xl border transition-all cursor-pointer ${
                       consent === 'essential'
-                        ? 'bg-blue-950 text-white border-blue-950 dark:bg-orange-500 dark:border-orange-500 shadow-sm'
-                        : 'bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800'
+                        ? 'bg-blue-950 text-white border-blue-950 dark:bg-orange-400 dark:border-orange-400 shadow-sm'
+                        : 'bg-slate-50 dark:bg-[#020611] text-slate-700 dark:text-slate-300 border-slate-200 dark:border-[#132649] hover:bg-slate-100 dark:hover:bg-[#0d203e]'
                     }`}
                   >
                     ESSENTIAL
@@ -108,8 +108,8 @@ const PrivacyPolicy = () => {
                     onClick={() => handleUpdateConsent('all')}
                     className={`px-5 py-2.5 text-xs font-bold uppercase tracking-wider rounded-xl border transition-all cursor-pointer ${
                       consent === 'all'
-                        ? 'bg-orange-500 text-white border-orange-500 shadow-sm'
-                        : 'bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800'
+                        ? 'bg-orange-500 text-white border-orange-500 dark:bg-orange-400 dark:border-orange-400 shadow-sm'
+                        : 'bg-slate-50 dark:bg-[#020611] text-slate-700 dark:text-slate-300 border-slate-200 dark:border-[#132649] hover:bg-slate-100 dark:hover:bg-[#0d203e]'
                     }`}
                   >
                     Accept All
@@ -127,19 +127,19 @@ const PrivacyPolicy = () => {
             <p className="mb-4">Anjaney Nexus India LLP processes your data strictly for legitimate business purposes, including:</p>
             <ul className="space-y-2 pl-2">
               <li className="flex items-start">
-                <span className="text-orange-500 mr-3 font-black">•</span>
+                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black">•</span>
                 <span>Verifying corporate buyers and mitigating trade fraud.</span>
               </li>
               <li className="flex items-start">
-                <span className="text-orange-500 mr-3 font-black">•</span>
+                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black">•</span>
                 <span>Generating and dispatching accurate Proforma Invoices based on your RFQs.</span>
               </li>
               <li className="flex items-start">
-                <span className="text-orange-500 mr-3 font-black">•</span>
+                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black">•</span>
                 <span>Providing secure access to our Trade Control Panel.</span>
               </li>
               <li className="flex items-start">
-                <span className="text-orange-500 mr-3 font-black">•</span>
+                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black">•</span>
                 <span>Communicating updates regarding logistics, shipments, and commodity market feeds.</span>
               </li>
             </ul>
@@ -166,7 +166,7 @@ const PrivacyPolicy = () => {
           </section>
 
           {/* Section 7 */}
-          <section className="bg-white dark:bg-black border border-slate-200 dark:border-slate-800 p-8 rounded-2xl shadow-sm mt-8">
+          <section className="bg-white dark:bg-[#071326] border border-slate-200 dark:border-[#132649] p-8 rounded-2xl shadow-sm mt-8">
             <h2 className="text-xl font-black text-blue-950 dark:text-white mb-4">
               7. Contact Us
             </h2>

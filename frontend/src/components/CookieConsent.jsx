@@ -96,7 +96,7 @@ const CookieConsent = ({ activePage }) => {
       {!showBanner && (
         <button 
           onClick={openSettings}
-          className="fixed bottom-4 left-4 z-50 bg-white dark:bg-[#0a0a0a] border border-slate-200 dark:border-slate-800 p-3 rounded-full shadow-lg hover:border-orange-500 dark:hover:border-orange-400 transition-colors group cursor-pointer"
+          className="fixed bottom-4 left-4 z-50 bg-white dark:bg-[#071326] border border-slate-200 dark:border-[#132649] p-3 rounded-full shadow-lg hover:border-orange-500 dark:hover:border-orange-400 transition-colors group cursor-pointer"
           aria-label="Cookie Settings"
           title="Cookie Settings"
         >
@@ -110,7 +110,7 @@ const CookieConsent = ({ activePage }) => {
       {/* COOKIE CONSENT BANNER (DROP-UP) */}
       {showBanner && (
         <div className="fixed bottom-0 left-0 w-full z-[100] p-4 sm:p-6 md:p-8 animate-fade-in-up font-sans pointer-events-none">
-          <div className="max-w-5xl mx-auto bg-white dark:bg-[#0a0a0a] border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl shadow-blue-950/10 dark:shadow-black pointer-events-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6 p-6 sm:p-8">
+          <div className="max-w-5xl mx-auto bg-white dark:bg-[#071326] border border-slate-200 dark:border-[#132649] rounded-2xl shadow-2xl shadow-blue-950/10 dark:shadow-black pointer-events-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6 p-6 sm:p-8">
             
             {/* Text Content */}
             <div className="flex-grow max-w-3xl">
@@ -138,13 +138,13 @@ const CookieConsent = ({ activePage }) => {
             <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto shrink-0">
               <button 
                 onClick={handleAcceptEssential}
-                className="px-6 py-3.5 bg-slate-50 hover:bg-slate-100 dark:bg-slate-900 dark:hover:bg-slate-800 text-blue-950 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-black text-xs uppercase tracking-widest rounded-xl transition-colors text-center cursor-pointer"
+                className="px-6 py-3.5 bg-slate-50 hover:bg-slate-100 dark:bg-[#020611] dark:hover:bg-[#0d203e] text-blue-950 dark:text-slate-300 border border-slate-200 dark:border-[#132649] font-black text-xs uppercase tracking-widest rounded-xl transition-colors text-center cursor-pointer"
               >
                 Essential
               </button>
               <button 
                 onClick={handleAcceptAll}
-                className="px-6 py-3.5 bg-blue-950 hover:bg-orange-500 dark:bg-blue-600 dark:hover:bg-orange-500 text-white font-black text-xs uppercase tracking-widest rounded-xl transition-all shadow-sm text-center cursor-pointer"
+                className="px-6 py-3.5 bg-blue-950 hover:bg-orange-500 dark:bg-orange-400 dark:hover:bg-orange-500 text-white font-black text-xs uppercase tracking-widest rounded-xl transition-all shadow-sm text-center cursor-pointer"
               >
                 Accept All
               </button>

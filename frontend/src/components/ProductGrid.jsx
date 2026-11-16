@@ -78,18 +78,27 @@ const ProductGrid = ({ setActivePage }) => {
   };
 
   return (
-    <section className={`w-full py-20 md:py-32 font-sans border-t transition-colors duration-500 relative ${
+    <section className={`w-full py-20 md:py-32 font-sans border-t transition-colors duration-500 relative overflow-hidden ${
       isDark 
-        ? 'bg-[#0c192c] text-slate-100 border-[#1f3c64]' 
+        ? 'bg-[#020611] text-slate-100 border-[#132649]' 
         : 'bg-[#f8fafc] text-[#0b1d3a] border-slate-200/90'
     }`}>
+      
+      {/* AMBIENT GLOWING BLOBS */}
+      <div className="absolute top-10 left-1/3 w-96 h-96 rounded-full pointer-events-none blur-3xl opacity-20 z-0 bg-orange-400/20"></div>
+      <div className={`absolute top-1/2 -right-20 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl z-0 ${
+        isDark ? 'bg-[#132649]/35' : 'bg-blue-600/10'
+      }`}></div>
+      <div className={`absolute -bottom-10 -left-10 w-[450px] h-[450px] rounded-full pointer-events-none blur-3xl z-0 ${
+        isDark ? 'bg-[#0d203e]/30' : 'bg-orange-500/10'
+      }`}></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* SECTION HEADER - SOLID B2B EXPORT TERMINAL STYLE */}
         <div className="mb-16 text-center max-w-3xl mx-auto">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] mb-6">
             <span className="text-blue-900 dark:text-white">Global </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-500 to-amber-500">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-500 to-amber-500 dark:from-orange-300 dark:via-orange-400 dark:to-amber-300">
               Commodities
             </span>
           </h2>
@@ -97,7 +106,7 @@ const ProductGrid = ({ setActivePage }) => {
           <div className="flex justify-center">
             <button 
               onClick={handleNavigateToProducts}
-              className="px-8 py-3.5 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-md shadow-orange-500/25 hover:shadow-orange-500/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+              className="px-8 py-3.5 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 dark:from-orange-400 dark:to-amber-500 dark:hover:from-orange-400 dark:hover:to-amber-400 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-md shadow-orange-500/25 hover:shadow-orange-500/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
             >
               Explore Catalogue
             </button>
@@ -122,14 +131,14 @@ const ProductGrid = ({ setActivePage }) => {
                 style={{ zIndex: isDropdownOpen ? 50 : 1 }}
                 className={`border-2 rounded-2xl transition-all duration-300 flex flex-col group relative ${
                   isDark 
-                    ? 'bg-[#12243d] border-[#1e3c66] shadow-xl hover:border-orange-500' 
+                    ? 'bg-[#071326] border-[#132649] shadow-xl hover:border-orange-400' 
                     : 'bg-white border-slate-200 shadow-lg hover:border-orange-500'
                 }`}
               >
                 
-                {/* Product Image Container with Solid Industrial Export Badges */}
+                {/* Product Image Container */}
                 <div className={`h-56 w-full rounded-t-2xl overflow-hidden relative ${
-                  isDark ? 'bg-[#0c192c]' : 'bg-slate-100'
+                  isDark ? 'bg-[#020611]' : 'bg-slate-100'
                 }`}>
                   <img 
                     src={cardImage} 
@@ -144,18 +153,6 @@ const ProductGrid = ({ setActivePage }) => {
                       }
                     }}
                   />
-                  
-                  {/* Category Pill (Solid, No Blur) */}
-                  {product.category && (
-                    <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[9px] font-black uppercase tracking-wider bg-[#081526] text-orange-400 border border-orange-500/40 shadow-sm">
-                      {product.category}
-                    </div>
-                  )}
-
-                  {/* Port Freight Indicator (Solid, No Blur) */}
-                  <div className="absolute top-3 right-3 px-2 py-0.5 rounded-md text-[9px] font-mono font-bold bg-[#081526] text-slate-200 border border-slate-700 shadow-sm">
-                    FCL EXPORT
-                  </div>
                 </div>
 
                 {/* Card Body */}
@@ -168,7 +165,7 @@ const ProductGrid = ({ setActivePage }) => {
                       }`}>
                         <span>{product.name}</span>
                         {product.subtitle && (
-                          <span className="text-xs sm:text-sm font-bold text-orange-500">
+                          <span className="text-xs sm:text-sm font-bold text-orange-500 dark:text-orange-400">
                             {product.subtitle}
                           </span>
                         )}
@@ -189,10 +186,10 @@ const ProductGrid = ({ setActivePage }) => {
                         {/* Dropdown Header Label */}
                         <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-1.5 flex items-center justify-between">
                           <span className="flex items-center gap-1.5">
-                            <span className="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-orange-500 dark:bg-orange-400"></span>
                             <span>Sub-Product / Variety</span>
                           </span>
-                          <span className="text-[9px] font-mono font-bold text-orange-500 bg-orange-500/10 border border-orange-500/20 px-2 py-0.5 rounded">
+                          <span className="text-[9px] font-mono font-bold text-orange-500 dark:text-orange-400 bg-orange-500/10 dark:bg-orange-400/15 border border-orange-500/20 dark:border-orange-400/30 px-2 py-0.5 rounded">
                             {product.varieties.length} GRADES
                           </span>
                         </div>
@@ -206,15 +203,15 @@ const ProductGrid = ({ setActivePage }) => {
                           }}
                           className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl border-2 text-xs font-black transition-all duration-200 cursor-pointer shadow-xs ${
                             isDropdownOpen
-                              ? 'bg-orange-500/15 border-orange-500 text-orange-600 dark:text-orange-400 ring-2 ring-orange-500/20'
+                              ? 'bg-orange-500/15 dark:bg-orange-400/15 border-orange-500 dark:border-orange-400 text-orange-600 dark:text-orange-400 ring-2 ring-orange-500/20 dark:ring-orange-400/25'
                               : isDark
-                                ? 'bg-[#0c192c] hover:bg-[#152a48] border-[#1e3c66] text-white hover:border-orange-500'
+                                ? 'bg-[#020611] hover:bg-[#0d203e] border-[#132649] text-white hover:border-orange-400'
                                 : 'bg-slate-100 hover:bg-slate-200/70 border-slate-200 text-blue-950 hover:border-orange-500'
                           }`}
                         >
                           <span className="flex items-center gap-2 min-w-0 pr-2">
                             <span className={`w-2 h-2 rounded-full shrink-0 ${
-                              isDropdownOpen ? 'bg-orange-500' : 'bg-orange-400'
+                              isDropdownOpen ? (isDark ? 'bg-orange-400' : 'bg-orange-500') : 'bg-orange-400'
                             }`}></span>
                             <span className="truncate text-xs font-black tracking-tight">
                               {selectedVarieties[product.id] || product.dropdownPlaceholder || 'Select Sub-Product'}
@@ -223,7 +220,7 @@ const ProductGrid = ({ setActivePage }) => {
 
                           <svg 
                             className={`w-4 h-4 shrink-0 transition-transform duration-300 ease-out ${
-                              isDropdownOpen ? 'rotate-180 text-orange-500' : 'text-slate-400'
+                              isDropdownOpen ? (isDark ? 'rotate-180 text-orange-400' : 'rotate-180 text-orange-500') : 'text-slate-400'
                             }`}
                             fill="none" 
                             stroke="currentColor" 
@@ -238,15 +235,15 @@ const ProductGrid = ({ setActivePage }) => {
                           <div 
                             className={`absolute left-0 right-0 top-[calc(100%+6px)] z-50 p-2 rounded-xl border-2 shadow-2xl animate-in fade-in zoom-in-95 duration-150 ${
                               isDark 
-                                ? 'bg-[#0c192c] border-[#234574] shadow-black/80 text-white' 
+                                ? 'bg-[#071326] border-[#132649] shadow-black/80 text-white' 
                                 : 'bg-white border-slate-300 shadow-blue-950/20 text-[#0b1d3a]'
                             }`}
                             onClick={(e) => e.stopPropagation()}
                           >
                             {/* Popover Header */}
-                            <div className="px-3 py-2 mb-1 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                            <div className="px-3 py-2 mb-1 flex items-center justify-between border-b border-slate-200 dark:border-[#132649] text-[10px] font-bold text-slate-400 uppercase tracking-wider">
                               <span>Available Export Grades</span>
-                              <span className="text-orange-500 font-black">{product.varieties.length} Options</span>
+                              <span className="text-orange-500 dark:text-orange-400 font-black">{product.varieties.length} Options</span>
                             </div>
 
                             {/* Options List (Solid Rows, Clean Typography, Zero Images) */}
@@ -264,16 +261,18 @@ const ProductGrid = ({ setActivePage }) => {
                                     }}
                                     className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold transition-all text-left cursor-pointer group/item ${
                                       isSelected 
-                                        ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white font-black shadow-sm' 
+                                        ? isDark
+                                          ? 'bg-gradient-to-r from-orange-400 to-amber-500 text-white font-black shadow-sm'
+                                          : 'bg-gradient-to-r from-orange-500 to-orange-600 text-white font-black shadow-sm' 
                                         : isDark
-                                          ? 'text-slate-200 hover:bg-[#162c4c] hover:text-white'
+                                          ? 'text-slate-200 hover:bg-[#0d203e] hover:text-white'
                                           : 'text-slate-800 hover:bg-slate-100 hover:text-orange-600'
                                     }`}
                                   >
                                     {/* Left: Index + Grade Name */}
                                     <div className="flex items-center gap-2 min-w-0 pr-1">
                                       <span className={`text-[10px] font-mono font-bold w-5 shrink-0 ${
-                                        isSelected ? 'text-white' : 'text-slate-400 group-hover/item:text-orange-500'
+                                        isSelected ? 'text-white' : 'text-slate-400 group-hover/item:text-orange-500 dark:group-hover/item:text-orange-400'
                                       }`}>
                                         0{vIdx + 1}
                                       </span>
@@ -293,7 +292,7 @@ const ProductGrid = ({ setActivePage }) => {
                                         <span>Active</span>
                                       </span>
                                     ) : (
-                                      <span className="text-[10px] font-bold text-slate-400 opacity-0 group-hover/item:opacity-100 group-hover/item:text-orange-500 transition-all shrink-0 ml-2">
+                                      <span className="text-[10px] font-bold text-slate-400 opacity-0 group-hover/item:opacity-100 group-hover/item:text-orange-500 dark:group-hover/item:text-orange-400 transition-all shrink-0 ml-2">
                                         Select →
                                       </span>
                                     )}
@@ -311,20 +310,20 @@ const ProductGrid = ({ setActivePage }) => {
                       <div>
                         <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-1.5 flex items-center justify-between">
                           <span className="flex items-center gap-1.5">
-                            <span className="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-orange-500 dark:bg-orange-400"></span>
                             <span>Sub-Product / Variety</span>
                           </span>
-                          <span className="text-[9px] font-bold text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">
+                          <span className="text-[9px] font-bold text-slate-400 bg-slate-100 dark:bg-[#0d203e] px-2 py-0.5 rounded">
                             SINGLE SPEC
                           </span>
                         </div>
                         <div className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl border-2 text-xs font-black shadow-xs ${
                           isDark 
-                            ? 'border-[#1e3c66] bg-[#0c192c] text-white' 
+                            ? 'border-[#132649] bg-[#020611] text-white' 
                             : 'border-slate-200 bg-slate-100 text-blue-950'
                         }`}>
                           <span className="flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-orange-500"></span>
+                            <span className="w-2 h-2 rounded-full bg-orange-500 dark:bg-orange-400"></span>
                             <span className="truncate text-xs font-black">
                               {typeof product.varieties[0] === 'string' ? product.varieties[0] : product.varieties[0]?.name}
                             </span>
@@ -341,7 +340,7 @@ const ProductGrid = ({ setActivePage }) => {
                   <div className="pt-2">
                     <button 
                       onClick={() => handleGetQuote(product)}
-                      className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-xs font-black uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-md shadow-orange-500/25 hover:shadow-orange-500/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center block"
+                      className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 dark:from-orange-400 dark:to-amber-500 dark:hover:from-orange-400 dark:hover:to-amber-400 text-white text-xs font-black uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-md shadow-orange-500/25 hover:shadow-orange-500/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center block"
                     >
                       Get Official Quote
                     </button>

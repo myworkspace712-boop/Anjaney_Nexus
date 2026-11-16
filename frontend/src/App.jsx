@@ -214,7 +214,7 @@ function AppContent({
   const isDarkMode = theme === 'dark';
 
   return (
-    <div className={`min-h-screen font-sans transition-colors duration-300 flex flex-col justify-between ${isDarkMode ? 'bg-zinc-950 text-white' : 'bg-slate-50 text-slate-900'}`}>
+    <div className={`min-h-screen font-sans transition-colors duration-300 flex flex-col justify-between ${isDarkMode ? 'bg-[#020611] text-white' : 'bg-slate-50 text-slate-900'}`}>
       <div>
         <Navbar
           activePage={activePage}
@@ -237,7 +237,7 @@ function AppContent({
 
       {/* Simple Professional Corporate Footer */}
       <footer className={`border-t py-12 transition-colors duration-200 ${
-        isDarkMode ? 'bg-zinc-900 border-zinc-800 text-zinc-400' : 'bg-slate-200/75 border-slate-300 text-slate-700'
+        isDarkMode ? 'bg-[#01040a] border-[#132649] text-slate-300' : 'bg-slate-200/75 border-slate-300 text-slate-700'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-sm">
@@ -256,11 +256,11 @@ function AppContent({
                 Quick Navigation
               </h4>
               <ul className="space-y-2 text-xs">
-                <li><button onClick={() => setActivePage('home')} className="hover:text-blue-600 transition-colors cursor-pointer">Home</button></li>
-                <li><button onClick={() => setActivePage('about')} className="hover:text-blue-600 transition-colors cursor-pointer">About Us</button></li>
-                <li><button onClick={() => setActivePage('products')} className="hover:text-blue-600 transition-colors cursor-pointer">Products & Services</button></li>
-                <li><button onClick={() => setActivePage('contact')} className="hover:text-blue-600 transition-colors cursor-pointer">Contact</button></li>
-                <li><button onClick={() => setActivePage('privacy-policy')} className="hover:text-blue-600 transition-colors cursor-pointer">Privacy & Terms</button></li>
+                <li><button onClick={() => setActivePage('home')} className="hover:text-blue-600 dark:hover:text-sky-400 transition-colors cursor-pointer">Home</button></li>
+                <li><button onClick={() => setActivePage('about')} className="hover:text-blue-600 dark:hover:text-sky-400 transition-colors cursor-pointer">About Us</button></li>
+                <li><button onClick={() => setActivePage('products')} className="hover:text-blue-600 dark:hover:text-sky-400 transition-colors cursor-pointer">Products & Services</button></li>
+                <li><button onClick={() => setActivePage('contact')} className="hover:text-blue-600 dark:hover:text-sky-400 transition-colors cursor-pointer">Contact</button></li>
+                <li><button onClick={() => setActivePage('privacy-policy')} className="hover:text-blue-600 dark:hover:text-sky-400 transition-colors cursor-pointer">Privacy & Terms</button></li>
               </ul>
             </div>
 
@@ -274,15 +274,15 @@ function AppContent({
                 Gujarat, India
               </p>
               <div className="mt-2 space-y-1 text-xs">
-                <p><a href="mailto:admin@anjaneynexus.com" className="hover:text-blue-600 transition-colors">admin@anjaneynexus.com</a></p>
-                <p><a href="tel:+919824056061" className="hover:text-blue-600 transition-colors">+91 98240 56061</a></p>
+                <p><a href="mailto:admin@anjaneynexus.com" className="hover:text-blue-600 dark:hover:text-sky-400 transition-colors">admin@anjaneynexus.com</a></p>
+                <p><a href="tel:+919824056061" className="hover:text-blue-600 dark:hover:text-sky-400 transition-colors">+91 98240 56061</a></p>
               </div>
             </div>
 
           </div>
 
           <div className={`pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-4 text-xs ${
-            isDarkMode ? 'border-zinc-800 text-zinc-400' : 'border-slate-300 text-slate-600'
+            isDarkMode ? 'border-[#132649] text-slate-400' : 'border-slate-300 text-slate-600'
           }`}>
             <p>© {new Date().getFullYear()} Anjaney Nexus India LLP. All rights reserved.</p>
             <p className="text-[11px]">Import & Export • Agricultural Commodities & Logistics</p>

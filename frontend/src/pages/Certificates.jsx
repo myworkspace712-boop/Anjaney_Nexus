@@ -33,18 +33,18 @@ const Certificates = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans py-16 md:py-24">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#020611] font-sans py-16 md:py-24 transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         
         {/* PAGE HEADER */}
         <div className="text-center mb-16">
-          <span className="text-xs font-black text-orange-500 uppercase tracking-widest bg-orange-50 px-3 py-1 rounded-full border border-orange-100 mb-4 inline-block">
+          <span className="text-xs font-black text-orange-500 dark:text-orange-400 uppercase tracking-widest bg-orange-50 dark:bg-[#01040a] dark:border-orange-400/30 px-3 py-1 rounded-full border border-orange-100 mb-4 inline-block">
             Verified Credentials
           </span>
-          <h1 className="text-4xl md:text-5xl font-black text-blue-950 tracking-tight leading-tight mb-6">
-            Document <span className="text-orange-500">Verification.</span>
+          <h1 className="text-4xl md:text-5xl font-black text-blue-950 dark:text-white tracking-tight leading-tight mb-6">
+            Document <span className="text-orange-500 dark:text-orange-400">Verification.</span>
           </h1>
-          <p className="text-slate-600 max-w-3xl mx-auto text-sm sm:text-base font-medium leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-300 max-w-3xl mx-auto text-sm sm:text-base font-medium leading-relaxed">
             Use this evidence register to distinguish issuer badges, requested documents and shipment-specific records. Rely only on a current document whose holder, scope and validity you have verified.
           </p>
         </div>
@@ -52,11 +52,11 @@ const Certificates = () => {
         {/* DETAILED VERIFICATION CARDS GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {certificates.map((cert, index) => (
-            <div key={index} className="bg-white border border-slate-200 rounded-xl overflow-hidden hover:border-orange-300 transition-colors shadow-sm flex flex-col">
+            <div key={index} className="bg-white dark:bg-[#071326] border border-slate-200 dark:border-[#132649] rounded-xl overflow-hidden hover:border-orange-500 dark:hover:border-orange-400 transition-colors shadow-sm flex flex-col">
               
               {/* Card Top: Logo & Title */}
               <div className="p-6 flex items-start gap-4">
-                <div className="w-20 h-20 bg-slate-50 border border-slate-100 rounded-lg flex shrink-0 items-center justify-center p-2 overflow-hidden">
+                <div className="w-20 h-20 bg-slate-50 dark:bg-white rounded-lg flex shrink-0 items-center justify-center p-2 overflow-hidden border border-slate-100 dark:border-white">
                   <img 
                     src={cert.image} 
                     alt={cert.id} 
@@ -66,10 +66,10 @@ const Certificates = () => {
                 </div>
                 
                 <div className="flex flex-col items-start pt-1">
-                  <h3 className="text-lg font-bold text-blue-950 leading-tight mb-1">
+                  <h3 className="text-lg font-bold text-blue-950 dark:text-white leading-tight mb-1">
                     {cert.title}
                   </h3>
-                  <p className="text-xs text-slate-500 mb-3">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">
                     {cert.authority}
                   </p>
                   <div className="inline-flex items-center gap-1.5 bg-green-50 text-green-800 px-3 py-1 rounded-full text-xs font-bold border border-green-200">
@@ -82,22 +82,22 @@ const Certificates = () => {
               </div>
 
               {/* Divider */}
-              <div className="w-full h-px bg-slate-100"></div>
+              <div className="w-full h-px bg-slate-100 dark:bg-[#132649]"></div>
 
               {/* Card Bottom: Text & Details */}
               <div className="p-6 flex flex-col flex-grow">
-                <p className="text-sm text-slate-600 mb-6 leading-relaxed">
+                <p className="text-sm text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
                   {cert.description}
                 </p>
 
                 <div className="grid grid-cols-2 gap-4 mb-8">
                   <div>
-                    <p className="text-sm font-bold text-blue-950 mb-0.5">{cert.docLabel}</p>
-                    <p className="text-sm text-slate-500">Not published</p>
+                    <p className="text-sm font-bold text-blue-950 dark:text-white mb-0.5">{cert.docLabel}</p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">Not published</p>
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-blue-950 mb-0.5">Valid until</p>
-                    <p className="text-sm text-slate-500">Check current copy</p>
+                    <p className="text-sm font-bold text-blue-950 dark:text-white mb-0.5">Valid until</p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">Check current copy</p>
                   </div>
                 </div>
 

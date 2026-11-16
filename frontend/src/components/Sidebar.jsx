@@ -91,7 +91,7 @@ const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
       <aside 
         className={`fixed top-0 bottom-0 right-0 w-80 sm:w-96 max-w-[85vw] z-50 flex flex-col justify-between transition-transform duration-300 ease-out border-l shadow-2xl ${
           isDark 
-            ? 'bg-[#0c192c] border-[#1e3c66] text-slate-100 shadow-black/80' 
+            ? 'bg-[#020611] border-[#132649] text-slate-100 shadow-black/80' 
             : 'bg-white border-slate-200 text-[#0b1d3a] shadow-blue-950/20'
         } ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
@@ -101,23 +101,23 @@ const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
         
         {/* SIDEBAR HEADER */}
         <div className={`p-5 sm:p-6 border-b flex items-center justify-between ${
-          isDark ? 'border-[#1e3c66]' : 'border-slate-100'
+          isDark ? 'border-[#132649]' : 'border-slate-100'
         }`}>
           {/* Logo & Company Name */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 min-w-0">
             <img 
               src="/logo.png" 
-              alt="Anjaney Nexus India" 
+              alt="Anjaney Nexus India LLP" 
               onError={(e) => {
                 e.target.onerror = null;
                 e.target.src = '/Logo1.jpeg';
               }}
               className="w-9 h-9 object-contain rounded-lg shrink-0" 
             />
-            <div className="text-base font-black leading-tight">
-              <span className="text-orange-500">Anjaney</span>{' '}
+            <div className="text-sm sm:text-base font-black leading-tight whitespace-nowrap">
+              <span className="text-orange-500 dark:text-orange-400">Anjaney</span>{' '}
               <span className={isDark ? 'text-blue-400' : 'text-blue-900'}>
-                Nexus India
+                Nexus India LLP
               </span>
             </div>
           </div>
@@ -128,7 +128,7 @@ const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
             onClick={onClose} 
             className={`w-9 h-9 rounded-full border flex items-center justify-center transition-all cursor-pointer bg-transparent ${
               isDark 
-                ? 'border-[#23426e] text-slate-300 hover:text-white hover:border-orange-500 hover:bg-white/5' 
+                ? 'border-[#132649] text-slate-300 hover:text-white hover:border-orange-400 hover:bg-white/5' 
                 : 'border-slate-200 text-slate-600 hover:text-blue-950 hover:border-orange-500 hover:bg-slate-100/60'
             }`}
             aria-label="Close sidebar menu"
@@ -154,9 +154,11 @@ const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
                 onClick={() => handleNavClick(item.id)}
                 className={`w-full text-left p-3.5 rounded-xl transition-all duration-200 cursor-pointer flex items-center justify-between group ${
                   isActive
-                    ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white font-black shadow-md shadow-orange-500/25'
+                    ? isDark 
+                      ? 'bg-gradient-to-r from-orange-400 to-amber-500 text-white font-black shadow-md shadow-orange-500/25'
+                      : 'bg-gradient-to-r from-orange-500 to-orange-600 text-white font-black shadow-md shadow-orange-500/25'
                     : isDark
-                      ? 'text-slate-200 hover:bg-[#12243d] hover:text-white border border-transparent hover:border-[#1e3c66]'
+                      ? 'text-slate-200 hover:bg-[#071326] hover:text-white border border-transparent hover:border-[#132649]'
                       : 'text-[#0b1d3a] hover:bg-slate-50 hover:text-orange-600 border border-transparent hover:border-slate-200'
                 }`}
               >
@@ -165,7 +167,7 @@ const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
                     isActive 
                       ? 'bg-white/20 text-white' 
                       : isDark 
-                        ? 'bg-[#12243d] text-orange-400 group-hover:bg-[#162c4c]' 
+                        ? 'bg-[#071326] text-orange-400 group-hover:bg-[#0d203e]' 
                         : 'bg-slate-100 text-orange-500 group-hover:bg-orange-50'
                   }`}>
                     {item.icon}
@@ -187,7 +189,7 @@ const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
                 {/* Right Arrow / Active Indicator */}
                 <svg 
                   className={`w-4 h-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1 ${
-                    isActive ? 'text-white' : 'text-slate-400 group-hover:text-orange-500'
+                    isActive ? 'text-white' : 'text-slate-400 group-hover:text-orange-500 dark:group-hover:text-orange-400'
                   }`}
                   fill="none" 
                   stroke="currentColor" 
@@ -202,13 +204,13 @@ const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
 
         {/* SIDEBAR FOOTER & CTA */}
         <div className={`p-5 sm:p-6 border-t space-y-4 ${
-          isDark ? 'border-[#1e3c66] bg-[#081526]/80' : 'border-slate-100 bg-slate-50/80'
+          isDark ? 'border-[#132649] bg-[#01040a]/90' : 'border-slate-100 bg-slate-50/80'
         }`}>
           {/* Direct Commercial Quote Action */}
           <button 
             type="button"
             onClick={() => handleNavClick('contact')}
-            className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-xs font-black uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-md shadow-orange-500/25 hover:shadow-orange-500/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center block"
+            className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 dark:from-orange-400 dark:to-amber-500 dark:hover:from-orange-400 dark:hover:to-amber-400 text-white text-xs font-black uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-md shadow-orange-500/25 hover:shadow-orange-500/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center block"
           >
             Request Export Quote
           </button>
@@ -217,9 +219,9 @@ const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
           <div className="flex items-center justify-center text-xs pt-1">
             <a 
               href="mailto:admin@anjaneynexus.com" 
-              className="text-xs font-semibold text-slate-400 hover:text-orange-500 transition-colors flex items-center gap-1.5"
+              className="text-xs font-semibold text-slate-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors flex items-center gap-1.5"
             >
-              <svg className="w-3.5 h-3.5 text-orange-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3.5 h-3.5 text-orange-500 dark:text-orange-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
               <span>admin@anjaneynexus.com</span>

@@ -345,14 +345,14 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
   const roleLabels = { user: 'User', seller: 'Seller', admin: 'Admin' };
 
   return (
-    <div className="min-h-[85vh] bg-slate-50 dark:bg-slate-950 flex items-center justify-center px-4 py-12 font-sans text-slate-800 dark:text-slate-100 transition-colors">
-      <div className="max-w-md w-full bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.4)] space-y-6">
+    <div className="min-h-[85vh] bg-slate-50 dark:bg-[#020611] flex items-center justify-center px-4 py-12 font-sans text-slate-800 dark:text-slate-100 transition-colors">
+      <div className="max-w-md w-full bg-white dark:bg-[#071326] p-8 rounded-2xl border border-slate-100 dark:border-[#132649] shadow-[0_8px_30px_rgb(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.4)] space-y-6">
         
         {pendingVerification ? (
           <div className="space-y-5 text-center py-4">
-            <div className="w-16 h-16 mx-auto rounded-full bg-orange-50 dark:bg-orange-950/40 border border-orange-100 dark:border-orange-800/50 flex items-center justify-center text-3xl">✉️</div>
+            <div className="w-16 h-16 mx-auto rounded-full bg-orange-50 dark:bg-orange-400/15 border border-orange-100 dark:border-orange-400/30 flex items-center justify-center text-3xl">✉️</div>
             <div className="space-y-2">
-              <span className="text-[10px] font-black text-orange-600 dark:text-orange-400 uppercase tracking-widest bg-orange-50 dark:bg-orange-950/40 px-3 py-1 rounded-full border border-orange-100 dark:border-orange-800/50">Action Required</span>
+              <span className="text-[10px] font-black text-orange-600 dark:text-orange-400 uppercase tracking-widest bg-orange-50 dark:bg-orange-400/15 px-3 py-1 rounded-full border border-orange-100 dark:border-orange-400/30">Action Required</span>
               <h2 className="text-2xl font-black text-blue-950 dark:text-white pt-2">Check Your Inbox</h2>
               {pendingVerification.serverOffline ? (
                 <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-xl text-xs text-amber-800 dark:text-amber-300 font-medium text-left space-y-1">
@@ -368,16 +368,16 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
               <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-xl text-xs text-amber-700 dark:text-amber-400 font-medium">
                 ⚡ <b>Leave this tab open.</b> It will automatically sign you in and open your dashboard once you verify in the new window.
               </div>
-              <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl border border-slate-200 dark:border-slate-800 mt-4 space-y-3">
+              <div className="bg-slate-50 dark:bg-[#020611] p-4 rounded-xl border border-slate-200 dark:border-[#132649] mt-4 space-y-3">
                 <p className="text-xs font-mono font-bold text-orange-600 dark:text-orange-400 break-all">{pendingVerification.email}</p>
                 {pendingVerification.link && (
-                  <div className="pt-3 border-t border-slate-200 dark:border-slate-800">
+                  <div className="pt-3 border-t border-slate-200 dark:border-[#132649]">
                     <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Dev Mode Bypass</p>
                     <a 
                       href={pendingVerification.link} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="inline-block w-full py-3 bg-orange-500 hover:bg-orange-600 text-white text-xs font-black tracking-widest uppercase rounded-xl transition-colors shadow-lg shadow-orange-500/30"
+                      className="inline-block w-full py-3 bg-orange-500 hover:bg-orange-600 dark:bg-orange-400 dark:hover:bg-orange-500 text-white text-xs font-black tracking-widest uppercase rounded-xl transition-colors shadow-lg shadow-orange-500/30"
                     >
                       Bypass & Verify Instantly
                     </a>
@@ -385,16 +385,16 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
                 )}
               </div>
             </div>
-            <div className="pt-6 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs font-bold text-slate-500 dark:text-slate-400">
+            <div className="pt-6 border-t border-slate-100 dark:border-[#132649] flex justify-between items-center text-xs font-bold text-slate-500 dark:text-slate-400">
               <button onClick={() => setPendingVerification(null)} className="hover:text-blue-950 dark:hover:text-white cursor-pointer transition-colors">← Back to Register</button>
-              <button onClick={() => setActivePage && setActivePage('home')} className="text-orange-500 hover:text-orange-400 cursor-pointer transition-colors">Return to Home →</button>
+              <button onClick={() => setActivePage && setActivePage('home')} className="text-orange-500 dark:text-orange-400 hover:text-orange-400 cursor-pointer transition-colors">Return to Home →</button>
             </div>
           </div>
         ) : (
           <>
-            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-[#132649] pb-4">
               <div>
-                <span className="text-[10px] font-black text-orange-500 dark:text-orange-400 uppercase tracking-widest bg-orange-50 dark:bg-orange-950/40 px-3 py-1 rounded-full border border-orange-100 dark:border-orange-800/50">
+                <span className="text-[10px] font-black text-orange-500 dark:text-orange-400 uppercase tracking-widest bg-orange-50 dark:bg-orange-400/15 px-3 py-1 rounded-full border border-orange-100 dark:border-orange-400/30">
                   {roleLabels[accountType]}
                 </span>
                 <h2 className="text-2xl font-black text-blue-950 dark:text-white mt-2">Create Account</h2>
@@ -402,13 +402,13 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
               <button 
                 type="button" 
                 onClick={() => setActivePage && setActivePage('home')} 
-                className="px-3.5 py-2 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-blue-950 dark:text-white border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-bold shadow-sm transition-colors cursor-pointer"
+                className="px-3.5 py-2 bg-white dark:bg-[#020611] hover:bg-slate-50 dark:hover:bg-[#0d203e] text-blue-950 dark:text-white border border-slate-200 dark:border-[#132649] rounded-lg text-xs font-bold shadow-sm transition-colors cursor-pointer"
               >
                 Home →
               </button>
             </div>
 
-            <div className="grid grid-cols-3 gap-1.5 p-1.5 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800">
+            <div className="grid grid-cols-3 gap-1.5 p-1.5 bg-slate-50 dark:bg-[#020611] rounded-xl border border-slate-200 dark:border-[#132649]">
               {['user', 'seller', 'admin'].map((roleKey) => (
                 <button
                   key={roleKey} 
@@ -416,8 +416,8 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
                   onClick={() => setAccountType(roleKey)}
                   className={`py-2.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
                     accountType === roleKey 
-                      ? 'bg-blue-950 text-white shadow-md dark:bg-orange-500 dark:text-white' 
-                      : 'text-slate-500 dark:text-slate-400 hover:text-blue-950 dark:hover:text-white hover:bg-white dark:hover:bg-slate-800/60'
+                      ? 'bg-blue-950 text-white shadow-md dark:bg-orange-400 dark:text-white' 
+                      : 'text-slate-500 dark:text-slate-400 hover:text-blue-950 dark:hover:text-white hover:bg-white dark:hover:bg-[#0d203e]'
                   }`}
                 >
                   {roleLabels[roleKey]}
@@ -445,14 +445,14 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
                     value={companyName} 
                     onChange={(e) => setCompanyName(e.target.value)} 
                     placeholder="Global Agro Exports" 
-                    className="w-full p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-blue-950 dark:text-white text-sm focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none" 
+                    className="w-full p-3.5 rounded-xl bg-slate-50 dark:bg-[#020611] border border-slate-200 dark:border-[#132649] text-blue-950 dark:text-white text-sm focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none" 
                   />
                 </div>
               )}
 
               {/* --- REPLACE YOUR OLD EMAIL INPUT WITH THIS --- */}
               <div className="relative" ref={dropdownRef}>
-                <label className="block text-xs uppercase font-bold text-slate-500 mb-1.5 tracking-wider">Email ID</label>
+                <label className="block text-xs uppercase font-bold text-slate-500 dark:text-slate-400 mb-1.5 tracking-wider">Email ID</label>
                 <input 
                   type="email" 
                   required 
@@ -464,16 +464,16 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
                   }}
                   onFocus={() => setShowEmailDropdown(true)}
                   placeholder="Enter your email id" 
-                  className="w-full p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-blue-950 placeholder-slate-400 outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-all text-sm font-medium" 
+                  className="w-full p-3.5 rounded-xl bg-slate-50 dark:bg-[#020611] border border-slate-200 dark:border-[#132649] text-blue-950 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-all text-sm font-medium" 
                 />
                 
                 {/* Custom Dropdown Menu */}
                 {showEmailDropdown && (
-                  <div className="absolute z-10 w-full mt-2 bg-white border border-slate-200 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] max-h-60 flex flex-col overflow-hidden animate-in fade-in duration-200">
+                  <div className="absolute z-10 w-full mt-2 bg-white dark:bg-[#071326] border border-slate-200 dark:border-[#132649] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] max-h-60 flex flex-col overflow-hidden animate-in fade-in duration-200">
                     
                     {/* Header: Saved emails (X) — Clear All */}
-                    <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100 bg-slate-50 shrink-0">
-                      <span className="text-xs font-bold text-slate-500">
+                    <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100 dark:border-[#132649] bg-slate-50 dark:bg-[#020611] shrink-0">
+                      <span className="text-xs font-bold text-slate-500 dark:text-slate-400">
                         Saved emails ({emailHistory.length})
                       </span>
                       {emailHistory.length > 0 && (
@@ -493,14 +493,14 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
                           <div 
                             key={idx}
                             onClick={() => handleSelectHistoryEmail(histEmail)}
-                            className="px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-blue-950 cursor-pointer transition-colors"
+                            className="px-4 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-[#0d203e] hover:text-blue-950 dark:hover:text-white cursor-pointer transition-colors"
                           >
                             {histEmail}
                           </div>
                         ))}
                       </div>
                     ) : (
-                      <div className="px-4 py-4 text-xs font-medium text-slate-400 text-center italic bg-white">
+                      <div className="px-4 py-4 text-xs font-medium text-slate-400 text-center italic bg-white dark:bg-[#071326]">
                         No previous emails saved.
                       </div>
                     )}
@@ -512,7 +512,7 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
               <div>
                 <div className="flex justify-between items-center mb-1.5">
                   <label className="block text-xs uppercase font-bold text-slate-500 dark:text-slate-400 tracking-wider">Create Password</label>
-                  <button type="button" onClick={() => setShowPassword(!showPassword)} className="text-[11px] text-orange-500 hover:underline font-bold cursor-pointer">{showPassword ? 'Hide' : 'Show'}</button>
+                  <button type="button" onClick={() => setShowPassword(!showPassword)} className="text-[11px] text-orange-500 dark:text-orange-400 hover:underline font-bold cursor-pointer">{showPassword ? 'Hide' : 'Show'}</button>
                 </div>
                 <input 
                   type={showPassword ? 'text' : 'password'} 
@@ -521,7 +521,7 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
                   value={createPassword} 
                   onChange={(e) => setCreatePassword(e.target.value.slice(0, 8))} 
                   placeholder="e.g. Nexus@12" 
-                  className="w-full p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-blue-950 dark:text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none text-sm font-mono" 
+                  className="w-full p-3.5 rounded-xl bg-slate-50 dark:bg-[#020611] border border-slate-200 dark:border-[#132649] text-blue-950 dark:text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none text-sm font-mono" 
                 />
               </div>
 
@@ -534,20 +534,20 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
                   value={verifyPassword} 
                   onChange={(e) => setVerifyPassword(e.target.value.slice(0, 8))} 
                   placeholder="Re-enter 6–8 char password" 
-                  className="w-full p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-blue-950 dark:text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none text-sm font-mono" 
+                  className="w-full p-3.5 rounded-xl bg-slate-50 dark:bg-[#020611] border border-slate-200 dark:border-[#132649] text-blue-950 dark:text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none text-sm font-mono" 
                 />
               </div>
 
               <button 
                 type="submit" 
                 disabled={isSending} 
-                className="w-full py-3.5 bg-orange-500 hover:bg-orange-600 disabled:opacity-50 text-white font-black rounded-xl text-xs uppercase tracking-widest transition-colors shadow-lg shadow-orange-500/30 mt-2 cursor-pointer"
+                className="w-full py-3.5 bg-orange-500 hover:bg-orange-600 dark:bg-orange-400 dark:hover:bg-orange-500 disabled:opacity-50 text-white font-black rounded-xl text-xs uppercase tracking-widest transition-colors shadow-lg shadow-orange-500/30 mt-2 cursor-pointer"
               >
                 {isSending ? 'Processing...' : 'Register & Send Link'}
               </button>
             </form>
 
-            <div className="pt-4 mt-2 border-t border-slate-100 dark:border-slate-800 text-center">
+            <div className="pt-4 mt-2 border-t border-slate-100 dark:border-[#132649] text-center">
               <button
                 type="button"
                 onClick={handleDeleteAccount}

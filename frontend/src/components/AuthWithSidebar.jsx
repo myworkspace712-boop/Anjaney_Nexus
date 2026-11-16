@@ -146,8 +146,8 @@ const AuthWithSidebar = () => {
         {/* LEFT 2 COLUMNS: REGISTRATION & SIGN IN FORMS */}
         <div className="lg:col-span-2 space-y-8">
           {/* REGISTER CARD */}
-          <div className="bg-slate-950 p-6 rounded-2xl border border-slate-800 shadow-xl space-y-4">
-            <span className="text-xs font-bold text-orange-500 uppercase tracking-widest bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/20">
+          <div className="bg-[#071326] p-6 rounded-2xl border border-[#132649] shadow-xl space-y-4">
+            <span className="text-xs font-bold text-orange-400 uppercase tracking-widest bg-orange-400/10 px-3 py-1 rounded-full border border-orange-400/20">
               Database Entry
             </span>
             <h2 className="text-xl font-bold">Add New Email & Password Holder</h2>
@@ -164,7 +164,7 @@ const AuthWithSidebar = () => {
                     value={regEmail}
                     onChange={(e) => setRegEmail(e.target.value)}
                     placeholder="trade@company.com"
-                    className="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white outline-none focus:border-orange-500 text-sm"
+                    className="w-full p-3 rounded-lg bg-[#020611] border border-[#132649] text-white outline-none focus:border-orange-400 text-sm"
                   />
                 </div>
                 <div>
@@ -177,13 +177,13 @@ const AuthWithSidebar = () => {
                     value={regPassword}
                     onChange={(e) => setRegPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white outline-none focus:border-orange-500 text-sm"
+                    className="w-full p-3 rounded-lg bg-[#020611] border border-[#132649] text-white outline-none focus:border-orange-400 text-sm"
                   />
                 </div>
               </div>
               <button
                 type="submit"
-                className="w-full py-3 bg-orange-500 hover:bg-orange-600 font-bold rounded-lg text-sm transition-colors cursor-pointer"
+                className="w-full py-3 bg-gradient-to-r from-orange-400 to-amber-500 hover:from-orange-400 hover:to-amber-400 font-bold rounded-lg text-sm transition-colors cursor-pointer text-white shadow-md shadow-orange-500/25"
               >
                 Store Credentials
               </button>
@@ -191,8 +191,8 @@ const AuthWithSidebar = () => {
           </div>
 
           {/* SIGN IN CARD */}
-          <div className="bg-slate-950 p-6 rounded-2xl border border-slate-800 shadow-xl space-y-4">
-            <span className="text-xs font-bold text-orange-500 uppercase tracking-widest bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/20">
+          <div className="bg-[#071326] p-6 rounded-2xl border border-[#132649] shadow-xl space-y-4">
+            <span className="text-xs font-bold text-orange-400 uppercase tracking-widest bg-orange-400/10 px-3 py-1 rounded-full border border-orange-400/20">
               Authentication
             </span>
             <h2 className="text-xl font-bold">Sign In & Track Attempts</h2>
@@ -209,7 +209,7 @@ const AuthWithSidebar = () => {
                     value={loginEmail}
                     onChange={(e) => setLoginEmail(e.target.value)}
                     placeholder="trade@company.com"
-                    className="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white outline-none focus:border-orange-500 text-sm"
+                    className="w-full p-3 rounded-lg bg-[#020611] border border-[#132649] text-white outline-none focus:border-orange-400 text-sm"
                   />
                 </div>
                 <div>
@@ -222,13 +222,13 @@ const AuthWithSidebar = () => {
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white outline-none focus:border-orange-500 text-sm"
+                    className="w-full p-3 rounded-lg bg-[#020611] border border-[#132649] text-white outline-none focus:border-orange-400 text-sm"
                   />
                 </div>
               </div>
               <button
                 type="submit"
-                className="w-full py-3 bg-orange-500 hover:bg-orange-600 font-bold rounded-lg text-sm transition-colors cursor-pointer"
+                className="w-full py-3 bg-gradient-to-r from-orange-400 to-amber-500 hover:from-orange-400 hover:to-amber-400 font-bold rounded-lg text-sm transition-colors cursor-pointer text-white shadow-md shadow-orange-500/25"
               >
                 Verify Credentials
               </button>
@@ -236,7 +236,7 @@ const AuthWithSidebar = () => {
           </div>
 
           {/* BUTTON DIRECTLY BELOW REGISTRATION & SIGN IN CARDS */}
-          <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 shadow-xl space-y-2">
+          <div className="p-4 rounded-2xl bg-[#071326] border border-[#132649] shadow-xl space-y-2">
             <button
               type="button"
               onClick={handleDeleteAccount}
@@ -249,10 +249,10 @@ const AuthWithSidebar = () => {
         </div>
 
         {/* RIGHT COLUMN: HISTORY & ATTEMPT DIRECTORY SIDEBAR */}
-        <div className="bg-slate-950 p-6 rounded-2xl border border-slate-800 shadow-xl space-y-4 sticky top-24">
-          <div className="flex justify-between items-center border-b border-slate-800 pb-3">
+        <div className="bg-[#071326] p-6 rounded-2xl border border-[#132649] shadow-xl space-y-4 sticky top-24">
+          <div className="flex justify-between items-center border-b border-[#132649] pb-3">
             <h3 className="text-base font-bold text-white">Stored Email Holders</h3>
-            <span className="text-xs font-mono bg-orange-500/10 text-orange-400 px-2 py-0.5 rounded border border-orange-500/20">
+            <span className="text-xs font-mono bg-orange-400/10 text-orange-400 px-2 py-0.5 rounded border border-orange-400/20">
               Total: {users.length}
             </span>
           </div>
@@ -261,7 +261,7 @@ const AuthWithSidebar = () => {
             {users.map((u, index) => (
               <div
                 key={index}
-                className="bg-slate-900 p-3 rounded-xl border border-slate-800/80 space-y-2"
+                className="bg-[#020611] p-3 rounded-xl border border-[#132649] space-y-2"
               >
                 <div className="flex justify-between items-start gap-2">
                   <span className="font-mono text-xs text-orange-400 font-semibold break-all">
@@ -282,7 +282,7 @@ const AuthWithSidebar = () => {
                         type="button"
                         onClick={() => handleUnlock(u.email)}
                         title="Reset & Unlock Account"
-                        className="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-orange-300 border border-orange-500/30 cursor-pointer"
+                        className="text-[10px] px-1.5 py-0.5 rounded bg-[#0d203e] hover:bg-[#132649] text-orange-300 border border-orange-400/30 cursor-pointer"
                       >
                         Reset
                       </button>
@@ -299,7 +299,7 @@ const AuthWithSidebar = () => {
             ))}
           </div>
 
-          <p className="text-[11px] text-slate-500 text-center pt-2 border-t border-slate-800">
+          <p className="text-[11px] text-slate-500 text-center pt-2 border-t border-[#132649]">
             Updates in real-time as login attempts are processed.
           </p>
         </div>
