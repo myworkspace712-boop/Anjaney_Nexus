@@ -227,7 +227,7 @@ function AppContent({
           {/* Page Switcher */}
           {activePage === 'home' && <HomePage setActivePage={setActivePage} activePage={activePage} />}
           {activePage === 'products' && <ProductsPage setActivePage={setActivePage} />}
-          {activePage === 'about' && <AboutPage />}
+          {activePage === 'about' && <AboutPage setActivePage={setActivePage} />}
           {activePage === 'certificates' && <CertificatesPage />}
           {activePage === 'contact' && <InquirePage setActivePage={setActivePage} />}
           {activePage === 'privacy-policy' && <PrivacyPolicy />}

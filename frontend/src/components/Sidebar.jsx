@@ -1,122 +1,233 @@
-import { NavLink } from 'react-router-dom';
-import { X } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { useTheme } from '../context/ThemeContext';
 
-const Sidebar = ({ isOpen, onClose }) => {
-  const token = localStorage.getItem('token') || localStorage.getItem('anjaney-nexus-token');
-  const isAuthenticated = token && token !== 'undefined' && token !== 'null';
+const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === 'dark';
 
-  const handleLogout = () => {
-    localStorage.removeItem('userInfo');
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    localStorage.removeItem('anjaney-nexus-token');
-    window.location.href = '/';
+  // Navigation items matching all options on the navbar
+  const navItems = [
+    {
+      id: 'home',
+      label: 'Home',
+      description: 'Global Agro Commodities & Trade Terminal',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+      ),
+    },
+    {
+      id: 'about',
+      label: 'About Us',
+      description: 'A Trusted Partner in Global Trade',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+        </svg>
+      ),
+    },
+    {
+      id: 'products',
+      label: 'Our Products',
+      description: '26 Export-Grade Commodities & Specifications',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+        </svg>
+      ),
+    },
+    {
+      id: 'contact',
+      label: 'Contact Us',
+      description: 'Commercial Procurement & Official Inquiries',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      ),
+    },
+  ];
+
+  // Close on Escape key & lock body scroll when open
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
+  const handleNavClick = (pageId) => {
+    if (typeof setActivePage === 'function') {
+      setActivePage(pageId);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    onClose();
   };
+
   return (
     <>
-      {/* Backdrop overlay */}
-      {isOpen && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ease-in-out"
-          onClick={onClose}
-        ></div>
-      )}
-
-      {/* Slide-over panel */}
+      {/* 1. Backdrop Overlay */}
       <div 
-        className={`fixed inset-y-0 left-0 w-72 bg-white z-50 shadow-2xl transform transition-transform duration-300 ease-in-out ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`fixed inset-0 z-50 bg-black/60 transition-opacity duration-300 ${
+          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
+        onClick={onClose}
+        aria-hidden="true"
+      />
+
+      {/* 2. Slide-Over Sidebar Menu Panel */}
+      <aside 
+        className={`fixed top-0 bottom-0 right-0 w-80 sm:w-96 max-w-[85vw] z-50 flex flex-col justify-between transition-transform duration-300 ease-out border-l shadow-2xl ${
+          isDark 
+            ? 'bg-[#0c192c] border-[#1e3c66] text-slate-100 shadow-black/80' 
+            : 'bg-white border-slate-200 text-[#0b1d3a] shadow-blue-950/20'
+        } ${
+          isOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+        aria-label="Sidebar Navigation Menu"
       >
-        <div className="flex items-center justify-between p-6 border-b">
-          <img 
-            src="https://anjaneynexus.com/wp-content/uploads/2026/06/Anjaney_logo.webp" 
-            alt="Anjaney Nexus" 
-            className="h-8 w-auto"
-          />
+        
+        {/* SIDEBAR HEADER */}
+        <div className={`p-5 sm:p-6 border-b flex items-center justify-between ${
+          isDark ? 'border-[#1e3c66]' : 'border-slate-100'
+        }`}>
+          {/* Logo & Company Name */}
+          <div className="flex items-center gap-3">
+            <img 
+              src="/logo.png" 
+              alt="Anjaney Nexus India" 
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = '/Logo1.jpeg';
+              }}
+              className="w-9 h-9 object-contain rounded-lg shrink-0" 
+            />
+            <div className="text-base font-black leading-tight">
+              <span className="text-orange-500">Anjaney</span>{' '}
+              <span className={isDark ? 'text-blue-400' : 'text-blue-900'}>
+                Nexus India
+              </span>
+            </div>
+          </div>
+
+          {/* Close Button */}
           <button 
+            type="button"
             onClick={onClose} 
-            className="p-2 text-gray-400 hover:text-spice-dark focus:outline-none"
-            aria-label="Close sidebar"
+            className={`w-9 h-9 rounded-full border flex items-center justify-center transition-all cursor-pointer bg-transparent ${
+              isDark 
+                ? 'border-[#23426e] text-slate-300 hover:text-white hover:border-orange-500 hover:bg-white/5' 
+                : 'border-slate-200 text-slate-600 hover:text-blue-950 hover:border-orange-500 hover:bg-slate-100/60'
+            }`}
+            aria-label="Close sidebar menu"
           >
-            <X size={24} />
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" />
+            </svg>
           </button>
         </div>
-        
-        <nav className="flex flex-col p-6 space-y-4">
-          <NavLink 
-            to="/" 
-            onClick={onClose}
-            className={({ isActive }) => 
-              `text-lg font-semibold transition-colors ${
-                isActive ? 'text-spice-gold' : 'text-spice-dark hover:text-spice-gold'
-              }`
-            }
-          >Home</NavLink>
-          <NavLink 
-            to="/products" 
-            onClick={onClose}
-            className={({ isActive }) => 
-              `text-lg font-semibold transition-colors ${
-                isActive ? 'text-spice-gold' : 'text-spice-dark hover:text-spice-gold'
-              }`
-            }
-          >Products</NavLink>
-          <NavLink 
-            to="/about-us" 
-            onClick={onClose}
-            className={({ isActive }) => 
-              `text-lg font-semibold transition-colors ${
-                isActive ? 'text-spice-gold' : 'text-spice-dark hover:text-spice-gold'
-              }`
-            }
-          >About Us</NavLink>
-          <NavLink 
-            to="/contact" 
-            onClick={onClose}
-            className={({ isActive }) => 
-              `text-lg font-semibold transition-colors ${
-                isActive ? 'text-spice-gold' : 'text-spice-dark hover:text-spice-gold'
-              }`
-            }
-          >Contact</NavLink>
-          <NavLink 
-            to="/seller-application" 
-            onClick={onClose}
-            className={({ isActive }) => 
-              `text-lg font-semibold transition-colors ${
-                isActive ? 'text-spice-gold' : 'text-spice-dark hover:text-spice-gold'
-              }`
-            }
-          >Seller Application</NavLink>
 
-          <div className="pt-6 mt-6 border-t border-gray-100 space-y-4 flex flex-col">
-            <NavLink 
-              to="/contact" 
-              onClick={onClose}
-              className="px-4 py-3 border-2 border-spice-dark text-center text-spice-dark font-bold hover:bg-spice-dark hover:text-white transition-colors"
-            >
-              Inquiry Now
-            </NavLink>
-            {isAuthenticated ? (
-              <button 
-                onClick={handleLogout}
-                className="px-4 py-3 bg-red-600 text-white text-center font-bold hover:bg-red-700 transition-colors w-full"
-              >
-                Logout
-              </button>
-            ) : (
-              <NavLink 
-                to="/signup" 
-                onClick={onClose}
-                className="px-4 py-3 bg-spice-gold text-white text-center font-bold hover:bg-yellow-600 transition-colors"
-              >
-                Sign Up / Login
-              </NavLink>
-            )}
+        {/* SIDEBAR NAVIGATION ITEMS */}
+        <div className="p-4 sm:p-6 flex-grow overflow-y-auto space-y-2 scrollbar-thin">
+          <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 px-3 mb-2">
+            Navigation Menu
           </div>
-        </nav>
-      </div>
+
+          {navItems.map((item) => {
+            const isActive = activePage === item.id;
+            return (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => handleNavClick(item.id)}
+                className={`w-full text-left p-3.5 rounded-xl transition-all duration-200 cursor-pointer flex items-center justify-between group ${
+                  isActive
+                    ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white font-black shadow-md shadow-orange-500/25'
+                    : isDark
+                      ? 'text-slate-200 hover:bg-[#12243d] hover:text-white border border-transparent hover:border-[#1e3c66]'
+                      : 'text-[#0b1d3a] hover:bg-slate-50 hover:text-orange-600 border border-transparent hover:border-slate-200'
+                }`}
+              >
+                <div className="flex items-center gap-3.5 min-w-0">
+                  <div className={`p-2 rounded-lg shrink-0 transition-colors ${
+                    isActive 
+                      ? 'bg-white/20 text-white' 
+                      : isDark 
+                        ? 'bg-[#12243d] text-orange-400 group-hover:bg-[#162c4c]' 
+                        : 'bg-slate-100 text-orange-500 group-hover:bg-orange-50'
+                  }`}>
+                    {item.icon}
+                  </div>
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-sm font-black tracking-tight leading-snug">
+                      {item.label}
+                    </span>
+                    <span className={`text-[11px] truncate leading-tight mt-0.5 ${
+                      isActive 
+                        ? 'text-white/80' 
+                        : isDark ? 'text-slate-400' : 'text-slate-500'
+                    }`}>
+                      {item.description}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Right Arrow / Active Indicator */}
+                <svg 
+                  className={`w-4 h-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1 ${
+                    isActive ? 'text-white' : 'text-slate-400 group-hover:text-orange-500'
+                  }`}
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* SIDEBAR FOOTER & CTA */}
+        <div className={`p-5 sm:p-6 border-t space-y-4 ${
+          isDark ? 'border-[#1e3c66] bg-[#081526]/80' : 'border-slate-100 bg-slate-50/80'
+        }`}>
+          {/* Direct Commercial Quote Action */}
+          <button 
+            type="button"
+            onClick={() => handleNavClick('contact')}
+            className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-xs font-black uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-md shadow-orange-500/25 hover:shadow-orange-500/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center block"
+          >
+            Request Export Quote
+          </button>
+
+          {/* Official Email */}
+          <div className="flex items-center justify-center text-xs pt-1">
+            <a 
+              href="mailto:admin@anjaneynexus.com" 
+              className="text-xs font-semibold text-slate-400 hover:text-orange-500 transition-colors flex items-center gap-1.5"
+            >
+              <svg className="w-3.5 h-3.5 text-orange-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <span>admin@anjaneynexus.com</span>
+            </a>
+          </div>
+        </div>
+
+      </aside>
     </>
   );
 };

@@ -233,7 +233,7 @@ export const PRODUCT_PROFILE_DETAILS = {
     ]
   },
   'P-11': {
-    categoryHeader: 'SPICES',
+    categoryHeader: 'OIL SEEDS',
     subHeader: 'Bold Flavor & Export Quality',
     overview: 'Mustard seeds (rai) are a staple in Indian kitchens and international cuisine, highly valued for their bold flavor, pungent kick, and traditional health benefits.',
     highlights: [
@@ -400,12 +400,12 @@ export const PRODUCT_PROFILE_DETAILS = {
       }
     ],
     technicalSpecs: [
-      { key: 'Export Grades', value: 'W180 (King of Cashews), W210 (Jumbo), W240, W320, W450, Splits (FS), Butts, Pieces (LWP)' },
+      { key: 'Export Grades & Varieties', value: 'W180, W240, W320, W400, SWP, BB, 4 Piece, 8 Piece, 100% Broken, All Origins' },
       { key: 'Processing Method', value: 'Boiled / Steam Roasted & Vacuum Packed with CO2/N2' }
     ]
   },
   'P-19': {
-    categoryHeader: 'DRY FRUITS',
+    categoryHeader: 'SPICES',
     subHeader: 'Vital Active Phytochemicals',
     overview: 'Saffron is chemically composed of over 150 volatile and aroma-yielding compounds, but its three most vital active phytochemicals are crocin (responsible for color), picrocrocin (for bitter taste), and safranal (for aroma). Dried threads contain roughly 65% carbohydrates, 11% protein, 6% fat, and trace minerals like manganese.',
     breakdownTitle: 'Core Chemical Breakdown',
@@ -430,8 +430,9 @@ export const PRODUCT_PROFILE_DETAILS = {
       }
     ],
     technicalSpecs: [
+      { key: 'Varieties / Origins', value: 'Kashmiri, Iranian, Spanish' },
       { key: 'ISO 3632 Classification', value: 'Category I (Highest Color & Aroma Strength)' },
-      { key: 'Origin Standard', value: 'Kashmiri Mongra / Super Negin Grade' },
+      { key: 'Origin Standard', value: 'Kashmiri Mongra / Iranian Super Negin / Spanish Superior' },
       { key: 'Packaging', value: 'Sealed luxury glass vials / metal tins / food-grade pouches' }
     ]
   },
@@ -450,7 +451,7 @@ export const PRODUCT_PROFILE_DETAILS = {
       { label: 'Magnesium', value: '76.7 milligrams (approx. 18% Daily Value)' }
     ],
     technicalSpecs: [
-      { key: 'Varieties Available', value: 'Nonpareil, Carmel, Butte/Padre, California, Mamra, Gurbandi' },
+      { key: 'Varieties & Yields Available', value: '70/30, 80/20, Independent' },
       { key: 'Size Calibration', value: '18/20, 20/22, 23/25, 27/30 kernels per ounce' },
       { key: 'Moisture Level', value: 'Max 6%' }
     ]
@@ -474,6 +475,7 @@ export const PRODUCT_PROFILE_DETAILS = {
       }
     ],
     technicalSpecs: [
+      { key: 'Grades & Blends Available', value: 'All Grades & Custom Blends of Tea' },
       { key: 'Leaf Grades (Black Tea)', value: 'FTGFOP, TGFOP, BOP, CTC (Pekoe Dust)' },
       { key: 'Origins Sourced', value: 'Assam, Darjeeling, Nilgiri' },
       { key: 'Bioactives', value: 'Theanine, Catechins, Polyphenols' }
@@ -497,14 +499,14 @@ export const PRODUCT_PROFILE_DETAILS = {
       }
     ],
     technicalSpecs: [
-      { key: 'Species Available', value: 'Coffea Arabica & Coffea Robusta' },
+      { key: 'Species & Grades Available', value: 'All Grades of Arabica Green or Roasted, All Grades of Robusta Green or Roasted' },
       { key: 'Roast Options', value: 'Green Raw Beans / Light / Medium / Dark Roast' },
       { key: 'Key Chemical Matrix', value: 'Caffeine, Chlorogenic Acids, Tannins, Trigonelline' }
     ]
   },
   'P-23': {
     categoryHeader: 'TEA & COFFEE',
-    subHeader: 'Cocoa vs. Cacao & Nutrient Density',
+    subHeader: 'Cocoa Powder & Nutrient Density',
     overview: 'Unsweetened cocoa powder is a nutrient-dense ingredient. A standard 1-tablespoon (5g) serving contains approximately 10 calories, 3g of carbohydrates (including 2g of dietary fiber), 0g of sugar, and 0.5g of fat. It is also a rich source of antioxidants, iron, and magnesium.',
     breakdownTitle: 'Nutritional Breakdown (per 1 tbsp / 5g)',
     breakdownItems: [
@@ -526,6 +528,7 @@ export const PRODUCT_PROFILE_DETAILS = {
       }
     ],
     technicalSpecs: [
+      { key: 'Grades Available', value: 'All Grades of Cocoa Powder' },
       { key: 'Alkalization Types', value: 'Natural (Acidic pH 5-6) / Dutch-Processed (Neutralized pH 7-8)' },
       { key: 'Fat Content in Powder', value: '10–12% Standard / 20–22% High Fat Cocoa' }
     ]
@@ -551,14 +554,15 @@ export const PRODUCT_PROFILE_DETAILS = {
       }
     ],
     technicalSpecs: [
-      { key: 'Form Cuts', value: 'Minced, Chopped, Granules, Powder (White & Red Onion)' },
+      { key: 'Varieties Available', value: 'Red, Pink' },
+      { key: 'Form Cuts', value: 'Minced, Chopped, Granules, Powder' },
       { key: 'Shelf Life', value: 'Up to 24 Months in cool, dry storage' }
     ]
   },
   'P-25': {
     categoryHeader: 'FOOD INGREDIENTS',
     subHeader: 'Commercial Limits & Nutritional Makeup',
-    overview: 'Dehydrated garlic powder is made by drying and grinding fresh garlic cloves. It contains zero fat, highly concentrated carbohydrates, and contains less than 5% moisture. It delivers essential nutrients like calcium, iron, and potassium while remaining shelf-stable for up to 12 months.',
+    overview: 'Dehydrated garlic powder and paste are made from premium fresh garlic cloves. Containing zero fat, highly concentrated nutrients, and less than 5% moisture, delivering high shelf-stability and intense natural aroma.',
     breakdownTitle: 'Nutritional Values (per 100g)',
     breakdownItems: [
       { label: 'Calories', value: '331 kcal' },
@@ -573,16 +577,16 @@ export const PRODUCT_PROFILE_DETAILS = {
       }
     ],
     technicalSpecs: [
+      { key: 'Available Forms', value: 'Dehydrated Garlic Powder & Garlic Paste' },
       { key: 'Moisture Limit', value: '≤ 5% to 6%' },
       { key: 'Volatile Oil Content', value: '≥ 0.3%' },
-      { key: 'Ash Content', value: '≤ 4%' },
-      { key: 'Available Cuts', value: 'Flakes / Cloves, Minced, Granules, Fine Powder' }
+      { key: 'Ash Content', value: '≤ 4%' }
     ]
   },
   'P-26': {
     categoryHeader: 'FOOD INGREDIENTS',
     subHeader: 'Gingerol Concentration & Volatiles',
-    overview: 'Dehydrated ginger powder is a highly concentrated spice. Its core composition relies on low moisture content (6% to 10%). It typically yields 1.5% to 7% of gingerol (the active compound responsible for its pungent kick) and 1% to 3% volatile oils, retaining a strong aroma and flavor.',
+    overview: 'Dehydrated ginger is a highly concentrated spice. Its core composition relies on low moisture content (6% to 10%). It typically yields 1.5% to 7% of gingerol (the active compound responsible for its pungent kick) and 1% to 3% volatile oils, retaining a strong aroma and flavor.',
     breakdownTitle: 'Standard Commercial Breakdown (per 100g)',
     breakdownItems: [
       { label: 'Carbohydrates', value: '~70% to 72%' },
@@ -593,6 +597,7 @@ export const PRODUCT_PROFILE_DETAILS = {
       { label: 'Volatile Oils', value: '1% to 3%' }
     ],
     technicalSpecs: [
+      { key: 'Varieties Available', value: 'Indian, Nigerian' },
       { key: 'Active Pungent Principle', value: 'Gingerol (1.5% to 7%)' },
       { key: 'Volatile Oil Content', value: '1% to 3%' },
       { key: 'Available Forms', value: 'Whole Dried Ginger (Sun-dried / Bleached), Flakes, Micro-pulverized Powder' }

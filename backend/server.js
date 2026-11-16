@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 process.on('uncaughtException', (err) => {
   console.log("\n================ [ REAL FATAL CRASH ] ================");
   console.error("The server genuinely crashed due to this exact error:");

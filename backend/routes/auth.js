@@ -183,11 +183,16 @@ router.post('/reset-password/:token', async (req, res) => {
 });
 
 // Configurable admin emails from environment variables (No hardcoded personal emails)
-const getConfiguredAdminEmails = () =>
-  (process.env.ADMIN_EMAILS || '')
-    .split(',')
-    .map((e) => e.trim().toLowerCase())
-    .filter(Boolean);
+const getConfiguredAdminEmails = () => {
+  const emails = [
+    process.env.ADMIN_EMAIL,
+    process.env.ADMIN_NOTIFICATION_EMAIL,
+    ...(process.env.ADMIN_EMAILS || '').split(','),
+  ];
+  return emails
+    .filter(Boolean)
+    .map((e) => e.trim().toLowerCase());
+};
 
 // ─────────────────────────────────────────────────────────────
 // @POST /api/auth/login

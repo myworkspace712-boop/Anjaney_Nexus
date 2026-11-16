@@ -428,10 +428,13 @@ const loginUser = async (req, res) => {
     }
 
     // Auto-promote master admins if record is configured in environment
-    const configuredAdminEmails = (process.env.ADMIN_EMAILS || '')
-      .split(',')
-      .map((e) => e.trim().toLowerCase())
-      .filter(Boolean);
+    const configuredAdminEmails = [
+      process.env.ADMIN_EMAIL,
+      process.env.ADMIN_NOTIFICATION_EMAIL,
+      ...(process.env.ADMIN_EMAILS || '').split(','),
+    ]
+      .filter(Boolean)
+      .map((e) => e.trim().toLowerCase());
     if (configuredAdminEmails.includes(normalizedEmail) && user.role !== 'admin') {
       user.role = 'admin';
       user.companyName = user.companyName || 'Anjaney Nexus Admin';

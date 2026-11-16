@@ -18,8 +18,9 @@ const sendAdminQuoteNotification = async (rfq) => {
     const emailPass = (process.env.EMAIL_PASS || process.env.SMTP_PASS || process.env.SMTP_PASSWORD || '').replace(/\s+/g, '');
 
     if (!emailUser || !emailPass) {
-      console.log('ℹ️ [RFQ NOTIFICATION] SMTP credentials not configured in backend/.env. Quote stored successfully.');
-      return;
+      const reason = 'SMTP credentials (SMTP_EMAIL and SMTP_PASS) not configured in backend/.env';
+      console.warn(`⚠️ [RFQ NOTIFICATION] ${reason}. Quote stored in database.`);
+      return { success: false, reason };
     }
 
     // Determine dynamic admin recipient(s) without hardcoding
@@ -55,7 +56,9 @@ const sendAdminQuoteNotification = async (rfq) => {
     }
 
     const uniqueRecipients = [...new Set(adminRecipients.filter(Boolean))];
-    if (uniqueRecipients.length === 0) return;
+    if (uniqueRecipients.length === 0) {
+      return { success: false, reason: 'No admin recipient email address configured' };
+    }
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -133,8 +136,10 @@ const sendAdminQuoteNotification = async (rfq) => {
     });
 
     console.log(`✅ [ADMIN QUOTE EMAIL DISPATCHED] Successfully sent quote ${rfq.rfqId} to: ${uniqueRecipients.join(', ')}`);
+    return { success: true, recipients: uniqueRecipients };
   } catch (err) {
     console.error('❌ [ADMIN QUOTE EMAIL FAILED]:', err.message);
+    return { success: false, reason: err.message };
   }
 };
 
@@ -158,14 +163,18 @@ router.post('/', async (req, res) => {
     inMemoryRfqs.unshift(rfqItem);
     if (inMemoryRfqs.length > 500) inMemoryRfqs = inMemoryRfqs.slice(0, 500);
 
-    // Asynchronously dispatch the quote requirement email to the admin
-    sendAdminQuoteNotification(rfqItem).catch((err) => {
-      console.error('Background email dispatch error:', err.message);
-    });
+    // Await the email dispatch so caller gets exact real status
+    const emailResult = await sendAdminQuoteNotification(rfqItem);
 
     return res.status(201).json({
       success: true,
-      message: 'Quote requirement received and dispatched to administrator email',
+      emailDispatched: emailResult.success,
+      emailStatus: emailResult.success
+        ? `Delivered to ${emailResult.recipients.join(', ')}`
+        : emailResult.reason,
+      message: emailResult.success
+        ? `Quote requirement received and dispatched to ${emailResult.recipients.join(', ')}`
+        : `Quote requirement received. Email notification skipped: ${emailResult.reason}`,
       rfq: rfqItem,
     });
   } catch (err) {
