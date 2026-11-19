@@ -200,6 +200,49 @@ const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
               </button>
             );
           })}
+
+          {/* Theme Mode Setting */}
+          <div className="pt-4 mt-3 border-t border-slate-100 dark:border-[#132649]/60">
+            <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 px-3 mb-2">
+              Appearance & Settings
+            </div>
+
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className={`w-full text-left p-3.5 rounded-xl transition-all duration-200 cursor-pointer flex items-center justify-between group ${
+                isDark
+                  ? 'text-slate-200 hover:bg-[#071326] hover:text-white border border-[#132649]/60 hover:border-[#132649]'
+                  : 'text-[#0b1d3a] hover:bg-slate-50 hover:text-orange-600 border border-slate-200 hover:border-slate-300'
+              }`}
+              title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            >
+              <div className="flex items-center gap-3.5 min-w-0">
+                <div className={`p-2 rounded-lg shrink-0 text-base transition-colors ${
+                  isDark ? 'bg-[#071326] text-amber-300 group-hover:bg-[#0d203e]' : 'bg-slate-100 text-amber-500 group-hover:bg-amber-50'
+                }`}>
+                  {isDark ? '🌙' : '☀️'}
+                </div>
+                <div className="flex flex-col min-w-0">
+                  <span className="text-sm font-black tracking-tight leading-snug">
+                    Theme: {isDark ? 'Dark Mode' : 'Light Mode'}
+                  </span>
+                  <span className={`text-[11px] truncate leading-tight mt-0.5 ${
+                    isDark ? 'text-slate-400' : 'text-slate-500'
+                  }`}>
+                    Switch to {isDark ? 'Light' : 'Dark'} mode
+                  </span>
+                </div>
+              </div>
+
+              {/* Toggle Switch */}
+              <div className={`w-11 h-6 rounded-full p-0.5 transition-colors duration-200 flex items-center shrink-0 ${
+                isDark ? 'bg-orange-500 justify-end' : 'bg-slate-300 justify-start'
+              }`}>
+                <div className="w-5 h-5 rounded-full bg-white shadow-md transform transition-transform" />
+              </div>
+            </button>
+          </div>
         </div>
 
         {/* SIDEBAR FOOTER & CTA */}

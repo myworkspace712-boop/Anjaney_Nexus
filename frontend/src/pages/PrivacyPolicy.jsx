@@ -14,8 +14,14 @@ const PrivacyPolicy = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#020611] font-sans py-20 md:py-32 transition-colors duration-300">
-      <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#020611] font-sans py-20 md:py-32 transition-colors duration-300 relative overflow-hidden">
+      
+      {/* AMBIENT DYNAMIC GLOWS */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full pointer-events-none blur-3xl opacity-20 -z-0 bg-orange-400/20"></div>
+      <div className="absolute top-[450px] right-10 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl -z-0 bg-[#132649]/35"></div>
+      <div className="absolute bottom-20 left-10 w-[450px] h-[450px] rounded-full pointer-events-none blur-3xl -z-0 bg-[#0d203e]/30"></div>
+
+      <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         
         {/* HEADER */}
         <div className="mb-16">
@@ -49,22 +55,22 @@ const PrivacyPolicy = () => {
               2. Information We Collect
             </h2>
             <p className="mb-4">We collect various types of information to provide and improve our B2B export services:</p>
-            <ul className="space-y-2 pl-2">
+            <ul className="space-y-2.5 pl-2">
               <li className="flex items-start">
-                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black">•</span>
-                <span><strong>Corporate Identity Data:</strong> Company name, registered addresses, and buyer credentials.</span>
+                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black text-lg leading-none">•</span>
+                <span><strong className="text-slate-800 dark:text-slate-100 font-bold">Corporate Identity Data:</strong> Company name, registered addresses, and buyer credentials.</span>
               </li>
               <li className="flex items-start">
-                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black">•</span>
-                <span><strong>Contact Information:</strong> Primary and billing email addresses, phone numbers, and representative names.</span>
+                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black text-lg leading-none">•</span>
+                <span><strong className="text-slate-800 dark:text-slate-100 font-bold">Contact Information:</strong> Primary and billing email addresses, phone numbers, and representative names.</span>
               </li>
               <li className="flex items-start">
-                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black">•</span>
-                <span><strong>Trade Data:</strong> Details of your RFQs, commodity requirements (e.g., spices, rice, oilseeds), port of destination, and preferred shipping terms (FOB, CIF).</span>
+                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black text-lg leading-none">•</span>
+                <span><strong className="text-slate-800 dark:text-slate-100 font-bold">Trade Data:</strong> Details of your RFQs, commodity requirements (e.g., spices, rice, oilseeds), port of destination, and preferred shipping terms (FOB, CIF).</span>
               </li>
               <li className="flex items-start">
-                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black">•</span>
-                <span><strong>Usage Data & Cookies:</strong> We use cookies to track portal usage, manage user authentication securely, and optimize the buyer journey.</span>
+                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black text-lg leading-none">•</span>
+                <span><strong className="text-slate-800 dark:text-slate-100 font-bold">Usage Data & Cookies:</strong> We use cookies to track portal usage, manage user authentication securely, and optimize the buyer journey.</span>
               </li>
             </ul>
           </section>
@@ -75,10 +81,7 @@ const PrivacyPolicy = () => {
               3. Cookie Policy & Tracking
             </h2>
             <p className="mb-4">
-              Our website utilizes cookies to ensure core functionality and security (Essential Cookies), as well as to analyze site traffic (Analytics Cookies).
-            </p>
-            <p className="mb-4">
-              When you first visit our site, you are presented with a Cookie Banner allowing you to accept all cookies or proceed with ESSENTIAL ones. You may revoke or modify your consent at any time using the floating cookie settings button at the bottom of the screen.
+              Our website utilizes cookies to ensure core functionality and security (Essential Cookies), as well as to analyze site traffic (Analytics Cookies). When you first visit our site, you are presented with a Cookie Banner allowing you to accept all cookies or proceed with essential ones. You may revoke or modify your consent at any time using the cookie settings button.
             </p>
 
             {/* Interactive Cookie Preference Settings */}
@@ -125,21 +128,21 @@ const PrivacyPolicy = () => {
               4. How We Use Your Data
             </h2>
             <p className="mb-4">Anjaney Nexus India LLP processes your data strictly for legitimate business purposes, including:</p>
-            <ul className="space-y-2 pl-2">
+            <ul className="space-y-2.5 pl-2">
               <li className="flex items-start">
-                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black">•</span>
+                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black text-lg leading-none">•</span>
                 <span>Verifying corporate buyers and mitigating trade fraud.</span>
               </li>
               <li className="flex items-start">
-                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black">•</span>
+                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black text-lg leading-none">•</span>
                 <span>Generating and dispatching accurate Proforma Invoices based on your RFQs.</span>
               </li>
               <li className="flex items-start">
-                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black">•</span>
+                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black text-lg leading-none">•</span>
                 <span>Providing secure access to our Trade Control Panel.</span>
               </li>
               <li className="flex items-start">
-                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black">•</span>
+                <span className="text-orange-500 dark:text-orange-400 mr-3 font-black text-lg leading-none">•</span>
                 <span>Communicating updates regarding logistics, shipments, and commodity market feeds.</span>
               </li>
             </ul>
@@ -148,38 +151,75 @@ const PrivacyPolicy = () => {
           {/* Section 5 */}
           <section>
             <h2 className="text-xl font-black text-blue-950 dark:text-white mb-4">
-              5. Data Security
+              5. Data Sharing & Third Parties
             </h2>
             <p>
-              We value the trust you place in providing your corporate information. Our platform uses standard encryption protocols for data transmission. Access to trade information and client records is strictly restricted and monitored. However, no method of transmission over the internet or electronic storage is 100% secure.
+              To fulfill export requirements and logistics, we may share necessary corporate and trade data with trusted third parties, including freight forwarders, shipping lines, customs authorities, and regulatory bodies (such as APEDA or the Spices Board).
             </p>
           </section>
 
           {/* Section 6 */}
           <section>
             <h2 className="text-xl font-black text-blue-950 dark:text-white mb-4">
-              6. Terms of Trade
+              6. Data Security
+            </h2>
+            <p>
+              We value the trust you place in providing your corporate information. Our platform uses standard encryption protocols for data transmission. Access to trade information and client records is strictly restricted and monitored. However, no method of transmission over the internet or electronic storage is 100% secure.
+            </p>
+          </section>
+
+          {/* Section 7 */}
+          <section>
+            <h2 className="text-xl font-black text-blue-950 dark:text-white mb-4">
+              7. Terms of Trade
             </h2>
             <p>
               Information provided on this website does not constitute a binding legal contract until a formal Proforma Invoice is signed by both parties. All agro-commodity exports are subject to Indian export regulations, third-party inspection clearances (where applicable), and mutually agreed incoterms.
             </p>
           </section>
 
-          {/* Section 7 */}
-          <section className="bg-white dark:bg-[#071326] border border-slate-200 dark:border-[#132649] p-8 rounded-2xl shadow-sm mt-8">
+          {/* Section 8 */}
+          <section>
             <h2 className="text-xl font-black text-blue-950 dark:text-white mb-4">
-              7. Contact Us
+              8. Your Data Rights
             </h2>
-            <p className="mb-4">If you have any questions or concerns regarding this Privacy Policy or your data, please contact our compliance team:</p>
-            <address className="not-italic font-medium text-slate-700 dark:text-slate-300 space-y-1">
-              <p className="font-bold text-blue-950 dark:text-white">Anjaney Nexus India LLP</p>
+            <p>
+              You have the right to access, update, or request the deletion of your corporate account information at any time. To exercise these rights, please contact our compliance team.
+            </p>
+          </section>
+
+          {/* Section 9 */}
+          <section className="bg-white dark:bg-[#071326] border border-slate-200 dark:border-[#132649] p-6 sm:p-8 rounded-2xl shadow-sm mt-8">
+            <h2 className="text-xl font-black text-blue-950 dark:text-white mb-4">
+              9. Contact Us
+            </h2>
+            <p className="mb-4">
+              If you have any questions or concerns regarding this Privacy Policy or your data, please contact our compliance team:
+            </p>
+            <address className="not-italic font-medium text-slate-700 dark:text-slate-300 space-y-1.5">
+              <p className="font-bold text-blue-950 dark:text-white text-base">Anjaney Nexus India LLP</p>
+              <p>C/145, First Floor, B G Tower, Delhi Darwaja</p>
               <p>Ahmedabad, Gujarat, India</p>
-              <p className="pt-2">
-                <span className="text-slate-400 dark:text-slate-500 mr-2">Phone:</span> 
-                <a href="tel:+919824056061" className="text-orange-500 hover:text-orange-600 dark:text-orange-400 dark:hover:text-orange-300 font-bold transition-colors">
-                  +91 98240 56061
-                </a>
-              </p>
+              <div className="pt-3 space-y-2">
+                <p className="flex items-center gap-2">
+                  <span className="text-slate-400 dark:text-slate-500 font-semibold text-xs uppercase tracking-wider min-w-[50px]">Email:</span>
+                  <a 
+                    href="mailto:yatharthjoshi127@gmail.com" 
+                    className="text-orange-500 hover:text-orange-600 dark:text-orange-400 dark:hover:text-orange-300 font-bold transition-colors"
+                  >
+                    yatharthjoshi127@gmail.com
+                  </a>
+                </p>
+                <p className="flex items-center gap-2">
+                  <span className="text-slate-400 dark:text-slate-500 font-semibold text-xs uppercase tracking-wider min-w-[50px]">Phone:</span>
+                  <a 
+                    href="tel:+919879756061" 
+                    className="text-orange-500 hover:text-orange-600 dark:text-orange-400 dark:hover:text-orange-300 font-bold transition-colors"
+                  >
+                    +91 98797 56061
+                  </a>
+                </p>
+              </div>
             </address>
           </section>
 

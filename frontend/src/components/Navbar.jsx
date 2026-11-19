@@ -6,7 +6,17 @@ const Navbar = ({ activePage, setActivePage }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
   const themeContext = useTheme();
-  const [localTheme, setLocalTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+  const [localTheme, setLocalTheme] = useState(() => {
+    try {
+      const userSelected = localStorage.getItem('theme_user_selected');
+      if (userSelected === 'true') {
+        return localStorage.getItem('theme') || 'light';
+      }
+      return 'light';
+    } catch {
+      return 'light';
+    }
+  });
   const isDarkMode = themeContext ? themeContext.theme === 'dark' : localTheme === 'dark';
 
   const navLinks = [
@@ -22,7 +32,12 @@ const Navbar = ({ activePage, setActivePage }) => {
     } else {
       setLocalTheme((prev) => {
         const next = prev === 'dark' ? 'light' : 'dark';
-        localStorage.setItem('theme', next);
+        try {
+          localStorage.setItem('theme_user_selected', 'true');
+          localStorage.setItem('theme', next);
+        } catch (e) {
+          console.warn('Could not store theme preference:', e);
+        }
         return next;
       });
     }
@@ -63,6 +78,7 @@ const Navbar = ({ activePage, setActivePage }) => {
             <div className="hidden sm:flex items-center gap-2.5 md:gap-4 lg:gap-8 h-full">
               {navLinks.map((link) => {
                 const isActive = activePage === link.id;
+
                 return (
                   <button
                     key={link.id}

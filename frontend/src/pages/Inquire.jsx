@@ -40,6 +40,20 @@ const Inquire = ({ setActivePage }) => {
           }));
         }
         localStorage.removeItem('an_quote_product');
+
+        setTimeout(() => {
+          const el = document.getElementById('export-quote-section');
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 150);
+      } else if (window.location.hash === '#export-quote-section') {
+        setTimeout(() => {
+          const el = document.getElementById('export-quote-section');
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 150);
       }
     } catch (err) {
       console.error(err);
@@ -373,7 +387,7 @@ const Inquire = ({ setActivePage }) => {
       {/* =========================================================================
           3. EXPORT QUOTE CARD (Kept as it was, with Logo Theme & Dark Non-Black Palette)
          ========================================================================= */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 relative z-10">
+      <div id="export-quote-section" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 relative z-10 scroll-mt-24">
         
         {/* CARD WRAPPER */}
         <div className={`rounded-3xl shadow-2xl overflow-hidden border transition-all duration-300 ${
@@ -389,7 +403,7 @@ const Inquire = ({ setActivePage }) => {
               : 'border-blue-950/20 bg-[#0b1d3a]'
           }`}>
             <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
-              Request Your Export Quote
+              Export Quote
             </h2>
           </div>
 

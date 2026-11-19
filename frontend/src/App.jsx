@@ -94,6 +94,53 @@ export default function App() {
   };
 
   // =====================================================================
+  // DYNAMIC CONSENT-BASED ANALYTICS & TRACKER LOADER
+  // =====================================================================
+  useEffect(() => {
+    const loadTrackers = () => {
+      try {
+        // 1. Check what the user clicked in the banner
+        const consent = localStorage.getItem('cookieConsent') || localStorage.getItem('anjaney_cookie_consent');
+
+        // 2. Only load trackers if they clicked "Accept All"
+        if (consent === 'all') {
+          // Prevent duplicate injection
+          if (document.getElementById('ga-gtag-script')) return;
+
+          // Example: Injecting Google Analytics dynamically
+          const script = document.createElement('script');
+          script.id = 'ga-gtag-script';
+          script.src = "https://www.googletagmanager.com/gtag/js?id=YOUR_TRACKING_ID";
+          script.async = true;
+          document.head.appendChild(script);
+
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'YOUR_TRACKING_ID');
+        }
+      } catch (err) {
+        // If cookies or storage are disabled by browser, site still works 100%
+        console.warn('Cookie storage unavailable; trackers not loaded:', err);
+      }
+    };
+
+    // Initial check on mount
+    loadTrackers();
+
+    // Listen for live consent updates dispatched from Cookie Banner or Privacy Policy page
+    const handleConsentChange = (e) => {
+      if (e?.detail === 'all') {
+        loadTrackers();
+      }
+    };
+    window.addEventListener('anjaney_cookie_consent_updated', handleConsentChange);
+    return () => {
+      window.removeEventListener('anjaney_cookie_consent_updated', handleConsentChange);
+    };
+  }, []);
+
+  // =====================================================================
   // BULLETPROOF EMAIL LINK DETECTOR & VERIFIER
   // =====================================================================
   useEffect(() => {

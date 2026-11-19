@@ -16,20 +16,20 @@ export const useTheme = () => {
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
     try {
-      const savedTheme = localStorage.getItem('theme');
-      return savedTheme ? savedTheme : 'light';
+      const userSelected = localStorage.getItem('theme_user_selected');
+      if (userSelected === 'true') {
+        const savedTheme = localStorage.getItem('theme');
+        return savedTheme === 'dark' ? 'dark' : 'light';
+      }
+      // Default theme for all visitors is strictly light mode
+      localStorage.setItem('theme', 'light');
+      return 'light';
     } catch {
       return 'light';
     }
   });
 
   useEffect(() => {
-    try {
-      localStorage.setItem('theme', theme);
-    } catch (e) {
-      console.warn('Could not store theme in localStorage:', e);
-    }
-
     const root = document.documentElement;
     if (theme === 'dark') {
       root.classList.add('dark');
@@ -41,7 +41,16 @@ export const ThemeProvider = ({ children }) => {
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme((prevTheme) => {
+      const nextTheme = prevTheme === 'light' ? 'dark' : 'light';
+      try {
+        localStorage.setItem('theme_user_selected', 'true');
+        localStorage.setItem('theme', nextTheme);
+      } catch (e) {
+        console.warn('Could not store theme preference:', e);
+      }
+      return nextTheme;
+    });
   };
 
   return (

@@ -1795,18 +1795,34 @@ const ProductsPage = ({ setActivePage }) => {
   const [activeCategory, setActiveCategory] = useState('All Commodities');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [openDropdownId, setOpenDropdownId] = useState(null);
+  const [openDropdowns, setOpenDropdowns] = useState({});
   const [selectedVarieties, setSelectedVarieties] = useState({});
 
-  // Close dropdown when clicking outside
+  const toggleDropdown = (productId) => {
+    setOpenDropdowns((prev) => ({
+      ...prev,
+      [productId]: !prev[productId]
+    }));
+  };
+
+  // Close dropdowns when clicking outside or pressing Escape
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (!e.target.closest('.product-dropdown-container')) {
-        setOpenDropdownId(null);
+      if (!e.target.closest('.subproduct-dropdown-container') && !e.target.closest('.product-dropdown-container')) {
+        setOpenDropdowns({});
+      }
+    };
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setOpenDropdowns({});
       }
     };
     document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
 
   // Sync search query from URL parameter if navigated from another page
@@ -1861,12 +1877,12 @@ const ProductsPage = ({ setActivePage }) => {
     return matchesCategory && matchesSearch;
   });
 
-  const handleGetQuote = (product) => {
-    const chosenVariety = selectedVarieties[product.id] || (product.varieties && (typeof product.varieties[0] === 'string' ? product.varieties[0] : product.varieties[0]?.name)) || '';
+  const handleGetQuote = (product, specificVariety = null) => {
+    const chosenVariety = specificVariety || selectedVarieties[product.id] || (product.varieties && (typeof product.varieties[0] === 'string' ? product.varieties[0] : product.varieties[0]?.name)) || '';
     try {
       localStorage.setItem('an_quote_product', JSON.stringify({
         id: product.id,
-        name: product.title || product.name,
+        name: chosenVariety ? `${product.title || product.name} - ${chosenVariety}` : (product.title || product.name),
         variety: chosenVariety,
         spec: chosenVariety ? `${product.title || product.name} (${chosenVariety})` : product.spec,
         moq: product.moq,
@@ -1879,9 +1895,16 @@ const ProductsPage = ({ setActivePage }) => {
 
     if (typeof setActivePage === 'function') {
       setActivePage('contact');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => {
+        const el = document.getElementById('export-quote-section');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          window.scrollTo({ top: 400, behavior: 'smooth' });
+        }
+      }, 100);
     } else {
-      window.location.href = '/contact';
+      window.location.href = '/contact#export-quote-section';
     }
   };
 
@@ -2087,6 +2110,7 @@ const ProductsPage = ({ setActivePage }) => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {filteredProducts.map((product) => {
+              const hasSubProducts = product.varieties && product.varieties.length > 1;
               const selectedVarObj = product.varieties?.find(
                 (v) => (typeof v === 'string' ? v : v.name) === selectedVarieties[product.id]
               );
@@ -2097,7 +2121,8 @@ const ProductsPage = ({ setActivePage }) => {
               return (
               <div 
                 key={product.id} 
-                className={`border rounded-3xl overflow-hidden transition-all duration-300 flex flex-col group hover:-translate-y-1.5 ${
+                onClick={() => handleGetQuote(product)}
+                className={`border rounded-3xl overflow-hidden transition-all duration-300 ease-out flex flex-col group relative cursor-pointer hover:-translate-y-2 hover:shadow-2xl h-[440px] w-full ${
                   isDark 
                     ? 'bg-[#071326] border-[#132649] shadow-[0_12px_30px_rgba(4,12,24,0.4)] hover:shadow-[0_20px_45px_rgba(4,12,24,0.7)] hover:border-orange-400/80' 
                     : 'bg-white border-slate-200/90 shadow-[0_10px_30px_rgba(11,29,58,0.05)] hover:shadow-[0_20px_45px_rgba(11,29,58,0.12)] hover:border-orange-500/60'
@@ -2105,7 +2130,7 @@ const ProductsPage = ({ setActivePage }) => {
               >
                 
                 {/* Product Image Container */}
-                <div className={`h-60 w-full overflow-hidden relative ${
+                <div className={`h-52 w-full overflow-hidden rounded-t-3xl relative shrink-0 ${
                   isDark ? 'bg-[#020611]' : 'bg-slate-100'
                 }`}>
                   <img 
@@ -2124,148 +2149,88 @@ const ProductsPage = ({ setActivePage }) => {
                 </div>
 
                 {/* Card Body */}
-                <div className="p-6 flex flex-col flex-grow justify-between space-y-5">
-                  <div className="space-y-4">
-                    {/* Title & Subtitle */}
-                    <div className="space-y-1">
-                      <h3 className={`text-xl sm:text-2xl font-black leading-tight flex flex-wrap items-baseline gap-2 ${
+                <div className="p-5 flex flex-col flex-1 justify-between space-y-3 rounded-b-3xl overflow-hidden">
+                  <div className="space-y-2">
+                    {/* Title & Subtitle (Consistent Height) */}
+                    <div className="h-14 flex items-center">
+                      <h3 className={`text-xl sm:text-2xl font-black leading-snug flex flex-wrap items-baseline gap-2 line-clamp-2 ${
                         isDark ? 'text-white' : 'text-[#0b1d3a]'
                       }`}>
                         <span>{product.name}</span>
                         {product.subtitle && (
-                          <span className="text-sm sm:text-base font-bold text-orange-500 dark:text-orange-400">
+                          <span className="text-sm font-bold text-orange-500 dark:text-orange-400">
                             {product.subtitle}
                           </span>
                         )}
                       </h3>
-                      {product.bullets && product.bullets.length > 0 && (
-                        <p className={`text-xs line-clamp-2 leading-relaxed ${
-                          isDark ? 'text-slate-400' : 'text-slate-600'
-                        }`}>
-                          {product.bullets[0]}
-                        </p>
-                      )}
                     </div>
 
-                    {/* Prominent Varieties & Grades Dropdown Menu (only if product has multiple varieties) */}
-                    {product.varieties && product.varieties.length > 1 && (
-                      <div className="relative product-dropdown-container">
-                        <button 
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setOpenDropdownId(openDropdownId === product.id ? null : product.id);
-                          }}
-                          className={`w-full flex items-center justify-between px-4 py-3.5 rounded-xl border text-xs font-black transition-all cursor-pointer shadow-xs ${
-                            openDropdownId === product.id
-                              ? 'bg-orange-50 dark:bg-orange-400/15 border-orange-500 dark:border-orange-400 text-orange-600 dark:text-orange-400 ring-2 ring-orange-500/20 dark:ring-orange-400/30'
-                              : isDark
-                                ? 'bg-[#020611] border-[#132649] text-white hover:border-orange-400/80'
-                                : 'bg-[#fafafa] border-slate-300 text-[#0b1d3a] hover:border-orange-500'
-                          }`}
-                        >
-                          <span className="flex items-center gap-2.5 min-w-0 pr-2">
-                            {selectedVarObj && typeof selectedVarObj === 'object' && selectedVarObj.image ? (
-                              <img 
-                                src={selectedVarObj.image} 
-                                alt={selectedVarObj.name} 
-                                className="w-5 h-5 rounded-md object-cover border border-slate-200 dark:border-[#132649] shrink-0 shadow-2xs" 
-                              />
-                            ) : (
-                              <span className={`w-2 h-2 rounded-full shrink-0 ${openDropdownId === product.id ? 'bg-orange-500 dark:bg-orange-400 animate-ping' : 'bg-orange-500 dark:bg-orange-400'}`}></span>
-                            )}
-                            <span className="truncate">
-                              {selectedVarieties[product.id] || product.dropdownPlaceholder || 'Select Variety / Grade'}
-                            </span>
-                          </span>
-                          <svg 
-                            className={`w-4 h-4 shrink-0 transition-transform duration-300 ${
-                              openDropdownId === product.id ? 'rotate-180 text-orange-500 dark:text-orange-400' : 'text-slate-400'
-                            }`}
-                            fill="none" 
-                            stroke="currentColor" 
-                            viewBox="0 0 24 24"
-                          >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
-                          </svg>
-                        </button>
-
-                        {/* Dropdown Menu Effect */}
-                        <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                          openDropdownId === product.id ? 'max-h-[500px] mt-2 opacity-100' : 'max-h-0 opacity-0'
-                        }`}>
-                          <div className={`p-2.5 border rounded-xl space-y-1.5 shadow-xl max-h-72 overflow-y-auto ${
-                            isDark 
-                              ? 'bg-[#020611] border-[#132649]' 
-                              : 'bg-white border-slate-200'
-                          }`}>
+                    {/* All Varieties & Grades Directly Visible (Consistent Height Container) */}
+                    <div className="h-32 flex flex-col justify-start">
+                      {hasSubProducts && (
+                        <div className="h-full overflow-y-auto scrollbar-thin pr-1">
+                          <div className="flex flex-wrap gap-1.5">
                             {product.varieties.map((v, vIdx) => {
                               const varName = typeof v === 'string' ? v : v.name;
                               const varImg = (typeof v === 'object' && v.image) ? v.image : null;
                               const isSelected = selectedVarieties[product.id] === varName;
                               return (
-                                <button 
+                                <button
                                   key={vIdx}
                                   type="button"
                                   onClick={(e) => {
                                     e.stopPropagation();
                                     setSelectedVarieties((prev) => ({ ...prev, [product.id]: varName }));
-                                    setOpenDropdownId(null);
+                                    handleGetQuote(product, varName);
                                   }}
-                                  className={`w-full flex items-center justify-between p-2.5 rounded-lg border text-xs font-bold transition-all text-left cursor-pointer ${
-                                    isSelected 
+                                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
+                                    isSelected
                                       ? isDark
-                                        ? 'bg-gradient-to-r from-orange-400 to-amber-500 text-white border-transparent shadow-sm'
-                                        : 'bg-orange-500 text-white border-orange-500 shadow-sm' 
+                                        ? 'bg-gradient-to-r from-orange-400 to-amber-500 text-white font-black border-transparent shadow-sm'
+                                        : 'bg-gradient-to-r from-orange-500 to-orange-600 text-white font-black border-transparent shadow-sm'
                                       : isDark
-                                        ? 'bg-[#071326] border-[#132649] text-slate-200 hover:border-orange-400/60 hover:bg-[#0d203e]'
-                                        : 'bg-slate-50 border-slate-200/80 text-slate-800 hover:border-orange-500/60 hover:bg-orange-50/50'
+                                        ? 'bg-[#020611] hover:bg-orange-500/20 border-[#132649] hover:border-orange-400 text-slate-200 hover:text-white'
+                                        : 'bg-slate-50 hover:bg-orange-50 border-slate-200 hover:border-orange-500 text-slate-700 hover:text-orange-600 shadow-2xs'
                                   }`}
                                 >
-                                  <div className="flex items-center gap-2.5 min-w-0 pr-1">
-                                    {varImg && (
-                                      <img 
-                                        src={varImg} 
-                                        alt={varName} 
-                                        className="w-8 h-8 rounded-lg object-cover border border-slate-200 dark:border-[#132649] shrink-0 shadow-xs" 
-                                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                                      />
-                                    )}
-                                    <span className="leading-snug break-words">{varName}</span>
-                                  </div>
+                                  {varImg && (
+                                    <img 
+                                      src={varImg} 
+                                      alt={varName} 
+                                      className="w-4 h-4 rounded-md object-cover shrink-0" 
+                                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                                    />
+                                  )}
+                                  <span>{varName}</span>
                                 </button>
                               );
                             })}
                           </div>
                         </div>
-                      </div>
-                    )}
+                      )}
 
-                    {/* Single Grade Line (e.g. Cocoa Powder / Tea) */}
-                    {product.varieties && product.varieties.length === 1 && (
-                      <div className={`w-full flex items-center justify-between px-4 py-3.5 rounded-xl border text-xs font-black shadow-xs ${
-                        isDark 
-                          ? 'border-[#132649] bg-[#020611] text-white' 
-                          : 'border-slate-300 bg-[#fafafa] text-[#0b1d3a]'
-                      }`}>
-                        <span className="flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-orange-500 dark:bg-orange-400"></span>
-                          <span className="truncate">
-                            {typeof product.varieties[0] === 'string' ? product.varieties[0] : product.varieties[0]?.name}
-                          </span>
-                        </span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Actions Section */}
-                  <div className="pt-2">
-                    <button 
-                      onClick={() => handleGetQuote(product)}
-                      className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 dark:from-orange-400 dark:to-amber-500 dark:hover:from-orange-400 dark:hover:to-amber-400 text-white text-xs font-black uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-md shadow-orange-500/25 hover:shadow-orange-500/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center block"
-                    >
-                      Get Official Quote
-                    </button>
+                      {/* Single Grade Line (e.g. Cocoa Powder / Tea) */}
+                      {product.varieties && product.varieties.length === 1 && (
+                        <div className="flex flex-wrap gap-1.5">
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const varName = typeof product.varieties[0] === 'string' ? product.varieties[0] : product.varieties[0]?.name;
+                              setSelectedVarieties((prev) => ({ ...prev, [product.id]: varName }));
+                              handleGetQuote(product, varName);
+                            }}
+                            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
+                              isDark 
+                                ? 'bg-[#020611] hover:bg-orange-500/20 border-[#132649] hover:border-orange-400 text-slate-200 hover:text-white' 
+                                : 'bg-slate-50 hover:bg-orange-50 border-slate-200 hover:border-orange-500 text-slate-700 hover:text-orange-600 shadow-2xs'
+                            }`}
+                          >
+                            <span>{typeof product.varieties[0] === 'string' ? product.varieties[0] : product.varieties[0]?.name}</span>
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

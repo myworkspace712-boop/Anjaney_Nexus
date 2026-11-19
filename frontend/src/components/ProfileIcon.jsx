@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProfileIcon = ({ isLoggedIn = false, isDarkMode = true }) => {
+const ProfileIcon = ({ isLoggedIn = false, isDarkMode = false }) => {
   return (
     <div
       className={`relative flex items-center justify-center w-9 h-9 rounded-full border transition-colors ${

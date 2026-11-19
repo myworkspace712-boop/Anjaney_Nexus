@@ -3,10 +3,10 @@ import React, { useState, useEffect } from 'react';
 // Central helper functions for retrieving and setting cookie consent
 export const getCookieConsent = () => {
   try {
-    const local = localStorage.getItem('anjaney_cookie_consent') || localStorage.getItem('an_cookie_consent');
+    const local = localStorage.getItem('cookieConsent') || localStorage.getItem('anjaney_cookie_consent') || localStorage.getItem('an_cookie_consent');
     if (local) return local;
     if (typeof document !== 'undefined') {
-      const match = document.cookie.match(/(?:^|; )anjaney_cookie_consent=([^;]*)/);
+      const match = document.cookie.match(/(?:^|; )(?:cookieConsent|anjaney_cookie_consent)=([^;]*)/);
       if (match) return match[1];
     }
   } catch (e) {
@@ -17,9 +17,11 @@ export const getCookieConsent = () => {
 
 export const setCookieConsent = (value) => {
   try {
+    localStorage.setItem('cookieConsent', value);
     localStorage.setItem('anjaney_cookie_consent', value);
     localStorage.setItem('an_cookie_consent', value);
     if (typeof document !== 'undefined') {
+      document.cookie = `cookieConsent=${value}; path=/; max-age=31536000; SameSite=Lax`;
       document.cookie = `anjaney_cookie_consent=${value}; path=/; max-age=31536000; SameSite=Lax`;
     }
     if (typeof window !== 'undefined') {
@@ -110,7 +112,19 @@ const CookieConsent = ({ activePage }) => {
       {/* COOKIE CONSENT BANNER (DROP-UP) */}
       {showBanner && (
         <div className="fixed bottom-0 left-0 w-full z-[100] p-4 sm:p-6 md:p-8 animate-fade-in-up font-sans pointer-events-none">
-          <div className="max-w-5xl mx-auto bg-white dark:bg-[#071326] border border-slate-200 dark:border-[#132649] rounded-2xl shadow-2xl shadow-blue-950/10 dark:shadow-black pointer-events-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6 p-6 sm:p-8">
+          <div className="max-w-5xl mx-auto bg-white dark:bg-[#071326] border border-slate-200 dark:border-[#132649] rounded-2xl shadow-2xl shadow-blue-950/10 dark:shadow-black pointer-events-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6 p-6 sm:p-8 relative">
+            
+            {/* Close / Dismiss Banner without accepting tracking cookies */}
+            <button
+              onClick={handleAcceptEssential}
+              className="absolute top-3.5 right-3.5 text-slate-400 hover:text-slate-600 dark:hover:text-white p-1 rounded-lg transition-colors cursor-pointer"
+              aria-label="Close cookie notice"
+              title="Close"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
             
             {/* Text Content */}
             <div className="flex-grow max-w-3xl">

@@ -13,7 +13,8 @@
     <script>
       // Prevent flash of wrong theme — defaults to pure white light mode
       (function() {
-        const theme = localStorage.getItem('theme') || localStorage.getItem('anjaney-nexus-theme');
+        const userSelected = localStorage.getItem('theme_user_selected');
+        const theme = userSelected === 'true' ? localStorage.getItem('theme') : 'light';
         if (theme === 'dark') {
           document.documentElement.classList.add('dark');
           document.documentElement.classList.remove('light');
