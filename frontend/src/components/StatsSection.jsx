@@ -212,9 +212,9 @@ const StatsSection = ({ setActivePage }) => {
                   : 'bg-white border-slate-200 hover:border-orange-500 shadow-sm'
               }`}
             >
-              {/* Official Registration Verified Tick Badge (Flower-like Circle Badge) */}
+              {/* Official Registration Verified Tick Badge (Pointed Flower Badge) */}
               <div 
-                className="absolute top-2 right-2 w-5.5 h-5.5 sm:w-6 sm:h-6 flex items-center justify-center z-10 transition-transform duration-300 group-hover:scale-110"
+                className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center z-10 transition-transform duration-300 group-hover:scale-110"
                 title="Verified Regulatory Body"
               >
                 <svg 
@@ -222,11 +222,12 @@ const StatsSection = ({ setActivePage }) => {
                   viewBox="0 0 24 24" 
                   fill="none"
                 >
-                  {/* Flower-like Scalloped Circle Background */}
+                  {/* Pointed Flower Background */}
                   <path 
-                    d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" 
+                    d="M12 1.5 L14.87 5.07 L19.42 4.58 L18.93 9.13 L22.5 12 L18.93 14.87 L19.42 19.42 L14.87 18.93 L12 22.5 L9.13 18.93 L4.58 19.42 L5.07 14.87 L1.5 12 L5.07 9.13 L4.58 4.58 L9.13 5.07 Z" 
                     className="fill-green-500/15 dark:fill-green-400/20 stroke-green-500 dark:stroke-green-400" 
                     strokeWidth="1.25"
+                    strokeLinejoin="round"
                   />
                   {/* Centered Green Checkmark / Tick */}
                   <path 
