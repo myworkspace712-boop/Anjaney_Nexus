@@ -48,18 +48,18 @@ const Certificates = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#fcfbf8] via-[#f7f4ee] to-[#f4efe4] dark:from-[#141312] dark:via-[#1a1816] dark:to-[#141312] font-sans py-16 md:py-24 transition-colors duration-500 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-[#ffffff] via-[#f8fafc] to-[#f1f5f9] dark:from-[#0a0f1d] dark:via-[#0d1527] dark:to-[#0a0f1d] font-sans py-16 md:py-24 transition-colors duration-500 relative overflow-hidden">
       {/* MARITIME TRADE & LOGISTICS BACKGROUND OVERLAY */}
       <div className="absolute inset-0 pointer-events-none -z-0 transition-opacity duration-700 bg-trade-grid-light dark:bg-trade-grid-dark opacity-75 dark:opacity-80"></div>
 
       {/* Dynamic Ambient Maritime Background Glows */}
-      <div className="absolute top-10 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl opacity-25 -z-0 bg-gradient-to-br from-[#c99a42]/30 via-[#dfb25b]/20 to-[#c99a42]/10 animate-maritime-drift"></div>
-      <div className="absolute bottom-20 right-10 w-[550px] h-[550px] rounded-full pointer-events-none blur-3xl opacity-20 -z-0 bg-gradient-to-tl from-[#c99a42]/18 via-[#dfb25b]/16 to-transparent dark:from-[#c99a42]/20 dark:via-[#a67c2e]/16 animate-float-slow"></div>
+      <div className="absolute top-10 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl opacity-25 -z-0 bg-gradient-to-br from-sky-500/20 via-blue-500/15 to-transparent animate-maritime-drift"></div>
+      <div className="absolute bottom-20 right-10 w-[550px] h-[550px] rounded-full pointer-events-none blur-3xl opacity-20 -z-0 bg-gradient-to-tl from-cyan-500/15 via-sky-500/15 to-transparent animate-float-slow"></div>
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         
         {/* PAGE HEADER */}
-        <div className="text-center mb-12 max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl backdrop-blur-md bg-gradient-to-b from-transparent via-[#f7f4ee]/80 to-transparent dark:via-[#1f1b17]/80">
+        <div className="text-center mb-12 max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl backdrop-blur-md bg-gradient-to-b from-transparent via-slate-100/80 to-transparent dark:via-[#0f172a]/80">
           <span className="text-xs font-black text-orange-500 dark:text-orange-400 uppercase tracking-widest bg-orange-50 dark:bg-[#01040a] dark:border-orange-400/30 px-3 py-1 rounded-full border border-orange-100 mb-4 inline-block shadow-xs">
             Verified Credentials
           </span>
@@ -77,7 +77,7 @@ const Certificates = () => {
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer ${
                 selectedFilter === 'all'
                   ? 'bg-orange-500 text-white shadow-md shadow-orange-500/25 scale-105'
-                  : 'bg-[#f7f4ee] dark:bg-[#1f1b17] text-slate-600 dark:text-slate-300 border border-[#e8e2d4] dark:border-[#332b21] hover:border-[#c99a42]'
+                  : 'bg-white dark:bg-[#0f172a] text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-sky-500 dark:hover:border-sky-400'
               }`}
             >
               All Credentials ({certificates.length})
@@ -89,7 +89,7 @@ const Certificates = () => {
                 className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer ${
                   selectedFilter === c.id
                     ? 'bg-orange-500 text-white shadow-md shadow-orange-500/25 scale-105'
-                    : 'bg-[#f7f4ee] dark:bg-[#1f1b17] text-slate-600 dark:text-slate-300 border border-[#e8e2d4] dark:border-[#332b21] hover:border-[#c99a42]'
+                    : 'bg-white dark:bg-[#0f172a] text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-sky-500 dark:hover:border-sky-400'
                 }`}
               >
                 {c.id.toUpperCase()}
@@ -103,7 +103,7 @@ const Certificates = () => {
           {filteredCerts.map((cert, index) => (
             <div 
               key={index} 
-              className="bg-[#f7f4ee] dark:bg-[#1f1b17] border border-[#e8e2d4] dark:border-[#332b21] backdrop-blur-md rounded-2xl overflow-hidden hover:border-[#c99a42] dark:hover:border-[#c99a42] transition-all duration-300 shadow-[0_12px_32px_rgba(201,154,66,0.06)] dark:shadow-[0_14px_35px_rgba(0,0,0,0.5)] hover:shadow-[0_14px_38px_rgba(201,154,66,0.16)] flex flex-col group relative before:absolute before:inset-x-0 before:top-0 before:h-[2.5px] before:bg-gradient-to-r before:from-transparent before:via-[#c99a42] before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10"
+              className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 backdrop-blur-md rounded-2xl overflow-hidden hover:border-sky-500 dark:hover:border-sky-400 transition-all duration-300 shadow-[0_12px_32px_rgba(14,165,233,0.06)] dark:shadow-[0_14px_35px_rgba(0,0,0,0.5)] hover:shadow-[0_14px_38px_rgba(14,165,233,0.16)] flex flex-col group relative before:absolute before:inset-x-0 before:top-0 before:h-[2.5px] before:bg-gradient-to-r before:from-transparent before:via-sky-400 before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10"
             >
               
               {/* Card Top: Logo & Title */}
@@ -111,7 +111,7 @@ const Certificates = () => {
                 <div 
                   onClick={() => setActiveModalCert(cert)}
                   title="Click to expand credential preview"
-                  className="w-20 h-20 bg-white rounded-xl flex shrink-0 items-center justify-center p-2 overflow-hidden border border-[#e8e2d4] dark:border-[#332b21] shadow-xs cursor-pointer group-hover:scale-105 transition-transform duration-300"
+                  className="w-20 h-20 bg-white rounded-xl flex shrink-0 items-center justify-center p-2 overflow-hidden border border-slate-200 dark:border-slate-800 shadow-xs cursor-pointer group-hover:scale-105 transition-transform duration-300"
                 >
                   <img 
                     src={cert.image} 
@@ -141,7 +141,7 @@ const Certificates = () => {
               </div>
 
               {/* Divider */}
-              <div className="w-full h-px bg-[#e8e2d4] dark:bg-[#332b21]"></div>
+              <div className="w-full h-px bg-slate-200 dark:bg-slate-800"></div>
 
               {/* Card Bottom: Text & Details */}
               <div className="p-6 flex flex-col flex-grow">
@@ -178,7 +178,7 @@ const Certificates = () => {
                   <button
                     type="button"
                     onClick={() => setActiveModalCert(cert)}
-                    className="p-2.5 rounded-lg border border-[#e8e2d4] dark:border-[#332b21] text-slate-500 dark:text-slate-400 hover:text-orange-500 dark:hover:text-orange-400 hover:border-orange-500/50 transition-all cursor-pointer"
+                    className="p-2.5 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 hover:text-orange-500 dark:hover:text-orange-400 hover:border-orange-500/50 transition-all cursor-pointer"
                     title="View Credential Card"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -204,13 +204,13 @@ const Certificates = () => {
           onClick={() => setActiveModalCert(null)}
         >
           <div 
-            className="bg-[#fcfbf8] dark:bg-[#1f1b17] border border-[#e8e2d4] dark:border-[#332b21] rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative overflow-hidden"
+            className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
               onClick={() => setActiveModalCert(null)}
-              className="absolute top-4 right-4 p-2 rounded-full text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-[#faf4e8] dark:hover:bg-[#231b16] transition-colors cursor-pointer"
+              className="absolute top-4 right-4 p-2 rounded-full text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
               aria-label="Close modal"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -220,7 +220,7 @@ const Certificates = () => {
 
             {/* Modal Body */}
             <div className="flex flex-col items-center text-center">
-              <div className="w-28 h-28 bg-[#ffffff] rounded-2xl flex items-center justify-center p-4 border border-[#e8e2d4] dark:border-[#332b21] shadow-sm mb-5">
+              <div className="w-28 h-28 bg-[#ffffff] rounded-2xl flex items-center justify-center p-4 border border-slate-200 dark:border-slate-800 shadow-sm mb-5">
                 <img 
                   src={activeModalCert.image} 
                   alt={activeModalCert.id} 
@@ -242,16 +242,16 @@ const Certificates = () => {
                 {activeModalCert.authority}
               </p>
 
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-6 text-left bg-[#f7f4ee] dark:bg-[#141312] p-4 rounded-xl border border-[#e8e2d4] dark:border-[#332b21]">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-6 text-left bg-slate-50 dark:bg-[#0a0f1d] p-4 rounded-xl border border-slate-200 dark:border-slate-800">
                 {activeModalCert.description}
               </p>
 
               <div className="grid grid-cols-2 gap-4 w-full mb-6 text-left">
-                <div className="bg-[#f7f4ee] dark:bg-[#141312] p-3 rounded-xl border border-[#e8e2d4] dark:border-[#332b21]">
+                <div className="bg-slate-50 dark:bg-[#0a0f1d] p-3 rounded-xl border border-slate-200 dark:border-slate-800">
                   <p className="text-xs font-bold text-blue-950 dark:text-white mb-0.5">{activeModalCert.docLabel}</p>
                   <p className="text-xs text-slate-500 dark:text-slate-400">Not published</p>
                 </div>
-                <div className="bg-[#f7f4ee] dark:bg-[#141312] p-3 rounded-xl border border-[#e8e2d4] dark:border-[#332b21]">
+                <div className="bg-slate-50 dark:bg-[#0a0f1d] p-3 rounded-xl border border-slate-200 dark:border-slate-800">
                   <p className="text-xs font-bold text-blue-950 dark:text-white mb-0.5">Valid until</p>
                   <p className="text-xs text-slate-500 dark:text-slate-400">Check current copy</p>
                 </div>
@@ -273,7 +273,7 @@ const Certificates = () => {
                 <button
                   type="button"
                   onClick={() => handleCopy(activeModalCert)}
-                  className="px-4 py-3 rounded-xl border border-[#ebdcc8] dark:border-[#33251c] text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 hover:border-orange-500/50 transition-colors cursor-pointer"
+                  className="px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 hover:border-orange-500/50 transition-colors cursor-pointer"
                 >
                   {copiedId === activeModalCert.id ? 'Copied!' : 'Copy Info'}
                 </button>

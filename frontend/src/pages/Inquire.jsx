@@ -168,8 +168,8 @@ const Inquire = ({ setActivePage }) => {
   return (
     <div className={`min-h-screen font-sans transition-colors duration-500 relative overflow-hidden ${
       isDark 
-        ? 'bg-gradient-to-b from-[#141312] via-[#1a1816] to-[#141312] text-slate-100' 
-        : 'bg-gradient-to-b from-[#fcfbf8] via-[#f7f4ee] to-[#f4efe4] text-[#0b1d3a]'
+        ? 'bg-gradient-to-b from-[#0a0f1d] via-[#0d1527] to-[#0a0f1d] text-slate-100' 
+        : 'bg-gradient-to-b from-[#ffffff] via-[#f8fafc] to-[#f1f5f9] text-[#0b1d3a]'
     }`}>
       
       {/* MARITIME TRADE & LOGISTICS BACKGROUND OVERLAY */}
@@ -178,12 +178,12 @@ const Inquire = ({ setActivePage }) => {
       }`}></div>
 
       {/* AMBIENT DYNAMIC MARITIME BEACONS & OCEANIC TRADE HUBS */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl opacity-25 -z-0 bg-gradient-to-br from-[#c99a42]/30 via-[#dfb25b]/20 to-[#c99a42]/10 animate-maritime-drift"></div>
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl opacity-25 -z-0 bg-gradient-to-br from-sky-500/20 via-blue-500/15 to-transparent animate-maritime-drift"></div>
       <div className={`absolute top-[400px] right-10 w-[600px] h-[600px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 animate-float-slow ${
-        isDark ? 'bg-gradient-to-bl from-[#c99a42]/20 via-[#a67c2e]/15 to-transparent' : 'bg-gradient-to-bl from-[#c99a42]/18 via-[#dfb25b]/20 to-transparent'
+        isDark ? 'bg-gradient-to-bl from-cyan-500/15 via-sky-500/15 to-transparent' : 'bg-gradient-to-bl from-sky-500/15 via-blue-500/15 to-transparent'
       }`}></div>
       <div className={`absolute bottom-40 left-10 w-[550px] h-[550px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 animate-maritime-drift ${
-        isDark ? 'bg-gradient-to-tr from-[#c99a42]/20 via-[#dfb25b]/15 to-transparent' : 'bg-gradient-to-tr from-[#c99a42]/18 via-[#dfb25b]/16 to-transparent'
+        isDark ? 'bg-gradient-to-tr from-sky-500/15 via-blue-500/15 to-transparent' : 'bg-gradient-to-tr from-sky-500/15 via-blue-500/15 to-transparent'
       }`}></div>
 
       {/* =========================================================================
@@ -209,14 +209,14 @@ const Inquire = ({ setActivePage }) => {
             - Dark mode: Deep Maritime Ocean Blue (#060d1d to #091a3a), strictly non-black */}
         <div className={`absolute inset-0 transition-colors duration-500 ${
           isDark 
-            ? 'bg-gradient-to-r from-[#0e0c0b]/95 via-[#0e0c0b]/85 to-[#16120f]/65'
+            ? 'bg-gradient-to-r from-[#0a0f1d]/95 via-[#0a0f1d]/85 to-[#0f172a]/65'
             : 'bg-gradient-to-r from-[#0b1d3a]/95 via-[#0b1d3a]/80 to-[#0b1d3a]/45'
         }`}></div>
         
         <div className={`absolute inset-0 pointer-events-none transition-colors duration-500 ${
           isDark
-            ? 'bg-gradient-to-b from-[#141312]/75 via-transparent to-[#141312]'
-            : 'bg-gradient-to-b from-[#0b1d3a]/75 via-transparent to-[#fcfbf8]'
+            ? 'bg-gradient-to-b from-[#0a0f1d]/75 via-transparent to-[#0a0f1d]'
+            : 'bg-gradient-to-b from-[#0b1d3a]/75 via-transparent to-white'
         }`}></div>
 
         {/* Hero Content (Clean, tags removed) */}
@@ -242,10 +242,10 @@ const Inquire = ({ setActivePage }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           
           {/* Card 1: Phone / Direct Desk */}
-          <div className={`p-6 rounded-2xl border transition-all duration-300 relative overflow-hidden group backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#c99a42] before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
+          <div className={`p-6 rounded-2xl border transition-all duration-300 relative overflow-hidden group backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-sky-400 before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
             isDark 
-              ? 'bg-[#1f1b17] border-[#332b21] hover:border-[#c99a42] shadow-[0_12px_30px_rgba(0,0,0,0.5)]' 
-              : 'bg-[#f7f4ee] border-[#e8e2d4] hover:border-[#c99a42] shadow-[0_12px_30px_rgba(201,154,66,0.07)]'
+              ? 'bg-[#0f172a] border-slate-800 hover:border-sky-400 shadow-[0_12px_30px_rgba(0,0,0,0.5)]' 
+              : 'bg-white border-slate-200 hover:border-sky-500 shadow-[0_12px_30px_rgba(14,165,233,0.07)]'
           }`}>
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400 group-hover:scale-105 transition-transform duration-300">
@@ -286,10 +286,10 @@ const Inquire = ({ setActivePage }) => {
           </div>
 
           {/* Card 2: Email / RFQ Desk */}
-          <div className={`p-6 rounded-2xl border transition-all duration-300 relative overflow-hidden group backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#c99a42] before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
+          <div className={`p-6 rounded-2xl border transition-all duration-300 relative overflow-hidden group backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-sky-400 before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
             isDark 
-              ? 'bg-[#1f1b17] border-[#332b21] hover:border-[#c99a42] shadow-[0_12px_30px_rgba(0,0,0,0.5)]' 
-              : 'bg-[#f7f4ee] border-[#e8e2d4] hover:border-[#c99a42] shadow-[0_12px_30px_rgba(201,154,66,0.07)]'
+              ? 'bg-[#0f172a] border-slate-800 hover:border-sky-400 shadow-[0_12px_30px_rgba(0,0,0,0.5)]' 
+              : 'bg-white border-slate-200 hover:border-sky-500 shadow-[0_12px_30px_rgba(14,165,233,0.07)]'
           }`}>
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400 group-hover:scale-105 transition-transform duration-300">
@@ -330,10 +330,10 @@ const Inquire = ({ setActivePage }) => {
           </div>
 
           {/* Card 3: Head Office */}
-          <div className={`p-6 rounded-2xl border transition-all duration-300 relative overflow-hidden group backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#c99a42] before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
+          <div className={`p-6 rounded-2xl border transition-all duration-300 relative overflow-hidden group backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-sky-400 before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
             isDark 
-              ? 'bg-[#1f1b17] border-[#332b21] hover:border-[#c99a42] shadow-[0_12px_30px_rgba(0,0,0,0.5)]' 
-              : 'bg-[#f7f4ee] border-[#e8e2d4] hover:border-[#c99a42] shadow-[0_12px_30px_rgba(201,154,66,0.07)]'
+              ? 'bg-[#0f172a] border-slate-800 hover:border-sky-400 shadow-[0_12px_30px_rgba(0,0,0,0.5)]' 
+              : 'bg-white border-slate-200 hover:border-sky-500 shadow-[0_12px_30px_rgba(14,165,233,0.07)]'
           }`}>
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400 group-hover:scale-105 transition-transform duration-300">
@@ -361,10 +361,10 @@ const Inquire = ({ setActivePage }) => {
           </div>
 
           {/* Card 4: Operating Hours (24/7) */}
-          <div className={`p-6 rounded-2xl border transition-all duration-300 relative overflow-hidden group backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#c99a42] before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
+          <div className={`p-6 rounded-2xl border transition-all duration-300 relative overflow-hidden group backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-sky-400 before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
             isDark 
-              ? 'bg-[#1f1b17] border-[#332b21] hover:border-[#c99a42] shadow-[0_12px_30px_rgba(0,0,0,0.5)]' 
-              : 'bg-[#f7f4ee] border-[#e8e2d4] hover:border-[#c99a42] shadow-[0_12px_30px_rgba(201,154,66,0.07)]'
+              ? 'bg-[#0f172a] border-slate-800 hover:border-sky-400 shadow-[0_12px_30px_rgba(0,0,0,0.5)]' 
+              : 'bg-white border-slate-200 hover:border-sky-500 shadow-[0_12px_30px_rgba(14,165,233,0.07)]'
           }`}>
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400 group-hover:scale-105 transition-transform duration-300">
@@ -399,15 +399,15 @@ const Inquire = ({ setActivePage }) => {
         {/* CARD WRAPPER */}
         <div className={`rounded-3xl shadow-2xl overflow-hidden border transition-all duration-300 backdrop-blur-xl relative ${
           isDark 
-            ? 'border-[#332b21] bg-[#1f1b17] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)]' 
-            : 'border-[#e8e2d4] bg-[#f7f4ee] shadow-[0_12px_40px_rgba(201,154,66,0.08)]'
+            ? 'border-slate-800 bg-[#0f172a] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)]' 
+            : 'border-slate-200 bg-white shadow-[0_12px_40px_rgba(14,165,233,0.08)]'
         }`}>
           
           {/* Card Top Title Bar (Left-aligned, Dark Blue Header) */}
           <div className={`p-6 sm:px-10 sm:py-7 border-b text-left transition-colors ${
             isDark 
-              ? 'border-[#332b21] bg-[#141312]' 
-              : 'border-[#e8e2d4] bg-[#0b1d3a]'
+              ? 'border-slate-800 bg-[#0a0f1d]' 
+              : 'border-slate-200 bg-[#0b1d3a]'
           }`}>
             <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
               Export Quote
@@ -416,7 +416,7 @@ const Inquire = ({ setActivePage }) => {
 
           {/* LOWER FORM SECTION */}
           <div className={`p-6 sm:p-10 md:p-12 transition-colors ${
-            isDark ? 'bg-[#1f1b17]' : 'bg-[#f7f4ee]'
+            isDark ? 'bg-[#0f172a]' : 'bg-white'
           }`}>
             {submitted ? (
               <div className="text-center py-10 space-y-5">
@@ -449,7 +449,7 @@ const Inquire = ({ setActivePage }) => {
                     </p>
 
                     <div className={`max-w-lg mx-auto p-4 rounded-xl text-left text-xs space-y-2 border ${
-                      isDark ? 'bg-[#141312] border-amber-400/40 text-slate-300' : 'bg-[#efeae0] border-amber-200 text-slate-700'
+                      isDark ? 'bg-[#0a0f1d] border-amber-400/40 text-slate-300' : 'bg-slate-50 border-amber-200 text-slate-700'
                     }`}>
                       <div className="font-bold text-amber-500 dark:text-amber-400 flex items-center gap-1.5">
                         <span className="w-2 h-2 rounded-full bg-amber-500 dark:bg-amber-400"></span>
@@ -489,7 +489,7 @@ const Inquire = ({ setActivePage }) => {
                     }}
                     className={`px-6 py-3 text-xs font-bold uppercase tracking-widest rounded-xl transition-colors cursor-pointer ${
                       isDark 
-                        ? 'bg-[#1f1b17] hover:bg-[#2a241f] text-white border border-[#332b21]' 
+                        ? 'bg-[#0f172a] hover:bg-slate-800 text-white border border-slate-800' 
                         : 'bg-slate-800 hover:bg-slate-700 text-white'
                     }`}
                   >
@@ -522,10 +522,10 @@ const Inquire = ({ setActivePage }) => {
                     value={formData.fullName}
                     onChange={handleChange}
                     placeholder="John Doe" 
-                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-[#c99a42]/20 dark:focus:ring-[#c99a42]/25 focus:border-[#c99a42] dark:focus:border-[#c99a42] ${
+                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-sky-500/20 dark:focus:ring-sky-500/25 focus:border-sky-500 dark:focus:border-sky-500 ${
                       isDark
-                        ? 'bg-[#141312] border-[#332b21] text-white placeholder-slate-400'
-                        : 'bg-[#ffffff] border-[#e8e2d4] text-slate-800 placeholder-slate-400'
+                        ? 'bg-[#0a0f1d] border-slate-800 text-white placeholder-slate-400'
+                        : 'bg-white border-slate-200 text-slate-800 placeholder-slate-400'
                     }`}
                     required
                   />
@@ -543,10 +543,10 @@ const Inquire = ({ setActivePage }) => {
                     value={formData.companyName}
                     onChange={handleChange}
                     placeholder="Global Impex Ltd" 
-                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-[#c99a42]/20 dark:focus:ring-[#c99a42]/25 focus:border-[#c99a42] dark:focus:border-[#c99a42] ${
+                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-sky-500/20 dark:focus:ring-sky-500/25 focus:border-sky-500 dark:focus:border-sky-500 ${
                       isDark
-                        ? 'bg-[#141312] border-[#332b21] text-white placeholder-slate-400'
-                        : 'bg-[#ffffff] border-[#e8e2d4] text-slate-800 placeholder-slate-400'
+                        ? 'bg-[#0a0f1d] border-slate-800 text-white placeholder-slate-400'
+                        : 'bg-white border-slate-200 text-slate-800 placeholder-slate-400'
                     }`}
                     required
                   />
@@ -565,10 +565,10 @@ const Inquire = ({ setActivePage }) => {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="procurement@company.com" 
-                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-[#c99a42]/20 dark:focus:ring-[#c99a42]/25 focus:border-[#c99a42] dark:focus:border-[#c99a42] ${
+                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-sky-500/20 dark:focus:ring-sky-500/25 focus:border-sky-500 dark:focus:border-sky-500 ${
                       isDark
-                        ? 'bg-[#141312] border-[#332b21] text-white placeholder-slate-400'
-                        : 'bg-[#ffffff] border-[#e8e2d4] text-slate-800 placeholder-slate-400'
+                        ? 'bg-[#0a0f1d] border-slate-800 text-white placeholder-slate-400'
+                        : 'bg-white border-slate-200 text-slate-800 placeholder-slate-400'
                     }`}
                     required
                   />
@@ -586,10 +586,10 @@ const Inquire = ({ setActivePage }) => {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="+971 50 000 0000" 
-                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-[#c99a42]/20 dark:focus:ring-[#c99a42]/25 focus:border-[#c99a42] dark:focus:border-[#c99a42] ${
+                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-sky-500/20 dark:focus:ring-sky-500/25 focus:border-sky-500 dark:focus:border-sky-500 ${
                       isDark
-                        ? 'bg-[#141312] border-[#332b21] text-white placeholder-slate-400'
-                        : 'bg-[#ffffff] border-[#e8e2d4] text-slate-800 placeholder-slate-400'
+                        ? 'bg-[#0a0f1d] border-slate-800 text-white placeholder-slate-400'
+                        : 'bg-white border-slate-200 text-slate-800 placeholder-slate-400'
                     }`}
                     required
                   />
@@ -608,10 +608,10 @@ const Inquire = ({ setActivePage }) => {
                     value={formData.quantity}
                     onChange={handleChange}
                     placeholder="e.g., 500" 
-                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:ring-2 focus:ring-[#c99a42]/20 dark:focus:ring-[#c99a42]/25 focus:border-[#c99a42] dark:focus:border-[#c99a42] ${
+                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:ring-2 focus:ring-sky-500/20 dark:focus:ring-sky-500/25 focus:border-sky-500 dark:focus:border-sky-500 ${
                       isDark
-                        ? 'bg-[#141312] border-[#332b21] text-white placeholder-slate-400'
-                        : 'bg-[#ffffff] border-[#e8e2d4] text-slate-800 placeholder-slate-400'
+                        ? 'bg-[#0a0f1d] border-slate-800 text-white placeholder-slate-400'
+                        : 'bg-white border-slate-200 text-slate-800 placeholder-slate-400'
                     }`}
                     required
                   />
@@ -630,10 +630,10 @@ const Inquire = ({ setActivePage }) => {
                     value={formData.destinationCountry}
                     onChange={handleChange}
                     placeholder="e.g., United Arab Emirates" 
-                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-[#c99a42]/20 dark:focus:ring-[#c99a42]/25 focus:border-[#c99a42] dark:focus:border-[#c99a42] ${
+                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-sky-500/20 dark:focus:ring-sky-500/25 focus:border-sky-500 dark:focus:border-sky-500 ${
                       isDark
-                        ? 'bg-[#141312] border-[#332b21] text-white placeholder-slate-400'
-                        : 'bg-[#ffffff] border-[#e8e2d4] text-slate-800 placeholder-slate-400'
+                        ? 'bg-[#0a0f1d] border-slate-800 text-white placeholder-slate-400'
+                        : 'bg-white border-slate-200 text-slate-800 placeholder-slate-400'
                     }`}
                     required
                   />
@@ -651,10 +651,10 @@ const Inquire = ({ setActivePage }) => {
                     value={formData.portOfDischarge}
                     onChange={handleChange}
                     placeholder="e.g., Jebel Ali" 
-                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-[#c99a42]/20 dark:focus:ring-[#c99a42]/25 focus:border-[#c99a42] dark:focus:border-[#c99a42] ${
+                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-sky-500/20 dark:focus:ring-sky-500/25 focus:border-sky-500 dark:focus:border-sky-500 ${
                       isDark
-                        ? 'bg-[#141312] border-[#332b21] text-white placeholder-slate-400'
-                        : 'bg-[#ffffff] border-[#e8e2d4] text-slate-800 placeholder-slate-400'
+                        ? 'bg-[#0a0f1d] border-slate-800 text-white placeholder-slate-400'
+                        : 'bg-white border-slate-200 text-slate-800 placeholder-slate-400'
                     }`}
                   />
                 </div>
@@ -672,10 +672,10 @@ const Inquire = ({ setActivePage }) => {
                     value={formData.requiredPacking}
                     onChange={handleChange}
                     placeholder="e.g., 50kg PP bags or 5kg private label" 
-                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-[#c99a42]/20 dark:focus:ring-[#c99a42]/25 focus:border-[#c99a42] dark:focus:border-[#c99a42] ${
+                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-sky-500/20 dark:focus:ring-sky-500/25 focus:border-sky-500 dark:focus:border-sky-500 ${
                       isDark
-                        ? 'bg-[#141312] border-[#332b21] text-white placeholder-slate-400'
-                        : 'bg-[#ffffff] border-[#e8e2d4] text-slate-800 placeholder-slate-400'
+                        ? 'bg-[#0a0f1d] border-slate-800 text-white placeholder-slate-400'
+                        : 'bg-white border-slate-200 text-slate-800 placeholder-slate-400'
                     }`}
                     required
                   />
@@ -693,10 +693,10 @@ const Inquire = ({ setActivePage }) => {
                     name="shipmentMonth"
                     value={formData.shipmentMonth}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-[#c99a42]/20 dark:focus:ring-[#c99a42]/25 focus:border-[#c99a42] dark:focus:border-[#c99a42] ${
+                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-sky-500/20 dark:focus:ring-sky-500/25 focus:border-sky-500 dark:focus:border-sky-500 ${
                       isDark
-                        ? 'bg-[#141312] border-[#332b21] text-white placeholder-slate-400'
-                        : 'bg-[#ffffff] border-[#e8e2d4] text-slate-800 placeholder-slate-400'
+                        ? 'bg-[#0a0f1d] border-slate-800 text-white placeholder-slate-400'
+                        : 'bg-white border-slate-200 text-slate-800 placeholder-slate-400'
                     }`}
                   />
                 </div>
@@ -719,16 +719,16 @@ const Inquire = ({ setActivePage }) => {
                     value={formData.requirements}
                     onChange={handleChange}
                     placeholder="e.g., 50kg PP Bags, 5% Broken max, SGS inspection, COA requirements, private label branding..." 
-                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border resize-y focus:ring-2 focus:ring-[#c99a42]/20 dark:focus:ring-[#c99a42]/25 focus:border-[#c99a42] dark:focus:border-[#c99a42] ${
+                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border resize-y focus:ring-2 focus:ring-sky-500/20 dark:focus:ring-sky-500/25 focus:border-sky-500 dark:focus:border-sky-500 ${
                       isDark
-                        ? 'bg-[#141312] border-[#332b21] text-white placeholder-slate-400'
-                        : 'bg-[#ffffff] border-[#e8e2d4] text-slate-800 placeholder-slate-400'
+                        ? 'bg-[#0a0f1d] border-slate-800 text-white placeholder-slate-400'
+                        : 'bg-white border-slate-200 text-slate-800 placeholder-slate-400'
                     }`}
                   ></textarea>
                 </div>
 
                 {/* SUBMISSION FOOTER (Full Width Elongated Button) */}
-                <div className="md:col-span-2 mt-6 border-t border-[#e8e2d4] dark:border-[#332b21] pt-8">
+                <div className="md:col-span-2 mt-6 border-t border-slate-200 dark:border-slate-800 pt-8">
                   <button 
                     type="submit"
                     disabled={isSubmitting}

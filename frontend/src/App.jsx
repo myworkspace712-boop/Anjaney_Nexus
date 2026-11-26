@@ -284,14 +284,14 @@ function AppContent({
   };
 
   return (
-    <div className={`min-h-screen font-sans transition-colors duration-500 flex flex-col justify-between relative ${isDarkMode ? 'bg-gradient-to-b from-[#141312] via-[#1a1816] to-[#141312] text-slate-100' : 'bg-gradient-to-b from-[#fcfbf8] via-[#f7f4ee] to-[#f4efe4] text-slate-900'}`}>
+    <div className={`min-h-screen font-sans transition-colors duration-500 flex flex-col justify-between relative ${isDarkMode ? 'bg-gradient-to-b from-[#0a0f1d] via-[#0d1527] to-[#0a0f1d] text-slate-100' : 'bg-gradient-to-b from-[#ffffff] via-[#f8fafc] to-[#f1f5f9] text-slate-900'}`}>
       
       {/* Global Maritime Trade Coordinate Grid & Ambient Horizon System */}
       <div className={`fixed inset-0 pointer-events-none -z-10 transition-opacity duration-700 ${isDarkMode ? 'bg-trade-grid-dark opacity-75' : 'bg-trade-grid-light opacity-70'}`} />
 
       {/* Global Dynamic Reading Scroll Progress Bar */}
       <div 
-        className="fixed top-0 left-0 h-[2.5px] z-50 pointer-events-none bg-gradient-to-r from-[#c99a42] via-[#dfb25b] to-[#c99a42] transition-all duration-150 ease-out shadow-xs shadow-[#c99a42]/50"
+        className="fixed top-0 left-0 h-[2.5px] z-50 pointer-events-none bg-gradient-to-r from-sky-500 via-orange-500 to-sky-400 transition-all duration-150 ease-out shadow-xs shadow-sky-500/50"
         style={{ width: `${scrollProgress}%` }}
       />
 
@@ -326,8 +326,8 @@ function AppContent({
             : 'opacity-0 translate-y-4 scale-90 pointer-events-none'
         } ${
           isDarkMode
-            ? 'bg-[#1f1b17]/95 backdrop-blur-md border-[#332b21] text-[#c99a42] hover:bg-[#c99a42] hover:text-white shadow-black/80'
-            : 'bg-[#f7f4ee]/95 backdrop-blur-md border-[#e8e2d4] text-[#c99a42] hover:bg-[#c99a42] hover:text-white shadow-[0_10px_25px_rgba(201,154,66,0.12)]'
+            ? 'bg-[#0f172a]/95 backdrop-blur-md border-[#1e293b] text-sky-400 hover:bg-sky-500 hover:text-white shadow-black/80'
+            : 'bg-white/95 backdrop-blur-md border-slate-200 text-sky-600 hover:bg-sky-500 hover:text-white shadow-[0_10px_25px_rgba(14,165,233,0.15)]'
         }`}
       >
         <svg className="w-5 h-5 transform transition-transform group-hover:-translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -337,11 +337,11 @@ function AppContent({
 
       {/* Simple Professional Corporate Footer */}
       <footer className={`border-t py-12 transition-colors duration-300 relative overflow-hidden ${
-        isDarkMode ? 'bg-gradient-to-b from-[#1a1a1a] via-[#141312] to-[#0d0c0b] border-[#29221a] text-slate-300' : 'bg-gradient-to-b from-[#f7f4ee] via-[#efeae0] to-[#e8e1d3] border-[#e2d9c8] text-slate-700'
+        isDarkMode ? 'bg-gradient-to-b from-[#0f172a] via-[#0a0f1d] to-[#070b14] border-[#1e293b] text-slate-300' : 'bg-gradient-to-b from-[#ffffff] via-[#f8fafc] to-[#f1f5f9] border-slate-200 text-slate-700'
       }`}>
         {/* Maritime Trade Coordinates & Horizon Highlight in Footer Background */}
         <div className="absolute inset-0 pointer-events-none bg-trade-grid-light dark:bg-trade-grid-dark opacity-35"></div>
-        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#c99a42]/30 to-transparent pointer-events-none"></div>
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-sky-500/30 to-transparent pointer-events-none"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-sm">
             
@@ -385,7 +385,7 @@ function AppContent({
           </div>
 
           <div className={`pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-4 text-xs ${
-            isDarkMode ? 'border-[#291e17] text-slate-400' : 'border-[#e2d0b5] text-slate-600'
+            isDarkMode ? 'border-[#1e293b] text-slate-400' : 'border-slate-200 text-slate-600'
           }`}>
             <p>© {new Date().getFullYear()} Anjaney Nexus India LLP. All rights reserved.</p>
             <p className="text-[11px] inline-flex items-center gap-2">

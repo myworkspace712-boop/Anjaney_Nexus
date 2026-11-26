@@ -54,8 +54,8 @@ const StatsSection = ({ setActivePage }) => {
   return (
     <section className={`w-full pt-12 sm:pt-16 md:pt-20 pb-16 md:pb-24 font-sans border-b transition-colors duration-500 overflow-hidden relative animate-fade-up ${
       isDark 
-        ? 'bg-gradient-to-b from-[#141312] via-[#1a1816] to-[#141312] text-slate-100 border-[#2d261e]' 
-        : 'bg-gradient-to-b from-[#fcfbf8] via-[#f7f4ee] to-[#f4efe4] text-[#0b1d3a] border-[#e8e2d4]'
+        ? 'bg-gradient-to-b from-[#0a0f1d] via-[#0d1527] to-[#0a0f1d] text-slate-100 border-slate-800' 
+        : 'bg-gradient-to-b from-[#ffffff] via-[#f8fafc] to-[#f1f5f9] text-[#0b1d3a] border-slate-200'
     }`}>
 
       {/* MARITIME TRADE & LOGISTICS BACKGROUND OVERLAY */}
@@ -64,12 +64,12 @@ const StatsSection = ({ setActivePage }) => {
       }`}></div>
 
       {/* AMBIENT DYNAMIC MARITIME TRADE BEACONS */}
-      <div className="absolute -top-12 right-1/4 w-[450px] h-[450px] rounded-full pointer-events-none blur-3xl opacity-25 z-0 bg-gradient-to-br from-[#c99a42]/30 via-[#dfb25b]/20 to-[#c99a42]/10 animate-maritime-drift"></div>
+      <div className="absolute -top-12 right-1/4 w-[450px] h-[450px] rounded-full pointer-events-none blur-3xl opacity-25 z-0 bg-gradient-to-br from-sky-500/20 via-blue-500/15 to-transparent animate-maritime-drift"></div>
       <div className={`absolute top-1/2 -left-20 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl z-0 transition-opacity duration-700 animate-float-slow ${
-        isDark ? 'bg-gradient-to-tr from-[#c99a42]/20 via-[#a67c2e]/15 to-transparent' : 'bg-gradient-to-tr from-[#c99a42]/18 via-[#dfb25b]/20 to-transparent'
+        isDark ? 'bg-gradient-to-tr from-sky-500/15 via-blue-600/15 to-transparent' : 'bg-gradient-to-tr from-sky-500/15 via-blue-500/15 to-transparent'
       }`}></div>
       <div className={`absolute -bottom-16 right-10 w-[450px] h-[450px] rounded-full pointer-events-none blur-3xl z-0 transition-opacity duration-700 animate-maritime-drift ${
-        isDark ? 'bg-gradient-to-bl from-[#c99a42]/20 via-[#dfb25b]/15 to-transparent' : 'bg-gradient-to-bl from-[#c99a42]/18 via-[#dfb25b]/16 to-transparent'
+        isDark ? 'bg-gradient-to-bl from-cyan-500/15 via-sky-500/15 to-transparent' : 'bg-gradient-to-bl from-sky-500/15 via-blue-500/15 to-transparent'
       }`}></div>
       
       {/* ANIMATION KEYFRAMES (Fade-Up & Marquee) */}
@@ -110,7 +110,7 @@ const StatsSection = ({ setActivePage }) => {
             <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black tracking-tight leading-[1.15] ${
               isDark ? 'text-white' : 'text-[#0b1d3a]'
             }`}>
-              Company fueled by <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-[#c99a42] to-amber-500 dark:from-orange-400 dark:via-[#dfb25b] dark:to-amber-300">passion for logistics</span>
+              Company fueled by <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-amber-500 to-orange-400 dark:from-orange-400 dark:via-amber-300 dark:to-orange-300">passion for logistics</span>
             </h2>
           </div>
 
@@ -118,8 +118,8 @@ const StatsSection = ({ setActivePage }) => {
           <div className="shrink-0 flex justify-end self-end sm:self-auto mt-4 sm:mt-10 md:mt-14">
             <div className={`relative rounded-2xl sm:rounded-3xl overflow-hidden border-2 transition-all duration-300 shadow-xl w-52 sm:w-64 md:w-72 lg:w-80 aspect-square p-2 backdrop-blur-md ${
               isDark 
-                ? 'bg-[#1f1b17] border-[#332b21] shadow-[0_14px_35px_rgba(0,0,0,0.5)]' 
-                : 'bg-[#f7f4ee] border-[#e8e2d4] shadow-[0_14px_35px_rgba(201,154,66,0.12)]'
+                ? 'bg-[#0f172a] border-slate-800 shadow-[0_14px_35px_rgba(0,0,0,0.5)]' 
+                : 'bg-white border-slate-200 shadow-[0_14px_35px_rgba(14,165,233,0.1)]'
             }`}>
               <img 
                 src="/images/forklift.jpg" 
@@ -140,8 +140,8 @@ const StatsSection = ({ setActivePage }) => {
           <div className="shrink-0 flex justify-center sm:justify-start">
             <div className={`relative rounded-2xl sm:rounded-3xl overflow-hidden border-2 transition-all duration-300 shadow-2xl w-full sm:w-[360px] md:w-[440px] lg:w-[500px] xl:w-[540px] p-2.5 sm:p-3 backdrop-blur-md ${
               isDark 
-                ? 'bg-[#1f1b17] border-[#332b21] shadow-[0_16px_40px_rgba(0,0,0,0.6)]' 
-                : 'bg-[#f7f4ee] border-[#e8e2d4] shadow-[0_16px_40px_rgba(201,154,66,0.12)]'
+                ? 'bg-[#0f172a] border-slate-800 shadow-[0_16px_40px_rgba(0,0,0,0.6)]' 
+                : 'bg-white border-slate-200 shadow-[0_16px_40px_rgba(14,165,233,0.1)]'
             }`}>
               <img 
                 src="/images/dockyard.jpg" 
@@ -165,7 +165,7 @@ const StatsSection = ({ setActivePage }) => {
 
       {/* 2. CENTERED HEADER, TITLE, SUBHEADING & REVIEW VERIFICATION DOCUMENTS BUTTON */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12 md:mb-16 relative z-10">
-        <div className="relative p-6 sm:p-8 rounded-3xl backdrop-blur-md bg-gradient-to-b from-transparent via-[#f7f4ee]/80 to-transparent dark:via-[#1f1b17]/80">
+        <div className="relative p-6 sm:p-8 rounded-3xl backdrop-blur-md bg-gradient-to-b from-transparent via-slate-100/80 to-transparent dark:via-[#0f172a]/80">
           {/* Title: Verified Credentials (Solid Badge) */}
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest bg-[#01040a] text-orange-400 border border-orange-400/30 mb-6 mx-auto shadow-sm">
             <svg className="w-4 h-4 text-orange-500 dark:text-orange-400" fill="currentColor" viewBox="0 0 20 20">
@@ -196,8 +196,8 @@ const StatsSection = ({ setActivePage }) => {
               onClick={handleReviewClick}
               className={`inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl border-2 font-black text-xs uppercase tracking-wider transition-all duration-300 group cursor-pointer shadow-md hover:-translate-y-0.5 active:translate-y-0 ${
                 isDark 
-                  ? 'border-[#332b21] bg-[#1f1b17] text-white hover:border-[#c99a42] hover:text-[#dfb25b]' 
-                  : 'border-[#e8e2d4] bg-[#f7f4ee] text-blue-950 hover:border-[#c99a42] hover:text-[#c99a42]'
+                  ? 'border-slate-800 bg-[#0f172a] text-white hover:border-sky-400 hover:text-sky-300' 
+                  : 'border-slate-200 bg-white text-slate-900 hover:border-sky-500 hover:text-sky-600'
               }`}
             >
               <span>Review Verification Documents</span>
@@ -219,10 +219,10 @@ const StatsSection = ({ setActivePage }) => {
         
         {/* Solid Edge Fades (Pure solid gradient matching background, no blur) */}
         <div className={`absolute left-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r ${
-          isDark ? 'from-[#141312]' : 'from-[#fcfbf8]'
+          isDark ? 'from-[#0a0f1d]' : 'from-[#ffffff]'
         } to-transparent z-10 pointer-events-none`}></div>
         <div className={`absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l ${
-          isDark ? 'from-[#141312]' : 'from-[#fcfbf8]'
+          isDark ? 'from-[#0a0f1d]' : 'from-[#ffffff]'
         } to-transparent z-10 pointer-events-none`}></div>
 
         <div className="animate-marquee gap-6 sm:gap-8 items-center px-4 py-2">
@@ -232,8 +232,8 @@ const StatsSection = ({ setActivePage }) => {
               title={`${item.name} - ${item.fullName}`}
               className={`relative flex-shrink-0 flex items-center justify-center h-20 sm:h-24 w-auto min-w-[170px] px-6 py-3 rounded-xl border-2 transition-all duration-300 group ${
                 isDark 
-                  ? 'bg-[#1f1b17] border-[#332b21] hover:border-[#c99a42] shadow-md hover:shadow-[0_10px_25px_rgba(201,154,66,0.15)]' 
-                  : 'bg-[#f7f4ee] border-[#e8e2d4] hover:border-[#c99a42] shadow-[0_4px_16px_rgba(201,154,66,0.06)] hover:shadow-[0_10px_25px_rgba(201,154,66,0.15)]'
+                  ? 'bg-[#0f172a] border-slate-800 hover:border-sky-400 shadow-md hover:shadow-[0_10px_25px_rgba(14,165,233,0.15)]' 
+                  : 'bg-white border-slate-200 hover:border-sky-500 shadow-[0_4px_16px_rgba(14,165,233,0.06)] hover:shadow-[0_10px_25px_rgba(14,165,233,0.15)]'
               }`}
             >
               {/* Official Registration Verified Tick Badge (Pointed Flower Badge) */}

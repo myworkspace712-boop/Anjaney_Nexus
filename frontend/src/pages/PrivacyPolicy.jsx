@@ -14,15 +14,15 @@ const PrivacyPolicy = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#fcfbf8] via-[#f7f4ee] to-[#f4efe4] dark:from-[#141312] dark:via-[#1a1816] dark:to-[#141312] font-sans py-20 md:py-32 transition-colors duration-500 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-[#ffffff] via-[#f8fafc] to-[#f1f5f9] dark:from-[#0a0f1d] dark:via-[#0d1527] dark:to-[#0a0f1d] font-sans py-20 md:py-32 transition-colors duration-500 relative overflow-hidden">
       
       {/* MARITIME TRADE & LOGISTICS BACKGROUND OVERLAY */}
       <div className="absolute inset-0 pointer-events-none -z-0 transition-opacity duration-700 bg-trade-grid-light dark:bg-trade-grid-dark opacity-75 dark:opacity-80"></div>
 
       {/* AMBIENT DYNAMIC MARITIME BEACONS */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl opacity-25 -z-0 bg-gradient-to-br from-[#c99a42]/30 via-[#dfb25b]/20 to-[#c99a42]/10 animate-maritime-drift"></div>
-      <div className="absolute top-[450px] right-10 w-[600px] h-[600px] rounded-full pointer-events-none blur-3xl -z-0 bg-gradient-to-bl from-[#c99a42]/20 via-[#a67c2e]/15 to-transparent dark:from-[#c99a42]/20 dark:via-[#dfb25b]/15 animate-float-slow"></div>
-      <div className="absolute bottom-20 left-10 w-[550px] h-[550px] rounded-full pointer-events-none blur-3xl -z-0 bg-gradient-to-tr from-[#c99a42]/18 via-[#dfb25b]/16 to-transparent dark:from-[#c99a42]/20 dark:via-[#a67c2e]/16 animate-maritime-drift"></div>
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl opacity-25 -z-0 bg-gradient-to-br from-sky-500/20 via-blue-500/15 to-transparent animate-maritime-drift"></div>
+      <div className="absolute top-[450px] right-10 w-[600px] h-[600px] rounded-full pointer-events-none blur-3xl -z-0 bg-gradient-to-bl from-cyan-500/15 via-sky-500/15 to-transparent animate-float-slow"></div>
+      <div className="absolute bottom-20 left-10 w-[550px] h-[550px] rounded-full pointer-events-none blur-3xl -z-0 bg-gradient-to-tr from-sky-500/15 via-blue-500/15 to-transparent animate-maritime-drift"></div>
 
       <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         
@@ -34,7 +34,7 @@ const PrivacyPolicy = () => {
           <h1 className="text-4xl md:text-5xl font-black text-blue-950 dark:text-white tracking-tight leading-[1.1] mb-6">
             Privacy & Cookie Policy
           </h1>
-          <p className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest border-b border-[#e8e2d4] dark:border-[#332b21] pb-8">
+          <p className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest border-b border-slate-200 dark:border-slate-800 pb-8">
             Anjaney Nexus India LLP
           </p>
         </div>
@@ -88,7 +88,7 @@ const PrivacyPolicy = () => {
             </p>
 
             {/* Interactive Cookie Preference Settings */}
-            <div className="bg-[#f7f4ee] dark:bg-[#1f1b17] border border-[#e8e2d4] dark:border-[#332b21] rounded-2xl p-5 sm:p-6 mt-4 shadow-[0_12px_30px_rgba(201,154,66,0.06)] dark:shadow-[0_12px_30px_rgba(0,0,0,0.4)]">
+            <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 mt-4 shadow-[0_12px_30px_rgba(14,165,233,0.06)] dark:shadow-[0_12px_30px_rgba(0,0,0,0.4)]">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                   <h4 className="text-sm font-bold text-blue-950 dark:text-white">Your Saved Cookie Preference</h4>
@@ -105,7 +105,7 @@ const PrivacyPolicy = () => {
                     className={`px-5 py-2.5 text-xs font-bold uppercase tracking-wider rounded-xl border transition-all cursor-pointer ${
                       consent === 'essential'
                         ? 'bg-blue-950 text-white border-blue-950 dark:bg-orange-400 dark:border-orange-400 shadow-sm'
-                        : 'bg-white dark:bg-[#141312] text-slate-700 dark:text-slate-300 border-[#e8e2d4] dark:border-[#332b21] hover:border-[#c99a42]'
+                        : 'bg-white dark:bg-[#0a0f1d] text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:border-sky-500 dark:hover:border-sky-400'
                     }`}
                   >
                     ESSENTIAL
@@ -115,7 +115,7 @@ const PrivacyPolicy = () => {
                     className={`px-5 py-2.5 text-xs font-bold uppercase tracking-wider rounded-xl border transition-all cursor-pointer ${
                       consent === 'all'
                         ? 'bg-orange-500 text-white border-orange-500 dark:bg-orange-400 dark:border-orange-400 shadow-sm'
-                        : 'bg-white dark:bg-[#141312] text-slate-700 dark:text-slate-300 border-[#e8e2d4] dark:border-[#332b21] hover:border-[#c99a42]'
+                        : 'bg-white dark:bg-[#0a0f1d] text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:border-sky-500 dark:hover:border-sky-400'
                     }`}
                   >
                     Accept All

@@ -4,29 +4,29 @@
 
 @layer base {
   :root {
-    /* Spice Grain Global Dynamic Look: Oatmeal Cream (#f7f4ee), Pure White (#ffffff), Warm Spice Gold (#c99a42) */
-    --bg-primary: #fcfbf8;
+    /* Fresh, Crisp, Modern Luminous Design: Pure White (#ffffff), Cool Slate (#f8fafc), Crisp Modern Slate Accent */
+    --bg-primary: #f8fafc;
     --bg-surface: #ffffff;
-    --bg-elevated: #f7f4ee;
-    --text-primary: #1a1a1a;     /* Spice Grain Deep Charcoal / Black */
-    --text-secondary: #4a453e;   /* Warm Spice Slate */
-    --brand-navy: #1a1a1a;       /* Deep Header Charcoal */
-    --brand-orange: #c99a42;     /* Spice Grain Signature Gold */
-    --brand-orange-hover: #a67c2e;
-    --border-color: #e8e2d4;
+    --bg-elevated: #f1f5f9;
+    --text-primary: #0f172a;     /* Deep Crisp Slate */
+    --text-secondary: #475569;   /* Cool Neutral Slate */
+    --brand-navy: #0b1d3a;       /* Deep Authority Navy */
+    --brand-orange: #f97316;     /* Vibrant Electric Orange */
+    --brand-orange-hover: #ea580c;
+    --border-color: #e2e8f0;     /* Crisp Slate 200 Border */
   }
 
   .dark {
-    /* Spice Grain Global Dark Mode: Matte Obsidian Charcoal & Radiant Spice Grain Gold (#c99a42) */
-    --bg-primary: #141312;
-    --bg-surface: #1a1a1a;
-    --bg-elevated: #1f1b17;
-    --text-primary: #f7f4ee;
-    --text-secondary: #b5ac9e;
-    --brand-navy: #c99a42;
-    --brand-orange: #c99a42;
-    --brand-orange-hover: #dfb25b;
-    --border-color: #332b21;
+    /* Fresh High-Tech Dark Mode: Deep Midnight Navy/Slate & Crisp Cyan / Vibrant Electric Accent */
+    --bg-primary: #0a0f1d;
+    --bg-surface: #0f172a;
+    --bg-elevated: #131d35;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --brand-navy: #38bdf8;
+    --brand-orange: #f97316;
+    --brand-orange-hover: #fb923c;
+    --border-color: #1e293b;     /* Deep Slate 800 Border */
   }
 
   html {
@@ -202,20 +202,20 @@
   will-change: transform;
 }
 
-/* Spice Grain Global Dynamic Coordinate Grids & Grain Ambience */
+/* Fresh Modern Global Coordinate Grids */
 .bg-trade-grid-light {
   background-image: 
-    radial-gradient(rgba(201, 154, 66, 0.22) 1.2px, transparent 1.2px),
-    linear-gradient(to right, rgba(201, 154, 66, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(201, 154, 66, 0.04) 1px, transparent 1px);
+    radial-gradient(rgba(14, 165, 233, 0.16) 1.2px, transparent 1.2px),
+    linear-gradient(to right, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
   background-size: 60px 60px, 60px 60px, 60px 60px;
 }
 
 .bg-trade-grid-dark {
   background-image: 
-    radial-gradient(rgba(201, 154, 66, 0.3) 1.2px, transparent 1.2px),
-    linear-gradient(to right, rgba(201, 154, 66, 0.065) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(201, 154, 66, 0.065) 1px, transparent 1px);
+    radial-gradient(rgba(56, 189, 248, 0.22) 1.2px, transparent 1.2px),
+    linear-gradient(to right, rgba(30, 41, 59, 0.3) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(30, 41, 59, 0.3) 1px, transparent 1px);
   background-size: 60px 60px, 60px 60px, 60px 60px;
 }
 
@@ -228,7 +228,7 @@
   animation: radar-pulse 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }
 
-/* Dynamic Interactive Spice Grain Card */
+/* Dynamic Interactive Fresh Card */
 .dynamic-card {
   position: relative;
   transition: box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
@@ -239,8 +239,8 @@
 
 .dynamic-card:hover {
   transform: none;
-  border-color: #c99a42;
-  box-shadow: 0 14px 38px rgba(201, 154, 66, 0.16);
+  border-color: #38bdf8;
+  box-shadow: 0 14px 38px rgba(14, 165, 233, 0.12);
 }
 
 /* Glassmorphism utility with warm depth */

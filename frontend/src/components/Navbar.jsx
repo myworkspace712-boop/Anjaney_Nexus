@@ -45,7 +45,7 @@ const Navbar = ({ activePage, setActivePage }) => {
 
   return (
     <>
-      <nav className="fixed w-full z-40 bg-[#fcfbf8]/95 dark:bg-[#1a1a1a]/95 backdrop-blur-xl border-b border-[#e8e2d4] dark:border-[#2d261e] shadow-[0_4px_20px_rgba(201,154,66,0.06)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.6)] hover:shadow-md transition-all duration-300">
+      <nav className="fixed w-full z-40 bg-white/90 dark:bg-[#0a0f1d]/90 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-[0_4px_20px_rgba(14,165,233,0.06)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.6)] hover:shadow-md transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             
@@ -82,15 +82,15 @@ const Navbar = ({ activePage, setActivePage }) => {
                     onClick={() => setActivePage && setActivePage(link.id)}
                     className={`relative flex items-center py-1 px-1 sm:px-1.5 md:px-1.5 lg:px-2 text-[9px] sm:text-[9.5px] md:text-[10px] lg:text-[11px] font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer whitespace-nowrap group ${
                       isActive 
-                        ? 'text-orange-500 dark:text-orange-400 font-black' 
+                        ? 'text-orange-500 dark:text-blue-400 font-black' 
                         : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:-translate-y-0.5 active:translate-y-0'
                     }`}
                   >
                     <span className="transition-colors duration-200">{link.label}</span>
 
-                    {/* Underline indicator placed near to the button */}
+                    {/* Single-color underline indicator (orange in light mode, blue in dark mode) */}
                     <span 
-                      className={`absolute bottom-0 left-0 w-full h-[2px] rounded-full bg-gradient-to-r from-[#c99a42] to-[#dfb25b] dark:from-[#c99a42] dark:to-[#dfb25b] origin-left transition-transform duration-300 ease-out pointer-events-none ${
+                      className={`absolute bottom-0 left-0 w-full h-[2px] rounded-full bg-orange-500 dark:bg-blue-400 origin-left transition-transform duration-300 ease-out pointer-events-none ${
                         isActive 
                           ? 'scale-x-100' 
                           : 'scale-x-0 group-hover:scale-x-100'
@@ -115,8 +115,8 @@ const Navbar = ({ activePage, setActivePage }) => {
                   onClick={toggleTheme}
                   className={`relative inline-flex h-4.5 w-8.5 sm:h-5 sm:w-9 shrink-0 items-center rounded-full p-0.5 border transition-all duration-300 cursor-pointer shadow-xs focus:outline-none ${
                     isDarkMode 
-                      ? 'bg-[#c99a42] border-[#dfb25b]' 
-                      : 'bg-[#e8e2d4] border-[#d8d0bf] hover:border-[#c99a42]'
+                      ? 'bg-sky-500 border-sky-400' 
+                      : 'bg-slate-200 border-slate-300 hover:border-sky-500'
                   }`}
                   aria-label="Toggle Theme"
                   title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
@@ -132,7 +132,7 @@ const Navbar = ({ activePage, setActivePage }) => {
               {/* Hamburger Menu Button - appears ONLY when the other buttons are not available (below sm) */}
               <button
                 onClick={() => setIsSidebarOpen(true)}
-                className="sm:hidden p-1.5 rounded-lg border border-[#e8e2d4] dark:border-[#332b21] bg-[#f7f4ee] dark:bg-[#1f1b17] text-slate-700 dark:text-slate-300 hover:text-[#c99a42] dark:hover:text-[#c99a42] hover:border-[#c99a42] dark:hover:border-[#c99a42] transition-all cursor-pointer shadow-xs"
+                className="sm:hidden p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-300 hover:text-sky-500 dark:hover:text-sky-400 hover:border-sky-500 dark:hover:border-sky-400 transition-all cursor-pointer shadow-xs"
                 aria-label="Open Navigation Sidebar"
                 title="Open Menu"
               >

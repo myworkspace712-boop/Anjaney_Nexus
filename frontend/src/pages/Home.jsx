@@ -10,8 +10,8 @@ const Home = ({ setActivePage }) => {
   return (
     <main className={`w-full min-h-screen font-sans transition-colors duration-500 overflow-hidden relative ${
       isDark 
-        ? 'bg-gradient-to-b from-[#141312] via-[#1a1816] to-[#141312] text-slate-100' 
-        : 'bg-gradient-to-b from-[#fcfbf8] via-[#f7f4ee] to-[#f4efe4] text-[#0b1d3a]'
+        ? 'bg-gradient-to-b from-[#0a0f1d] via-[#0d1527] to-[#0a0f1d] text-slate-100' 
+        : 'bg-gradient-to-b from-[#ffffff] via-[#f8fafc] to-[#f1f5f9] text-[#0b1d3a]'
     }`}>
 
       {/* MARITIME TRADE & LOGISTICS BACKGROUND OVERLAY (Navigational Chart Grid + Deep Ocean Aurora) */}
@@ -20,22 +20,22 @@ const Home = ({ setActivePage }) => {
       }`}></div>
 
       {/* AMBIENT DYNAMIC MARITIME BEACONS & OCEANIC TRADE HUBS */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl opacity-25 -z-0 bg-gradient-to-br from-[#c99a42]/30 via-[#dfb25b]/20 to-[#c99a42]/10 animate-maritime-drift"></div>
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl opacity-25 -z-0 bg-gradient-to-br from-sky-500/20 via-blue-500/15 to-transparent animate-maritime-drift"></div>
       <div className={`absolute top-[450px] right-10 w-[600px] h-[600px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 animate-float-slow ${
-        isDark ? 'bg-gradient-to-bl from-[#c99a42]/20 via-[#a67c2e]/15 to-transparent' : 'bg-gradient-to-bl from-[#c99a42]/18 via-[#dfb25b]/20 to-transparent'
+        isDark ? 'bg-gradient-to-bl from-cyan-500/15 via-sky-500/15 to-transparent' : 'bg-gradient-to-bl from-sky-500/15 via-blue-500/15 to-transparent'
       }`}></div>
       <div className={`absolute top-[1200px] left-10 w-[550px] h-[550px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 animate-maritime-drift ${
-        isDark ? 'bg-gradient-to-tr from-[#c99a42]/20 via-[#dfb25b]/15 to-transparent' : 'bg-gradient-to-tr from-[#c99a42]/18 via-[#dfb25b]/16 to-transparent'
+        isDark ? 'bg-gradient-to-tr from-sky-500/15 via-blue-600/15 to-transparent' : 'bg-gradient-to-tr from-sky-500/15 via-blue-500/15 to-transparent'
       }`}></div>
       <div className={`absolute bottom-32 right-12 w-[550px] h-[550px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 animate-float-slow ${
-        isDark ? 'bg-gradient-to-tl from-[#c99a42]/20 via-[#a67c2e]/15 to-transparent' : 'bg-gradient-to-tl from-[#c99a42]/16 via-[#dfb25b]/15 to-transparent'
+        isDark ? 'bg-gradient-to-tl from-cyan-500/15 via-sky-500/15 to-transparent' : 'bg-gradient-to-tl from-sky-500/15 via-blue-500/15 to-transparent'
       }`}></div>
 
       {/* 
         1. HERO SECTION - INTERNATIONAL MARITIME IMPORT/EXPORT TERMINAL AESTHETIC
         Solid, authoritative corporate trade presentation (Zero Glassmorphism)
       */}
-      <section className="relative w-full min-h-[580px] lg:min-h-[680px] flex items-center font-sans overflow-hidden border-b border-[#e8e2d4] dark:border-[#2d261e]">
+      <section className="relative w-full min-h-[580px] lg:min-h-[680px] flex items-center font-sans overflow-hidden border-b border-slate-200 dark:border-slate-800">
         
         {/* Background Freight & Shipping Port Image */}
         <div className="absolute inset-0">
@@ -55,7 +55,7 @@ const Home = ({ setActivePage }) => {
         {/* Solid Corporate Maritime Overlays (High-Contrast, Pure Solid Depth, No Glass) */}
         <div className={`absolute inset-0 transition-colors duration-500 ${
           isDark 
-            ? 'bg-gradient-to-r from-[#0e0c0b] via-[#0e0c0b]/95 to-[#16120f]/85'
+            ? 'bg-gradient-to-r from-[#0a0f1d] via-[#0a0f1d]/95 to-[#0f172a]/85'
             : 'bg-gradient-to-r from-[#0b1d3a] via-[#0b1d3a]/92 to-[#0b1d3a]/70'
         }`}></div>
         
@@ -66,7 +66,7 @@ const Home = ({ setActivePage }) => {
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-20 sm:py-28">
           <div className="max-w-3xl text-left">
             {/* Commercial Trust & Export Dispatch Badge */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 bg-gradient-to-r from-[#140f0c]/90 to-[#181310]/90 border border-orange-400/50 text-orange-300 font-black text-[11px] uppercase tracking-widest rounded-full mb-6 shadow-md transform transition-all duration-300 hover:scale-[1.02] cursor-default">
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 bg-gradient-to-r from-[#0a0f1d]/90 to-[#0f172a]/90 border border-orange-400/50 text-orange-300 font-black text-[11px] uppercase tracking-widest rounded-full mb-6 shadow-md transform transition-all duration-300 hover:scale-[1.02] cursor-default">
               <span className="w-2.5 h-2.5 rounded-full bg-orange-400 radar-dot"></span>
               <span>PREMIUM EXPORT SOLUTIONS · GLOBAL AGRO COMMODITIES</span>
             </div>
@@ -86,7 +86,7 @@ const Home = ({ setActivePage }) => {
             <div className="flex flex-wrap items-center justify-start gap-4">
               <button
                 onClick={() => setActivePage && setActivePage('contact')}
-                className="px-8 py-4 bg-[#140f0c] hover:bg-[#1e1713] border-2 border-white/20 hover:border-white/50 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-md hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                className="px-8 py-4 bg-[#0a0f1d] hover:bg-[#111a2e] border-2 border-white/20 hover:border-white/50 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-md hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
               >
                 Request Quote
               </button>

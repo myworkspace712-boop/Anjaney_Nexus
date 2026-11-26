@@ -1914,8 +1914,8 @@ const ProductsPage = ({ setActivePage }) => {
   return (
     <div className={`min-h-screen font-sans transition-colors duration-500 relative overflow-hidden ${
       isDark 
-        ? 'bg-gradient-to-b from-[#141312] via-[#1a1816] to-[#141312] text-slate-100' 
-        : 'bg-gradient-to-b from-[#fcfbf8] via-[#f7f4ee] to-[#f4efe4] text-[#0b1d3a]'
+        ? 'bg-gradient-to-b from-[#0a0f1d] via-[#0d1527] to-[#0a0f1d] text-slate-100' 
+        : 'bg-gradient-to-b from-[#ffffff] via-[#f8fafc] to-[#f1f5f9] text-[#0b1d3a]'
     }`}>
       
       {/* MARITIME TRADE & LOGISTICS BACKGROUND OVERLAY */}
@@ -1924,12 +1924,12 @@ const ProductsPage = ({ setActivePage }) => {
       }`}></div>
 
       {/* AMBIENT DYNAMIC MARITIME BEACONS & OCEANIC TRADE HUBS */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl opacity-25 -z-0 bg-gradient-to-br from-[#c99a42]/30 via-[#dfb25b]/20 to-[#c99a42]/10 animate-maritime-drift"></div>
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl opacity-25 -z-0 bg-gradient-to-br from-sky-500/20 via-blue-500/15 to-transparent animate-maritime-drift"></div>
       <div className={`absolute top-[450px] right-10 w-[600px] h-[600px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 animate-float-slow ${
-        isDark ? 'bg-gradient-to-bl from-[#c99a42]/20 via-[#a67c2e]/15 to-transparent' : 'bg-gradient-to-bl from-[#c99a42]/18 via-[#dfb25b]/20 to-transparent'
+        isDark ? 'bg-gradient-to-bl from-cyan-500/15 via-sky-500/15 to-transparent' : 'bg-gradient-to-bl from-sky-500/15 via-blue-500/15 to-transparent'
       }`}></div>
       <div className={`absolute top-[1200px] left-10 w-[550px] h-[550px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 animate-maritime-drift ${
-        isDark ? 'bg-gradient-to-tr from-[#c99a42]/20 via-[#dfb25b]/15 to-transparent' : 'bg-gradient-to-tr from-[#c99a42]/18 via-[#dfb25b]/16 to-transparent'
+        isDark ? 'bg-gradient-to-tr from-sky-500/15 via-blue-500/15 to-transparent' : 'bg-gradient-to-tr from-sky-500/15 via-blue-500/15 to-transparent'
       }`}></div>
 
       {/* =========================================================================
@@ -1955,14 +1955,14 @@ const ProductsPage = ({ setActivePage }) => {
             - Dark mode: Deep Maritime Ocean Blue (#060d1d to #091a3a), strictly non-black */}
         <div className={`absolute inset-0 transition-colors duration-500 ${
           isDark 
-            ? 'bg-gradient-to-r from-[#0e0c0b]/95 via-[#0e0c0b]/85 to-[#16120f]/65'
+            ? 'bg-gradient-to-r from-[#0a0f1d]/95 via-[#0a0f1d]/85 to-[#0f172a]/65'
             : 'bg-gradient-to-r from-[#0b1d3a]/95 via-[#0b1d3a]/80 to-[#0b1d3a]/45'
         }`}></div>
         
         <div className={`absolute inset-0 pointer-events-none transition-colors duration-500 ${
           isDark
-            ? 'bg-gradient-to-b from-[#141312]/75 via-transparent to-[#141312]'
-            : 'bg-gradient-to-b from-[#0b1d3a]/75 via-transparent to-[#fcfbf8]'
+            ? 'bg-gradient-to-b from-[#0a0f1d]/75 via-transparent to-[#0a0f1d]'
+            : 'bg-gradient-to-b from-[#0b1d3a]/75 via-transparent to-white'
         }`}></div>
 
         {/* Subtle dynamic grid pattern for high-tech maritime feel */}
@@ -1993,10 +1993,10 @@ const ProductsPage = ({ setActivePage }) => {
           {stats.map((stat, idx) => (
             <div 
               key={idx}
-              className={`p-6 rounded-2xl border transition-all duration-300 relative overflow-hidden group backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#c99a42] before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
+              className={`p-6 rounded-2xl border transition-all duration-300 relative overflow-hidden group backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-sky-400 before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
                 isDark 
-                  ? 'bg-[#1f1b17] border-[#332b21] hover:border-[#c99a42] shadow-[0_12px_30px_rgba(0,0,0,0.5)]' 
-                  : 'bg-[#f7f4ee] border-[#e8e2d4] hover:border-[#c99a42] shadow-[0_12px_30px_rgba(201,154,66,0.07)]'
+                  ? 'bg-[#0f172a] border-slate-800 hover:border-sky-400 shadow-[0_12px_30px_rgba(0,0,0,0.5)]' 
+                  : 'bg-white border-slate-200 hover:border-sky-500 shadow-[0_12px_30px_rgba(14,165,233,0.07)]'
               }`}
             >
               <div className="flex items-center mb-4">
@@ -2026,7 +2026,7 @@ const ProductsPage = ({ setActivePage }) => {
       <div id="catalog-products-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-24 relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-[#e8e2d4] dark:border-[#2d261e]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-slate-200 dark:border-slate-800">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-orange-500 dark:text-orange-400 bg-orange-500/10 dark:bg-orange-400/15 border border-orange-500/20 dark:border-orange-400/30 mb-3">
               <span>B2B Commercial Export Catalog</span>
@@ -2052,8 +2052,8 @@ const ProductsPage = ({ setActivePage }) => {
               onChange={(e) => setSearchQuery(e.target.value)}
               className={`w-full py-3.5 pl-11 pr-10 text-sm font-medium rounded-xl border transition-all outline-none ${
                 isDark
-                  ? 'bg-[#1f1b17] border-[#332b21] text-white placeholder-slate-400 focus:border-[#c99a42] focus:ring-2 focus:ring-[#c99a42]/30'
-                  : 'bg-[#f7f4ee] border-[#e8e2d4] text-[#0b1d3a] placeholder-slate-400 focus:border-[#c99a42] focus:ring-2 focus:ring-[#c99a42]/20 shadow-xs'
+                  ? 'bg-[#0f172a] border-slate-800 text-white placeholder-slate-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30'
+                  : 'bg-white border-slate-200 text-[#0b1d3a] placeholder-slate-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 shadow-xs'
               }`}
             />
             <svg className="w-5 h-5 text-orange-500 dark:text-orange-400 absolute left-3.5 top-3.5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2093,18 +2093,18 @@ const ProductsPage = ({ setActivePage }) => {
                 className={`whitespace-nowrap px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center gap-2 ${
                   isSelected
                     ? isDark 
-                      ? 'bg-gradient-to-r from-[#c99a42] to-[#dfb25b] text-white shadow-lg shadow-[#c99a42]/30 scale-105 border-transparent'
-                      : 'bg-[#c99a42] text-white shadow-lg shadow-[#c99a42]/20 scale-105 border-transparent'
+                      ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-lg shadow-sky-500/30 scale-105 border-transparent'
+                      : 'bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-lg shadow-sky-500/20 scale-105 border-transparent'
                     : isDark
-                      ? 'bg-[#1f1b17] text-slate-300 hover:text-white border border-[#332b21] hover:border-[#c99a42] hover:scale-[1.02]'
-                      : 'bg-[#f7f4ee] text-slate-600 hover:text-[#0b1d3a] border border-[#e8e2d4] hover:border-[#c99a42] shadow-xs hover:scale-[1.02]'
+                      ? 'bg-[#0f172a] text-slate-300 hover:text-white border border-slate-800 hover:border-sky-400 hover:scale-[1.02]'
+                      : 'bg-white text-slate-600 hover:text-[#0b1d3a] border border-slate-200 hover:border-sky-500 shadow-xs hover:scale-[1.02]'
                 }`}
               >
                 <span>{cat}</span>
                 <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold transition-colors ${
                   isSelected 
                     ? 'bg-white/20 text-white' 
-                    : isDark ? 'bg-[#141312] text-[#dfb25b]' : 'bg-[#efeae0] text-[#a67c2e]'
+                    : isDark ? 'bg-[#0a0f1d] text-sky-400' : 'bg-slate-100 text-sky-600'
                 }`}>
                   {count}
                 </span>
@@ -2116,7 +2116,7 @@ const ProductsPage = ({ setActivePage }) => {
         {/* Product Cards Grid */}
         {filteredProducts.length === 0 ? (
           <div className={`text-center py-20 rounded-3xl border border-dashed p-8 ${
-            isDark ? 'bg-[#1f1b17] border-[#332b21]' : 'bg-[#f7f4ee] border-[#e8e2d4]'
+            isDark ? 'bg-[#0f172a] border-slate-800' : 'bg-white border-slate-200'
           }`}>
             <div className="w-16 h-16 rounded-2xl bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400 flex items-center justify-center mx-auto mb-4 text-2xl font-black">
               🔍
@@ -2146,16 +2146,16 @@ const ProductsPage = ({ setActivePage }) => {
               <div 
                 key={product.id} 
                 onClick={() => handleGetQuote(product)}
-                className={`border rounded-3xl overflow-hidden transition-all duration-300 ease-out flex flex-col group relative cursor-pointer hover:shadow-2xl h-[440px] w-full before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#c99a42] before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 backdrop-blur-md ${
+                className={`border rounded-3xl overflow-hidden transition-all duration-300 ease-out flex flex-col group relative cursor-pointer hover:shadow-2xl h-[440px] w-full before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-sky-400 before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 backdrop-blur-md ${
                   isDark 
-                    ? 'bg-[#1f1b17] border-[#332b21] shadow-[0_12px_32px_rgba(0,0,0,0.5)] hover:shadow-[0_14px_38px_rgba(201,154,66,0.18)] hover:border-[#c99a42]' 
-                    : 'bg-[#f7f4ee] border-[#e8e2d4] shadow-[0_12px_32px_rgba(201,154,66,0.06)] hover:shadow-[0_14px_38px_rgba(201,154,66,0.16)] hover:border-[#c99a42]'
+                    ? 'bg-[#0f172a] border-slate-800 shadow-[0_12px_32px_rgba(0,0,0,0.5)] hover:shadow-[0_14px_38px_rgba(14,165,233,0.18)] hover:border-sky-400' 
+                    : 'bg-white border-slate-200 shadow-[0_12px_32px_rgba(14,165,233,0.06)] hover:shadow-[0_14px_38px_rgba(14,165,233,0.16)] hover:border-sky-500'
                 }`}
               >
                 
                 {/* Product Image Container */}
                 <div className={`h-52 w-full overflow-hidden rounded-t-3xl relative shrink-0 ${
-                  isDark ? 'bg-[#181411]' : 'bg-[#efeae0]'
+                  isDark ? 'bg-[#0b1120]' : 'bg-slate-100'
                 }`}>
                   <img 
                     src={cardImage} 
@@ -2174,7 +2174,7 @@ const ProductsPage = ({ setActivePage }) => {
 
                 {/* Card Body */}
                 <div className={`p-5 flex flex-col flex-1 justify-between space-y-3 rounded-b-3xl overflow-hidden relative ${
-                  isDark ? 'bg-gradient-to-b from-transparent to-[#181411]/60' : 'bg-gradient-to-b from-transparent to-[#efeae0]/60'
+                  isDark ? 'bg-gradient-to-b from-transparent to-[#0b1120]/60' : 'bg-gradient-to-b from-transparent to-slate-100/60'
                 }`}>
                   <div className="space-y-2">
                     {/* Title & Subtitle (Consistent Height) */}
@@ -2215,8 +2215,8 @@ const ProductsPage = ({ setActivePage }) => {
                                         ? 'bg-gradient-to-r from-orange-400 to-amber-500 text-white font-black border-transparent shadow-sm'
                                         : 'bg-gradient-to-r from-orange-500 to-orange-600 text-white font-black border-transparent shadow-sm'
                                       : isDark
-                                        ? 'bg-[#141312] hover:bg-[#c99a42]/20 border-[#332b21] hover:border-[#c99a42] text-slate-200 hover:text-white'
-                                        : 'bg-[#ffffff] hover:bg-[#f7f4ee] border-[#e8e2d4] hover:border-[#c99a42] text-slate-700 hover:text-[#a67c2e] shadow-2xs'
+                                        ? 'bg-[#0a0f1d] hover:bg-sky-500/20 border-slate-800 hover:border-sky-400 text-slate-200 hover:text-white'
+                                        : 'bg-slate-50 hover:bg-slate-100 border-slate-200 hover:border-sky-500 text-slate-700 hover:text-sky-600 shadow-2xs'
                                   }`}
                                 >
                                   {varImg && (
@@ -2248,8 +2248,8 @@ const ProductsPage = ({ setActivePage }) => {
                             }}
                             className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
                               isDark 
-                                ? 'bg-[#141312] hover:bg-[#c99a42]/20 border-[#332b21] hover:border-[#c99a42] text-slate-200 hover:text-white' 
-                                : 'bg-[#ffffff] hover:bg-[#f7f4ee] border-[#e8e2d4] hover:border-[#c99a42] text-slate-700 hover:text-[#a67c2e] shadow-2xs'
+                                ? 'bg-[#0a0f1d] hover:bg-sky-500/20 border-slate-800 hover:border-sky-400 text-slate-200 hover:text-white' 
+                                : 'bg-slate-50 hover:bg-slate-100 border-slate-200 hover:border-sky-500 text-slate-700 hover:text-sky-600 shadow-2xs'
                             }`}
                           >
                             <span>{typeof product.varieties[0] === 'string' ? product.varieties[0] : product.varieties[0]?.name}</span>
@@ -2273,20 +2273,20 @@ const ProductsPage = ({ setActivePage }) => {
         const profile = PRODUCT_PROFILE_DETAILS[selectedProduct.id] || PRODUCT_PROFILE_DETAILS[baseKey] || {};
         return (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 md:p-6 bg-[#0e0c0b]/90 backdrop-blur-md animate-fadeIn overflow-y-auto"
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 md:p-6 bg-[#0a0f1d]/90 backdrop-blur-md animate-fadeIn overflow-y-auto"
             onClick={() => setSelectedProduct(null)}
           >
             <div
               className={`relative w-full max-w-4xl my-auto rounded-3xl border shadow-2xl overflow-hidden transition-all duration-300 max-h-[92vh] flex flex-col ${
                 isDark
-                  ? 'bg-[#1f1b17] border-[#332b21] text-slate-100 shadow-[0_25px_70px_rgba(0,0,0,0.8)]'
-                  : 'bg-[#fcfbf8] border-[#e8e2d4] text-[#0b1d3a] shadow-2xl'
+                  ? 'bg-[#0f172a] border-slate-800 text-slate-100 shadow-[0_25px_70px_rgba(0,0,0,0.8)]'
+                  : 'bg-white border-slate-200 text-[#0b1d3a] shadow-2xl'
               }`}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal Header */}
               <div className={`p-5 sm:p-6 border-b flex items-start justify-between gap-4 sticky top-0 z-20 backdrop-blur-md ${
-                isDark ? 'bg-[#1f1b17]/95 border-[#332b21]' : 'bg-[#fcfbf8]/95 border-[#e8e2d4]'
+                isDark ? 'bg-[#0f172a]/95 border-slate-800' : 'bg-white/95 border-slate-200'
               }`}>
                 <div className="space-y-1">
                   <div className="flex items-center gap-2 flex-wrap">
@@ -2294,13 +2294,13 @@ const ProductsPage = ({ setActivePage }) => {
                       {profile.categoryHeader || selectedProduct.badgeCategory || selectedProduct.category}
                     </span>
                     <span className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-md border ${
-                      isDark ? 'bg-[#141312] text-slate-300 border-[#332b21]' : 'bg-[#f7f4ee] text-slate-700 border-[#e8e2d4]'
+                      isDark ? 'bg-[#0a0f1d] text-slate-300 border-slate-800' : 'bg-slate-50 text-slate-700 border-slate-200'
                     }`}>
                       Official Export Documentation
                     </span>
                     {selectedProduct.hsCode && (
                       <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-md ${
-                        isDark ? 'bg-[#141312] text-[#dfb25b]' : 'bg-[#f7f4ee] text-[#a67c2e]'
+                        isDark ? 'bg-[#0a0f1d] text-sky-400' : 'bg-slate-50 text-sky-600'
                       }`}>
                         HS: {selectedProduct.hsCode}
                       </span>
@@ -2327,7 +2327,7 @@ const ProductsPage = ({ setActivePage }) => {
                   <button
                     onClick={() => setSelectedProduct(null)}
                     className={`p-2 rounded-xl transition-colors cursor-pointer shrink-0 ${
-                      isDark ? 'bg-[#141312] hover:bg-[#29221a] text-slate-300' : 'bg-[#f7f4ee] hover:bg-[#efeae0] text-slate-700'
+                      isDark ? 'bg-[#0a0f1d] hover:bg-slate-800 text-slate-300' : 'bg-slate-50 hover:bg-slate-100 text-slate-700'
                     }`}
                     aria-label="Close details"
                   >
@@ -2343,10 +2343,10 @@ const ProductsPage = ({ setActivePage }) => {
                 
                 {/* Product Overview Top Box */}
                 <div className={`p-4 sm:p-6 rounded-2xl border flex flex-col sm:flex-row items-center gap-6 ${
-                  isDark ? 'bg-[#141312] border-[#332b21]' : 'bg-[#f7f4ee] border-[#e8e2d4]'
+                  isDark ? 'bg-[#0a0f1d] border-slate-800' : 'bg-slate-50 border-slate-200'
                 }`}>
                   <div className={`w-36 h-36 sm:w-44 sm:h-44 rounded-2xl p-2 flex items-center justify-center shrink-0 border overflow-hidden ${
-                    isDark ? 'bg-[#1f1b17] border-[#332b21]' : 'bg-white border-[#e8e2d4] shadow-sm'
+                    isDark ? 'bg-[#0f172a] border-slate-800' : 'bg-white border-slate-200 shadow-sm'
                   }`}>
                     <img
                       src={selectedProduct.image}
@@ -2390,7 +2390,7 @@ const ProductsPage = ({ setActivePage }) => {
                         <div
                           key={idx}
                           className={`p-4 rounded-xl border flex flex-col justify-between ${
-                            isDark ? 'bg-[#141312] border-[#332b21]' : 'bg-[#fffdfa] border-[#e8e2d4]'
+                            isDark ? 'bg-[#0a0f1d] border-slate-800' : 'bg-slate-50 border-slate-200'
                           }`}
                         >
                           <div>
@@ -2421,7 +2421,7 @@ const ProductsPage = ({ setActivePage }) => {
                         <div
                           key={idx}
                           className={`p-3 rounded-xl border text-center ${
-                            isDark ? 'bg-[#141312] border-[#332b21]' : 'bg-[#fffdfa] border-[#e8e2d4]'
+                            isDark ? 'bg-[#0a0f1d] border-slate-800' : 'bg-slate-50 border-slate-200'
                           }`}
                         >
                           <div className="text-[11px] font-semibold text-slate-400 mb-0.5">
@@ -2450,7 +2450,7 @@ const ProductsPage = ({ setActivePage }) => {
                         <div
                           key={idx}
                           className={`p-4 rounded-xl border ${
-                            isDark ? 'bg-[#141312] border-[#332b21]' : 'bg-[#fffdfa] border-[#e8e2d4]'
+                            isDark ? 'bg-[#0a0f1d] border-slate-800' : 'bg-slate-50 border-slate-200'
                           }`}
                         >
                           <h5 className="text-xs font-bold text-orange-500 dark:text-orange-400 mb-1">{h.title}</h5>
@@ -2473,7 +2473,7 @@ const ProductsPage = ({ setActivePage }) => {
                       Technical &amp; Quality Parameters
                     </h4>
                     <div className={`rounded-2xl border overflow-hidden ${
-                      isDark ? 'border-[#332b21] bg-[#141312]' : 'border-[#e8e2d4] bg-white'
+                      isDark ? 'border-slate-800 bg-[#0a0f1d]' : 'border-slate-200 bg-white'
                     }`}>
                       <table className="w-full text-left text-xs border-collapse">
                         <tbody>
@@ -2482,7 +2482,7 @@ const ProductsPage = ({ setActivePage }) => {
                               <tr
                                 key={idx}
                                 className={`border-b last:border-0 ${
-                                  isDark ? 'border-[#332b21]/60 hover:bg-[#1f1b17]' : 'border-[#e8e2d4]/70 hover:bg-[#fffdfa]'
+                                  isDark ? 'border-slate-800/60 hover:bg-[#0f172a]' : 'border-slate-200/70 hover:bg-slate-50'
                                 }`}
                               >
                                 <td className="p-3 sm:p-3.5 font-bold text-orange-500 dark:text-orange-400 w-1/3">
@@ -2498,7 +2498,7 @@ const ProductsPage = ({ setActivePage }) => {
                               <tr
                                 key={idx}
                                 className={`border-b last:border-0 ${
-                                  isDark ? 'border-[#332b21]/60 hover:bg-[#1f1b17]' : 'border-[#e8e2d4]/70 hover:bg-[#fffdfa]'
+                                  isDark ? 'border-slate-800/60 hover:bg-[#0f172a]' : 'border-slate-200/70 hover:bg-slate-50'
                                 }`}
                               >
                                 <td className="p-3 sm:p-3.5 font-bold text-orange-500 dark:text-orange-400 w-1/3">
@@ -2518,7 +2518,7 @@ const ProductsPage = ({ setActivePage }) => {
 
                 {/* Company Footer Note */}
                 <div className={`p-4 rounded-xl border text-xs flex flex-col sm:flex-row items-center justify-between gap-3 ${
-                  isDark ? 'bg-[#141312] border-[#332b21] text-slate-400' : 'bg-[#f7f4ee] border-[#e8e2d4] text-slate-600'
+                  isDark ? 'bg-[#0a0f1d] border-slate-800 text-slate-400' : 'bg-slate-50 border-slate-200 text-slate-600'
                 }`}>
                   <div className="flex items-center gap-2">
                     <span className="font-bold text-orange-500 dark:text-orange-400">Anjaney Nexus India LLP</span>
@@ -2533,7 +2533,7 @@ const ProductsPage = ({ setActivePage }) => {
 
               {/* Modal Action Footer */}
               <div className={`p-4 sm:p-5 border-t flex flex-col sm:flex-row items-center justify-between gap-3 sticky bottom-0 z-20 backdrop-blur-md ${
-                isDark ? 'bg-[#1f1b17]/95 border-[#332b21]' : 'bg-[#fcfbf8]/95 border-[#e8e2d4]'
+                isDark ? 'bg-[#0f172a]/95 border-slate-800' : 'bg-white/95 border-slate-200'
               }`}>
                 <div className="text-xs text-slate-400 hidden sm:block">
                   Need private labelling, custom packaging, or SGS inspection?
@@ -2542,7 +2542,7 @@ const ProductsPage = ({ setActivePage }) => {
                   <button
                     onClick={() => setSelectedProduct(null)}
                     className={`flex-1 sm:flex-none px-5 py-2.5 rounded-xl text-xs font-bold transition-colors cursor-pointer border ${
-                      isDark ? 'border-[#332b21] bg-[#141312] text-slate-200 hover:bg-[#29221a]' : 'border-[#e8e2d4] bg-[#f7f4ee] text-slate-700 hover:bg-[#efeae0]'
+                      isDark ? 'border-slate-800 bg-[#0a0f1d] text-slate-200 hover:bg-slate-800' : 'border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100'
                     }`}
                   >
                     Close
