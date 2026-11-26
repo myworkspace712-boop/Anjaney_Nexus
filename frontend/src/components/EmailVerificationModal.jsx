@@ -109,8 +109,8 @@ const EmailVerificationModal = ({ targetEmail, onVerified, onCancel }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#020611]/90 backdrop-blur-md">
-      <div className="max-w-md w-full bg-[#071326] border border-[#132649] rounded-2xl shadow-2xl p-8 space-y-6 relative overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0e0c0b]/90 backdrop-blur-md">
+      <div className="max-w-md w-full bg-[#181310] border border-[#33251c] rounded-2xl shadow-2xl p-8 space-y-6 relative overflow-hidden">
         {/* Glow Accent */}
         <div className="absolute -top-10 -right-10 w-32 h-32 bg-orange-400/10 rounded-full blur-2xl pointer-events-none" />
 
@@ -139,7 +139,7 @@ const EmailVerificationModal = ({ targetEmail, onVerified, onCancel }) => {
           </div>
         )}
 
-        <div className="p-2.5 bg-[#020611]/60 border border-[#132649] rounded-lg text-[11px] text-slate-400 text-center leading-relaxed">
+        <div className="p-2.5 bg-[#100d0a]/80 border border-[#33251c] rounded-lg text-[11px] text-slate-400 text-center leading-relaxed">
           💡 If you don't see the email within 1–2 minutes, please check your <strong className="text-orange-400">Spam / Junk</strong> folder or the <strong className="text-slate-300">Promotions</strong> tab.
         </div>
 
@@ -155,7 +155,7 @@ const EmailVerificationModal = ({ targetEmail, onVerified, onCancel }) => {
               value={code}
               onChange={(e) => setCode(e.target.value)}
               placeholder="e.g. 849201"
-              className="w-full text-center tracking-widest text-lg font-mono p-3 rounded-lg bg-[#020611] border border-[#132649] text-white placeholder-slate-500 outline-none focus:border-orange-400"
+              className="w-full text-center tracking-widest text-lg font-mono p-3 rounded-lg bg-[#100d0a] border border-[#33251c] text-white placeholder-slate-500 outline-none focus:border-orange-400"
             />
           </div>
 
@@ -168,7 +168,7 @@ const EmailVerificationModal = ({ targetEmail, onVerified, onCancel }) => {
           </button>
         </form>
 
-        <div className="flex justify-between items-center text-xs text-slate-400 pt-2 border-t border-[#132649]">
+        <div className="flex justify-between items-center text-xs text-slate-400 pt-2 border-t border-[#33251c]">
           <button
             type="button"
             disabled={timer > 0}

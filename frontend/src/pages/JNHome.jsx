@@ -204,7 +204,7 @@ const JNHome = () => {
                     
                     <div className="marquee-container gap-6 px-4 pb-4">
                         {[...certificates, ...certificates, ...certificates, ...certificates, ...certificates, ...certificates].map((cert, index) => (
-                            <div key={index} className="flex-shrink-0 bg-white rounded-2xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] p-6 relative flex flex-col items-center justify-center w-[260px] sm:w-[300px] border border-gray-100 cursor-pointer hover:-translate-y-1 transition-transform">
+                            <div key={index} className="flex-shrink-0 bg-white rounded-2xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] p-6 relative flex flex-col items-center justify-center w-[260px] sm:w-[300px] border border-gray-100 cursor-pointer transition-transform">
                                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-400 to-transparent opacity-80 rounded-t-2xl"></div>
                                 <div className="absolute top-4 right-4 text-green-700 bg-green-50 rounded-full p-0.5">
                                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
@@ -241,7 +241,7 @@ const JNHome = () => {
                         {featuredCommodities.map((product, index) => (
                             <div 
                                 key={index} 
-                                className="bg-white rounded-[1.25rem] p-5 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 flex flex-col group hover:-translate-y-1 transition-transform duration-300"
+                                className="bg-white rounded-[1.25rem] p-5 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 flex flex-col group transition-transform duration-300"
                             >
                                 <div className="w-full h-48 mb-5 overflow-hidden rounded-xl bg-gray-50 relative">
                                     <div className="absolute inset-0 bg-gray-900 opacity-0 group-hover:opacity-5 transition-opacity z-10"></div>

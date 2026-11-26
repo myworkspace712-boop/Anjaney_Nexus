@@ -9,46 +9,53 @@ const Home = ({ setActivePage }) => {
 
   return (
     <main className={`w-full min-h-screen font-sans transition-colors duration-500 overflow-hidden relative ${
-      isDark ? 'bg-[#020611] text-slate-100' : 'bg-[#f8fafc] text-[#0b1d3a]'
+      isDark 
+        ? 'bg-gradient-to-b from-[#141312] via-[#1a1816] to-[#141312] text-slate-100' 
+        : 'bg-gradient-to-b from-[#fcfbf8] via-[#f7f4ee] to-[#f4efe4] text-[#0b1d3a]'
     }`}>
 
-      {/* AMBIENT DYNAMIC GLOWING BLOBS (Matching About, Products & Inquire pages) */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full pointer-events-none blur-3xl opacity-20 -z-0 transition-opacity duration-700 bg-orange-400/20"></div>
-      <div className={`absolute top-[450px] right-10 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 ${
-        isDark ? 'bg-[#132649]/35' : 'bg-blue-600/10'
+      {/* MARITIME TRADE & LOGISTICS BACKGROUND OVERLAY (Navigational Chart Grid + Deep Ocean Aurora) */}
+      <div className={`absolute inset-0 pointer-events-none -z-0 transition-opacity duration-700 ${
+        isDark ? 'bg-trade-grid-dark opacity-80' : 'bg-trade-grid-light opacity-75'
       }`}></div>
-      <div className={`absolute top-[1200px] left-10 w-[450px] h-[450px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 ${
-        isDark ? 'bg-[#0d203e]/30' : 'bg-orange-500/10'
+
+      {/* AMBIENT DYNAMIC MARITIME BEACONS & OCEANIC TRADE HUBS */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl opacity-25 -z-0 bg-gradient-to-br from-[#c99a42]/30 via-[#dfb25b]/20 to-[#c99a42]/10 animate-maritime-drift"></div>
+      <div className={`absolute top-[450px] right-10 w-[600px] h-[600px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 animate-float-slow ${
+        isDark ? 'bg-gradient-to-bl from-[#c99a42]/20 via-[#a67c2e]/15 to-transparent' : 'bg-gradient-to-bl from-[#c99a42]/18 via-[#dfb25b]/20 to-transparent'
       }`}></div>
-      <div className={`absolute bottom-32 right-12 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 ${
-        isDark ? 'bg-[#132649]/30' : 'bg-blue-600/10'
+      <div className={`absolute top-[1200px] left-10 w-[550px] h-[550px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 animate-maritime-drift ${
+        isDark ? 'bg-gradient-to-tr from-[#c99a42]/20 via-[#dfb25b]/15 to-transparent' : 'bg-gradient-to-tr from-[#c99a42]/18 via-[#dfb25b]/16 to-transparent'
+      }`}></div>
+      <div className={`absolute bottom-32 right-12 w-[550px] h-[550px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 animate-float-slow ${
+        isDark ? 'bg-gradient-to-tl from-[#c99a42]/20 via-[#a67c2e]/15 to-transparent' : 'bg-gradient-to-tl from-[#c99a42]/16 via-[#dfb25b]/15 to-transparent'
       }`}></div>
 
       {/* 
         1. HERO SECTION - INTERNATIONAL MARITIME IMPORT/EXPORT TERMINAL AESTHETIC
         Solid, authoritative corporate trade presentation (Zero Glassmorphism)
       */}
-      <section className="relative w-full min-h-[580px] lg:min-h-[680px] flex items-center font-sans overflow-hidden border-b border-slate-200 dark:border-[#132649]">
+      <section className="relative w-full min-h-[580px] lg:min-h-[680px] flex items-center font-sans overflow-hidden border-b border-[#e8e2d4] dark:border-[#2d261e]">
         
         {/* Background Freight & Shipping Port Image */}
         <div className="absolute inset-0">
           <img 
             src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&q=80&w=2000" 
             alt="Global Trade and Export Logistics" 
-            className="w-full h-full object-cover object-center scale-100"
+            className="w-full h-full object-cover object-center scale-100 transition-transform duration-1000 ease-out hover:scale-105"
           />
         </div>
 
         {/* Ambient Glowing Blobs inside Hero */}
-        <div className="absolute top-10 left-1/4 w-96 h-96 rounded-full pointer-events-none blur-3xl opacity-25 z-0 bg-orange-400/20"></div>
-        <div className={`absolute top-1/2 -right-16 w-[450px] h-[450px] rounded-full pointer-events-none blur-3xl z-0 ${
+        <div className="absolute top-10 left-1/4 w-96 h-96 rounded-full pointer-events-none blur-3xl opacity-25 z-0 bg-orange-400/20 animate-pulse-subtle"></div>
+        <div className={`absolute top-1/2 -right-16 w-[450px] h-[450px] rounded-full pointer-events-none blur-3xl z-0 animate-float-slow ${
           isDark ? 'bg-[#132649]/40' : 'bg-blue-600/15'
         }`}></div>
 
         {/* Solid Corporate Maritime Overlays (High-Contrast, Pure Solid Depth, No Glass) */}
         <div className={`absolute inset-0 transition-colors duration-500 ${
           isDark 
-            ? 'bg-gradient-to-r from-[#020611] via-[#020611]/95 to-[#071326]/85'
+            ? 'bg-gradient-to-r from-[#0e0c0b] via-[#0e0c0b]/95 to-[#16120f]/85'
             : 'bg-gradient-to-r from-[#0b1d3a] via-[#0b1d3a]/92 to-[#0b1d3a]/70'
         }`}></div>
         
@@ -56,42 +63,34 @@ const Home = ({ setActivePage }) => {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none"></div>
 
         {/* Hero Main Content */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-24 sm:py-32">
-          <div className="max-w-3xl">
-            
-            {/* Commercial Trust & Export Dispatch Badge (Pill Shape, Solid, No Blur) */}
-            <div className="inline-flex items-center gap-2.5 px-5 py-2 bg-[#01040a] border border-orange-400/50 text-orange-300 font-black text-[11px] uppercase tracking-widest rounded-full mb-6 shadow-md">
-              <span className="w-2 h-2 rounded-full bg-orange-400"></span>
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-20 sm:py-28">
+          <div className="max-w-3xl text-left">
+            {/* Commercial Trust & Export Dispatch Badge */}
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 bg-gradient-to-r from-[#140f0c]/90 to-[#181310]/90 border border-orange-400/50 text-orange-300 font-black text-[11px] uppercase tracking-widest rounded-full mb-6 shadow-md transform transition-all duration-300 hover:scale-[1.02] cursor-default">
+              <span className="w-2.5 h-2.5 rounded-full bg-orange-400 radar-dot"></span>
               <span>PREMIUM EXPORT SOLUTIONS · GLOBAL AGRO COMMODITIES</span>
             </div>
 
             {/* Authoritative Main Headline */}
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black text-white tracking-tighter leading-[0.98] mb-6 drop-shadow-md">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black text-white tracking-tighter leading-[0.98] mb-6 drop-shadow-md text-left">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-orange-400 to-amber-300">Trade Without</span><br />
               <span className="text-white">Boundaries.</span>
             </h1>
 
             {/* Subheading / Tagline */}
-            <p className="text-base sm:text-lg md:text-xl text-slate-100 font-medium max-w-2xl leading-relaxed drop-shadow-sm mb-8">
-              Direct farm procurement connecting India’s harvest to global markets. Delivering premium basmati rice, spices, oil seeds, and certified agro-commodities worldwide with uncompromising standards.
+            <p className="text-base sm:text-lg md:text-xl text-slate-100 font-medium max-w-2xl leading-relaxed drop-shadow-sm mb-8 text-left">
+              Direct farm procurement connecting India’s harvest to global markets. Delivering premium and certified agro-commodities worldwide with uncompromising standards.
             </p>
 
-            {/* Solid Commercial Action Buttons (Zero Glassmorphism) */}
-            <div className="flex flex-wrap items-center gap-4">
-              <button
-                onClick={() => setActivePage && setActivePage('products')}
-                className="px-8 py-4 bg-gradient-to-r from-orange-400 to-amber-500 hover:from-orange-500 hover:to-amber-600 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-orange-500/25 hover:shadow-orange-400/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
-              >
-                Explore Products
-              </button>
+            {/* Solid Commercial Action Buttons */}
+            <div className="flex flex-wrap items-center justify-start gap-4">
               <button
                 onClick={() => setActivePage && setActivePage('contact')}
-                className="px-8 py-4 bg-[#020611] hover:bg-[#071326] border-2 border-white/20 hover:border-white/50 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-md hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                className="px-8 py-4 bg-[#140f0c] hover:bg-[#1e1713] border-2 border-white/20 hover:border-white/50 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-md hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
               >
-                Request Export Quote
+                Request Quote
               </button>
             </div>
-
           </div>
         </div>
 

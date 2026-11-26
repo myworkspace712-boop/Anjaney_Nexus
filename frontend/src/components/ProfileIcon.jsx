@@ -5,8 +5,8 @@ const ProfileIcon = ({ isLoggedIn = false, isDarkMode = false }) => {
     <div
       className={`relative flex items-center justify-center w-9 h-9 rounded-full border transition-colors ${
         isDarkMode
-          ? 'bg-[#071326] border-[#132649] text-orange-400 group-hover:border-orange-400'
-          : 'bg-blue-50 border-blue-200 text-blue-950 group-hover:border-orange-500'
+          ? 'bg-[#1f1b17] border-[#332b21] text-[#c99a42] group-hover:border-[#c99a42]'
+          : 'bg-[#f7f4ee] border-[#e8e2d4] text-[#0b1d3a] group-hover:border-[#c99a42]'
       }`}
     >
       {/* User Silhouette SVG */}
@@ -27,7 +27,7 @@ const ProfileIcon = ({ isLoggedIn = false, isDarkMode = false }) => {
       {/* Online / Signed-In Status Dot */}
       <span
         className={`absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full border-2 ${
-          isDarkMode ? 'border-[#020611]' : 'border-white'
+          isDarkMode ? 'border-[#141312]' : 'border-[#fcfbf8]'
         } ${isLoggedIn ? 'bg-green-500' : 'bg-slate-400'}`}
       />
     </div>

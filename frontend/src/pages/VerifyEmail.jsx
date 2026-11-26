@@ -103,9 +103,9 @@ const VerifyEmail = ({ token: propToken, setActivePage }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f8f9fc] dark:bg-[#020611] font-sans px-4 transition-colors">
-      <div className="bg-white dark:bg-[#071326] p-10 rounded-3xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] text-center max-w-md w-full border border-gray-100 dark:border-[#132649]">
-        <div className="w-16 h-16 bg-[#172033] dark:bg-[#020611] border border-transparent dark:border-[#132649] text-white rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-md">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#fcfbf8] via-[#f7f4ee] to-[#f4efe4] dark:from-[#141312] dark:via-[#1a1816] dark:to-[#141312] font-sans px-4 transition-colors">
+      <div className="bg-[#f7f4ee] dark:bg-[#1f1b17] p-10 rounded-3xl shadow-[0_12px_32px_rgba(201,154,66,0.07)] dark:shadow-[0_14px_35px_rgba(0,0,0,0.5)] text-center max-w-md w-full border border-[#e8e2d4] dark:border-[#332b21]">
+        <div className="w-16 h-16 bg-white dark:bg-[#141312] border border-[#e8e2d4] dark:border-[#332b21] text-white rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-md">
           ✉️
         </div>
         <h2 className="text-2xl font-extrabold text-[#172033] dark:text-white mb-4 tracking-tight">
@@ -132,7 +132,7 @@ const VerifyEmail = ({ token: propToken, setActivePage }) => {
                 if (typeof setActivePage === 'function') setActivePage('home');
                 else navigate('/');
               }}
-              className="w-full bg-[#172033] hover:bg-gray-800 dark:bg-[#020611] dark:hover:bg-[#0d203e] border border-transparent dark:border-[#132649] text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition-all cursor-pointer"
+              className="w-full bg-[#172033] hover:bg-gray-800 dark:bg-[#100d0a] dark:hover:bg-[#1e1713] border border-transparent dark:border-[#33251c] text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition-all cursor-pointer"
             >
               Back to Homepage
             </button>

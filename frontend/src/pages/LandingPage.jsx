@@ -376,7 +376,7 @@ const LandingPage = ({ onNavigate }) => {
             {filteredProducts.map((p) => (
               <div 
                 key={p.id}
-                className="bg-white rounded-2xl border border-slate-200/90 p-6 flex flex-col justify-between shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+                className="bg-white rounded-2xl border border-slate-200/90 p-6 flex flex-col justify-between shadow-sm hover:shadow-xl transition-all duration-300 group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">

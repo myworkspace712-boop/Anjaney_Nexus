@@ -4,51 +4,60 @@
 
 @layer base {
   :root {
-    /* Logo-Inspired Light Mode: Pure White Background, Contrast Deep Navy Blue, Saffron/Orange Accent */
-    --bg-primary: #ffffff;
+    /* Spice Grain Global Dynamic Look: Oatmeal Cream (#f7f4ee), Pure White (#ffffff), Warm Spice Gold (#c99a42) */
+    --bg-primary: #fcfbf8;
     --bg-surface: #ffffff;
-    --bg-elevated: #f8fafc;
-    --text-primary: #0b1d3a;     /* Logo Deep Navy */
-    --text-secondary: #475569;   /* Muted Corporate Slate */
-    --brand-navy: #0b1d3a;       /* Anjaney Corporate Deep Navy */
-    --brand-orange: #f97316;     /* Saffron / Energy Orange */
-    --brand-orange-hover: #ea580c;
-    --border-color: #e2e8f0;
+    --bg-elevated: #f7f4ee;
+    --text-primary: #1a1a1a;     /* Spice Grain Deep Charcoal / Black */
+    --text-secondary: #4a453e;   /* Warm Spice Slate */
+    --brand-navy: #1a1a1a;       /* Deep Header Charcoal */
+    --brand-orange: #c99a42;     /* Spice Grain Signature Gold */
+    --brand-orange-hover: #a67c2e;
+    --border-color: #e8e2d4;
   }
 
   .dark {
-    /* Dark Mode: Deep Midnight Sapphire Navy & Lighter Radiant Saffron Orange */
-    --bg-primary: #020611;
-    --bg-surface: #071326;
-    --bg-elevated: #0d203e;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --brand-navy: #38bdf8;
-    --brand-orange: #fb923c;
-    --brand-orange-hover: #fdba74;
-    --border-color: #132649;
+    /* Spice Grain Global Dark Mode: Matte Obsidian Charcoal & Radiant Spice Grain Gold (#c99a42) */
+    --bg-primary: #141312;
+    --bg-surface: #1a1a1a;
+    --bg-elevated: #1f1b17;
+    --text-primary: #f7f4ee;
+    --text-secondary: #b5ac9e;
+    --brand-navy: #c99a42;
+    --brand-orange: #c99a42;
+    --brand-orange-hover: #dfb25b;
+    --border-color: #332b21;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  ::selection {
+    background-color: #f97316;
+    color: #ffffff;
   }
 
   body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 }
 
 @keyframes marquee {
   0% {
-    transform: translateX(0%);
+    transform: translate3d(0%, 0, 0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 @keyframes nav-underline-in {
   0% {
     transform: scaleX(0);
-    opacity: 0.5;
+    opacity: 0.4;
   }
   100% {
     transform: scaleX(1);
@@ -58,7 +67,7 @@
 
 .animate-nav-underline {
   transform-origin: left;
-  animation: nav-underline-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: nav-underline-in 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Smooth expanding collapse for sub-product panel */
@@ -69,10 +78,10 @@
   margin-top: 0;
   transform: translateY(-8px) scale(0.99);
   pointer-events: none;
-  transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-              margin-top 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: grid-template-rows 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              margin-top 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: grid-template-rows, opacity, transform;
 }
 
@@ -84,6 +93,182 @@
   pointer-events: auto;
 }
 
+/* =====================================================================
+   DYNAMIC MOTION & INTERACTIVE SYSTEM (Modern Spring & Organic Physics)
+   ===================================================================== */
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -15px, 0) scale(1.03) rotate(1.2deg);
+  }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 0.28;
+    transform: scale(1);
+    filter: blur(48px);
+  }
+  50% {
+    opacity: 0.58;
+    transform: scale(1.1);
+    filter: blur(60px);
+  }
+}
+
+@keyframes page-fade-slide {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0) scale(0.995);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes shimmer-sweep {
+  0% {
+    transform: translateX(-120%) skewX(-20deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateX(220%) skewX(-20deg);
+    opacity: 0;
+  }
+}
+
+@keyframes radar-pulse {
+  0% {
+    transform: scale(0.92);
+    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7);
+  }
+  70% {
+    transform: scale(1.06);
+    box-shadow: 0 0 0 12px rgba(249, 115, 22, 0);
+  }
+  100% {
+    transform: scale(0.92);
+    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0);
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    opacity: 0.28;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  will-change: transform;
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  will-change: opacity, transform;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 6.5s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+@keyframes maritime-drift {
+  0%, 100% {
+    transform: translate3d(0px, 0px, 0) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate3d(32px, -24px, 0) scale(1.07) rotate(3deg);
+  }
+  66% {
+    transform: translate3d(-24px, 20px, 0) scale(0.96) rotate(-2.5deg);
+  }
+}
+
+.animate-maritime-drift {
+  animation: maritime-drift 20s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+  will-change: transform;
+}
+
+/* Spice Grain Global Dynamic Coordinate Grids & Grain Ambience */
+.bg-trade-grid-light {
+  background-image: 
+    radial-gradient(rgba(201, 154, 66, 0.22) 1.2px, transparent 1.2px),
+    linear-gradient(to right, rgba(201, 154, 66, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(201, 154, 66, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px, 60px 60px, 60px 60px;
+}
+
+.bg-trade-grid-dark {
+  background-image: 
+    radial-gradient(rgba(201, 154, 66, 0.3) 1.2px, transparent 1.2px),
+    linear-gradient(to right, rgba(201, 154, 66, 0.065) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(201, 154, 66, 0.065) 1px, transparent 1px);
+  background-size: 60px 60px, 60px 60px, 60px 60px;
+}
+
+.animate-page-enter {
+  animation: page-fade-slide 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
+}
+
+.radar-dot {
+  animation: radar-pulse 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+/* Dynamic Interactive Spice Grain Card */
+.dynamic-card {
+  position: relative;
+  transition: box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: box-shadow, border-color, background;
+}
+
+.dynamic-card:hover {
+  transform: none;
+  border-color: #c99a42;
+  box-shadow: 0 14px 38px rgba(201, 154, 66, 0.16);
+}
+
+/* Glassmorphism utility with warm depth */
+.glass-panel {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Smooth customized warm scrollbars */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(217, 119, 6, 0.3);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(249, 115, 22, 0.7);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
 /* Remove number input spin arrows */
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
@@ -93,4 +278,3 @@ input[type='number']::-webkit-outer-spin-button {
 input[type='number'] {
   -moz-appearance: textfield;
 }
-

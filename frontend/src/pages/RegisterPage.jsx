@@ -345,8 +345,8 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
   const roleLabels = { user: 'User', seller: 'Seller', admin: 'Admin' };
 
   return (
-    <div className="min-h-[85vh] bg-slate-50 dark:bg-[#020611] flex items-center justify-center px-4 py-12 font-sans text-slate-800 dark:text-slate-100 transition-colors">
-      <div className="max-w-md w-full bg-white dark:bg-[#071326] p-8 rounded-2xl border border-slate-100 dark:border-[#132649] shadow-[0_8px_30px_rgb(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.4)] space-y-6">
+    <div className="min-h-[85vh] bg-gradient-to-b from-[#fcfbf8] via-[#f7f4ee] to-[#f4efe4] dark:from-[#141312] dark:via-[#1a1816] dark:to-[#141312] flex items-center justify-center px-4 py-12 font-sans text-slate-800 dark:text-slate-100 transition-colors">
+      <div className="max-w-md w-full bg-[#f7f4ee] dark:bg-[#1f1b17] p-8 rounded-2xl border border-[#e8e2d4] dark:border-[#332b21] shadow-[0_12px_32px_rgba(201,154,66,0.08)] dark:shadow-[0_14px_35px_rgba(0,0,0,0.6)] space-y-6">
         
         {pendingVerification ? (
           <div className="space-y-5 text-center py-4">
@@ -368,10 +368,10 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
               <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-xl text-xs text-amber-700 dark:text-amber-400 font-medium">
                 ⚡ <b>Leave this tab open.</b> It will automatically sign you in and open your dashboard once you verify in the new window.
               </div>
-              <div className="bg-slate-50 dark:bg-[#020611] p-4 rounded-xl border border-slate-200 dark:border-[#132649] mt-4 space-y-3">
+              <div className="bg-[#efeae0] dark:bg-[#141312] p-4 rounded-xl border border-[#e8e2d4] dark:border-[#332b21] mt-4 space-y-3">
                 <p className="text-xs font-mono font-bold text-orange-600 dark:text-orange-400 break-all">{pendingVerification.email}</p>
                 {pendingVerification.link && (
-                  <div className="pt-3 border-t border-slate-200 dark:border-[#132649]">
+                  <div className="pt-3 border-t border-[#e8e2d4] dark:border-[#332b21]">
                     <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Dev Mode Bypass</p>
                     <a 
                       href={pendingVerification.link} 
@@ -385,14 +385,14 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
                 )}
               </div>
             </div>
-            <div className="pt-6 border-t border-slate-100 dark:border-[#132649] flex justify-between items-center text-xs font-bold text-slate-500 dark:text-slate-400">
+            <div className="pt-6 border-t border-[#e8e2d4] dark:border-[#332b21] flex justify-between items-center text-xs font-bold text-slate-500 dark:text-slate-400">
               <button onClick={() => setPendingVerification(null)} className="hover:text-blue-950 dark:hover:text-white cursor-pointer transition-colors">← Back to Register</button>
               <button onClick={() => setActivePage && setActivePage('home')} className="text-orange-500 dark:text-orange-400 hover:text-orange-400 cursor-pointer transition-colors">Return to Home →</button>
             </div>
           </div>
         ) : (
           <>
-            <div className="flex items-center justify-between border-b border-slate-100 dark:border-[#132649] pb-4">
+            <div className="flex items-center justify-between border-b border-[#e8e2d4] dark:border-[#332b21] pb-4">
               <div>
                 <span className="text-[10px] font-black text-orange-500 dark:text-orange-400 uppercase tracking-widest bg-orange-50 dark:bg-orange-400/15 px-3 py-1 rounded-full border border-orange-100 dark:border-orange-400/30">
                   {roleLabels[accountType]}
@@ -402,13 +402,13 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
               <button 
                 type="button" 
                 onClick={() => setActivePage && setActivePage('home')} 
-                className="px-3.5 py-2 bg-white dark:bg-[#020611] hover:bg-slate-50 dark:hover:bg-[#0d203e] text-blue-950 dark:text-white border border-slate-200 dark:border-[#132649] rounded-lg text-xs font-bold shadow-sm transition-colors cursor-pointer"
+                className="px-3.5 py-2 bg-[#ffffff] dark:bg-[#141312] hover:bg-[#efeae0] dark:hover:bg-[#25201b] text-blue-950 dark:text-white border border-[#e8e2d4] dark:border-[#332b21] rounded-lg text-xs font-bold shadow-sm transition-colors cursor-pointer"
               >
                 Home →
               </button>
             </div>
 
-            <div className="grid grid-cols-3 gap-1.5 p-1.5 bg-slate-50 dark:bg-[#020611] rounded-xl border border-slate-200 dark:border-[#132649]">
+            <div className="grid grid-cols-3 gap-1.5 p-1.5 bg-[#efeae0] dark:bg-[#141312] rounded-xl border border-[#e8e2d4] dark:border-[#332b21]">
               {['user', 'seller', 'admin'].map((roleKey) => (
                 <button
                   key={roleKey} 
@@ -417,7 +417,7 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
                   className={`py-2.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
                     accountType === roleKey 
                       ? 'bg-blue-950 text-white shadow-md dark:bg-orange-400 dark:text-white' 
-                      : 'text-slate-500 dark:text-slate-400 hover:text-blue-950 dark:hover:text-white hover:bg-white dark:hover:bg-[#0d203e]'
+                      : 'text-slate-500 dark:text-slate-400 hover:text-blue-950 dark:hover:text-white hover:bg-white dark:hover:bg-[#1f1b17]'
                   }`}
                 >
                   {roleLabels[roleKey]}
@@ -445,7 +445,7 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
                     value={companyName} 
                     onChange={(e) => setCompanyName(e.target.value)} 
                     placeholder="Global Agro Exports" 
-                    className="w-full p-3.5 rounded-xl bg-slate-50 dark:bg-[#020611] border border-slate-200 dark:border-[#132649] text-blue-950 dark:text-white text-sm focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none" 
+                    className="w-full p-3.5 rounded-xl bg-[#ffffff] dark:bg-[#141312] border border-[#e8e2d4] dark:border-[#332b21] text-blue-950 dark:text-white text-sm focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none" 
                   />
                 </div>
               )}
@@ -464,15 +464,15 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
                   }}
                   onFocus={() => setShowEmailDropdown(true)}
                   placeholder="Enter your email id" 
-                  className="w-full p-3.5 rounded-xl bg-slate-50 dark:bg-[#020611] border border-slate-200 dark:border-[#132649] text-blue-950 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-all text-sm font-medium" 
+                  className="w-full p-3.5 rounded-xl bg-[#ffffff] dark:bg-[#141312] border border-[#e8e2d4] dark:border-[#332b21] text-blue-950 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-all text-sm font-medium" 
                 />
                 
                 {/* Custom Dropdown Menu */}
                 {showEmailDropdown && (
-                  <div className="absolute z-10 w-full mt-2 bg-white dark:bg-[#071326] border border-slate-200 dark:border-[#132649] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] max-h-60 flex flex-col overflow-hidden animate-in fade-in duration-200">
+                  <div className="absolute z-10 w-full mt-2 bg-[#f7f4ee] dark:bg-[#1f1b17] border border-[#e8e2d4] dark:border-[#332b21] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] max-h-60 flex flex-col overflow-hidden animate-in fade-in duration-200">
                     
                     {/* Header: Saved emails (X) — Clear All */}
-                    <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100 dark:border-[#132649] bg-slate-50 dark:bg-[#020611] shrink-0">
+                    <div className="flex items-center justify-between px-4 py-3 border-b border-[#e8e2d4] dark:border-[#332b21] bg-[#efeae0] dark:bg-[#141312] shrink-0">
                       <span className="text-xs font-bold text-slate-500 dark:text-slate-400">
                         Saved emails ({emailHistory.length})
                       </span>
@@ -493,14 +493,14 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
                           <div 
                             key={idx}
                             onClick={() => handleSelectHistoryEmail(histEmail)}
-                            className="px-4 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-[#0d203e] hover:text-blue-950 dark:hover:text-white cursor-pointer transition-colors"
+                            className="px-4 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-[#efeae0] dark:hover:bg-[#25201b] hover:text-blue-950 dark:hover:text-white cursor-pointer transition-colors"
                           >
                             {histEmail}
                           </div>
                         ))}
                       </div>
                     ) : (
-                      <div className="px-4 py-4 text-xs font-medium text-slate-400 text-center italic bg-white dark:bg-[#071326]">
+                      <div className="px-4 py-4 text-xs font-medium text-slate-400 text-center italic bg-[#f7f4ee] dark:bg-[#1f1b17]">
                         No previous emails saved.
                       </div>
                     )}
@@ -521,7 +521,7 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
                   value={createPassword} 
                   onChange={(e) => setCreatePassword(e.target.value.slice(0, 8))} 
                   placeholder="e.g. Nexus@12" 
-                  className="w-full p-3.5 rounded-xl bg-slate-50 dark:bg-[#020611] border border-slate-200 dark:border-[#132649] text-blue-950 dark:text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none text-sm font-mono" 
+                  className="w-full p-3.5 rounded-xl bg-[#ffffff] dark:bg-[#141312] border border-[#e8e2d4] dark:border-[#332b21] text-blue-950 dark:text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none text-sm font-mono" 
                 />
               </div>
 
@@ -534,7 +534,7 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
                   value={verifyPassword} 
                   onChange={(e) => setVerifyPassword(e.target.value.slice(0, 8))} 
                   placeholder="Re-enter 6–8 char password" 
-                  className="w-full p-3.5 rounded-xl bg-slate-50 dark:bg-[#020611] border border-slate-200 dark:border-[#132649] text-blue-950 dark:text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none text-sm font-mono" 
+                  className="w-full p-3.5 rounded-xl bg-[#ffffff] dark:bg-[#141312] border border-[#e8e2d4] dark:border-[#332b21] text-blue-950 dark:text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none text-sm font-mono" 
                 />
               </div>
 
@@ -547,7 +547,7 @@ const RegisterPage = ({ setActivePage, setCurrentUser }) => {
               </button>
             </form>
 
-            <div className="pt-4 mt-2 border-t border-slate-100 dark:border-[#132649] text-center">
+            <div className="pt-4 mt-2 border-t border-[#e8e2d4] dark:border-[#332b21] text-center">
               <button
                 type="button"
                 onClick={handleDeleteAccount}

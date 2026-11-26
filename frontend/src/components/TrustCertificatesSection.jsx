@@ -124,7 +124,7 @@ const TrustCertificatesSection = ({ onReviewAll, customCertificates }) => {
             <div 
               key={cert.id || index} 
               onClick={() => setSelectedCert(cert)}
-              className="bg-white rounded-xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.07)] p-8 relative flex flex-col items-center justify-between w-full sm:w-[320px] hover:-translate-y-1.5 hover:shadow-[0_12px_30px_-6px_rgba(0,0,0,0.12)] transition-all duration-300 group overflow-hidden border border-gray-100/90 cursor-pointer"
+              className="bg-white rounded-xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.07)] p-8 relative flex flex-col items-center justify-between w-full sm:w-[320px] hover:shadow-[0_12px_30px_-6px_rgba(0,0,0,0.12)] transition-all duration-300 group overflow-hidden border border-gray-100/90 cursor-pointer"
             >
               {/* Top Golden Accent Line */}
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-200 opacity-80"></div>

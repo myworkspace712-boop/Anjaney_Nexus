@@ -7,16 +7,23 @@ const AboutPage = ({ setActivePage }) => {
 
   return (
     <div className={`min-h-screen font-sans transition-colors duration-500 relative overflow-hidden ${
-      isDark ? 'bg-[#020611] text-slate-100' : 'bg-[#f8fafc] text-[#0b1d3a]'
+      isDark 
+        ? 'bg-gradient-to-b from-[#141312] via-[#1a1816] to-[#141312] text-slate-100' 
+        : 'bg-gradient-to-b from-[#fcfbf8] via-[#f7f4ee] to-[#f4efe4] text-[#0b1d3a]'
     }`}>
       
-      {/* AMBIENT DYNAMIC GLOWS (Strictly non-black in dark mode, branded in light mode) */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full pointer-events-none blur-3xl opacity-20 -z-0 transition-opacity duration-700 bg-orange-400/20"></div>
-      <div className={`absolute top-[450px] right-10 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 ${
-        isDark ? 'bg-[#132649]/35' : 'bg-blue-600/10'
+      {/* MARITIME TRADE & LOGISTICS BACKGROUND OVERLAY */}
+      <div className={`absolute inset-0 pointer-events-none -z-0 transition-opacity duration-700 ${
+        isDark ? 'bg-trade-grid-dark opacity-80' : 'bg-trade-grid-light opacity-75'
       }`}></div>
-      <div className={`absolute top-[1100px] left-10 w-[450px] h-[450px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 ${
-        isDark ? 'bg-[#0d203e]/30' : 'bg-orange-500/10'
+
+      {/* AMBIENT DYNAMIC MARITIME BEACONS & OCEANIC TRADE HUBS */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl opacity-25 -z-0 bg-gradient-to-br from-[#c99a42]/30 via-[#dfb25b]/20 to-[#c99a42]/10 animate-maritime-drift"></div>
+      <div className={`absolute top-[450px] right-10 w-[600px] h-[600px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 animate-float-slow ${
+        isDark ? 'bg-gradient-to-bl from-[#c99a42]/20 via-[#a67c2e]/15 to-transparent' : 'bg-gradient-to-bl from-[#c99a42]/18 via-[#dfb25b]/20 to-transparent'
+      }`}></div>
+      <div className={`absolute top-[1100px] left-10 w-[550px] h-[550px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 animate-maritime-drift ${
+        isDark ? 'bg-gradient-to-tr from-[#c99a42]/20 via-[#dfb25b]/15 to-transparent' : 'bg-gradient-to-tr from-[#c99a42]/18 via-[#dfb25b]/16 to-transparent'
       }`}></div>
 
       {/* =========================================================================
@@ -34,17 +41,17 @@ const AboutPage = ({ setActivePage }) => {
 
         {/* Dynamic Theme Gradient Overlays:
             - Light mode: Deep Anjaney Logo Navy (#0b1d3a) gradient for maximum contrast and prestige
-            - Dark mode: Deep Maritime Ocean Blue (#020611 to #071326), strictly non-black */}
+            - Dark mode: Deep Maritime Ocean Blue (#060d1d to #091a3a), strictly non-black */}
         <div className={`absolute inset-0 transition-colors duration-500 ${
           isDark 
-            ? 'bg-gradient-to-r from-[#020611]/95 via-[#020611]/85 to-[#071326]/65'
+            ? 'bg-gradient-to-r from-[#0e0c0b]/95 via-[#0e0c0b]/85 to-[#16120f]/65'
             : 'bg-gradient-to-r from-[#0b1d3a]/95 via-[#0b1d3a]/80 to-[#0b1d3a]/45'
         }`}></div>
         
         <div className={`absolute inset-0 pointer-events-none transition-colors duration-500 ${
           isDark
-            ? 'bg-gradient-to-b from-[#020611]/75 via-transparent to-[#020611]'
-            : 'bg-gradient-to-b from-[#0b1d3a]/75 via-transparent to-[#f8fafc]'
+            ? 'bg-gradient-to-b from-[#141312]/75 via-transparent to-[#141312]'
+            : 'bg-gradient-to-b from-[#0b1d3a]/75 via-transparent to-[#fcfbf8]'
         }`}></div>
 
         {/* Subtle dynamic grid pattern for high-tech maritime feel */}
@@ -52,25 +59,25 @@ const AboutPage = ({ setActivePage }) => {
 
         {/* Hero Content */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-20 sm:py-24">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl text-left">
             {/* Top Eyebrow Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-orange-500 dark:text-orange-400 bg-orange-500/10 dark:bg-orange-400/15 border border-orange-500/20 dark:border-orange-400/30 mb-4">
               <span>Global Agricultural Trade &amp; Procurement</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.1] mb-4 tracking-tight drop-shadow-lg text-white">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.1] mb-4 tracking-tight drop-shadow-lg text-white text-left">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-orange-400 to-amber-300">Direct Farm Procurement.</span><br />
               <span className="text-white">Connecting India's Harvest to the World.</span>
             </h1>
 
             {/* Subheading / Tagline */}
-            <p className="text-lg sm:text-xl text-orange-400 dark:text-orange-300 font-bold mb-4 drop-shadow-sm">
+            <p className="text-lg sm:text-xl text-orange-400 dark:text-orange-300 font-bold mb-4 drop-shadow-sm text-left">
               Ensuring global standards in every shipment.
             </p>
 
             {/* Description */}
-            <p className="text-slate-100 max-w-2xl text-base sm:text-lg leading-relaxed font-normal drop-shadow-md">
+            <p className="text-slate-100 max-w-2xl text-base sm:text-lg leading-relaxed font-normal drop-shadow-md text-left">
               Backed by over 15 years of trade integrity, strict laboratory testing standards, and transparent supply chain execution from farm to containerized sea freight.
             </p>
           </div>
@@ -84,10 +91,10 @@ const AboutPage = ({ setActivePage }) => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           
           {/* Card 1: 15+ Years Industry Experience */}
-          <div className={`p-6 rounded-2xl border transition-all duration-300 transform hover:-translate-y-1.5 cursor-pointer group ${
+          <div className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer group relative overflow-hidden backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#c99a42] before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
             isDark 
-              ? 'bg-[#071326] border-[#132649] hover:border-orange-400/80 shadow-[0_12px_30px_rgba(4,12,24,0.4)] hover:shadow-[0_20px_40px_rgba(4,12,24,0.6)]' 
-              : 'bg-white border-slate-200/90 hover:border-orange-500/60 shadow-[0_12px_30px_rgba(11,29,58,0.06)] hover:shadow-[0_20px_40px_rgba(11,29,58,0.12)]'
+              ? 'bg-[#1f1b17] border-[#332b21] hover:border-[#c99a42] shadow-[0_14px_35px_rgba(0,0,0,0.5)] hover:shadow-[0_14px_38px_rgba(201,154,66,0.18)]' 
+              : 'bg-[#f7f4ee] border-[#e8e2d4] hover:border-[#c99a42] shadow-[0_14px_35px_rgba(201,154,66,0.06)] hover:shadow-[0_14px_38px_rgba(201,154,66,0.16)]'
           }`}>
             <div className="flex items-center mb-4">
               <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400 group-hover:bg-orange-500 dark:group-hover:bg-orange-400 group-hover:text-white transition-all duration-300">
@@ -107,10 +114,10 @@ const AboutPage = ({ setActivePage }) => {
           </div>
 
           {/* Card 2: Commitment to Sustainable Practices */}
-          <div className={`p-6 rounded-2xl border transition-all duration-300 transform hover:-translate-y-1.5 cursor-pointer group ${
+          <div className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer group relative overflow-hidden backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#c99a42] before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
             isDark 
-              ? 'bg-[#071326] border-[#132649] hover:border-orange-400/80 shadow-[0_12px_30px_rgba(4,12,24,0.4)] hover:shadow-[0_20px_40px_rgba(4,12,24,0.6)]' 
-              : 'bg-white border-slate-200/90 hover:border-orange-500/60 shadow-[0_12px_30px_rgba(11,29,58,0.06)] hover:shadow-[0_20px_40px_rgba(11,29,58,0.12)]'
+              ? 'bg-[#1f1b17] border-[#332b21] hover:border-[#c99a42] shadow-[0_14px_35px_rgba(0,0,0,0.5)] hover:shadow-[0_14px_38px_rgba(201,154,66,0.18)]' 
+              : 'bg-[#f7f4ee] border-[#e8e2d4] hover:border-[#c99a42] shadow-[0_14px_35px_rgba(201,154,66,0.06)] hover:shadow-[0_14px_38px_rgba(201,154,66,0.16)]'
           }`}>
             <div className="flex items-center mb-4">
               <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400 group-hover:bg-orange-500 dark:group-hover:bg-orange-400 group-hover:text-white transition-all duration-300">
@@ -130,10 +137,10 @@ const AboutPage = ({ setActivePage }) => {
           </div>
 
           {/* Card 3: Global Network & Reliable Logistics */}
-          <div className={`p-6 rounded-2xl border transition-all duration-300 transform hover:-translate-y-1.5 cursor-pointer group ${
+          <div className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer group relative overflow-hidden backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#c99a42] before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
             isDark 
-              ? 'bg-[#071326] border-[#132649] hover:border-orange-400/80 shadow-[0_12px_30px_rgba(4,12,24,0.4)] hover:shadow-[0_20px_40px_rgba(4,12,24,0.6)]' 
-              : 'bg-white border-slate-200/90 hover:border-orange-500/60 shadow-[0_12px_30px_rgba(11,29,58,0.06)] hover:shadow-[0_20px_40px_rgba(11,29,58,0.12)]'
+              ? 'bg-[#1f1b17] border-[#332b21] hover:border-[#c99a42] shadow-[0_14px_35px_rgba(0,0,0,0.5)] hover:shadow-[0_14px_38px_rgba(201,154,66,0.18)]' 
+              : 'bg-[#f7f4ee] border-[#e8e2d4] hover:border-[#c99a42] shadow-[0_14px_35px_rgba(201,154,66,0.06)] hover:shadow-[0_14px_38px_rgba(201,154,66,0.16)]'
           }`}>
             <div className="flex items-center mb-4">
               <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400 group-hover:bg-orange-500 dark:group-hover:bg-orange-400 group-hover:text-white transition-all duration-300">
@@ -161,7 +168,7 @@ const AboutPage = ({ setActivePage }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-20 relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-6 border-b border-slate-200 dark:border-[#132649]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-6 border-b border-[#e8e2d4] dark:border-[#2d261e]">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-orange-500 dark:text-orange-400 bg-orange-500/10 dark:bg-orange-400/15 border border-orange-500/20 dark:border-orange-400/30 mb-3">
               <span>Established Commercial Enterprise</span>
@@ -176,17 +183,19 @@ const AboutPage = ({ setActivePage }) => {
         </div>
 
         {/* Narrative Feature Card */}
-        <div className={`p-8 sm:p-10 lg:p-12 rounded-3xl border transition-all duration-300 relative overflow-hidden mb-12 ${
+        <div className={`p-8 sm:p-10 lg:p-12 rounded-3xl border transition-all duration-500 relative overflow-hidden mb-12 backdrop-blur-xl before:absolute before:inset-x-0 before:top-0 before:h-[2.5px] before:bg-gradient-to-r before:from-transparent before:via-[#c99a42] before:to-transparent ${
           isDark 
-            ? 'bg-[#071326] border-[#132649] shadow-[0_16px_40px_rgba(4,12,24,0.4)]' 
-            : 'bg-white border-slate-200/90 shadow-[0_16px_40px_rgba(11,29,58,0.06)]'
+            ? 'bg-[#1f1b17] border-[#332b21] shadow-[0_20px_50px_rgba(0,0,0,0.6)]' 
+            : 'bg-[#f7f4ee] border-[#e8e2d4] shadow-[0_20px_50px_rgba(201,154,66,0.08)]'
         }`}>
-          {/* Subtle Ambient Backlight Accent */}
-          <div className="absolute top-0 right-0 w-80 h-80 rounded-full pointer-events-none blur-3xl opacity-10 bg-orange-400"></div>
+          {/* Dynamic Ambient Backlight Accents */}
+          <div className="absolute top-0 right-0 w-96 h-96 rounded-full pointer-events-none blur-3xl opacity-15 bg-gradient-to-br from-amber-200 to-orange-300 animate-pulse-subtle"></div>
+          <div className={`absolute bottom-0 left-0 w-80 h-80 rounded-full pointer-events-none blur-3xl opacity-15 ${isDark ? 'bg-blue-600' : 'bg-blue-400'} animate-float-slow`}></div>
+          <div className="absolute inset-0 bg-[radial-gradient(#f97316_0.75px,transparent_0.75px)] [background-size:24px_24px] opacity-10 pointer-events-none"></div>
 
           <div className="relative z-10 space-y-6 max-w-4xl">
             <div className="flex items-center gap-3">
-              <span className="w-3 h-3 rounded-full bg-orange-500 dark:bg-orange-400"></span>
+              <span className="w-3 h-3 rounded-full bg-orange-300 dark:bg-orange-300 shadow-[0_0_8px_rgba(253,186,116,0.7)]"></span>
               <span className="text-xs font-black uppercase tracking-widest text-orange-500 dark:text-orange-400">
                 Trade Foundation &amp; Experience
               </span>
@@ -214,14 +223,17 @@ const AboutPage = ({ setActivePage }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-16">
           
           {/* OUR MISSION CARD */}
-          <div className={`p-8 sm:p-10 rounded-3xl border transition-all duration-300 relative overflow-hidden flex flex-col justify-between group hover:-translate-y-1.5 ${
-            isDark 
-              ? 'bg-[#071326] border-[#132649] hover:border-orange-400/80 shadow-[0_14px_35px_rgba(4,12,24,0.4)]' 
-              : 'bg-white border-slate-200/90 hover:border-orange-500/60 shadow-[0_14px_35px_rgba(11,29,58,0.06)]'
-          }`}>
+          <div 
+            className={`p-8 sm:p-10 rounded-3xl border transition-all duration-300 relative overflow-hidden flex flex-col justify-between group backdrop-blur-xl before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#c99a42] before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
+              isDark 
+                ? 'bg-[#1f1b17] border-[#332b21] hover:border-[#c99a42] shadow-[0_14px_35px_rgba(0,0,0,0.5)] hover:shadow-[0_14px_38px_rgba(201,154,66,0.18)]' 
+                : 'bg-[#f7f4ee] border-[#e8e2d4] hover:border-[#c99a42] shadow-[0_14px_35px_rgba(201,154,66,0.06)] hover:shadow-[0_14px_38px_rgba(201,154,66,0.16)]'
+            }`}
+          >
+            <div className="absolute -bottom-8 -right-8 w-40 h-40 rounded-full blur-2xl opacity-15 bg-orange-400 pointer-events-none group-hover:scale-125 transition-transform duration-500"></div>
             <div>
               <div className="flex items-center mb-6">
-                <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400 group-hover:bg-gradient-to-br group-hover:from-orange-500 group-hover:to-orange-600 dark:group-hover:from-orange-400 dark:group-hover:to-amber-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400 group-hover:bg-gradient-to-br group-hover:from-orange-500 group-hover:to-orange-600 dark:group-hover:from-orange-400 dark:group-hover:to-amber-500 group-hover:text-white transition-all duration-300 shadow-sm group-hover:scale-105">
                   <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
@@ -243,14 +255,17 @@ const AboutPage = ({ setActivePage }) => {
           </div>
 
           {/* OUR VISION CARD */}
-          <div className={`p-8 sm:p-10 rounded-3xl border transition-all duration-300 relative overflow-hidden flex flex-col justify-between group hover:-translate-y-1.5 ${
-            isDark 
-              ? 'bg-[#071326] border-[#132649] hover:border-orange-400/80 shadow-[0_14px_35px_rgba(4,12,24,0.4)]' 
-              : 'bg-white border-slate-200/90 hover:border-orange-500/60 shadow-[0_14px_35px_rgba(11,29,58,0.06)]'
-          }`}>
+          <div 
+            className={`p-8 sm:p-10 rounded-3xl border transition-all duration-300 relative overflow-hidden flex flex-col justify-between group backdrop-blur-xl before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#c99a42] before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
+              isDark 
+                ? 'bg-[#1f1b17] border-[#332b21] hover:border-[#c99a42] shadow-[0_14px_35px_rgba(0,0,0,0.5)] hover:shadow-[0_14px_38px_rgba(201,154,66,0.18)]' 
+                : 'bg-[#f7f4ee] border-[#e8e2d4] hover:border-[#c99a42] shadow-[0_14px_35px_rgba(201,154,66,0.06)] hover:shadow-[0_14px_38px_rgba(201,154,66,0.16)]'
+            }`}
+          >
+            <div className="absolute -bottom-8 -right-8 w-40 h-40 rounded-full blur-2xl opacity-15 bg-blue-500 pointer-events-none group-hover:scale-125 transition-transform duration-500"></div>
             <div>
               <div className="flex items-center mb-6">
-                <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-blue-500/10 dark:bg-sky-400/15 text-blue-500 dark:text-sky-400 group-hover:bg-gradient-to-br group-hover:from-blue-600 group-hover:to-blue-700 dark:group-hover:from-sky-500 dark:group-hover:to-blue-600 group-hover:text-white transition-all duration-300 shadow-sm">
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-blue-500/10 dark:bg-sky-400/15 text-blue-500 dark:text-sky-400 group-hover:bg-gradient-to-br group-hover:from-blue-600 group-hover:to-blue-700 dark:group-hover:from-sky-500 dark:group-hover:to-blue-600 group-hover:text-white transition-all duration-300 shadow-sm group-hover:scale-105">
                   <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -277,10 +292,10 @@ const AboutPage = ({ setActivePage }) => {
         {/* =========================================================================
             5. CALL TO ACTION STRIP
            ========================================================================= */}
-        <div className={`p-8 sm:p-10 rounded-3xl border transition-all duration-300 flex flex-col sm:flex-row items-center justify-between gap-6 ${
+        <div className={`p-8 sm:p-10 rounded-3xl border transition-all duration-300 flex flex-col sm:flex-row items-center justify-between gap-6 backdrop-blur-xl relative overflow-hidden before:absolute before:inset-0 before:bg-[radial-gradient(ellipse_at_top_right,rgba(201,154,66,0.15),transparent_60%)] before:pointer-events-none ${
           isDark 
-            ? 'bg-gradient-to-r from-[#01040a] via-[#071326] to-[#0d203e] border-[#132649] shadow-xl' 
-            : 'bg-gradient-to-r from-blue-950 via-[#0b1d3a] to-blue-900 border-transparent shadow-xl text-white'
+            ? 'bg-[#1f1b17] border-[#332b21] shadow-[0_20px_50px_rgba(0,0,0,0.7)]' 
+            : 'bg-[#241e17] border-[#3d3326] text-white shadow-[0_20px_50px_rgba(201,154,66,0.15)]'
         }`}>
           <div>
             <span className="text-[10px] font-black uppercase tracking-widest text-orange-400 dark:text-orange-300 mb-1 block">
@@ -305,7 +320,7 @@ const AboutPage = ({ setActivePage }) => {
               onClick={() => setActivePage && setActivePage('contact')}
               className={`flex-1 sm:flex-none px-6 py-3.5 text-xs font-black uppercase tracking-wider rounded-xl transition-all cursor-pointer border text-center ${
                 isDark 
-                  ? 'border-[#132649] bg-[#020611] hover:bg-[#0d203e] text-white hover:border-orange-400' 
+                  ? 'border-[#332b21] bg-[#141312] hover:bg-[#29221a] text-white hover:border-[#c99a42]' 
                   : 'border-white/30 bg-white/10 hover:bg-white/20 text-white'
               }`}
             >

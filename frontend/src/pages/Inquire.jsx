@@ -167,16 +167,23 @@ const Inquire = ({ setActivePage }) => {
 
   return (
     <div className={`min-h-screen font-sans transition-colors duration-500 relative overflow-hidden ${
-      isDark ? 'bg-[#020611] text-slate-100' : 'bg-[#f8fafc] text-[#0b1d3a]'
+      isDark 
+        ? 'bg-gradient-to-b from-[#141312] via-[#1a1816] to-[#141312] text-slate-100' 
+        : 'bg-gradient-to-b from-[#fcfbf8] via-[#f7f4ee] to-[#f4efe4] text-[#0b1d3a]'
     }`}>
       
-      {/* AMBIENT DYNAMIC GLOWS (Strictly non-black in dark mode, branded in light mode) */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full pointer-events-none blur-3xl opacity-20 -z-0 transition-opacity duration-700 bg-orange-400/20"></div>
-      <div className={`absolute top-[400px] right-10 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 ${
-        isDark ? 'bg-[#132649]/35' : 'bg-blue-600/10'
+      {/* MARITIME TRADE & LOGISTICS BACKGROUND OVERLAY */}
+      <div className={`absolute inset-0 pointer-events-none -z-0 transition-opacity duration-700 ${
+        isDark ? 'bg-trade-grid-dark opacity-80' : 'bg-trade-grid-light opacity-75'
       }`}></div>
-      <div className={`absolute bottom-40 left-10 w-[450px] h-[450px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 ${
-        isDark ? 'bg-[#0d203e]/30' : 'bg-orange-500/10'
+
+      {/* AMBIENT DYNAMIC MARITIME BEACONS & OCEANIC TRADE HUBS */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl opacity-25 -z-0 bg-gradient-to-br from-[#c99a42]/30 via-[#dfb25b]/20 to-[#c99a42]/10 animate-maritime-drift"></div>
+      <div className={`absolute top-[400px] right-10 w-[600px] h-[600px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 animate-float-slow ${
+        isDark ? 'bg-gradient-to-bl from-[#c99a42]/20 via-[#a67c2e]/15 to-transparent' : 'bg-gradient-to-bl from-[#c99a42]/18 via-[#dfb25b]/20 to-transparent'
+      }`}></div>
+      <div className={`absolute bottom-40 left-10 w-[550px] h-[550px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 animate-maritime-drift ${
+        isDark ? 'bg-gradient-to-tr from-[#c99a42]/20 via-[#dfb25b]/15 to-transparent' : 'bg-gradient-to-tr from-[#c99a42]/18 via-[#dfb25b]/16 to-transparent'
       }`}></div>
 
       {/* =========================================================================
@@ -199,29 +206,29 @@ const Inquire = ({ setActivePage }) => {
 
         {/* Dynamic Theme Gradient Overlays:
             - Light mode: Deep Anjaney Logo Navy (#0b1d3a) gradient for maximum contrast and prestige
-            - Dark mode: Deep Maritime Ocean Blue (#020611 to #071326), strictly non-black */}
+            - Dark mode: Deep Maritime Ocean Blue (#060d1d to #091a3a), strictly non-black */}
         <div className={`absolute inset-0 transition-colors duration-500 ${
           isDark 
-            ? 'bg-gradient-to-r from-[#020611]/95 via-[#020611]/85 to-[#071326]/65'
+            ? 'bg-gradient-to-r from-[#0e0c0b]/95 via-[#0e0c0b]/85 to-[#16120f]/65'
             : 'bg-gradient-to-r from-[#0b1d3a]/95 via-[#0b1d3a]/80 to-[#0b1d3a]/45'
         }`}></div>
         
         <div className={`absolute inset-0 pointer-events-none transition-colors duration-500 ${
           isDark
-            ? 'bg-gradient-to-b from-[#020611]/75 via-transparent to-[#020611]'
-            : 'bg-gradient-to-b from-[#0b1d3a]/75 via-transparent to-[#f8fafc]'
+            ? 'bg-gradient-to-b from-[#141312]/75 via-transparent to-[#141312]'
+            : 'bg-gradient-to-b from-[#0b1d3a]/75 via-transparent to-[#fcfbf8]'
         }`}></div>
 
         {/* Hero Content (Clean, tags removed) */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 sm:py-20">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl text-left">
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-4 tracking-tight drop-shadow-md">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-4 tracking-tight drop-shadow-md text-left">
               Have a chat with us for your <span className="text-orange-500 dark:text-orange-400">Export Inquiry</span>
             </h1>
 
             {/* Description ("during published business hours." removed) */}
-            <p className="text-slate-100 max-w-2xl text-sm sm:text-base leading-relaxed font-medium drop-shadow-sm">
+            <p className="text-slate-100 max-w-2xl text-sm sm:text-base leading-relaxed font-medium drop-shadow-sm text-left">
               Submit your product, quantity, specification and destination inquiry, our export team will review your complete trade enquiry.
             </p>
           </div>
@@ -235,13 +242,13 @@ const Inquire = ({ setActivePage }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           
           {/* Card 1: Phone / Direct Desk */}
-          <div className={`p-6 rounded-2xl border transition-all duration-300 transform hover:-translate-y-1 ${
+          <div className={`p-6 rounded-2xl border transition-all duration-300 relative overflow-hidden group backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#c99a42] before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
             isDark 
-              ? 'bg-[#071326] border-[#132649] hover:border-orange-400/60 shadow-[0_12px_30px_rgba(4,12,24,0.4)]' 
-              : 'bg-white border-slate-200/90 hover:border-orange-500/40 shadow-[0_12px_30px_rgba(11,29,58,0.06)]'
+              ? 'bg-[#1f1b17] border-[#332b21] hover:border-[#c99a42] shadow-[0_12px_30px_rgba(0,0,0,0.5)]' 
+              : 'bg-[#f7f4ee] border-[#e8e2d4] hover:border-[#c99a42] shadow-[0_12px_30px_rgba(201,154,66,0.07)]'
           }`}>
             <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400">
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400 group-hover:scale-105 transition-transform duration-300">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
@@ -279,13 +286,13 @@ const Inquire = ({ setActivePage }) => {
           </div>
 
           {/* Card 2: Email / RFQ Desk */}
-          <div className={`p-6 rounded-2xl border transition-all duration-300 transform hover:-translate-y-1 ${
+          <div className={`p-6 rounded-2xl border transition-all duration-300 relative overflow-hidden group backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#c99a42] before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
             isDark 
-              ? 'bg-[#071326] border-[#132649] hover:border-orange-400/60 shadow-[0_12px_30px_rgba(4,12,24,0.4)]' 
-              : 'bg-white border-slate-200/90 hover:border-orange-500/40 shadow-[0_12px_30px_rgba(11,29,58,0.06)]'
+              ? 'bg-[#1f1b17] border-[#332b21] hover:border-[#c99a42] shadow-[0_12px_30px_rgba(0,0,0,0.5)]' 
+              : 'bg-[#f7f4ee] border-[#e8e2d4] hover:border-[#c99a42] shadow-[0_12px_30px_rgba(201,154,66,0.07)]'
           }`}>
             <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400">
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400 group-hover:scale-105 transition-transform duration-300">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
@@ -323,13 +330,13 @@ const Inquire = ({ setActivePage }) => {
           </div>
 
           {/* Card 3: Head Office */}
-          <div className={`p-6 rounded-2xl border transition-all duration-300 transform hover:-translate-y-1 ${
+          <div className={`p-6 rounded-2xl border transition-all duration-300 relative overflow-hidden group backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#c99a42] before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
             isDark 
-              ? 'bg-[#071326] border-[#132649] hover:border-orange-400/60 shadow-[0_12px_30px_rgba(4,12,24,0.4)]' 
-              : 'bg-white border-slate-200/90 hover:border-orange-500/40 shadow-[0_12px_30px_rgba(11,29,58,0.06)]'
+              ? 'bg-[#1f1b17] border-[#332b21] hover:border-[#c99a42] shadow-[0_12px_30px_rgba(0,0,0,0.5)]' 
+              : 'bg-[#f7f4ee] border-[#e8e2d4] hover:border-[#c99a42] shadow-[0_12px_30px_rgba(201,154,66,0.07)]'
           }`}>
             <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400">
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400 group-hover:scale-105 transition-transform duration-300">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
@@ -354,13 +361,13 @@ const Inquire = ({ setActivePage }) => {
           </div>
 
           {/* Card 4: Operating Hours (24/7) */}
-          <div className={`p-6 rounded-2xl border transition-all duration-300 transform hover:-translate-y-1 ${
+          <div className={`p-6 rounded-2xl border transition-all duration-300 relative overflow-hidden group backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#c99a42] before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
             isDark 
-              ? 'bg-[#071326] border-[#132649] hover:border-orange-400/60 shadow-[0_12px_30px_rgba(4,12,24,0.4)]' 
-              : 'bg-white border-slate-200/90 hover:border-orange-500/40 shadow-[0_12px_30px_rgba(11,29,58,0.06)]'
+              ? 'bg-[#1f1b17] border-[#332b21] hover:border-[#c99a42] shadow-[0_12px_30px_rgba(0,0,0,0.5)]' 
+              : 'bg-[#f7f4ee] border-[#e8e2d4] hover:border-[#c99a42] shadow-[0_12px_30px_rgba(201,154,66,0.07)]'
           }`}>
             <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400">
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400 group-hover:scale-105 transition-transform duration-300">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -390,17 +397,17 @@ const Inquire = ({ setActivePage }) => {
       <div id="export-quote-section" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 relative z-10 scroll-mt-24">
         
         {/* CARD WRAPPER */}
-        <div className={`rounded-3xl shadow-2xl overflow-hidden border transition-all duration-300 ${
+        <div className={`rounded-3xl shadow-2xl overflow-hidden border transition-all duration-300 backdrop-blur-xl relative ${
           isDark 
-            ? 'border-[#132649] bg-[#071326] shadow-[0_20px_60px_-15px_rgba(4,12,24,0.7)]' 
-            : 'border-slate-200 bg-white shadow-xl'
+            ? 'border-[#332b21] bg-[#1f1b17] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)]' 
+            : 'border-[#e8e2d4] bg-[#f7f4ee] shadow-[0_12px_40px_rgba(201,154,66,0.08)]'
         }`}>
           
           {/* Card Top Title Bar (Left-aligned, Dark Blue Header) */}
           <div className={`p-6 sm:px-10 sm:py-7 border-b text-left transition-colors ${
             isDark 
-              ? 'border-[#132649] bg-[#01040a]' 
-              : 'border-blue-950/20 bg-[#0b1d3a]'
+              ? 'border-[#332b21] bg-[#141312]' 
+              : 'border-[#e8e2d4] bg-[#0b1d3a]'
           }`}>
             <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
               Export Quote
@@ -409,7 +416,7 @@ const Inquire = ({ setActivePage }) => {
 
           {/* LOWER FORM SECTION */}
           <div className={`p-6 sm:p-10 md:p-12 transition-colors ${
-            isDark ? 'bg-[#071326]' : 'bg-white'
+            isDark ? 'bg-[#1f1b17]' : 'bg-[#f7f4ee]'
           }`}>
             {submitted ? (
               <div className="text-center py-10 space-y-5">
@@ -442,7 +449,7 @@ const Inquire = ({ setActivePage }) => {
                     </p>
 
                     <div className={`max-w-lg mx-auto p-4 rounded-xl text-left text-xs space-y-2 border ${
-                      isDark ? 'bg-[#020611] border-amber-400/40 text-slate-300' : 'bg-amber-50 border-amber-200 text-slate-700'
+                      isDark ? 'bg-[#141312] border-amber-400/40 text-slate-300' : 'bg-[#efeae0] border-amber-200 text-slate-700'
                     }`}>
                       <div className="font-bold text-amber-500 dark:text-amber-400 flex items-center gap-1.5">
                         <span className="w-2 h-2 rounded-full bg-amber-500 dark:bg-amber-400"></span>
@@ -482,7 +489,7 @@ const Inquire = ({ setActivePage }) => {
                     }}
                     className={`px-6 py-3 text-xs font-bold uppercase tracking-widest rounded-xl transition-colors cursor-pointer ${
                       isDark 
-                        ? 'bg-[#132649] hover:bg-[#234b88] text-white' 
+                        ? 'bg-[#1f1b17] hover:bg-[#2a241f] text-white border border-[#332b21]' 
                         : 'bg-slate-800 hover:bg-slate-700 text-white'
                     }`}
                   >
@@ -515,10 +522,10 @@ const Inquire = ({ setActivePage }) => {
                     value={formData.fullName}
                     onChange={handleChange}
                     placeholder="John Doe" 
-                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-orange-500/20 dark:focus:ring-orange-400/25 focus:border-orange-500 dark:focus:border-orange-400 ${
+                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-[#c99a42]/20 dark:focus:ring-[#c99a42]/25 focus:border-[#c99a42] dark:focus:border-[#c99a42] ${
                       isDark
-                        ? 'bg-[#020611] border-[#132649] text-white placeholder-slate-400'
-                        : 'bg-[#fafafa] border-slate-300/80 text-slate-800 placeholder-slate-400'
+                        ? 'bg-[#141312] border-[#332b21] text-white placeholder-slate-400'
+                        : 'bg-[#ffffff] border-[#e8e2d4] text-slate-800 placeholder-slate-400'
                     }`}
                     required
                   />
@@ -536,10 +543,10 @@ const Inquire = ({ setActivePage }) => {
                     value={formData.companyName}
                     onChange={handleChange}
                     placeholder="Global Impex Ltd" 
-                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-orange-500/20 dark:focus:ring-orange-400/25 focus:border-orange-500 dark:focus:border-orange-400 ${
+                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-[#c99a42]/20 dark:focus:ring-[#c99a42]/25 focus:border-[#c99a42] dark:focus:border-[#c99a42] ${
                       isDark
-                        ? 'bg-[#020611] border-[#132649] text-white placeholder-slate-400'
-                        : 'bg-[#fafafa] border-slate-300/80 text-slate-800 placeholder-slate-400'
+                        ? 'bg-[#141312] border-[#332b21] text-white placeholder-slate-400'
+                        : 'bg-[#ffffff] border-[#e8e2d4] text-slate-800 placeholder-slate-400'
                     }`}
                     required
                   />
@@ -558,10 +565,10 @@ const Inquire = ({ setActivePage }) => {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="procurement@company.com" 
-                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-orange-500/20 dark:focus:ring-orange-400/25 focus:border-orange-500 dark:focus:border-orange-400 ${
+                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-[#c99a42]/20 dark:focus:ring-[#c99a42]/25 focus:border-[#c99a42] dark:focus:border-[#c99a42] ${
                       isDark
-                        ? 'bg-[#020611] border-[#132649] text-white placeholder-slate-400'
-                        : 'bg-[#fafafa] border-slate-300/80 text-slate-800 placeholder-slate-400'
+                        ? 'bg-[#141312] border-[#332b21] text-white placeholder-slate-400'
+                        : 'bg-[#ffffff] border-[#e8e2d4] text-slate-800 placeholder-slate-400'
                     }`}
                     required
                   />
@@ -579,102 +586,17 @@ const Inquire = ({ setActivePage }) => {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="+971 50 000 0000" 
-                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-orange-500/20 dark:focus:ring-orange-400/25 focus:border-orange-500 dark:focus:border-orange-400 ${
+                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-[#c99a42]/20 dark:focus:ring-[#c99a42]/25 focus:border-[#c99a42] dark:focus:border-[#c99a42] ${
                       isDark
-                        ? 'bg-[#020611] border-[#132649] text-white placeholder-slate-400'
-                        : 'bg-[#fafafa] border-slate-300/80 text-slate-800 placeholder-slate-400'
+                        ? 'bg-[#141312] border-[#332b21] text-white placeholder-slate-400'
+                        : 'bg-[#ffffff] border-[#e8e2d4] text-slate-800 placeholder-slate-400'
                     }`}
                     required
                   />
                 </div>
 
-                {/* ROW 3: PRODUCT OF INTEREST & QUANTITY (G/L) */}
-                <div className="flex flex-col">
-                  <label className={`text-[11px] font-black uppercase tracking-wider mb-2 flex items-center gap-1 ${
-                    isDark ? 'text-slate-300' : 'text-slate-800'
-                  }`}>
-                    PRODUCT OF INTEREST <span className="text-red-500">*</span>
-                  </label>
-                  <select 
-                    name="product"
-                    value={formData.product}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border cursor-pointer focus:ring-2 focus:ring-orange-500/20 dark:focus:ring-orange-400/25 focus:border-orange-500 dark:focus:border-orange-400 ${
-                      isDark
-                        ? 'bg-[#020611] border-[#132649] text-white'
-                        : 'bg-[#fafafa] border-slate-300/80 text-slate-800'
-                    }`}
-                    required
-                  >
-                    <option value="Other / Multiple Products">Other / Multiple Products</option>
-                    
-                    {/* 1. Agriculture / Rice */}
-                    <optgroup label="── BASMATI RICE ──" className="font-bold text-orange-500 dark:text-orange-400">
-                      <option value="1121 Steamy Sella Basmati">1121 Steamy Sella Basmati</option>
-                      <option value="1121 Creamy Sella Basmati">1121 Creamy Sella Basmati</option>
-                      <option value="1121 Golden Sella Basmati">1121 Golden Sella Basmati</option>
-                      <option value="XXXL Steamy Sella Basmati">XXXL Steamy Sella Basmati</option>
-                      <option value="XXXL Creamy Sella Basmati">XXXL Creamy Sella Basmati</option>
-                      <option value="XXXL Golden Sella Basmati">XXXL Golden Sella Basmati</option>
-                      <option value="1509 Basmati Rice">1509 Basmati Rice</option>
-                    </optgroup>
-                    <optgroup label="── NON-BASMATI RICE ──" className="font-bold text-orange-500 dark:text-orange-400">
-                      <option value="Non-Basmati - Sona Masuri">Non-Basmati - Sona Masuri</option>
-                      <option value="Non-Basmati - IR64">Non-Basmati - IR64</option>
-                      <option value="Non-Basmati - All Broken Grades(5% - 100%)">Non-Basmati - All Broken Grades(5% - 100%)</option>
-                    </optgroup>
-
-                    {/* 2. Spices */}
-                    <optgroup label="── SPICES ──" className="font-bold text-orange-500 dark:text-orange-400">
-                      <option value="Turmeric (2.5% - 9% curcumin)">Turmeric (2.5% - 9% curcumin) - Fingers / Bulb / Powder</option>
-                      <option value="Chillies">Chillies (S17 Teja / Kashmiri / Sannam 334 / Byadgi)</option>
-                      <option value="Cumin Seeds">Cumin Seeds (Singaporean / European)</option>
-                      <option value="Cardamom">Cardamom (6mm to 8.5mm / Green / Black / Husk)</option>
-                      <option value="Pepper">Pepper (400-800 G/L / White Vietnamese / Black Indian-Sri Lankan-Vietnamese)</option>
-                      <option value="Cloves">Cloves (Indonesian Lal Pari / Madagascan)</option>
-                      <option value="Coriander">Coriander (Eagle / Parrot Machine Cleaned or Sortex)</option>
-                      <option value="Cinnamon">Cinnamon (Vietnamese / Indian)</option>
-                      <option value="Saffron">Saffron (Kashmiri / Iranian / Spanish)</option>
-                    </optgroup>
-
-                    {/* 3. Oil Seeds */}
-                    <optgroup label="── OIL SEEDS ──" className="font-bold text-orange-500 dark:text-orange-400">
-                      <option value="Mustard Seeds">Mustard Seeds (Yellow / Black)</option>
-                      <option value="Sesame Seeds">Sesame Seeds (White / Black)</option>
-                      <option value="Soyabeans">Soyabeans (Whole High Protein Seeds)</option>
-                      <option value="Ground Nut">Ground Nut / Peanuts (Bold / Java / Tj / 30/40 / 40/50 / 50/50 / 60/70)</option>
-                    </optgroup>
-
-                    {/* 4. Edible Oils */}
-                    <optgroup label="── EDIBLE OILS ──" className="font-bold text-orange-500 dark:text-orange-400">
-                      <option value="Sunflower Oil">Sunflower Oil (African / Russian / Indian)</option>
-                      <option value="Soyabean Oil">Soyabean Oil</option>
-                      <option value="Ground Nut Oil">Ground Nut Oil (Cold Press / Filtered)</option>
-                    </optgroup>
-
-                    {/* 5. Dry Fruits */}
-                    <optgroup label="── DRY FRUITS ──" className="font-bold text-orange-500 dark:text-orange-400">
-                      <option value="Cashew Nuts">Cashew Nuts (W180, W240, W320, W400, SWP, BB, 4 Piece, 8 Piece, 100% Broken, All Origins)</option>
-                      <option value="Almonds">Almonds (70/30 / 80/20 / Independent)</option>
-                    </optgroup>
-
-                    {/* 6. Tea & Coffee */}
-                    <optgroup label="── TEA & COFFEE ──" className="font-bold text-orange-500 dark:text-orange-400">
-                      <option value="Tea">Tea (All Grades & Custom Blends of Tea)</option>
-                      <option value="Coffee">Coffee (All Grades of Arabica Green or Roasted / All Grades of Robusta Green or Roasted)</option>
-                      <option value="Cocoa Powder">Cocoa Powder (All Grades of Cocoa Powder)</option>
-                    </optgroup>
-
-                    {/* 7. Food Ingredients */}
-                    <optgroup label="── FOOD INGREDIENTS ──" className="font-bold text-orange-500 dark:text-orange-400">
-                      <option value="Dehydrated Onion Powder">Dehydrated Onion Powder (Red / Pink)</option>
-                      <option value="Dehydrated Garlic Powder / Paste">Dehydrated Garlic Powder / Paste (Powder / Paste)</option>
-                      <option value="Dehydrated Ginger">Dehydrated Ginger (Indian / Nigerian)</option>
-                    </optgroup>
-                  </select>
-                </div>
-                
-                <div className="flex flex-col relative">
+                {/* ROW 3: QUANTITY (G/L) */}
+                <div className="flex flex-col md:col-span-2 relative">
                   <label className={`text-[11px] font-black uppercase tracking-wider mb-2 flex items-center gap-1 ${
                     isDark ? 'text-slate-300' : 'text-slate-800'
                   }`}>
@@ -686,10 +608,10 @@ const Inquire = ({ setActivePage }) => {
                     value={formData.quantity}
                     onChange={handleChange}
                     placeholder="e.g., 500" 
-                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:ring-2 focus:ring-orange-500/20 dark:focus:ring-orange-400/25 focus:border-orange-500 dark:focus:border-orange-400 ${
+                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:ring-2 focus:ring-[#c99a42]/20 dark:focus:ring-[#c99a42]/25 focus:border-[#c99a42] dark:focus:border-[#c99a42] ${
                       isDark
-                        ? 'bg-[#020611] border-[#132649] text-white placeholder-slate-400'
-                        : 'bg-[#fafafa] border-slate-300/80 text-slate-800 placeholder-slate-400'
+                        ? 'bg-[#141312] border-[#332b21] text-white placeholder-slate-400'
+                        : 'bg-[#ffffff] border-[#e8e2d4] text-slate-800 placeholder-slate-400'
                     }`}
                     required
                   />
@@ -708,10 +630,10 @@ const Inquire = ({ setActivePage }) => {
                     value={formData.destinationCountry}
                     onChange={handleChange}
                     placeholder="e.g., United Arab Emirates" 
-                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-orange-500/20 dark:focus:ring-orange-400/25 focus:border-orange-500 dark:focus:border-orange-400 ${
+                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-[#c99a42]/20 dark:focus:ring-[#c99a42]/25 focus:border-[#c99a42] dark:focus:border-[#c99a42] ${
                       isDark
-                        ? 'bg-[#020611] border-[#132649] text-white placeholder-slate-400'
-                        : 'bg-[#fafafa] border-slate-300/80 text-slate-800 placeholder-slate-400'
+                        ? 'bg-[#141312] border-[#332b21] text-white placeholder-slate-400'
+                        : 'bg-[#ffffff] border-[#e8e2d4] text-slate-800 placeholder-slate-400'
                     }`}
                     required
                   />
@@ -729,10 +651,10 @@ const Inquire = ({ setActivePage }) => {
                     value={formData.portOfDischarge}
                     onChange={handleChange}
                     placeholder="e.g., Jebel Ali" 
-                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-orange-500/20 dark:focus:ring-orange-400/25 focus:border-orange-500 dark:focus:border-orange-400 ${
+                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-[#c99a42]/20 dark:focus:ring-[#c99a42]/25 focus:border-[#c99a42] dark:focus:border-[#c99a42] ${
                       isDark
-                        ? 'bg-[#020611] border-[#132649] text-white placeholder-slate-400'
-                        : 'bg-[#fafafa] border-slate-300/80 text-slate-800 placeholder-slate-400'
+                        ? 'bg-[#141312] border-[#332b21] text-white placeholder-slate-400'
+                        : 'bg-[#ffffff] border-[#e8e2d4] text-slate-800 placeholder-slate-400'
                     }`}
                   />
                 </div>
@@ -750,41 +672,17 @@ const Inquire = ({ setActivePage }) => {
                     value={formData.requiredPacking}
                     onChange={handleChange}
                     placeholder="e.g., 50kg PP bags or 5kg private label" 
-                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-orange-500/20 dark:focus:ring-orange-400/25 focus:border-orange-500 dark:focus:border-orange-400 ${
+                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-[#c99a42]/20 dark:focus:ring-[#c99a42]/25 focus:border-[#c99a42] dark:focus:border-[#c99a42] ${
                       isDark
-                        ? 'bg-[#020611] border-[#132649] text-white placeholder-slate-400'
-                        : 'bg-[#fafafa] border-slate-300/80 text-slate-800 placeholder-slate-400'
+                        ? 'bg-[#141312] border-[#332b21] text-white placeholder-slate-400'
+                        : 'bg-[#ffffff] border-[#e8e2d4] text-slate-800 placeholder-slate-400'
                     }`}
                     required
                   />
                 </div>
 
-                {/* ROW 6: PREFERRED INCOTERM & TARGET SHIPMENT MONTH */}
-                <div className="flex flex-col">
-                  <label className={`text-[11px] font-black uppercase tracking-wider mb-2 flex items-center gap-1 ${
-                    isDark ? 'text-slate-300' : 'text-slate-800'
-                  }`}>
-                    PREFERRED INCOTERM <span className="text-red-500">*</span>
-                  </label>
-                  <select 
-                    name="incoterm"
-                    value={formData.incoterm}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border cursor-pointer focus:ring-2 focus:ring-orange-500/20 dark:focus:ring-orange-400/25 focus:border-orange-500 dark:focus:border-orange-400 ${
-                      isDark
-                        ? 'bg-[#020611] border-[#132649] text-white'
-                        : 'bg-[#fafafa] border-slate-300/80 text-slate-800'
-                    }`}
-                    required
-                  >
-                    <option value="CIF">CIF — Cost, Insurance &amp; Freight</option>
-                    <option value="FOB">FOB — Free On Board</option>
-                    <option value="CFR">CFR — Cost and Freight</option>
-                    <option value="EXW">EXW — Ex-Works (Mill Delivery)</option>
-                  </select>
-                </div>
-                
-                <div className="flex flex-col">
+                {/* ROW 6: TARGET SHIPMENT MONTH */}
+                <div className="flex flex-col md:col-span-2">
                   <label className={`text-[11px] font-black uppercase tracking-wider mb-2 flex items-center gap-1 ${
                     isDark ? 'text-slate-300' : 'text-slate-800'
                   }`}>
@@ -795,37 +693,42 @@ const Inquire = ({ setActivePage }) => {
                     name="shipmentMonth"
                     value={formData.shipmentMonth}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-orange-500/20 dark:focus:ring-orange-400/25 focus:border-orange-500 dark:focus:border-orange-400 ${
+                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border focus:ring-2 focus:ring-[#c99a42]/20 dark:focus:ring-[#c99a42]/25 focus:border-[#c99a42] dark:focus:border-[#c99a42] ${
                       isDark
-                        ? 'bg-[#020611] border-[#132649] text-white placeholder-slate-400'
-                        : 'bg-[#fafafa] border-slate-300/80 text-slate-800 placeholder-slate-400'
+                        ? 'bg-[#141312] border-[#332b21] text-white placeholder-slate-400'
+                        : 'bg-[#ffffff] border-[#e8e2d4] text-slate-800 placeholder-slate-400'
                     }`}
                   />
                 </div>
 
                 {/* ROW 7 (Full Width Textarea): SPECIFIC REQUIREMENTS */}
                 <div className="flex flex-col md:col-span-2">
-                  <label className={`text-[11px] font-black uppercase tracking-wider mb-2 flex items-center gap-1 ${
-                    isDark ? 'text-slate-300' : 'text-slate-800'
-                  }`}>
-                    SPECIFIC REQUIREMENTS
-                  </label>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className={`text-[11px] font-black uppercase tracking-wider flex items-center gap-1 ${
+                      isDark ? 'text-slate-300' : 'text-slate-800'
+                    }`}>
+                      SPECIFIC REQUIREMENTS
+                    </label>
+                    <span className="text-[10px] text-slate-400 font-medium">
+                      {formData.requirements ? formData.requirements.length : 0} characters
+                    </span>
+                  </div>
                   <textarea 
                     rows="4"
                     name="requirements"
                     value={formData.requirements}
                     onChange={handleChange}
                     placeholder="e.g., 50kg PP Bags, 5% Broken max, SGS inspection, COA requirements, private label branding..." 
-                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border resize-y focus:ring-2 focus:ring-orange-500/20 dark:focus:ring-orange-400/25 focus:border-orange-500 dark:focus:border-orange-400 ${
+                    className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border resize-y focus:ring-2 focus:ring-[#c99a42]/20 dark:focus:ring-[#c99a42]/25 focus:border-[#c99a42] dark:focus:border-[#c99a42] ${
                       isDark
-                        ? 'bg-[#020611] border-[#132649] text-white placeholder-slate-400'
-                        : 'bg-[#fafafa] border-slate-300/80 text-slate-800 placeholder-slate-400'
+                        ? 'bg-[#141312] border-[#332b21] text-white placeholder-slate-400'
+                        : 'bg-[#ffffff] border-[#e8e2d4] text-slate-800 placeholder-slate-400'
                     }`}
                   ></textarea>
                 </div>
 
                 {/* SUBMISSION FOOTER (Full Width Elongated Button) */}
-                <div className="md:col-span-2 mt-6 border-t border-slate-200 dark:border-[#132649] pt-8">
+                <div className="md:col-span-2 mt-6 border-t border-[#e8e2d4] dark:border-[#332b21] pt-8">
                   <button 
                     type="submit"
                     disabled={isSubmitting}

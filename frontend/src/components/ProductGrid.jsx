@@ -55,22 +55,27 @@ const ProductGrid = ({ setActivePage }) => {
   return (
     <section className={`w-full py-20 md:py-32 font-sans border-t transition-colors duration-500 relative overflow-hidden ${
       isDark 
-        ? 'bg-[#020611] text-slate-100 border-[#132649]' 
-        : 'bg-[#f8fafc] text-[#0b1d3a] border-slate-200/90'
+        ? 'bg-gradient-to-b from-[#141312] via-[#1a1816] to-[#141312] text-slate-100 border-[#2d261e]' 
+        : 'bg-gradient-to-b from-[#fcfbf8] via-[#f7f4ee] to-[#f4efe4] text-[#0b1d3a] border-[#e8e2d4]'
     }`}>
       
-      {/* AMBIENT GLOWING BLOBS */}
-      <div className="absolute top-10 left-1/3 w-96 h-96 rounded-full pointer-events-none blur-3xl opacity-20 z-0 bg-orange-400/20"></div>
-      <div className={`absolute top-1/2 -right-20 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl z-0 ${
-        isDark ? 'bg-[#132649]/35' : 'bg-blue-600/10'
+      {/* MARITIME TRADE & LOGISTICS BACKGROUND OVERLAY */}
+      <div className={`absolute inset-0 pointer-events-none -z-0 transition-opacity duration-700 ${
+        isDark ? 'bg-trade-grid-dark opacity-80' : 'bg-trade-grid-light opacity-75'
       }`}></div>
-      <div className={`absolute -bottom-10 -left-10 w-[450px] h-[450px] rounded-full pointer-events-none blur-3xl z-0 ${
-        isDark ? 'bg-[#0d203e]/30' : 'bg-orange-500/10'
+
+      {/* AMBIENT DYNAMIC MARITIME TRADE BEACONS */}
+      <div className="absolute top-10 left-1/3 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl opacity-25 z-0 bg-gradient-to-br from-[#c99a42]/30 via-[#dfb25b]/20 to-[#c99a42]/10 animate-maritime-drift"></div>
+      <div className={`absolute top-1/2 -right-20 w-[550px] h-[550px] rounded-full pointer-events-none blur-3xl z-0 transition-opacity duration-700 animate-float-slow ${
+        isDark ? 'bg-gradient-to-bl from-[#c99a42]/20 via-[#a67c2e]/15 to-transparent' : 'bg-gradient-to-bl from-[#c99a42]/18 via-[#dfb25b]/20 to-transparent'
+      }`}></div>
+      <div className={`absolute -bottom-10 -left-10 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl z-0 transition-opacity duration-700 animate-maritime-drift ${
+        isDark ? 'bg-gradient-to-tr from-[#c99a42]/20 via-[#dfb25b]/15 to-transparent' : 'bg-gradient-to-tr from-[#c99a42]/18 via-[#dfb25b]/16 to-transparent'
       }`}></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* SECTION HEADER - SOLID B2B EXPORT TERMINAL STYLE */}
-        <div className="mb-16 text-center max-w-3xl mx-auto">
+        <div className="mb-16 text-center max-w-3xl mx-auto p-6 sm:p-8 rounded-3xl backdrop-blur-md bg-gradient-to-b from-transparent via-[#f7f4ee]/80 to-transparent dark:via-[#1f1b17]/80">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] mb-6">
             <span className="text-blue-900 dark:text-white">Global </span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-500 to-amber-500 dark:from-orange-300 dark:via-orange-400 dark:to-amber-300">
@@ -103,21 +108,21 @@ const ProductGrid = ({ setActivePage }) => {
               <div 
                 key={product.id} 
                 onClick={() => handleGetQuote(product)}
-                className={`border rounded-3xl overflow-hidden transition-all duration-300 ease-out flex flex-col group relative cursor-pointer hover:-translate-y-2 hover:shadow-2xl h-[440px] w-full ${
+                className={`border rounded-3xl overflow-hidden transition-all duration-300 ease-out flex flex-col group relative cursor-pointer hover:shadow-2xl h-[440px] w-full before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#c99a42] before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 backdrop-blur-md ${
                   isDark 
-                    ? 'bg-[#071326] border-[#132649] shadow-[0_12px_30px_rgba(4,12,24,0.4)] hover:shadow-[0_20px_45px_rgba(4,12,24,0.7)] hover:border-orange-400/80' 
-                    : 'bg-white border-slate-200/90 shadow-[0_10px_30px_rgba(11,29,58,0.05)] hover:shadow-[0_20px_45px_rgba(11,29,58,0.12)] hover:border-orange-500/60'
+                    ? 'bg-[#1f1b17] border-[#332b21] shadow-[0_12px_32px_rgba(0,0,0,0.5)] hover:shadow-[0_14px_38px_rgba(201,154,66,0.18)] hover:border-[#c99a42]' 
+                    : 'bg-[#f7f4ee] border-[#e8e2d4] shadow-[0_12px_32px_rgba(201,154,66,0.06)] hover:shadow-[0_14px_38px_rgba(201,154,66,0.16)] hover:border-[#c99a42]'
                 }`}
               >
                 
                 {/* Product Image Container */}
                 <div className={`h-52 w-full overflow-hidden rounded-t-3xl relative shrink-0 ${
-                  isDark ? 'bg-[#020611]' : 'bg-slate-100'
+                  isDark ? 'bg-[#181411]' : 'bg-[#efeae0]'
                 }`}>
                   <img 
                     src={cardImage} 
                     alt={product.title || product.name} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-in-out"
                     onError={(e) => {
                       if (product.fallbackImage && e.target.src !== product.fallbackImage) {
                         e.target.src = product.fallbackImage;
@@ -130,7 +135,9 @@ const ProductGrid = ({ setActivePage }) => {
                 </div>
 
                 {/* Card Body */}
-                <div className="p-5 flex flex-col flex-1 justify-between space-y-3 rounded-b-3xl overflow-hidden">
+                <div className={`p-5 flex flex-col flex-1 justify-between space-y-3 rounded-b-3xl overflow-hidden relative ${
+                  isDark ? 'bg-gradient-to-b from-transparent to-[#181411]/60' : 'bg-gradient-to-b from-transparent to-[#efeae0]/60'
+                }`}>
                   <div className="space-y-2">
                     {/* Title & Subtitle (Consistent Height) */}
                     <div className="h-14 flex items-center">
@@ -164,8 +171,8 @@ const ProductGrid = ({ setActivePage }) => {
                                   }}
                                   className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
                                     isDark
-                                      ? 'bg-[#020611] hover:bg-orange-500/20 border-[#132649] hover:border-orange-400 text-slate-200 hover:text-white'
-                                      : 'bg-slate-50 hover:bg-orange-50 border-slate-200 hover:border-orange-500 text-slate-700 hover:text-orange-600 shadow-2xs'
+                                      ? 'bg-[#141312] hover:bg-[#c99a42]/20 border-[#332b21] hover:border-[#c99a42] text-slate-200 hover:text-white'
+                                      : 'bg-[#ffffff] hover:bg-[#f7f4ee] border-[#e8e2d4] hover:border-[#c99a42] text-slate-700 hover:text-[#a67c2e] shadow-2xs'
                                   }`}
                                 >
                                   {varImg && (
@@ -197,8 +204,8 @@ const ProductGrid = ({ setActivePage }) => {
                             }}
                             className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
                               isDark 
-                                ? 'bg-[#020611] hover:bg-orange-500/20 border-[#132649] hover:border-orange-400 text-slate-200 hover:text-white' 
-                                : 'bg-slate-50 hover:bg-orange-50 border-slate-200 hover:border-orange-500 text-slate-700 hover:text-orange-600 shadow-2xs'
+                                ? 'bg-[#141312] hover:bg-[#c99a42]/20 border-[#332b21] hover:border-[#c99a42] text-slate-200 hover:text-white' 
+                                : 'bg-[#ffffff] hover:bg-[#f7f4ee] border-[#e8e2d4] hover:border-[#c99a42] text-slate-700 hover:text-[#a67c2e] shadow-2xs'
                             }`}
                           >
                             <span>{typeof product.varieties[0] === 'string' ? product.varieties[0] : product.varieties[0]?.name}</span>

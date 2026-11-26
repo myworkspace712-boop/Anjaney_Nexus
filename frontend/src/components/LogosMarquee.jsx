@@ -39,7 +39,7 @@ const LogosMarquee = () => {
   const loopedLogos = [...logos, ...logos, ...logos, ...logos, ...logos, ...logos];
 
   return (
-    <section className="w-full bg-white dark:bg-[#020611] border-y border-slate-200 dark:border-[#132649] py-8 overflow-hidden relative transition-colors duration-300">
+    <section className="w-full bg-[#fffdf9] dark:bg-[#0e0c0b] border-y border-[#ebdcc8] dark:border-[#291e17] py-8 overflow-hidden relative transition-colors duration-300">
       {/* Marquee Animation Keyframes */}
       <style dangerouslySetInnerHTML={{
         __html: `
@@ -75,8 +75,8 @@ const LogosMarquee = () => {
 
       {/* Edge Gradient Mask for Smooth Fade In/Out */}
       <div className="relative w-full overflow-hidden py-1">
-        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-white dark:from-[#020611] to-transparent z-10 pointer-events-none"></div>
-        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-white dark:from-[#020611] to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#fdfbf7] dark:from-[#0e0c0b] to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#fdfbf7] dark:from-[#0e0c0b] to-transparent z-10 pointer-events-none"></div>
 
         {/* The Moving Slider track (slides towards the left side) */}
         <div className="logos-slider-track gap-10 sm:gap-14 items-center px-4 py-2">
@@ -84,7 +84,7 @@ const LogosMarquee = () => {
             <div
               key={index}
               title={`${item.name} - ${item.fullName}`}
-              className="relative flex-shrink-0 flex items-center justify-center h-20 sm:h-24 w-auto min-w-[140px] px-5 py-2.5 bg-white dark:bg-[#071326] rounded-xl border border-slate-200/90 dark:border-[#132649] shadow-xs hover:shadow-md transition-all group"
+              className="relative flex-shrink-0 flex items-center justify-center h-20 sm:h-24 w-auto min-w-[140px] px-5 py-2.5 bg-white dark:bg-[#181310] rounded-xl border border-[#ebdcc8] dark:border-[#33251c] shadow-xs hover:shadow-md transition-all group"
             >
               {/* Flower-like Circle Badge */}
               <div 

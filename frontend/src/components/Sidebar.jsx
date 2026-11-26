@@ -91,8 +91,8 @@ const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
       <aside 
         className={`fixed top-0 bottom-0 right-0 w-80 sm:w-96 max-w-[85vw] z-50 flex flex-col justify-between transition-transform duration-300 ease-out border-l shadow-2xl ${
           isDark 
-            ? 'bg-[#020611] border-[#132649] text-slate-100 shadow-black/80' 
-            : 'bg-white border-slate-200 text-[#0b1d3a] shadow-blue-950/20'
+            ? 'bg-[#141312] border-[#332b21] text-slate-100 shadow-black/90' 
+            : 'bg-[#fcfbf8] border-[#e8e2d4] text-[#0b1d3a] shadow-[0_20px_60px_rgba(201,154,66,0.15)]'
         } ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
@@ -101,7 +101,7 @@ const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
         
         {/* SIDEBAR HEADER */}
         <div className={`p-5 sm:p-6 border-b flex items-center justify-between ${
-          isDark ? 'border-[#132649]' : 'border-slate-100'
+          isDark ? 'border-[#332b21]' : 'border-[#e8e2d4]'
         }`}>
           {/* Logo & Company Name */}
           <div className="flex items-center gap-3 min-w-0">
@@ -116,7 +116,7 @@ const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
             />
             <div className="text-sm sm:text-base font-black leading-tight whitespace-nowrap">
               <span className="text-orange-500 dark:text-orange-400">Anjaney</span>{' '}
-              <span className={isDark ? 'text-blue-400' : 'text-blue-900'}>
+              <span className={isDark ? 'text-amber-400' : 'text-blue-900'}>
                 Nexus India LLP
               </span>
             </div>
@@ -128,8 +128,8 @@ const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
             onClick={onClose} 
             className={`w-9 h-9 rounded-full border flex items-center justify-center transition-all cursor-pointer bg-transparent ${
               isDark 
-                ? 'border-[#132649] text-slate-300 hover:text-white hover:border-orange-400 hover:bg-white/5' 
-                : 'border-slate-200 text-slate-600 hover:text-blue-950 hover:border-orange-500 hover:bg-slate-100/60'
+                ? 'border-[#332b21] text-slate-300 hover:text-white hover:border-[#c99a42] hover:bg-white/5' 
+                : 'border-[#e8e2d4] text-slate-600 hover:text-blue-950 hover:border-[#c99a42] hover:bg-[#f7f4ee]'
             }`}
             aria-label="Close sidebar menu"
           >
@@ -155,11 +155,11 @@ const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
                 className={`w-full text-left p-3.5 rounded-xl transition-all duration-200 cursor-pointer flex items-center justify-between group ${
                   isActive
                     ? isDark 
-                      ? 'bg-gradient-to-r from-orange-400 to-amber-500 text-white font-black shadow-md shadow-orange-500/25'
-                      : 'bg-gradient-to-r from-orange-500 to-orange-600 text-white font-black shadow-md shadow-orange-500/25'
+                      ? 'bg-gradient-to-r from-[#c99a42] to-[#dfb25b] text-white font-black shadow-md shadow-[#c99a42]/25'
+                      : 'bg-gradient-to-r from-[#c99a42] to-[#a67c2e] text-white font-black shadow-md shadow-[#c99a42]/25'
                     : isDark
-                      ? 'text-slate-200 hover:bg-[#071326] hover:text-white border border-transparent hover:border-[#132649]'
-                      : 'text-[#0b1d3a] hover:bg-slate-50 hover:text-orange-600 border border-transparent hover:border-slate-200'
+                      ? 'text-slate-200 hover:bg-[#1f1b17] hover:text-white border border-transparent hover:border-[#332b21]'
+                      : 'text-[#0b1d3a] hover:bg-[#f7f4ee] hover:text-[#c99a42] border border-transparent hover:border-[#e8e2d4]'
                 }`}
               >
                 <div className="flex items-center gap-3.5 min-w-0">
@@ -167,8 +167,8 @@ const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
                     isActive 
                       ? 'bg-white/20 text-white' 
                       : isDark 
-                        ? 'bg-[#071326] text-orange-400 group-hover:bg-[#0d203e]' 
-                        : 'bg-slate-100 text-orange-500 group-hover:bg-orange-50'
+                        ? 'bg-[#1f1b17] text-[#c99a42] group-hover:bg-[#29221a]' 
+                        : 'bg-[#f7f4ee] text-[#c99a42] group-hover:bg-[#efeae0]'
                   }`}>
                     {item.icon}
                   </div>
@@ -202,7 +202,7 @@ const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
           })}
 
           {/* Theme Mode Setting */}
-          <div className="pt-4 mt-3 border-t border-slate-100 dark:border-[#132649]/60">
+          <div className="pt-4 mt-3 border-t border-[#e8e2d4] dark:border-[#332b21]">
             <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 px-3 mb-2">
               Appearance & Settings
             </div>
@@ -212,14 +212,14 @@ const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
               onClick={toggleTheme}
               className={`w-full text-left p-3.5 rounded-xl transition-all duration-200 cursor-pointer flex items-center justify-between group ${
                 isDark
-                  ? 'text-slate-200 hover:bg-[#071326] hover:text-white border border-[#132649]/60 hover:border-[#132649]'
-                  : 'text-[#0b1d3a] hover:bg-slate-50 hover:text-orange-600 border border-slate-200 hover:border-slate-300'
+                  ? 'text-slate-200 hover:bg-[#1f1b17] hover:text-white border border-[#332b21] hover:border-[#3d3326]'
+                  : 'text-[#0b1d3a] hover:bg-[#f7f4ee] hover:text-[#c99a42] border border-[#e8e2d4] hover:border-[#dfd6c4]'
               }`}
               title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
             >
               <div className="flex items-center gap-3.5 min-w-0">
                 <div className={`p-2 rounded-lg shrink-0 text-base transition-colors ${
-                  isDark ? 'bg-[#071326] text-amber-300 group-hover:bg-[#0d203e]' : 'bg-slate-100 text-amber-500 group-hover:bg-amber-50'
+                  isDark ? 'bg-[#1f1b17] text-[#dfb25b] group-hover:bg-[#29221a]' : 'bg-[#f7f4ee] text-[#c99a42] group-hover:bg-[#efeae0]'
                 }`}>
                   {isDark ? '🌙' : '☀️'}
                 </div>
@@ -237,7 +237,7 @@ const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
 
               {/* Toggle Switch */}
               <div className={`w-11 h-6 rounded-full p-0.5 transition-colors duration-200 flex items-center shrink-0 ${
-                isDark ? 'bg-orange-500 justify-end' : 'bg-slate-300 justify-start'
+                isDark ? 'bg-[#c99a42] justify-end' : 'bg-[#e8e2d4] justify-start'
               }`}>
                 <div className="w-5 h-5 rounded-full bg-white shadow-md transform transition-transform" />
               </div>
@@ -247,7 +247,7 @@ const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
 
         {/* SIDEBAR FOOTER & CTA */}
         <div className={`p-5 sm:p-6 border-t space-y-4 ${
-          isDark ? 'border-[#132649] bg-[#01040a]/90' : 'border-slate-100 bg-slate-50/80'
+          isDark ? 'border-[#332b21] bg-[#1a1816]/95' : 'border-[#e8e2d4] bg-[#f7f4ee]/95'
         }`}>
           {/* Direct Commercial Quote Action */}
           <button 

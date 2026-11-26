@@ -1419,7 +1419,7 @@ export const EXPORT_CATALOG = [
     "numId": 21,
     "name": "Tea",
     "title": "Tea",
-    "category": "Beverages",
+    "category": "Tea & Coffee",
     "badgeCategory": "TEA & COFFEE",
     "dropdownPlaceholder": "All Grades & Custom Blends of Tea",
     "varieties": [
@@ -1474,7 +1474,7 @@ export const EXPORT_CATALOG = [
     "numId": 22,
     "name": "Coffee",
     "title": "Coffee",
-    "category": "Beverages",
+    "category": "Tea & Coffee",
     "badgeCategory": "TEA & COFFEE",
     "dropdownPlaceholder": "Select Variety / Grade",
     "varieties": [
@@ -1536,7 +1536,7 @@ export const EXPORT_CATALOG = [
     "numId": 23,
     "name": "Cocoa Powder",
     "title": "Cocoa Powder",
-    "category": "Beverages",
+    "category": "Tea & Coffee",
     "badgeCategory": "TEA & COFFEE",
     "dropdownPlaceholder": "All Grades of Cocoa Powder",
     "varieties": [
@@ -1591,7 +1591,7 @@ export const EXPORT_CATALOG = [
     "numId": 24,
     "name": "Dehydrated Onion Powder",
     "title": "Dehydrated Onion Powder",
-    "category": "Dehydrated",
+    "category": "Food Ingredients",
     "badgeCategory": "FOOD INGREDIENTS",
     "dropdownPlaceholder": "Select Variety",
     "varieties": [
@@ -1653,7 +1653,7 @@ export const EXPORT_CATALOG = [
     "numId": 25,
     "name": "Dehydrated Garlic Powder / Paste",
     "title": "Dehydrated Garlic Powder / Paste",
-    "category": "Dehydrated",
+    "category": "Food Ingredients",
     "badgeCategory": "FOOD INGREDIENTS",
     "dropdownPlaceholder": "Select Variety / Form",
     "varieties": [
@@ -1715,7 +1715,7 @@ export const EXPORT_CATALOG = [
     "numId": 26,
     "name": "Dehydrated Ginger",
     "title": "Dehydrated Ginger",
-    "category": "Dehydrated",
+    "category": "Food Ingredients",
     "badgeCategory": "FOOD INGREDIENTS",
     "dropdownPlaceholder": "Select Variety",
     "varieties": [
@@ -1859,10 +1859,13 @@ const ProductsPage = ({ setActivePage }) => {
     }
   ];
 
+  const normCategory = (str) => (str || '').toLowerCase().replace(/&/g, 'and').replace(/\s+/g, ' ').trim();
+
   const filteredProducts = EXPORT_CATALOG.filter((item) => {
     const matchesCategory =
       activeCategory === 'All Commodities' ||
       item.category.toLowerCase() === activeCategory.toLowerCase() ||
+      normCategory(item.category) === normCategory(activeCategory) ||
       (activeCategory === 'Rice' && item.category === 'Agriculture');
 
     const matchesSearch =
@@ -1910,16 +1913,23 @@ const ProductsPage = ({ setActivePage }) => {
 
   return (
     <div className={`min-h-screen font-sans transition-colors duration-500 relative overflow-hidden ${
-      isDark ? 'bg-[#020611] text-slate-100' : 'bg-[#f8fafc] text-[#0b1d3a]'
+      isDark 
+        ? 'bg-gradient-to-b from-[#141312] via-[#1a1816] to-[#141312] text-slate-100' 
+        : 'bg-gradient-to-b from-[#fcfbf8] via-[#f7f4ee] to-[#f4efe4] text-[#0b1d3a]'
     }`}>
       
-      {/* AMBIENT DYNAMIC GLOWS (Strictly non-black in dark mode, branded in light mode) */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full pointer-events-none blur-3xl opacity-20 -z-0 transition-opacity duration-700 bg-orange-400/20"></div>
-      <div className={`absolute top-[450px] right-10 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 ${
-        isDark ? 'bg-[#132649]/35' : 'bg-blue-600/10'
+      {/* MARITIME TRADE & LOGISTICS BACKGROUND OVERLAY */}
+      <div className={`absolute inset-0 pointer-events-none -z-0 transition-opacity duration-700 ${
+        isDark ? 'bg-trade-grid-dark opacity-80' : 'bg-trade-grid-light opacity-75'
       }`}></div>
-      <div className={`absolute top-[1200px] left-10 w-[450px] h-[450px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 ${
-        isDark ? 'bg-[#0d203e]/30' : 'bg-orange-500/10'
+
+      {/* AMBIENT DYNAMIC MARITIME BEACONS & OCEANIC TRADE HUBS */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl opacity-25 -z-0 bg-gradient-to-br from-[#c99a42]/30 via-[#dfb25b]/20 to-[#c99a42]/10 animate-maritime-drift"></div>
+      <div className={`absolute top-[450px] right-10 w-[600px] h-[600px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 animate-float-slow ${
+        isDark ? 'bg-gradient-to-bl from-[#c99a42]/20 via-[#a67c2e]/15 to-transparent' : 'bg-gradient-to-bl from-[#c99a42]/18 via-[#dfb25b]/20 to-transparent'
+      }`}></div>
+      <div className={`absolute top-[1200px] left-10 w-[550px] h-[550px] rounded-full pointer-events-none blur-3xl -z-0 transition-opacity duration-700 animate-maritime-drift ${
+        isDark ? 'bg-gradient-to-tr from-[#c99a42]/20 via-[#dfb25b]/15 to-transparent' : 'bg-gradient-to-tr from-[#c99a42]/18 via-[#dfb25b]/16 to-transparent'
       }`}></div>
 
       {/* =========================================================================
@@ -1942,17 +1952,17 @@ const ProductsPage = ({ setActivePage }) => {
 
         {/* Dynamic Theme Gradient Overlays:
             - Light mode: Deep Anjaney Logo Navy (#0b1d3a) gradient for maximum contrast and prestige
-            - Dark mode: Deep Maritime Ocean Blue (#020611 to #071326), strictly non-black */}
+            - Dark mode: Deep Maritime Ocean Blue (#060d1d to #091a3a), strictly non-black */}
         <div className={`absolute inset-0 transition-colors duration-500 ${
           isDark 
-            ? 'bg-gradient-to-r from-[#020611]/95 via-[#020611]/85 to-[#071326]/65'
+            ? 'bg-gradient-to-r from-[#0e0c0b]/95 via-[#0e0c0b]/85 to-[#16120f]/65'
             : 'bg-gradient-to-r from-[#0b1d3a]/95 via-[#0b1d3a]/80 to-[#0b1d3a]/45'
         }`}></div>
         
         <div className={`absolute inset-0 pointer-events-none transition-colors duration-500 ${
           isDark
-            ? 'bg-gradient-to-b from-[#020611]/75 via-transparent to-[#020611]'
-            : 'bg-gradient-to-b from-[#0b1d3a]/75 via-transparent to-[#f8fafc]'
+            ? 'bg-gradient-to-b from-[#141312]/75 via-transparent to-[#141312]'
+            : 'bg-gradient-to-b from-[#0b1d3a]/75 via-transparent to-[#fcfbf8]'
         }`}></div>
 
         {/* Subtle dynamic grid pattern for high-tech maritime feel */}
@@ -1960,15 +1970,15 @@ const ProductsPage = ({ setActivePage }) => {
 
         {/* Hero Content */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-20 sm:py-24">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl text-left">
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.1] mb-5 tracking-tight drop-shadow-lg text-white">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.1] mb-5 tracking-tight drop-shadow-lg text-white text-left">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-orange-400 to-amber-300">India's</span>{' '}
               <span className="text-white">Global Pantry</span>
             </h1>
 
             {/* Subheading / Tagline */}
-            <p className="text-slate-100 max-w-2xl text-base sm:text-lg leading-relaxed font-normal drop-shadow-md">
+            <p className="text-slate-100 max-w-2xl text-base sm:text-lg leading-relaxed font-normal drop-shadow-md text-left">
               Submit your product, quantity, specification and destination inquiry, our export team will review your complete trade enquiry during published business hours.
             </p>
           </div>
@@ -1983,10 +1993,10 @@ const ProductsPage = ({ setActivePage }) => {
           {stats.map((stat, idx) => (
             <div 
               key={idx}
-              className={`p-6 rounded-2xl border transition-all duration-300 transform hover:-translate-y-1 ${
+              className={`p-6 rounded-2xl border transition-all duration-300 relative overflow-hidden group backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#c99a42] before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
                 isDark 
-                  ? 'bg-[#071326] border-[#132649] hover:border-orange-400/60 shadow-[0_12px_30px_rgba(4,12,24,0.4)]' 
-                  : 'bg-white border-slate-200/90 hover:border-orange-500/40 shadow-[0_12px_30px_rgba(11,29,58,0.06)]'
+                  ? 'bg-[#1f1b17] border-[#332b21] hover:border-[#c99a42] shadow-[0_12px_30px_rgba(0,0,0,0.5)]' 
+                  : 'bg-[#f7f4ee] border-[#e8e2d4] hover:border-[#c99a42] shadow-[0_12px_30px_rgba(201,154,66,0.07)]'
               }`}
             >
               <div className="flex items-center mb-4">
@@ -2016,7 +2026,7 @@ const ProductsPage = ({ setActivePage }) => {
       <div id="catalog-products-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-24 relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-slate-200 dark:border-[#132649]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-[#e8e2d4] dark:border-[#2d261e]">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-orange-500 dark:text-orange-400 bg-orange-500/10 dark:bg-orange-400/15 border border-orange-500/20 dark:border-orange-400/30 mb-3">
               <span>B2B Commercial Export Catalog</span>
@@ -2042,8 +2052,8 @@ const ProductsPage = ({ setActivePage }) => {
               onChange={(e) => setSearchQuery(e.target.value)}
               className={`w-full py-3.5 pl-11 pr-10 text-sm font-medium rounded-xl border transition-all outline-none ${
                 isDark
-                  ? 'bg-[#071326] border-[#132649] text-white placeholder-slate-400 focus:border-orange-400 focus:ring-2 focus:ring-orange-400/30'
-                  : 'bg-white border-slate-300 text-[#0b1d3a] placeholder-slate-400 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 shadow-xs'
+                  ? 'bg-[#1f1b17] border-[#332b21] text-white placeholder-slate-400 focus:border-[#c99a42] focus:ring-2 focus:ring-[#c99a42]/30'
+                  : 'bg-[#f7f4ee] border-[#e8e2d4] text-[#0b1d3a] placeholder-slate-400 focus:border-[#c99a42] focus:ring-2 focus:ring-[#c99a42]/20 shadow-xs'
               }`}
             />
             <svg className="w-5 h-5 text-orange-500 dark:text-orange-400 absolute left-3.5 top-3.5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2069,21 +2079,35 @@ const ProductsPage = ({ setActivePage }) => {
         <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-10 scrollbar-none">
           {CATEGORIES.map((cat) => {
             const isSelected = activeCategory === cat;
+            const count = EXPORT_CATALOG.filter((item) => 
+              cat === 'All Commodities' || 
+              item.category.toLowerCase() === cat.toLowerCase() ||
+              normCategory(item.category) === normCategory(cat) ||
+              (cat === 'Rice' && item.category === 'Agriculture')
+            ).length;
+
             return (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`whitespace-nowrap px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+                className={`whitespace-nowrap px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center gap-2 ${
                   isSelected
                     ? isDark 
-                      ? 'bg-gradient-to-r from-orange-400 to-amber-500 text-white shadow-lg shadow-orange-500/30 scale-105 border-transparent'
-                      : 'bg-[#0b1d3a] text-white shadow-lg shadow-blue-950/20 scale-105 border-transparent'
+                      ? 'bg-gradient-to-r from-[#c99a42] to-[#dfb25b] text-white shadow-lg shadow-[#c99a42]/30 scale-105 border-transparent'
+                      : 'bg-[#c99a42] text-white shadow-lg shadow-[#c99a42]/20 scale-105 border-transparent'
                     : isDark
-                      ? 'bg-[#071326] text-slate-300 hover:text-white border border-[#132649] hover:border-orange-400/60'
-                      : 'bg-white text-slate-600 hover:text-[#0b1d3a] border border-slate-200/90 hover:border-orange-400 shadow-xs'
+                      ? 'bg-[#1f1b17] text-slate-300 hover:text-white border border-[#332b21] hover:border-[#c99a42] hover:scale-[1.02]'
+                      : 'bg-[#f7f4ee] text-slate-600 hover:text-[#0b1d3a] border border-[#e8e2d4] hover:border-[#c99a42] shadow-xs hover:scale-[1.02]'
                 }`}
               >
-                {cat}
+                <span>{cat}</span>
+                <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold transition-colors ${
+                  isSelected 
+                    ? 'bg-white/20 text-white' 
+                    : isDark ? 'bg-[#141312] text-[#dfb25b]' : 'bg-[#efeae0] text-[#a67c2e]'
+                }`}>
+                  {count}
+                </span>
               </button>
             );
           })}
@@ -2092,7 +2116,7 @@ const ProductsPage = ({ setActivePage }) => {
         {/* Product Cards Grid */}
         {filteredProducts.length === 0 ? (
           <div className={`text-center py-20 rounded-3xl border border-dashed p-8 ${
-            isDark ? 'bg-[#071326] border-[#132649]' : 'bg-white border-slate-300'
+            isDark ? 'bg-[#1f1b17] border-[#332b21]' : 'bg-[#f7f4ee] border-[#e8e2d4]'
           }`}>
             <div className="w-16 h-16 rounded-2xl bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400 flex items-center justify-center mx-auto mb-4 text-2xl font-black">
               🔍
@@ -2122,21 +2146,21 @@ const ProductsPage = ({ setActivePage }) => {
               <div 
                 key={product.id} 
                 onClick={() => handleGetQuote(product)}
-                className={`border rounded-3xl overflow-hidden transition-all duration-300 ease-out flex flex-col group relative cursor-pointer hover:-translate-y-2 hover:shadow-2xl h-[440px] w-full ${
+                className={`border rounded-3xl overflow-hidden transition-all duration-300 ease-out flex flex-col group relative cursor-pointer hover:shadow-2xl h-[440px] w-full before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#c99a42] before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 backdrop-blur-md ${
                   isDark 
-                    ? 'bg-[#071326] border-[#132649] shadow-[0_12px_30px_rgba(4,12,24,0.4)] hover:shadow-[0_20px_45px_rgba(4,12,24,0.7)] hover:border-orange-400/80' 
-                    : 'bg-white border-slate-200/90 shadow-[0_10px_30px_rgba(11,29,58,0.05)] hover:shadow-[0_20px_45px_rgba(11,29,58,0.12)] hover:border-orange-500/60'
+                    ? 'bg-[#1f1b17] border-[#332b21] shadow-[0_12px_32px_rgba(0,0,0,0.5)] hover:shadow-[0_14px_38px_rgba(201,154,66,0.18)] hover:border-[#c99a42]' 
+                    : 'bg-[#f7f4ee] border-[#e8e2d4] shadow-[0_12px_32px_rgba(201,154,66,0.06)] hover:shadow-[0_14px_38px_rgba(201,154,66,0.16)] hover:border-[#c99a42]'
                 }`}
               >
                 
                 {/* Product Image Container */}
                 <div className={`h-52 w-full overflow-hidden rounded-t-3xl relative shrink-0 ${
-                  isDark ? 'bg-[#020611]' : 'bg-slate-100'
+                  isDark ? 'bg-[#181411]' : 'bg-[#efeae0]'
                 }`}>
                   <img 
                     src={cardImage} 
                     alt={product.title || product.name} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-in-out"
                     onError={(e) => {
                       if (product.fallbackImage && e.target.src !== product.fallbackImage) {
                         e.target.src = product.fallbackImage;
@@ -2149,7 +2173,9 @@ const ProductsPage = ({ setActivePage }) => {
                 </div>
 
                 {/* Card Body */}
-                <div className="p-5 flex flex-col flex-1 justify-between space-y-3 rounded-b-3xl overflow-hidden">
+                <div className={`p-5 flex flex-col flex-1 justify-between space-y-3 rounded-b-3xl overflow-hidden relative ${
+                  isDark ? 'bg-gradient-to-b from-transparent to-[#181411]/60' : 'bg-gradient-to-b from-transparent to-[#efeae0]/60'
+                }`}>
                   <div className="space-y-2">
                     {/* Title & Subtitle (Consistent Height) */}
                     <div className="h-14 flex items-center">
@@ -2189,8 +2215,8 @@ const ProductsPage = ({ setActivePage }) => {
                                         ? 'bg-gradient-to-r from-orange-400 to-amber-500 text-white font-black border-transparent shadow-sm'
                                         : 'bg-gradient-to-r from-orange-500 to-orange-600 text-white font-black border-transparent shadow-sm'
                                       : isDark
-                                        ? 'bg-[#020611] hover:bg-orange-500/20 border-[#132649] hover:border-orange-400 text-slate-200 hover:text-white'
-                                        : 'bg-slate-50 hover:bg-orange-50 border-slate-200 hover:border-orange-500 text-slate-700 hover:text-orange-600 shadow-2xs'
+                                        ? 'bg-[#141312] hover:bg-[#c99a42]/20 border-[#332b21] hover:border-[#c99a42] text-slate-200 hover:text-white'
+                                        : 'bg-[#ffffff] hover:bg-[#f7f4ee] border-[#e8e2d4] hover:border-[#c99a42] text-slate-700 hover:text-[#a67c2e] shadow-2xs'
                                   }`}
                                 >
                                   {varImg && (
@@ -2222,8 +2248,8 @@ const ProductsPage = ({ setActivePage }) => {
                             }}
                             className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
                               isDark 
-                                ? 'bg-[#020611] hover:bg-orange-500/20 border-[#132649] hover:border-orange-400 text-slate-200 hover:text-white' 
-                                : 'bg-slate-50 hover:bg-orange-50 border-slate-200 hover:border-orange-500 text-slate-700 hover:text-orange-600 shadow-2xs'
+                                ? 'bg-[#141312] hover:bg-[#c99a42]/20 border-[#332b21] hover:border-[#c99a42] text-slate-200 hover:text-white' 
+                                : 'bg-[#ffffff] hover:bg-[#f7f4ee] border-[#e8e2d4] hover:border-[#c99a42] text-slate-700 hover:text-[#a67c2e] shadow-2xs'
                             }`}
                           >
                             <span>{typeof product.varieties[0] === 'string' ? product.varieties[0] : product.varieties[0]?.name}</span>
@@ -2247,20 +2273,20 @@ const ProductsPage = ({ setActivePage }) => {
         const profile = PRODUCT_PROFILE_DETAILS[selectedProduct.id] || PRODUCT_PROFILE_DETAILS[baseKey] || {};
         return (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 md:p-6 bg-[#020611]/90 backdrop-blur-md animate-fadeIn overflow-y-auto"
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 md:p-6 bg-[#0e0c0b]/90 backdrop-blur-md animate-fadeIn overflow-y-auto"
             onClick={() => setSelectedProduct(null)}
           >
             <div
               className={`relative w-full max-w-4xl my-auto rounded-3xl border shadow-2xl overflow-hidden transition-all duration-300 max-h-[92vh] flex flex-col ${
                 isDark
-                  ? 'bg-[#071326] border-[#132649] text-slate-100 shadow-[0_25px_70px_rgba(4,12,24,0.8)]'
-                  : 'bg-white border-slate-200 text-[#0b1d3a] shadow-2xl'
+                  ? 'bg-[#1f1b17] border-[#332b21] text-slate-100 shadow-[0_25px_70px_rgba(0,0,0,0.8)]'
+                  : 'bg-[#fcfbf8] border-[#e8e2d4] text-[#0b1d3a] shadow-2xl'
               }`}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal Header */}
               <div className={`p-5 sm:p-6 border-b flex items-start justify-between gap-4 sticky top-0 z-20 backdrop-blur-md ${
-                isDark ? 'bg-[#071326]/95 border-[#132649]' : 'bg-white/95 border-slate-200'
+                isDark ? 'bg-[#1f1b17]/95 border-[#332b21]' : 'bg-[#fcfbf8]/95 border-[#e8e2d4]'
               }`}>
                 <div className="space-y-1">
                   <div className="flex items-center gap-2 flex-wrap">
@@ -2268,13 +2294,13 @@ const ProductsPage = ({ setActivePage }) => {
                       {profile.categoryHeader || selectedProduct.badgeCategory || selectedProduct.category}
                     </span>
                     <span className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-md border ${
-                      isDark ? 'bg-[#020611] text-slate-300 border-[#132649]' : 'bg-slate-100 text-slate-700 border-slate-200'
+                      isDark ? 'bg-[#141312] text-slate-300 border-[#332b21]' : 'bg-[#f7f4ee] text-slate-700 border-[#e8e2d4]'
                     }`}>
                       Official Export Documentation
                     </span>
                     {selectedProduct.hsCode && (
                       <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-md ${
-                        isDark ? 'bg-[#020611] text-orange-400' : 'bg-slate-100 text-orange-600'
+                        isDark ? 'bg-[#141312] text-[#dfb25b]' : 'bg-[#f7f4ee] text-[#a67c2e]'
                       }`}>
                         HS: {selectedProduct.hsCode}
                       </span>
@@ -2301,7 +2327,7 @@ const ProductsPage = ({ setActivePage }) => {
                   <button
                     onClick={() => setSelectedProduct(null)}
                     className={`p-2 rounded-xl transition-colors cursor-pointer shrink-0 ${
-                      isDark ? 'bg-[#020611] hover:bg-[#0d203e] text-slate-300' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                      isDark ? 'bg-[#141312] hover:bg-[#29221a] text-slate-300' : 'bg-[#f7f4ee] hover:bg-[#efeae0] text-slate-700'
                     }`}
                     aria-label="Close details"
                   >
@@ -2317,10 +2343,10 @@ const ProductsPage = ({ setActivePage }) => {
                 
                 {/* Product Overview Top Box */}
                 <div className={`p-4 sm:p-6 rounded-2xl border flex flex-col sm:flex-row items-center gap-6 ${
-                  isDark ? 'bg-[#020611] border-[#132649]' : 'bg-orange-50/30 border-orange-100'
+                  isDark ? 'bg-[#141312] border-[#332b21]' : 'bg-[#f7f4ee] border-[#e8e2d4]'
                 }`}>
                   <div className={`w-36 h-36 sm:w-44 sm:h-44 rounded-2xl p-2 flex items-center justify-center shrink-0 border overflow-hidden ${
-                    isDark ? 'bg-[#071326] border-[#132649]' : 'bg-white border-slate-200 shadow-sm'
+                    isDark ? 'bg-[#1f1b17] border-[#332b21]' : 'bg-white border-[#e8e2d4] shadow-sm'
                   }`}>
                     <img
                       src={selectedProduct.image}
@@ -2364,7 +2390,7 @@ const ProductsPage = ({ setActivePage }) => {
                         <div
                           key={idx}
                           className={`p-4 rounded-xl border flex flex-col justify-between ${
-                            isDark ? 'bg-[#020611] border-[#132649]' : 'bg-slate-50 border-slate-200'
+                            isDark ? 'bg-[#141312] border-[#332b21]' : 'bg-[#fffdfa] border-[#e8e2d4]'
                           }`}
                         >
                           <div>
@@ -2395,7 +2421,7 @@ const ProductsPage = ({ setActivePage }) => {
                         <div
                           key={idx}
                           className={`p-3 rounded-xl border text-center ${
-                            isDark ? 'bg-[#020611] border-[#132649]' : 'bg-slate-50 border-slate-200'
+                            isDark ? 'bg-[#141312] border-[#332b21]' : 'bg-[#fffdfa] border-[#e8e2d4]'
                           }`}
                         >
                           <div className="text-[11px] font-semibold text-slate-400 mb-0.5">
@@ -2424,7 +2450,7 @@ const ProductsPage = ({ setActivePage }) => {
                         <div
                           key={idx}
                           className={`p-4 rounded-xl border ${
-                            isDark ? 'bg-[#020611] border-[#132649]' : 'bg-slate-50 border-slate-200'
+                            isDark ? 'bg-[#141312] border-[#332b21]' : 'bg-[#fffdfa] border-[#e8e2d4]'
                           }`}
                         >
                           <h5 className="text-xs font-bold text-orange-500 dark:text-orange-400 mb-1">{h.title}</h5>
@@ -2447,7 +2473,7 @@ const ProductsPage = ({ setActivePage }) => {
                       Technical &amp; Quality Parameters
                     </h4>
                     <div className={`rounded-2xl border overflow-hidden ${
-                      isDark ? 'border-[#132649] bg-[#020611]' : 'border-slate-200 bg-white'
+                      isDark ? 'border-[#332b21] bg-[#141312]' : 'border-[#e8e2d4] bg-white'
                     }`}>
                       <table className="w-full text-left text-xs border-collapse">
                         <tbody>
@@ -2456,7 +2482,7 @@ const ProductsPage = ({ setActivePage }) => {
                               <tr
                                 key={idx}
                                 className={`border-b last:border-0 ${
-                                  isDark ? 'border-[#132649]/60 hover:bg-[#071326]' : 'border-slate-100 hover:bg-slate-50/80'
+                                  isDark ? 'border-[#332b21]/60 hover:bg-[#1f1b17]' : 'border-[#e8e2d4]/70 hover:bg-[#fffdfa]'
                                 }`}
                               >
                                 <td className="p-3 sm:p-3.5 font-bold text-orange-500 dark:text-orange-400 w-1/3">
@@ -2472,7 +2498,7 @@ const ProductsPage = ({ setActivePage }) => {
                               <tr
                                 key={idx}
                                 className={`border-b last:border-0 ${
-                                  isDark ? 'border-[#132649]/60 hover:bg-[#071326]' : 'border-slate-100 hover:bg-slate-50/80'
+                                  isDark ? 'border-[#332b21]/60 hover:bg-[#1f1b17]' : 'border-[#e8e2d4]/70 hover:bg-[#fffdfa]'
                                 }`}
                               >
                                 <td className="p-3 sm:p-3.5 font-bold text-orange-500 dark:text-orange-400 w-1/3">
@@ -2492,7 +2518,7 @@ const ProductsPage = ({ setActivePage }) => {
 
                 {/* Company Footer Note */}
                 <div className={`p-4 rounded-xl border text-xs flex flex-col sm:flex-row items-center justify-between gap-3 ${
-                  isDark ? 'bg-[#020611] border-[#132649] text-slate-400' : 'bg-slate-100 border-slate-200 text-slate-600'
+                  isDark ? 'bg-[#141312] border-[#332b21] text-slate-400' : 'bg-[#f7f4ee] border-[#e8e2d4] text-slate-600'
                 }`}>
                   <div className="flex items-center gap-2">
                     <span className="font-bold text-orange-500 dark:text-orange-400">Anjaney Nexus India LLP</span>
@@ -2507,7 +2533,7 @@ const ProductsPage = ({ setActivePage }) => {
 
               {/* Modal Action Footer */}
               <div className={`p-4 sm:p-5 border-t flex flex-col sm:flex-row items-center justify-between gap-3 sticky bottom-0 z-20 backdrop-blur-md ${
-                isDark ? 'bg-[#071326]/95 border-[#132649]' : 'bg-white/95 border-slate-200'
+                isDark ? 'bg-[#1f1b17]/95 border-[#332b21]' : 'bg-[#fcfbf8]/95 border-[#e8e2d4]'
               }`}>
                 <div className="text-xs text-slate-400 hidden sm:block">
                   Need private labelling, custom packaging, or SGS inspection?
@@ -2516,7 +2542,7 @@ const ProductsPage = ({ setActivePage }) => {
                   <button
                     onClick={() => setSelectedProduct(null)}
                     className={`flex-1 sm:flex-none px-5 py-2.5 rounded-xl text-xs font-bold transition-colors cursor-pointer border ${
-                      isDark ? 'border-[#132649] bg-[#020611] text-slate-200 hover:bg-[#0d203e]' : 'border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200'
+                      isDark ? 'border-[#332b21] bg-[#141312] text-slate-200 hover:bg-[#29221a]' : 'border-[#e8e2d4] bg-[#f7f4ee] text-slate-700 hover:bg-[#efeae0]'
                     }`}
                   >
                     Close
