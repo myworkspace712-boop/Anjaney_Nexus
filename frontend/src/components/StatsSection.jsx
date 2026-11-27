@@ -39,9 +39,6 @@ const StatsSection = ({ setActivePage }) => {
     },
   ];
 
-  // Repeat items to ensure seamless infinite looping marquee
-  const loopedLogos = [...logos, ...logos, ...logos, ...logos, ...logos, ...logos];
-
   const handleReviewClick = () => {
     if (typeof setActivePage === 'function') {
       setActivePage('certificates');
@@ -52,7 +49,7 @@ const StatsSection = ({ setActivePage }) => {
   };
 
   return (
-    <section className={`w-full pt-12 sm:pt-16 md:pt-20 pb-16 md:pb-24 font-sans border-b transition-colors duration-500 overflow-hidden relative animate-fade-up ${
+    <section className={`w-full pt-12 sm:pt-16 md:pt-20 pb-16 md:pb-24 font-sans border-b transition-colors duration-500 overflow-hidden relative ${
       isDark 
         ? 'bg-gradient-to-b from-[#0a0f1d] via-[#0d1527] to-[#0a0f1d] text-slate-100 border-slate-800' 
         : 'bg-gradient-to-b from-[#ffffff] via-[#f8fafc] to-[#f1f5f9] text-[#0b1d3a] border-slate-200'
@@ -85,7 +82,7 @@ const StatsSection = ({ setActivePage }) => {
           }
         }
         .animate-fade-up {
-          animation: fadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+          animation: fadeUp 1.05s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
         @keyframes scroll-left {
           0% { transform: translateX(0); }
@@ -102,7 +99,7 @@ const StatsSection = ({ setActivePage }) => {
       `}} />
 
       {/* 1. COMPANY FUELED BY PASSION FOR LOGISTICS (Left Text, Right Forklift Image) */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 md:mb-20 relative z-20 animate-fade-up">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 md:mb-20 relative z-20">
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6 sm:gap-8 md:gap-12">
           
           {/* Left Side: Statement Text */}
@@ -133,7 +130,7 @@ const StatsSection = ({ setActivePage }) => {
       </div>
 
       {/* 2. DOCKYARD LOGISTICS (Larger Dockyard Image on Left, Paragraph beside it on Right) */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 md:mb-24 relative z-20 animate-fade-up">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 md:mb-24 relative z-20">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 sm:gap-8 md:gap-10 lg:gap-14">
           
           {/* Left Side: Dockyard Image (Larger in size) */}
@@ -167,10 +164,7 @@ const StatsSection = ({ setActivePage }) => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12 md:mb-16 relative z-10">
         <div className="relative p-6 sm:p-8 rounded-3xl backdrop-blur-md bg-gradient-to-b from-transparent via-slate-100/80 to-transparent dark:via-[#0f172a]/80">
           {/* Title: Verified Credentials (Solid Badge) */}
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest bg-[#01040a] text-orange-400 border border-orange-400/30 mb-6 mx-auto shadow-sm">
-            <svg className="w-4 h-4 text-orange-500 dark:text-orange-400" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-            </svg>
+          <div className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest bg-orange-50 dark:bg-orange-500/15 text-orange-600 dark:text-orange-400 border border-orange-200 dark:border-orange-400/30 mb-6 mx-auto shadow-xs">
             <span>Verified Credentials</span>
           </div>
 
@@ -214,31 +208,23 @@ const StatsSection = ({ setActivePage }) => {
         </div>
       </div>
 
-      {/* 3. CERTIFICATES SLIDER - SOLID REGULATORY REGISTRY CARDS */}
-      <div className="w-full relative overflow-hidden pb-4">
-        
-        {/* Solid Edge Fades (Pure solid gradient matching background, no blur) */}
-        <div className={`absolute left-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r ${
-          isDark ? 'from-[#0a0f1d]' : 'from-[#ffffff]'
-        } to-transparent z-10 pointer-events-none`}></div>
-        <div className={`absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l ${
-          isDark ? 'from-[#0a0f1d]' : 'from-[#ffffff]'
-        } to-transparent z-10 pointer-events-none`}></div>
-
-        <div className="animate-marquee gap-6 sm:gap-8 items-center px-4 py-2">
-          {loopedLogos.map((item, index) => (
+      {/* 3. STATIC LARGE CERTIFICATES & REGULATORY REGISTRY CARDS */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-6 relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-6 lg:gap-6">
+          {logos.map((item, index) => (
             <div
               key={index}
-              title={`${item.name} - ${item.fullName}`}
-              className={`relative flex-shrink-0 flex items-center justify-center h-20 sm:h-24 w-auto min-w-[170px] px-6 py-3 rounded-xl border-2 transition-all duration-300 group ${
+              onClick={handleReviewClick}
+              title={`${item.name} - ${item.fullName} (Click to review documents)`}
+              className={`relative flex flex-col items-center justify-between min-h-[220px] sm:min-h-[250px] p-6 sm:p-7 rounded-2xl sm:rounded-3xl border-2 transition-all duration-300 group cursor-pointer ${
                 isDark 
-                  ? 'bg-[#0f172a] border-slate-800 hover:border-sky-400 shadow-md hover:shadow-[0_10px_25px_rgba(14,165,233,0.15)]' 
-                  : 'bg-white border-slate-200 hover:border-sky-500 shadow-[0_4px_16px_rgba(14,165,233,0.06)] hover:shadow-[0_10px_25px_rgba(14,165,233,0.15)]'
+                  ? 'bg-[#0f172a] border-slate-800 hover:border-sky-400 shadow-lg hover:shadow-[0_16px_36px_rgba(14,165,233,0.18)] hover:-translate-y-1.5' 
+                  : 'bg-white border-slate-200 hover:border-sky-500 shadow-md hover:shadow-[0_16px_36px_rgba(14,165,233,0.15)] hover:-translate-y-1.5'
               }`}
             >
               {/* Official Registration Verified Tick Badge (Pointed Flower Badge) */}
               <div 
-                className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center z-10 transition-transform duration-300 group-hover:scale-110"
+                className="absolute top-3 right-3 sm:top-3.5 sm:right-3.5 w-6 h-6 flex items-center justify-center z-10 transition-transform duration-300 group-hover:scale-110"
                 title="Verified Regulatory Body"
               >
                 <svg 
@@ -264,22 +250,35 @@ const StatsSection = ({ setActivePage }) => {
                 </svg>
               </div>
 
-              <img
-                src={item.imagePath}
-                alt={item.alt}
-                className="max-h-12 sm:max-h-14 max-w-[150px] w-auto h-auto object-contain transition-transform group-hover:scale-105 duration-300"
-                onError={(e) => {
-                  e.currentTarget.onerror = null;
-                  e.currentTarget.style.display = 'none';
-                  const fallback = e.currentTarget.parentElement.querySelector('.logo-fallback');
-                  if (fallback) fallback.classList.remove('hidden');
-                }}
-              />
-              <span className={`logo-fallback hidden text-sm font-bold ${
-                isDark ? 'text-slate-200' : 'text-slate-700'
-              }`}>
-                {item.name}
-              </span>
+              {/* Large Certificate Logo Container */}
+              <div className="w-full h-24 sm:h-28 flex items-center justify-center p-2 mt-1 mb-4">
+                <img
+                  src={item.imagePath}
+                  alt={item.alt}
+                  className="max-h-20 sm:max-h-24 max-w-[170px] w-auto h-auto object-contain transition-transform group-hover:scale-105 duration-300"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.style.display = 'none';
+                    const fallback = e.currentTarget.parentElement.querySelector('.logo-fallback');
+                    if (fallback) fallback.classList.remove('hidden');
+                  }}
+                />
+                <span className={`logo-fallback hidden text-base font-bold ${
+                  isDark ? 'text-slate-200' : 'text-slate-700'
+                }`}>
+                  {item.name}
+                </span>
+              </div>
+
+              {/* Card Bottom Details: Title & Full Regulatory Authority */}
+              <div className="w-full text-center pt-3 border-t border-slate-100 dark:border-slate-800/80 mt-auto">
+                <h3 className="text-sm sm:text-base font-black text-blue-950 dark:text-white uppercase tracking-wider group-hover:text-orange-500 dark:group-hover:text-orange-400 transition-colors">
+                  {item.name}
+                </h3>
+                <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2 leading-relaxed">
+                  {item.fullName}
+                </p>
+              </div>
             </div>
           ))}
         </div>

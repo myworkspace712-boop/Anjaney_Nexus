@@ -19,7 +19,7 @@ const Certificates = () => {
       id: "spices-board",
       title: "Spices Board Documentation", 
       authority: "Spices Board of India, Govt. of India",
-      image: "/Certi_Img/spices-board.jpg",
+      image: "/Logos/spices-board.svg",
       docLabel: "Registration number",
       description: "Spices Board registration summary for regulated spice-export activities. Current scope and validity should be checked against the stamped copy.",
       waText: "Hello, I need a copy of your Spices Board certificate. Product/page: Proof & DocumentVerification Source page: /certificates.html"
@@ -28,7 +28,7 @@ const Certificates = () => {
       id: "fssai",
       title: "FSSAI Licence Documentation", 
       authority: "Food Safety & Standards Authority of India",
-      image: "/Certi_Img/fssai.jpg",
+      image: "/Logos/fssai.jpg",
       docLabel: "Licence number",
       description: "Food-business licencing summary for the activities listed on the current FSSAI document. Buyers can request the stamped copy and scope for verification.",
       waText: "Hello, I need a copy of your FSSAI Licence certificate. Product/page: Proof & DocumentVerification Source page: /certificates.html"
@@ -60,7 +60,7 @@ const Certificates = () => {
         
         {/* PAGE HEADER */}
         <div className="text-center mb-12 max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl backdrop-blur-md bg-gradient-to-b from-transparent via-slate-100/80 to-transparent dark:via-[#0f172a]/80">
-          <span className="text-xs font-black text-orange-500 dark:text-orange-400 uppercase tracking-widest bg-orange-50 dark:bg-[#01040a] dark:border-orange-400/30 px-3 py-1 rounded-full border border-orange-100 mb-4 inline-block shadow-xs">
+          <span className="text-xs font-black text-orange-600 dark:text-orange-400 uppercase tracking-widest bg-orange-50 dark:bg-orange-500/15 px-4 py-1.5 rounded-full border border-orange-200 dark:border-orange-400/30 mb-4 inline-block shadow-xs">
             Verified Credentials
           </span>
           <h1 className="text-4xl md:text-5xl font-black text-blue-950 dark:text-white tracking-tight leading-tight mb-6">

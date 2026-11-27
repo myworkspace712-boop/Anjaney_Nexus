@@ -263,7 +263,7 @@ function AppContent({
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
   }, [activePage]);
 
   useEffect(() => {
@@ -282,6 +282,125 @@ function AppContent({
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // Fast, lag-free scroll reveal animation with persistent re-triggering on scroll
+  useEffect(() => {
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+          } else {
+            // When an element exits through the bottom of the viewport (user scrolled up past it),
+            // reset it offscreen so when the user scrolls down again, it rises up smoothly once more.
+            if (entry.boundingClientRect.top > 0) {
+              entry.target.classList.remove('is-revealed');
+            }
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '0px 0px 80px 0px',
+        threshold: 0,
+      }
+    );
+
+    const scanAndObserve = () => {
+      // 1. Grid items (individual cards across all product grids, stat grids, certificate grids, etc.)
+      const gridItems = Array.from(document.querySelectorAll('main .grid > *'));
+
+      // 2. Standalone cards & feature blocks not inside grids
+      const standaloneCards = Array.from(
+        document.querySelectorAll(
+          'main [class*="rounded-2xl"], main [class*="rounded-3xl"], main .dynamic-card'
+        )
+      ).filter(
+        (el) =>
+          !el.closest('.grid') &&
+          !el.classList.contains('fixed') &&
+          !el.classList.contains('pointer-events-none')
+      );
+
+      // 3. Section content blocks (excluding parent wrappers that already contain grids)
+      const contentBlocks = Array.from(
+        document.querySelectorAll(
+          'main section > [class*="max-w-"], main > div > [class*="max-w-"], main > main > [class*="max-w-"]'
+        )
+      ).filter((el) => !el.querySelector('.grid'));
+
+      // 4. Section headers & titles
+      const headers = Array.from(
+        document.querySelectorAll('main h1, main h2, main .text-center:not([class*="fixed"])')
+      ).filter(
+        (el) =>
+          !el.closest('.grid') &&
+          !standaloneCards.some((c) => c.contains(el)) &&
+          !contentBlocks.some((b) => b.contains(el))
+      );
+
+      // 5. Hero text & button containers
+      const heroBlocks = Array.from(
+        document.querySelectorAll('main .relative.z-10 > .max-w-3xl, main .relative.z-10 > .max-w-2xl')
+      );
+
+      // 6. Footer text blocks (text columns & copyright bar)
+      const footerTextBlocks = Array.from(
+        document.querySelectorAll('footer .grid > *, footer .border-t.flex')
+      );
+
+      const allElements = [
+        ...heroBlocks,
+        ...headers,
+        ...contentBlocks,
+        ...gridItems,
+        ...standaloneCards,
+        ...footerTextBlocks,
+      ];
+
+      const targets = Array.from(new Set(allElements)).filter((el, _, arr) => {
+        if (!el || el.classList.contains('pointer-events-none') || el.classList.contains('fixed')) return false;
+        return !arr.some((other) => other !== el && other.contains(el));
+      });
+
+      targets.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        // Footer text blocks or elements below the initial viewport fold get persistent scroll reveal
+        const isFooterChild = footerTextBlocks.includes(el);
+        const isBelowFold = isFooterChild || rect.top >= window.innerHeight * 0.75;
+
+        if (isBelowFold) {
+          if (!el.classList.contains('reveal-on-scroll')) {
+            el.classList.add('reveal-on-scroll');
+          }
+          observer.observe(el);
+        }
+      });
+    };
+
+    const timer = setTimeout(scanAndObserve, 30);
+
+    // Debounced listener for tab/filter switching without infinite mutation loops
+    let debounceTimer;
+    const mutationObserver = new MutationObserver(() => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(scanAndObserve, 100);
+    });
+
+    const mainEl = document.querySelector('main');
+    if (mainEl) {
+      mutationObserver.observe(mainEl, { childList: true });
+    }
+
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(debounceTimer);
+      observer.disconnect();
+      mutationObserver.disconnect();
+    };
+  }, [activePage]);
 
   return (
     <div className={`min-h-screen font-sans transition-colors duration-500 flex flex-col justify-between relative ${isDarkMode ? 'bg-gradient-to-b from-[#0a0f1d] via-[#0d1527] to-[#0a0f1d] text-slate-100' : 'bg-gradient-to-b from-[#ffffff] via-[#f8fafc] to-[#f1f5f9] text-slate-900'}`}>
@@ -303,7 +422,7 @@ function AppContent({
           onSignOut={handleSignOut}
         />
 
-        <main key={activePage} className="animate-page-enter">
+        <main key={activePage} className="animate-fade-up">
           {/* Page Switcher */}
           {activePage === 'home' && <HomePage setActivePage={setActivePage} activePage={activePage} />}
           {activePage === 'products' && <ProductsPage setActivePage={setActivePage} />}
@@ -336,16 +455,19 @@ function AppContent({
       </button>
 
       {/* Simple Professional Corporate Footer */}
-      <footer className={`border-t py-12 transition-colors duration-300 relative overflow-hidden ${
-        isDarkMode ? 'bg-gradient-to-b from-[#0f172a] via-[#0a0f1d] to-[#070b14] border-[#1e293b] text-slate-300' : 'bg-gradient-to-b from-[#ffffff] via-[#f8fafc] to-[#f1f5f9] border-slate-200 text-slate-700'
-      }`}>
+      <footer 
+        key={`footer-${activePage}`}
+        className={`border-t py-12 transition-colors duration-300 relative overflow-hidden ${
+          isDarkMode ? 'bg-gradient-to-b from-[#0f172a] via-[#0a0f1d] to-[#070b14] border-[#1e293b] text-slate-300' : 'bg-gradient-to-b from-[#ffffff] via-[#f8fafc] to-[#f1f5f9] border-slate-200 text-slate-700'
+        }`}
+      >
         {/* Maritime Trade Coordinates & Horizon Highlight in Footer Background */}
         <div className="absolute inset-0 pointer-events-none bg-trade-grid-light dark:bg-trade-grid-dark opacity-35"></div>
         <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-sky-500/30 to-transparent pointer-events-none"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-sm">
             
-            <div className="md:col-span-2 space-y-3">
+            <div className="md:col-span-2 space-y-3 reveal-on-scroll">
               <h3 className={`text-base font-bold ${isDarkMode ? 'text-white' : 'text-[#0f172a]'}`}>
                 Anjaney Nexus India LLP
               </h3>
@@ -354,7 +476,7 @@ function AppContent({
               </p>
             </div>
 
-            <div>
+            <div className="reveal-on-scroll">
               <h4 className={`text-xs font-bold uppercase tracking-wider mb-3 ${isDarkMode ? 'text-white' : 'text-[#0f172a]'}`}>
                 Quick Navigation
               </h4>
@@ -367,7 +489,7 @@ function AppContent({
               </ul>
             </div>
 
-            <div>
+            <div className="reveal-on-scroll">
               <h4 className={`text-xs font-bold uppercase tracking-wider mb-3 ${isDarkMode ? 'text-white' : 'text-[#0f172a]'}`}>
                 Contact Details
               </h4>
@@ -384,7 +506,7 @@ function AppContent({
 
           </div>
 
-          <div className={`pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-4 text-xs ${
+          <div className={`pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-4 text-xs reveal-on-scroll ${
             isDarkMode ? 'border-[#1e293b] text-slate-400' : 'border-slate-200 text-slate-600'
           }`}>
             <p>© {new Date().getFullYear()} Anjaney Nexus India LLP. All rights reserved.</p>

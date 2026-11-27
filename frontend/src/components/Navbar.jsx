@@ -53,17 +53,21 @@ const Navbar = ({ activePage, setActivePage }) => {
             <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 select-none cursor-default">
               {/* 1. The Logo Image */}
               <img 
+                key={`logo-${activePage}`}
                 src="/logo.png" 
                 alt="Anjaney Nexus Logo" 
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = '/Logo1.jpeg';
                 }}
-                className="w-7 h-7 sm:w-8 sm:h-8 object-contain rounded-lg shrink-0" 
+                className="w-7 h-7 sm:w-8 sm:h-8 object-contain rounded-lg shrink-0 animate-fade-up" 
               />
               
               {/* 2. The Styled Company Name */}
-              <div className="text-[11px] sm:text-xs md:text-sm lg:text-base font-black whitespace-nowrap tracking-tight">
+              <div 
+                key={`text-${activePage}`}
+                className="text-[11px] sm:text-xs md:text-sm lg:text-base font-black whitespace-nowrap tracking-tight animate-fade-up"
+              >
                 <span className="text-orange-500 dark:text-orange-400">Anjaney</span>{' '}
                 <span className="text-blue-900 dark:text-blue-400">
                   Nexus India LLP
@@ -72,7 +76,7 @@ const Navbar = ({ activePage, setActivePage }) => {
             </div>
 
             {/* Navigation Links (Visible on sm and larger screens) */}
-            <div className="hidden sm:flex items-center gap-1 sm:gap-1.5 md:gap-2.5 lg:gap-4 h-full">
+            <div key={`links-${activePage}`} className="hidden sm:flex items-center gap-1 sm:gap-1.5 md:gap-2.5 lg:gap-4 h-full">
               {navLinks.map((link) => {
                 const isActive = activePage === link.id;
 
@@ -80,7 +84,7 @@ const Navbar = ({ activePage, setActivePage }) => {
                   <button
                     key={link.id}
                     onClick={() => setActivePage && setActivePage(link.id)}
-                    className={`relative flex items-center py-1 px-1 sm:px-1.5 md:px-1.5 lg:px-2 text-[9px] sm:text-[9.5px] md:text-[10px] lg:text-[11px] font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer whitespace-nowrap group ${
+                    className={`relative flex items-center py-1 px-1 sm:px-1.5 md:px-1.5 lg:px-2 text-[9px] sm:text-[9.5px] md:text-[10px] lg:text-[11px] font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer whitespace-nowrap group animate-fade-up ${
                       isActive 
                         ? 'text-orange-500 dark:text-blue-400 font-black' 
                         : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:-translate-y-0.5 active:translate-y-0'
@@ -102,9 +106,9 @@ const Navbar = ({ activePage, setActivePage }) => {
             </div>
 
             {/* Right Utility Actions */}
-            <div className="flex items-center gap-1.5 sm:gap-2">
+            <div key={`utils-${activePage}`} className="flex items-center gap-1.5 sm:gap-2">
               {/* Theme Toggle Switch with "Theme" label */}
-              <div className="flex items-center gap-1 sm:gap-1.5">
+              <div className="flex items-center gap-1 sm:gap-1.5 animate-fade-up">
                 <span className="text-[9px] sm:text-[9.5px] md:text-[10px] font-black uppercase tracking-wider text-slate-600 dark:text-slate-300 select-none">
                   Theme
                 </span>
@@ -132,7 +136,7 @@ const Navbar = ({ activePage, setActivePage }) => {
               {/* Hamburger Menu Button - appears ONLY when the other buttons are not available (below sm) */}
               <button
                 onClick={() => setIsSidebarOpen(true)}
-                className="sm:hidden p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-300 hover:text-sky-500 dark:hover:text-sky-400 hover:border-sky-500 dark:hover:border-sky-400 transition-all cursor-pointer shadow-xs"
+                className="sm:hidden p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-300 hover:text-sky-500 dark:hover:text-sky-400 hover:border-sky-500 dark:hover:border-sky-400 transition-all cursor-pointer shadow-xs animate-fade-up"
                 aria-label="Open Navigation Sidebar"
                 title="Open Menu"
               >

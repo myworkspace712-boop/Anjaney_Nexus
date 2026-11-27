@@ -119,14 +119,25 @@
   }
 }
 
-@keyframes page-fade-slide {
+@keyframes fade-up {
   0% {
     opacity: 0;
-    transform: translate3d(0, 16px, 0) scale(0.995);
+    transform: translate3d(0, 32px, 0);
   }
   100% {
     opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes page-fade-slide {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 32px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -219,8 +230,36 @@
   background-size: 60px 60px, 60px 60px, 60px 60px;
 }
 
+/* =====================================================================
+   SCROLL REVEAL MOTION SYSTEM (Content Rises Upwards While Scrolling)
+   ===================================================================== */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translate3d(0, 32px, 0);
+  transition: opacity 1.05s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.05s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
+  }
+}
+
+.animate-fade-up,
 .animate-page-enter {
-  animation: page-fade-slide 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fade-up 1.05s cubic-bezier(0.16, 1, 0.3, 1) both;
   will-change: opacity, transform;
 }
 
