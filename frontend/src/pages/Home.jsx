@@ -66,8 +66,7 @@ const Home = ({ setActivePage }) => {
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-20 sm:py-28">
           <div className="max-w-3xl text-left">
             {/* Commercial Trust & Export Dispatch Badge */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 bg-gradient-to-r from-[#0a0f1d]/90 to-[#0f172a]/90 border border-orange-400/50 text-orange-300 font-black text-[11px] uppercase tracking-widest rounded-full mb-6 shadow-md transform transition-all duration-300 hover:scale-[1.02] cursor-default">
-              <span className="w-2.5 h-2.5 rounded-full bg-orange-400 radar-dot"></span>
+            <div className="inline-flex items-center px-4 py-2 bg-orange-500/15 backdrop-blur-sm border border-orange-400/40 text-orange-300 font-black text-[11px] uppercase tracking-widest rounded-full mb-6 shadow-md transform transition-all duration-300 hover:scale-[1.02] cursor-default">
               <span>PREMIUM EXPORT SOLUTIONS · GLOBAL AGRO COMMODITIES</span>
             </div>
 

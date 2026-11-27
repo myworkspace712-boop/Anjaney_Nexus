@@ -260,7 +260,6 @@ function AppContent({
   const { theme } = useTheme();
   const isDarkMode = theme === 'dark';
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -269,11 +268,6 @@ function AppContent({
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 350);
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalHeight > 0) {
-        const progress = (window.scrollY / totalHeight) * 100;
-        setScrollProgress(Math.min(100, Math.max(0, progress)));
-      }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -283,7 +277,7 @@ function AppContent({
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Fast, lag-free scroll reveal animation with persistent re-triggering on scroll
+  // Fast, lag-free scroll reveal animation that triggers dynamically while scrolling
   useEffect(() => {
     if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
 
@@ -293,9 +287,9 @@ function AppContent({
           if (entry.isIntersecting) {
             entry.target.classList.add('is-revealed');
           } else {
-            // When an element exits through the bottom of the viewport (user scrolled up past it),
-            // reset it offscreen so when the user scrolls down again, it rises up smoothly once more.
-            if (entry.boundingClientRect.top > 0) {
+            // When scrolling up and element exits back out the bottom of the viewport,
+            // reset it so scrolling down past it triggers the smooth fade-up animation again
+            if (entry.boundingClientRect.top > (window.innerHeight || document.documentElement.clientHeight) * 0.75) {
               entry.target.classList.remove('is-revealed');
             }
           }
@@ -303,8 +297,8 @@ function AppContent({
       },
       {
         root: null,
-        rootMargin: '0px 0px 80px 0px',
-        threshold: 0,
+        rootMargin: '0px 0px -40px 0px',
+        threshold: 0.05,
       }
     );
 
@@ -324,37 +318,28 @@ function AppContent({
           !el.classList.contains('pointer-events-none')
       );
 
-      // 3. Section content blocks (excluding parent wrappers that already contain grids)
-      const contentBlocks = Array.from(
-        document.querySelectorAll(
-          'main section > [class*="max-w-"], main > div > [class*="max-w-"], main > main > [class*="max-w-"]'
-        )
-      ).filter((el) => !el.querySelector('.grid'));
-
-      // 4. Section headers & titles
+      // 3. Section headers & titles
       const headers = Array.from(
         document.querySelectorAll('main h1, main h2, main .text-center:not([class*="fixed"])')
       ).filter(
         (el) =>
           !el.closest('.grid') &&
-          !standaloneCards.some((c) => c.contains(el)) &&
-          !contentBlocks.some((b) => b.contains(el))
+          !standaloneCards.some((c) => c.contains(el))
       );
 
-      // 5. Hero text & button containers
+      // 4. Hero text & button containers
       const heroBlocks = Array.from(
         document.querySelectorAll('main .relative.z-10 > .max-w-3xl, main .relative.z-10 > .max-w-2xl')
       );
 
-      // 6. Footer text blocks (text columns & copyright bar)
+      // 5. Footer text blocks (text columns & copyright bar)
       const footerTextBlocks = Array.from(
-        document.querySelectorAll('footer .grid > *, footer .border-t.flex')
+        document.querySelectorAll('footer .grid > *, footer .border-t')
       );
 
       const allElements = [
         ...heroBlocks,
         ...headers,
-        ...contentBlocks,
         ...gridItems,
         ...standaloneCards,
         ...footerTextBlocks,
@@ -367,16 +352,18 @@ function AppContent({
 
       targets.forEach((el) => {
         const rect = el.getBoundingClientRect();
-        // Footer text blocks or elements below the initial viewport fold get persistent scroll reveal
-        const isFooterChild = footerTextBlocks.includes(el);
-        const isBelowFold = isFooterChild || rect.top >= window.innerHeight * 0.75;
+        const isInInitialView = rect.top < (window.innerHeight || document.documentElement.clientHeight) && rect.bottom > 0;
 
-        if (isBelowFold) {
-          if (!el.classList.contains('reveal-on-scroll')) {
-            el.classList.add('reveal-on-scroll');
-          }
-          observer.observe(el);
+        if (!el.classList.contains('reveal-on-scroll')) {
+          el.classList.add('reveal-on-scroll');
         }
+
+        // Elements already in the viewport on load are revealed immediately
+        if (isInInitialView) {
+          el.classList.add('is-revealed');
+        }
+
+        observer.observe(el);
       });
     };
 
@@ -408,11 +395,6 @@ function AppContent({
       {/* Global Maritime Trade Coordinate Grid & Ambient Horizon System */}
       <div className={`fixed inset-0 pointer-events-none -z-10 transition-opacity duration-700 ${isDarkMode ? 'bg-trade-grid-dark opacity-75' : 'bg-trade-grid-light opacity-70'}`} />
 
-      {/* Global Dynamic Reading Scroll Progress Bar */}
-      <div 
-        className="fixed top-0 left-0 h-[2.5px] z-50 pointer-events-none bg-gradient-to-r from-sky-500 via-orange-500 to-sky-400 transition-all duration-150 ease-out shadow-xs shadow-sky-500/50"
-        style={{ width: `${scrollProgress}%` }}
-      />
 
       <div>
         <Navbar
@@ -467,7 +449,7 @@ function AppContent({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-sm">
             
-            <div className="md:col-span-2 space-y-3 reveal-on-scroll">
+            <div className="md:col-span-2 space-y-3">
               <h3 className={`text-base font-bold ${isDarkMode ? 'text-white' : 'text-[#0f172a]'}`}>
                 Anjaney Nexus India LLP
               </h3>
@@ -476,7 +458,7 @@ function AppContent({
               </p>
             </div>
 
-            <div className="reveal-on-scroll">
+            <div>
               <h4 className={`text-xs font-bold uppercase tracking-wider mb-3 ${isDarkMode ? 'text-white' : 'text-[#0f172a]'}`}>
                 Quick Navigation
               </h4>
@@ -489,7 +471,7 @@ function AppContent({
               </ul>
             </div>
 
-            <div className="reveal-on-scroll">
+            <div>
               <h4 className={`text-xs font-bold uppercase tracking-wider mb-3 ${isDarkMode ? 'text-white' : 'text-[#0f172a]'}`}>
                 Contact Details
               </h4>
@@ -506,7 +488,7 @@ function AppContent({
 
           </div>
 
-          <div className={`pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-4 text-xs reveal-on-scroll ${
+          <div className={`pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-4 text-xs ${
             isDarkMode ? 'border-[#1e293b] text-slate-400' : 'border-slate-200 text-slate-600'
           }`}>
             <p>© {new Date().getFullYear()} Anjaney Nexus India LLP. All rights reserved.</p>

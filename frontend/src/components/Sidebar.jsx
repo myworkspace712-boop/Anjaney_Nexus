@@ -49,15 +49,22 @@ const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
     },
   ];
 
-  // Close on Escape key & lock body scroll when open
+  // Close on Escape key, auto-close on desktop resize & lock body scroll when open
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') onClose();
     };
 
+    const handleResize = () => {
+      if (window.innerWidth >= 640) {
+        onClose();
+      }
+    };
+
     if (isOpen) {
       document.body.style.overflow = 'hidden';
       window.addEventListener('keydown', handleKeyDown);
+      window.addEventListener('resize', handleResize);
     } else {
       document.body.style.overflow = '';
     }
@@ -65,6 +72,7 @@ const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
     return () => {
       document.body.style.overflow = '';
       window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('resize', handleResize);
     };
   }, [isOpen, onClose]);
 
@@ -79,17 +87,17 @@ const Sidebar = ({ isOpen, onClose, activePage, setActivePage }) => {
   return (
     <>
       {/* 1. Backdrop Overlay */}
-      <div 
-        className={`fixed inset-0 z-50 bg-black/60 transition-opacity duration-300 ${
-          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-        onClick={onClose}
-        aria-hidden="true"
-      />
+      {isOpen && (
+        <div 
+          className="sm:hidden fixed inset-0 z-50 bg-black/60 transition-opacity duration-300 opacity-100 pointer-events-auto"
+          onClick={onClose}
+          aria-hidden="true"
+        />
+      )}
 
       {/* 2. Slide-Over Sidebar Menu Panel */}
       <aside 
-        className={`fixed top-0 bottom-0 right-0 w-80 sm:w-96 max-w-[85vw] z-50 flex flex-col justify-between transition-transform duration-300 ease-out border-l shadow-2xl ${
+        className={`sm:hidden fixed top-0 bottom-0 right-0 w-80 sm:w-96 max-w-[85vw] z-50 flex flex-col justify-between transition-transform duration-300 ease-out border-l shadow-2xl ${
           isDark 
             ? 'bg-[#0a0f1d] border-[#1e293b] text-slate-100 shadow-black/90' 
             : 'bg-white border-slate-200 text-slate-900 shadow-[0_20px_60px_rgba(14,165,233,0.12)]'

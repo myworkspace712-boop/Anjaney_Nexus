@@ -214,9 +214,8 @@ const StatsSection = ({ setActivePage }) => {
           {logos.map((item, index) => (
             <div
               key={index}
-              onClick={handleReviewClick}
-              title={`${item.name} - ${item.fullName} (Click to review documents)`}
-              className={`relative flex flex-col items-center justify-between min-h-[220px] sm:min-h-[250px] p-6 sm:p-7 rounded-2xl sm:rounded-3xl border-2 transition-all duration-300 group cursor-pointer ${
+              title={`${item.name} - ${item.fullName}`}
+              className={`relative flex flex-col items-center justify-between min-h-[220px] sm:min-h-[250px] p-6 sm:p-7 rounded-2xl sm:rounded-3xl border-2 transition-all duration-300 group ${
                 isDark 
                   ? 'bg-[#0f172a] border-slate-800 hover:border-sky-400 shadow-lg hover:shadow-[0_16px_36px_rgba(14,165,233,0.18)] hover:-translate-y-1.5' 
                   : 'bg-white border-slate-200 hover:border-sky-500 shadow-md hover:shadow-[0_16px_36px_rgba(14,165,233,0.15)] hover:-translate-y-1.5'
@@ -272,7 +271,7 @@ const StatsSection = ({ setActivePage }) => {
 
               {/* Card Bottom Details: Title & Full Regulatory Authority */}
               <div className="w-full text-center pt-3 border-t border-slate-100 dark:border-slate-800/80 mt-auto">
-                <h3 className="text-sm sm:text-base font-black text-blue-950 dark:text-white uppercase tracking-wider group-hover:text-orange-500 dark:group-hover:text-orange-400 transition-colors">
+                <h3 className="text-sm sm:text-base font-black text-blue-950 dark:text-white uppercase tracking-wider transition-colors">
                   {item.name}
                 </h3>
                 <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2 leading-relaxed">

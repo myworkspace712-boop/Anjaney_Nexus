@@ -9,8 +9,6 @@ const ProductGrid = ({ setActivePage }) => {
   // 4 items from the "PRODUCTS" page catalog displayed on the homepage
   const featuredProducts = EXPORT_CATALOG.slice(0, 4);
 
-  const [selectedVarieties, setSelectedVarieties] = useState({});
-
   const handleNavigateToProducts = (e) => {
     if (e && e.preventDefault) e.preventDefault();
     if (typeof setActivePage === 'function') {
@@ -21,14 +19,13 @@ const ProductGrid = ({ setActivePage }) => {
     }
   };
 
-  const handleGetQuote = (product, specificVariety = null) => {
-    const chosenVariety = specificVariety || selectedVarieties[product.id] || (product.varieties && (typeof product.varieties[0] === 'string' ? product.varieties[0] : product.varieties[0]?.name)) || '';
+  const handleGetQuote = (product) => {
     try {
       localStorage.setItem('an_quote_product', JSON.stringify({
         id: product.id,
-        name: chosenVariety ? `${product.title || product.name} - ${chosenVariety}` : (product.title || product.name),
-        variety: chosenVariety,
-        spec: chosenVariety ? `${product.title || product.name} (${chosenVariety})` : product.spec,
+        name: product.title || product.name,
+        variety: '',
+        spec: product.spec,
         moq: product.moq,
         category: product.category,
         hsCode: product.hsCode
@@ -96,19 +93,13 @@ const ProductGrid = ({ setActivePage }) => {
         {/* 4 COMMODITY CARDS - SOLID B2B EXPORT MANIFEST ARCHITECTURE (ZERO GLASS) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-6 lg:gap-6">
           {featuredProducts.map((product) => {
-            const hasSubProducts = product.varieties && product.varieties.length > 1;
-            const selectedVarObj = product.varieties?.find(
-              (v) => (typeof v === 'string' ? v : v.name) === selectedVarieties[product.id]
-            );
-            const cardImage = (selectedVarObj && typeof selectedVarObj === 'object' && selectedVarObj.image)
-              ? selectedVarObj.image
-              : product.image;
+            const cardImage = product.image;
 
             return (
               <div 
                 key={product.id} 
                 onClick={() => handleGetQuote(product)}
-                className={`border rounded-3xl overflow-hidden transition-all duration-300 ease-out flex flex-col group relative cursor-pointer hover:shadow-2xl h-[440px] w-full before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-sky-400 before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 backdrop-blur-md ${
+                className={`border rounded-3xl overflow-hidden transition-all duration-300 ease-out flex flex-col group relative cursor-pointer hover:shadow-2xl w-full before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-sky-400 before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 backdrop-blur-md ${
                   isDark 
                     ? 'bg-[#0f172a] border-slate-800 shadow-[0_12px_32px_rgba(0,0,0,0.5)] hover:shadow-[0_14px_38px_rgba(14,165,233,0.18)] hover:border-sky-400' 
                     : 'bg-white border-slate-200 shadow-[0_12px_32px_rgba(14,165,233,0.06)] hover:shadow-[0_14px_38px_rgba(14,165,233,0.16)] hover:border-sky-500'
@@ -116,7 +107,7 @@ const ProductGrid = ({ setActivePage }) => {
               >
                 
                 {/* Product Image Container */}
-                <div className={`h-52 w-full overflow-hidden rounded-t-3xl relative shrink-0 ${
+                <div className={`h-56 sm:h-60 w-full overflow-hidden rounded-t-3xl relative shrink-0 ${
                   isDark ? 'bg-[#0b1120]' : 'bg-slate-100'
                 }`}>
                   <img 
@@ -135,84 +126,28 @@ const ProductGrid = ({ setActivePage }) => {
                 </div>
 
                 {/* Card Body */}
-                <div className={`p-5 flex flex-col flex-1 justify-between space-y-3 rounded-b-3xl overflow-hidden relative ${
+                <div className={`p-5 flex flex-col flex-1 justify-between space-y-2 rounded-b-3xl overflow-hidden relative ${
                   isDark ? 'bg-gradient-to-b from-transparent to-[#0b1120]/60' : 'bg-gradient-to-b from-transparent to-slate-100/60'
                 }`}>
-                  <div className="space-y-2">
-                    {/* Title & Subtitle (Consistent Height) */}
-                    <div className="h-14 flex items-center">
-                      <h3 className={`text-xl font-black leading-snug flex flex-wrap items-baseline gap-2 line-clamp-2 ${
-                        isDark ? 'text-white' : 'text-[#0b1d3a]'
-                      }`}>
-                        <span>{product.name}</span>
-                        {product.subtitle && (
-                          <span className="text-sm font-bold text-orange-500 dark:text-orange-400">
-                            {product.subtitle}
-                          </span>
-                        )}
-                      </h3>
-                    </div>
+                  <div className="space-y-1">
+                    {/* Category Tag */}
+                    {product.category && (
+                      <span className="text-[11px] font-black uppercase tracking-wider text-orange-500 dark:text-orange-400">
+                        {product.category}
+                      </span>
+                    )}
 
-                    {/* All Varieties & Grades Directly Visible (Consistent Height Container) */}
-                    <div className="h-32 flex flex-col justify-start">
-                      {hasSubProducts && (
-                        <div className="h-full overflow-y-auto scrollbar-thin pr-1">
-                          <div className="flex flex-wrap gap-1.5">
-                            {product.varieties.map((v, vIdx) => {
-                              const varName = typeof v === 'string' ? v : v.name;
-                              const varImg = (typeof v === 'object' && v.image) ? v.image : null;
-                              return (
-                                <button
-                                  key={vIdx}
-                                  type="button"
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    handleGetQuote(product, varName);
-                                  }}
-                                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
-                                    isDark
-                                      ? 'bg-[#0a0f1d] hover:bg-sky-500/20 border-slate-800 hover:border-sky-400 text-slate-200 hover:text-white'
-                                      : 'bg-slate-50 hover:bg-slate-100 border-slate-200 hover:border-sky-500 text-slate-700 hover:text-sky-600 shadow-2xs'
-                                  }`}
-                                >
-                                  {varImg && (
-                                    <img 
-                                      src={varImg} 
-                                      alt={varName} 
-                                      className="w-4 h-4 rounded-md object-cover shrink-0" 
-                                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                                    />
-                                  )}
-                                  <span>{varName}</span>
-                                </button>
-                              );
-                            })}
-                          </div>
-                        </div>
+                    {/* Title & Subtitle */}
+                    <h3 className={`text-xl font-black leading-snug flex flex-wrap items-baseline gap-2 line-clamp-2 ${
+                      isDark ? 'text-white' : 'text-[#0b1d3a]'
+                    }`}>
+                      <span>{product.name}</span>
+                      {product.subtitle && (
+                        <span className="text-sm font-bold text-orange-500 dark:text-orange-400">
+                          {product.subtitle}
+                        </span>
                       )}
-
-                      {/* Single Grade Line (if product only has 1 variety) */}
-                      {product.varieties && product.varieties.length === 1 && (
-                        <div className="flex flex-wrap gap-1.5">
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              const varName = typeof product.varieties[0] === 'string' ? product.varieties[0] : product.varieties[0]?.name;
-                              setSelectedVarieties((prev) => ({ ...prev, [product.id]: varName }));
-                              handleGetQuote(product, varName);
-                            }}
-                            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
-                              isDark 
-                                ? 'bg-[#0a0f1d] hover:bg-sky-500/20 border-slate-800 hover:border-sky-400 text-slate-200 hover:text-white' 
-                                : 'bg-slate-50 hover:bg-slate-100 border-slate-200 hover:border-sky-500 text-slate-700 hover:text-sky-600 shadow-2xs'
-                            }`}
-                          >
-                            <span>{typeof product.varieties[0] === 'string' ? product.varieties[0] : product.varieties[0]?.name}</span>
-                          </button>
-                        </div>
-                      )}
-                    </div>
+                    </h3>
                   </div>
                 </div>
               </div>

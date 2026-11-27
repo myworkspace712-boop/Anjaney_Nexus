@@ -51,7 +51,7 @@ const AboutPage = ({ setActivePage }) => {
         <div className={`absolute inset-0 pointer-events-none transition-colors duration-500 ${
           isDark
             ? 'bg-gradient-to-b from-[#0a0f1d]/75 via-transparent to-[#0a0f1d]'
-            : 'bg-gradient-to-b from-[#0b1d3a]/75 via-transparent to-white'
+            : 'bg-gradient-to-b from-[#0b1d3a]/75 via-transparent to-white/15'
         }`}></div>
 
         {/* Subtle dynamic grid pattern for high-tech maritime feel */}
@@ -84,83 +84,7 @@ const AboutPage = ({ setActivePage }) => {
         </div>
       </div>
 
-      {/* =========================================================================
-          2. FLOATING 3-CARD STATS / CORE COMPETENCIES STRIP
-         ========================================================================= */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 sm:-mt-14 relative z-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-          
-          {/* Card 1: 15+ Years Industry Experience */}
-          <div className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer group relative overflow-hidden backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-sky-400 before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
-            isDark 
-              ? 'bg-[#0f172a] border-slate-800 hover:border-sky-400 shadow-[0_14px_35px_rgba(0,0,0,0.5)] hover:shadow-[0_14px_38px_rgba(14,165,233,0.18)]' 
-              : 'bg-white border-slate-200 hover:border-sky-500 shadow-[0_14px_35px_rgba(14,165,233,0.06)] hover:shadow-[0_14px_38px_rgba(14,165,233,0.16)]'
-          }`}>
-            <div className="flex items-center mb-4">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400 group-hover:bg-orange-500 dark:group-hover:bg-orange-400 group-hover:text-white transition-all duration-300">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-            </div>
-            <h4 className={`text-lg sm:text-xl font-black tracking-tight leading-snug mb-2 transition-colors ${
-              isDark ? 'text-white group-hover:text-orange-400' : 'text-[#0b1d3a] group-hover:text-orange-600'
-            }`}>
-              15+ Years Industry Experience
-            </h4>
-            <p className={`text-xs leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-              Deep domain expertise in agricultural sourcing, compliance, and cross-border trade execution.
-            </p>
-          </div>
 
-          {/* Card 2: Commitment to Sustainable Practices */}
-          <div className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer group relative overflow-hidden backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-sky-400 before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
-            isDark 
-              ? 'bg-[#0f172a] border-slate-800 hover:border-sky-400 shadow-[0_14px_35px_rgba(0,0,0,0.5)] hover:shadow-[0_14px_38px_rgba(14,165,233,0.18)]' 
-              : 'bg-white border-slate-200 hover:border-sky-500 shadow-[0_14px_35px_rgba(14,165,233,0.06)] hover:shadow-[0_14px_38px_rgba(14,165,233,0.16)]'
-          }`}>
-            <div className="flex items-center mb-4">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400 group-hover:bg-orange-500 dark:group-hover:bg-orange-400 group-hover:text-white transition-all duration-300">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-            </div>
-            <h4 className={`text-lg sm:text-xl font-black tracking-tight leading-snug mb-2 transition-colors ${
-              isDark ? 'text-white group-hover:text-orange-400' : 'text-[#0b1d3a] group-hover:text-orange-600'
-            }`}>
-              Commitment to Sustainable Practices
-            </h4>
-            <p className={`text-xs leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-              Responsible farming partnerships, ethical procurement, and environmental stewardship.
-            </p>
-          </div>
-
-          {/* Card 3: Global Network & Reliable Logistics */}
-          <div className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer group relative overflow-hidden backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-sky-400 before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
-            isDark 
-              ? 'bg-[#0f172a] border-slate-800 hover:border-sky-400 shadow-[0_14px_35px_rgba(0,0,0,0.5)] hover:shadow-[0_14px_38px_rgba(14,165,233,0.18)]' 
-              : 'bg-white border-slate-200 hover:border-sky-500 shadow-[0_14px_35px_rgba(14,165,233,0.06)] hover:shadow-[0_14px_38px_rgba(14,165,233,0.16)]'
-          }`}>
-            <div className="flex items-center mb-4">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400 group-hover:bg-orange-500 dark:group-hover:bg-orange-400 group-hover:text-white transition-all duration-300">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
-              </div>
-            </div>
-            <h4 className={`text-lg sm:text-xl font-black tracking-tight leading-snug mb-2 transition-colors ${
-              isDark ? 'text-white group-hover:text-orange-400' : 'text-[#0b1d3a] group-hover:text-orange-600'
-            }`}>
-              Global Network &amp; Reliable Logistics
-            </h4>
-            <p className={`text-xs leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-              End-to-end containerized ocean shipping, port clearance, and multimodal forwarding.
-            </p>
-          </div>
-
-        </div>
-      </div>
 
       {/* =========================================================================
           3. MAIN ABOUT CONTENT SECTION (A Trusted Partner in Global Trade)
@@ -189,13 +113,13 @@ const AboutPage = ({ setActivePage }) => {
             : 'bg-white border-slate-200 shadow-[0_20px_50px_rgba(14,165,233,0.08)]'
         }`}>
           {/* Dynamic Ambient Backlight Accents */}
-          <div className="absolute top-0 right-0 w-96 h-96 rounded-full pointer-events-none blur-3xl opacity-15 bg-gradient-to-br from-amber-200 to-orange-300 animate-pulse-subtle"></div>
+          <div className="absolute top-0 right-0 w-96 h-96 rounded-full pointer-events-none blur-3xl opacity-20 bg-gradient-to-br from-amber-200 to-orange-300"></div>
           <div className={`absolute bottom-0 left-0 w-80 h-80 rounded-full pointer-events-none blur-3xl opacity-15 ${isDark ? 'bg-blue-600' : 'bg-blue-400'} animate-float-slow`}></div>
           <div className="absolute inset-0 bg-[radial-gradient(#f97316_0.75px,transparent_0.75px)] [background-size:24px_24px] opacity-10 pointer-events-none"></div>
 
           <div className="relative z-10 space-y-6 max-w-4xl">
             <div className="flex items-center gap-3">
-              <span className="w-3 h-3 rounded-full bg-orange-300 dark:bg-orange-300 shadow-[0_0_8px_rgba(253,186,116,0.7)]"></span>
+              <span className="w-3 h-3 rounded-full bg-orange-300 dark:bg-orange-300"></span>
               <span className="text-xs font-black uppercase tracking-widest text-orange-500 dark:text-orange-400">
                 Trade Foundation &amp; Experience
               </span>
@@ -214,6 +138,21 @@ const AboutPage = ({ setActivePage }) => {
             }`}>
               Our commitment to quality, reliability, and timely delivery has enabled us to build long-term relationships with suppliers, distributors, and customers worldwide. Backed by industry knowledge, a strong global network, and a customer-focused approach, we continue to expand our reach and deliver value to the agricultural sector.
             </p>
+
+            {/* Farmer Image */}
+            <div className="pt-2">
+              <div className="overflow-hidden rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-lg group">
+                <img 
+                  src="/images/farmer.jpg" 
+                  alt="Direct Farm Procurement - Farmer Partner" 
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = '/images/images/farmer.jpg';
+                  }}
+                  className="w-full h-64 sm:h-80 md:h-[420px] object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+              </div>
+            </div>
           </div>
         </div>
 
