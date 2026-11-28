@@ -1838,27 +1838,6 @@ const ProductsPage = ({ setActivePage }) => {
     }
   }, []);
 
-  const stats = [
-    { 
-      icon: "M13 10V3L4 14h7v7l9-11h-7z", 
-      value: "18+", 
-      label: "Products Exported", 
-      subtext: "Certified Agro Commodities" 
-    },
-    { 
-      icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4", 
-      value: "250 G/L", 
-      label: "Daily Capacity", 
-      subtext: "High-Volume Supply" 
-    },
-    { 
-      icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z", 
-      value: "100%", 
-      label: "Buyer Commitment", 
-      subtext: "APEDA & FSSAI Standards" 
-    }
-  ];
-
   const normCategory = (str) => (str || '').toLowerCase().replace(/&/g, 'and').replace(/\s+/g, ' ').trim();
 
   const filteredProducts = EXPORT_CATALOG.filter((item) => {
@@ -1962,7 +1941,7 @@ const ProductsPage = ({ setActivePage }) => {
         <div className={`absolute inset-0 pointer-events-none transition-colors duration-500 ${
           isDark
             ? 'bg-gradient-to-b from-[#0a0f1d]/75 via-transparent to-[#0a0f1d]'
-            : 'bg-gradient-to-b from-[#0b1d3a]/75 via-transparent to-white'
+            : 'bg-gradient-to-b from-[#0b1d3a]/75 via-transparent to-white/15'
         }`}></div>
 
         {/* Subtle dynamic grid pattern for high-tech maritime feel */}
@@ -1982,41 +1961,6 @@ const ProductsPage = ({ setActivePage }) => {
               Submit your product, quantity, specification and destination inquiry, our export team will review your complete trade enquiry during published business hours.
             </p>
           </div>
-        </div>
-      </div>
-
-      {/* =========================================================================
-          2. FLOATING 3-CARD STATS STRIP (Cohesive with Contact Us Channels)
-         ========================================================================= */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 sm:-mt-14 relative z-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-          {stats.map((stat, idx) => (
-            <div 
-              key={idx}
-              className={`p-6 rounded-2xl border transition-all duration-300 relative overflow-hidden group backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-sky-400 before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:z-10 ${
-                isDark 
-                  ? 'bg-[#0f172a] border-slate-800 hover:border-sky-400 shadow-[0_12px_30px_rgba(0,0,0,0.5)]' 
-                  : 'bg-white border-slate-200 hover:border-sky-500 shadow-[0_12px_30px_rgba(14,165,233,0.07)]'
-              }`}
-            >
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-500/10 dark:bg-orange-400/15 text-orange-500 dark:text-orange-400">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={stat.icon} />
-                  </svg>
-                </div>
-              </div>
-              <div className="text-2xl sm:text-3xl font-black text-orange-500 dark:text-orange-400 tracking-tight mb-1">
-                {stat.value}
-              </div>
-              <div className={`text-sm font-bold mb-1 ${isDark ? 'text-white' : 'text-[#0b1d3a]'}`}>
-                {stat.label}
-              </div>
-              <p className={`text-xs ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-                {stat.subtext}
-              </p>
-            </div>
-          ))}
         </div>
       </div>
 
