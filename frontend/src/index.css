@@ -213,7 +213,7 @@
   will-change: transform;
 }
 
-/* Fresh Modern Global Coordinate Grids */
+/* Fresh Modern Global Coordinate Grids (Clean plain background in Dark Mode) */
 .bg-trade-grid-light {
   background-image: 
     radial-gradient(rgba(14, 165, 233, 0.16) 1.2px, transparent 1.2px),
@@ -222,12 +222,9 @@
   background-size: 60px 60px, 60px 60px, 60px 60px;
 }
 
-.bg-trade-grid-dark {
-  background-image: 
-    radial-gradient(rgba(56, 189, 248, 0.22) 1.2px, transparent 1.2px),
-    linear-gradient(to right, rgba(30, 41, 59, 0.3) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(30, 41, 59, 0.3) 1px, transparent 1px);
-  background-size: 60px 60px, 60px 60px, 60px 60px;
+.bg-trade-grid-dark,
+.dark .bg-trade-grid-light {
+  background-image: none;
 }
 
 /* =====================================================================
